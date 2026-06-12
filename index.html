@@ -25,7 +25,12 @@ color:white;
 padding:80px 20px;
 text-align:center;
 }
-
+<nav>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#packages">Packages</a>
+<a href="#contact">Contact</a>
+</nav>
 header h1{
 font-size:48px;
 margin-bottom:10px;
@@ -156,7 +161,21 @@ transition:0.3s;
 .card:hover{
 transform:translateY(-5px);
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    }
+ }
+nav{
+margin-bottom:20px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+font-weight:bold;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
 </style>
 .card{
 background:white;
@@ -187,7 +206,7 @@ WhatsApp Now
     
 <section>
 <h2>About Us</h2>
-
+<section id="about">
 <p style="text-align:center;">
 Professional Accounting, Bookkeeping, Tally Data Entry,
 GST Data Preparation, MIS Reporting & Financial Services
@@ -203,7 +222,7 @@ for Small Businesses, Retailers, Traders and Startups.
 </section>
 <section style="text-align:center;padding:40px 20px;">
 <h2>Advanced Accounting Services</h2>
-
+<section id="services">
 <img src="Image .png" class="package-img" alt="Advanced Accounting Services">
 
 </section>
@@ -236,7 +255,7 @@ for Small Businesses, Retailers, Traders and Startups.
 
 <section>
 <h2>Monthly Packages</h2>
-
+<section id="packages">
 <div class="grid">
 
 <div class="package">
@@ -277,7 +296,7 @@ for Small Businesses, Retailers, Traders and Startups.
 <section class="contact">
 <h2>Contact Us</h2>
 <h2 style="text-align:center;">Client Reviews</h2>
-
+<section id="contact">
 <div class="card">
 ⭐⭐⭐⭐⭐
 <p>Excellent Accounting Service.</p>

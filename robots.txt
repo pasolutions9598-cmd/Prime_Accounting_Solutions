@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/sitemap.xml

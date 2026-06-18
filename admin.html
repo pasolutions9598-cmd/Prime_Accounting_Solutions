@@ -372,7 +372,15 @@ const file =
 document.getElementById("imageFile").files[0];
 
 if(file){
-  image = URL.createObjectURL(file);
+
+    const storageRef = ref(
+        storage,
+        "posts/" + Date.now() + "_" + file.name
+    );
+
+    await uploadBytes(storageRef, file);
+
+    image = await getDownloadURL(storageRef);
 }
 
 const content =

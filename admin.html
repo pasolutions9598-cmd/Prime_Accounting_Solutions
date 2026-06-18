@@ -366,8 +366,14 @@ window.publishPost = async function(){
 const title =
 document.getElementById("postTitle").value;
 
-const image =
-document.getElementById("postImage").value;
+let image = document.getElementById("postImage").value;
+
+const file =
+document.getElementById("imageFile").files[0];
+
+if(file){
+  image = URL.createObjectURL(file);
+}
 
 const content =
 document.getElementById("postContent").value;

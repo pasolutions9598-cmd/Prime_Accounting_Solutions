@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prime Accounting Solutions</title>
+<style>
+body{font-family:Arial;margin:0;background:#f5f7fb}
+.banner{background:#ffeb3b;padding:10px;text-align:center;font-weight:bold}
+header{background:#002d72;color:#fff;padding:20px;text-align:center}
+.menu{background:#001845;padding:12px;text-align:center}
+.menu a{color:#fff;text-decoration:none;margin:0 10px}
+.card{background:#fff;margin:15px;padding:15px;border-radius:12px;box-shadow:0 2px 8px #ccc}
+.admin-panel{display:none}
+input,textarea{width:100%;padding:10px;margin:6px 0}
+button{padding:10px 15px}
+.postimg{max-width:100%;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="banner">📢 Welcome to Prime Accounting Solutions</div>
+<header><h1>Prime Accounting Solutions</h1></header>
+
+<div class="menu">
+<a href="#updates">Updates</a>
+<a href="#services">Services</a>
+<a href="#contact">Contact</a>
+<a href="#" onclick="adminLogin()">Admin Login</a>
+</div>
+
+<section id="updates" class="card">
+<h2>Latest Updates</h2>
+<div id="posts"></div>
+</section>
+
+<section id="services" class="card">
+<h2>Our Services</h2>
+<p>Accounting • Bookkeeping • GST • Tally • MIS Reporting</p>
+</section>
+
+<section id="contact" class="card">
+<h2>Contact</h2>
+<p>📞 6394748563</p>
+<p>📧 p.a.solutions9598@gmail.com</p>
+</section>
+
+<section class="card admin-panel">
+<h2>Publish New Post</h2>
+<input id="title" placeholder="Post Title">
+<input id="image" placeholder="Image URL">
+<textarea id="content" placeholder="Post Content"></textarea>
+<button onclick="publishPost()">Publish Post</button>
+</section>
+
+<script>
+function adminLogin(){
+let e=prompt("Email");
+let p=prompt("Password");
+if(e==="p.a.solutions9598@gmail.com" && p==="aqibsolutions@9598"){
+document.querySelector(".admin-panel").style.display="block";
+alert("Login Success");
+}else{
+alert("Invalid Login");
+}
+}
+function publishPost(){
+let t=title.value,c=content.value,i=image.value;
+let d=new Date().toLocaleString();
+posts.innerHTML='<div class="card"><h3>'+t+'</h3><img class="postimg" src="'+i+'"><p>'+c+'</p><small>'+d+'</small><br>❤️0 Likes | 👁️0 Views</div>'+posts.innerHTML;
+}
+</script>
+</body>
+</html>

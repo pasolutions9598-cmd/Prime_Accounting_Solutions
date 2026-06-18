@@ -312,7 +312,166 @@ document.getElementById("adminPanel")
 }
 
 });
+window.publishPost = async function(){
 
+const title =
+document.getElementById("postTitle").value;
+
+const image =
+document.getElementById("postImage").value;
+
+const content =
+document.getElementById("postContent").value;
+
+if(!title || !content){
+
+alert("Please fill required fields");
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"posts"),
+{
+title:title,
+image:image,
+content:content,
+likes:0,
+views:0,
+createdAt:serverTimestamp()
+}
+);
+
+alert("Post Published Successfully");
+
+document.getElementById("postTitle").value="";
+document.getElementById("postImage").value="";
+document.getElementById("postContent").value="";
+
+loadPosts();
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+
+
+window.loadPosts = async function(){
+
+const container =
+document.getElementById("postsContainer");
+
+container.innerHTML="";
+
+const q = query(
+collection(db,"posts"),
+orderBy("createdAt","desc")
+);
+
+const snapshot =
+await getDocs(q);
+
+snapshot.forEach((post)=>{
+
+const data = post.data();
+
+container.innerHTML += `
+
+<div class="post-card">
+
+<h3>${data.title || ""}</h3>
+
+${
+data.image
+?
+`<img src="${data.image}">`
+:
+""
+}
+
+<p>${data.content || ""}</p>
+
+<div class="post-date">
+📅 ${data.createdAt?.toDate?.().toLocaleString?.() || "Recently"}
+</div>
+
+<br>
+
+<button
+class="edit-btn"
+onclick="editPost('${post.id}')">
+Edit
+</button>
+
+<button
+class="delete-btn"
+onclick="deletePost('${post.id}')">
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+};
+
+
+window.deletePost = async function(id){
+
+const confirmDelete =
+confirm("Delete this post?");
+
+if(!confirmDelete) return;
+
+try{
+
+await deleteDoc(
+doc(db,"posts",id)
+);
+
+loadPosts();
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+
+
+window.editPost = async function(id){
+
+const newTitle =
+prompt("New Title");
+
+if(!newTitle) return;
+
+try{
+
+await updateDoc(
+doc(db,"posts",id),
+{
+title:newTitle
+}
+);
+
+loadPosts();
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
 </script>
 
 </body>

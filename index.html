@@ -15,7 +15,7 @@ gtag('config', 'G-LT271NRJ2Q');
 <meta name="description" content="Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services in Prayagraj.">
 <meta name="keywords" content="Accounting Services, Bookkeeping, GST, Tally Data Entry, MIS Reporting, Prayagraj">
 <meta name="author" content="Prime Accounting Solutions">
-<link rel="icon" type="image/png" href="favicon.png?v=5">
+<link class="favicon" rel="icon" type="image/png" href="favicon.png?v=5">
 <meta property="og:title" content="Prime Accounting Solutions">
 <meta property="og:description" content="Professional Accounting, Bookkeeping, GST, Tally & MIS Reporting Services.">
 <meta property="og:image" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png">
@@ -38,14 +38,35 @@ gtag('config', 'G-LT271NRJ2Q');
 html { scroll-behavior:smooth; }
 body { background: var(--light); color: var(--text); line-height:1.6; }
 
+/* Premium Welcome Pop-up Overlay Style */
+.welcome-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 24, 69, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100000; opacity: 1; transition: opacity 0.5s ease;
+}
+.welcome-box {
+  background: white; padding: 40px; border-radius: 20px; text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3); max-width: 500px; width: 90%;
+  border-top: 6px solid var(--secondary); transform: scale(1); transition: transform 0.4s ease;
+}
+.welcome-box img { width: 120px; margin-bottom: 20px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+.welcome-box h2 { color: var(--primary); font-size: 28px; margin-bottom: 10px; font-weight: 700; }
+.welcome-box h2::after { display: none; }
+.welcome-box p { color: #4a5568; font-size: 16px; margin-bottom: 25px; }
+.welcome-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; border: none; padding: 12px 35px; border-radius: 30px;
+  font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,146,69,0.3);
+}
+.welcome-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,146,69,0.4); }
+
 /* Premium Header */
 header {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  text-align: center;
-  padding: 80px 20px;
-  position: relative;
-  overflow: hidden;
+  color: white; text-align: center; padding: 80px 20px; position: relative; overflow: hidden;
 }
 header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
@@ -72,15 +93,17 @@ h2::after { content:''; display:block; width: 60px; height: 4px; background: var
 
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
 
-/* Card Premium Design */
+/* Card & Package Responsive Design */
 .card, .package {
-  background:white; padding:35px 25px; border-radius:16px; 
+  background:white; padding:25px; border-radius:16px; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition:.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   text-align:center; border: 1px solid #edf2f7; position: relative; overflow: hidden;
 }
 .card:hover, .package:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,45,114,.08); border-color: rgba(0,146,69,0.2); }
 
-.package-img { width:100%; border-radius:12px; display:block; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.package-img, .package img { 
+  width:100%; height: auto; max-width: 100%; object-fit: contain; border-radius:12px; display:block; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+}
 .price { font-size:36px; font-weight:700; color: var(--secondary); margin:20px 0; display: flex; align-items: center; justify-content: center; }
 
 /* Contact Premium Banner */
@@ -126,34 +149,17 @@ footer p { opacity: 0.8; margin: 4px 0; }
   .contact { padding: 30px 20px; }
 }
 </style>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AccountingService",
-  "name": "Prime Accounting Solutions",
-  "url": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/",
-  "logo": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png",
-  "telephone": "+91 6394748563",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Prayagraj",
-    "addressRegion": "Uttar Pradesh",
-    "addressCountry": "IN"
-  },
-  "areaServed": "India",
-  "priceRange": "₹₹",
-  "serviceType": [
-    "Accounting Services",
-    "Bookkeeping",
-    "GST Data Preparation",
-    "Tally Data Entry",
-    "MIS Reporting"
-  ]
-}
-</script>
 </head>
 <body>
+
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-box">
+    <img src="logo.png" alt="Logo">
+    <h2>Welcome to Prime Accounting Solutions</h2>
+    <p>Your Trusted Partner for Accurate, Reliable, and Affordable Accounting & GST Services.</p>
+    <button class="welcome-btn" onclick="closeWelcomePopup()">Get Started</button>
+  </div>
+</div>
 
 <header>
   <img src="logo.png" alt="Prime Accounting Solutions Logo">
@@ -253,12 +259,12 @@ footer p { opacity: 0.8; margin: 4px 0; }
     <h2>What Our Clients Say</h2>
     <div class="grid">
       <div class="card">
-        <div style="color:#ffb703; font-size:20px; margin-bottom:10px;">⭐⭐⭐⭐⭐</div>
+        <div style="color:#ffb703; font-size:20px; margin-bottom:10px;">⭐⭐⭐⭐微</div>
         <p style="font-style:italic; color:#4a5568;">"Excellent Accounting Service. Very precise, fast, and took complete ownership of our accounting sheets."</p>
         <b style="display:block; margin-top:15px; color:var(--primary);">- Local Business Owner</b>
       </div>
       <div class="card">
-        <div style="color:#ffb703; font-size:20px; margin-bottom:10px;">⭐⭐⭐⭐⭐</div>
+        <div style="color:#ffb703; font-size:20px; margin-bottom:10px;">⭐⭐⭐⭐微</div>
         <p style="font-style:italic; color:#4a5568;">"Extremely professional, reliable and highly affordable service structure in Prayagraj. Highly recommended!"</p>
         <b style="display:block; margin-top:15px; color:var(--primary);">- Retail Client</b>
       </div>
@@ -290,8 +296,8 @@ footer p { opacity: 0.8; margin: 4px 0; }
 
 <section>
   <h2>Find Our Office</h2>
-  <div style="border-radius:16px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-    <iframe src="http://googleusercontent.com/maps.google.com/3" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  <div style="border-radius:16px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: #e5e7eb;">
+    <iframe src="https://maps.google.com/maps?q=Prayagraj&t=&z=13&ie=UTF-8&iwloc=&output=embed" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
 
@@ -316,10 +322,18 @@ footer p { opacity: 0.8; margin: 4px 0; }
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-// EXACT CONFIGURATION MATCHED TO YOUR ADMIN FILE
 const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co"; 
 const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp"; 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Function to close Welcome Popup
+window.closeWelcomePopup = function() {
+    const overlay = document.getElementById("welcomeOverlay");
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+        overlay.style.display = "none";
+    }, 500);
+}
 
 async function loadLiveFeed() {
     const container = document.getElementById("postsContainer");
@@ -362,7 +376,6 @@ async function loadLiveFeed() {
     }
 }
 
-// Track Anonymous Visitor Count Analytics
 async function updateAnalytics() {
     try {
         const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();

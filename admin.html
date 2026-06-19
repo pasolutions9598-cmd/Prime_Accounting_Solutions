@@ -4,44 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prime Accounting Solutions - Admin Panel</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 body { background:#f5f7fb; color: #333; }
-.header { background:linear-gradient(135deg,#002d72,#009245); padding:20px; text-align:center; color:white; font-size:28px; font-weight:700; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.header { background:linear-gradient(135deg,#002d72,#009245); padding:20px; text-align:center; color:white; font-size:28px; font-weight:700; }
 .container { max-width:1200px; margin:auto; padding:20px; }
 .card { background:white; border-radius:15px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,.1); margin-bottom:20px; }
-
-/* Analytics Style */
 .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 20px; }
 .stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); border-top: 4px solid #002d72; text-align: center; }
 .stat-card.visitors { border-top-color: #009245; }
 .stat-number { font-size: 26px; font-weight: 700; margin-top: 5px; color: #1e293b; }
-
 .row { display: flex; gap: 15px; margin-bottom: 10px; }
 .row > div { flex: 1; }
-
 label { font-size: 14px; font-weight: 500; color: #555; display: block; margin-top: 10px; }
-input[type="text"], input[type="email"], input[type="password"], textarea, select { width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:8px; font-size:15px; background: #f9fbfd; transition: all 0.3s; }
-input:focus, textarea:focus, select:focus { border-color: #009245; background: #fff; outline: none; }
+input[type="text"], input[type="email"], input[type="password"], textarea, select { width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:8px; font-size:15px; background: #f9fbfd; }
 textarea { min-height:140px; resize:vertical; }
-
-/* Premium Upload Design */
 .custom-file-btn { display: block; background: #f0f4f8; border: 2px dashed #cbd5e1; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer; color: #475569; font-weight: 500; margin: 8px 0; }
 input[type="file"] { display: none; }
-
-button { padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-size: 15px; transition: all 0.2s; margin-right: 5px; }
-button:active { transform: scale(0.98); }
+button { padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-size: 15px; margin-right: 5px; }
 .login-btn { background:#002d72; color:white; width:100%; margin-top: 10px; }
 .publish-btn { background:#009245; color:white; }
 .draft-btn { background:#64748b; color:white; }
 .logout-btn { background:#d62828; color:white; float:right; padding: 8px 16px; font-size: 13px; }
 .edit-btn { background:#ffb703; color:black; }
 .delete-btn { background:#d62828; color:white; }
-
 #adminPanel { display:none; }
 .post-card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,.08); margin-bottom:15px; border: 1px solid #edf2f7; }
 .post-card img { width:100%; border-radius:10px; margin:15px 0; max-height:300px; object-fit:cover; }
@@ -79,7 +67,6 @@ button:active { transform: scale(0.98); }
         <div class="card">
             <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
             <h2>Publish New Post</h2>
-            
             <div class="row">
                 <div>
                     <label>Post Type</label>
@@ -143,7 +130,6 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
 
-// Live Image Preview Connection
 document.getElementById("imageFile").addEventListener("change", (e) => {
     const file = e.target.files[0];
     if(!file) return;
@@ -160,12 +146,11 @@ document.getElementById("imageFile").addEventListener("change", (e) => {
 window.loginAdmin = function() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
     if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
         sessionStorage.setItem("isAdminIn", "true");
         checkAuth();
     } else {
-        alert("गलत ईमेल या पासवर्ड!");
+        alert("Wrong email or password!");
     }
 }
 
@@ -190,12 +175,12 @@ window.onload = checkAuth;
 
 async function loadAnalytics() {
     try {
-        const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').single();
+        const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
         if(analytics) document.getElementById("totalVisitors").innerText = analytics.visitor_count;
         
         const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
         document.getElementById("totalPostsCount").innerText = count || 0;
-    } catch (e) { console.error(e); }
+    } catch (e) { console.error("Analytics failed", e); }
 }
 
 window.saveContent = async function(status) {
@@ -207,7 +192,7 @@ window.saveContent = async function(status) {
     const submitBtn = document.getElementById("submitBtn");
 
     if(!title || !content) {
-        alert("Title और Content डालना आवश्यक है!");
+        alert("Title and Content are required!");
         return;
     }
 
@@ -257,52 +242,52 @@ window.loadPosts = async function() {
     const filterCat = document.getElementById("filterCategory").value;
     container.innerHTML = "Loading posts...";
 
-    let query = supabase.from('posts').select('*');
-    if(filterCat !== "All") {
-        query = query.eq('category', filterCat);
-    }
-    
-    const { data: posts, error } = await query.order('id', { ascending: false });
-
-    if (error) {
-        container.innerHTML = "Error loading posts.";
-        return;
-    }
-
-    container.innerHTML = "";
-    if(posts.length === 0) { container.innerHTML = "<p style='color:#999;'>No content found.</p>"; return; }
-
-    posts.forEach((post) => {
-        const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
-        const isAnnounce = post.type === 'announcement';
-        const isDraft = post.status === 'draft';
+    try {
+        let query = supabase.from('posts').select('*');
+        if(filterCat !== "All") {
+            query = query.eq('category', filterCat);
+        }
         
-        container.innerHTML += `
-            <div class="post-card" style="${isAnnounce ? 'border-left: 5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.8; border-left:5px solid #64748b;' : ''}">
-                <div>
-                    ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
-                    <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
-                        ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 BLOG POST'}
-                    </span>
-                    <span class="badge" style="background:#dcfce7; color:#15803d;">🏷️ ${post.category}</span>
+        const { data: posts, error } = await query.order('id', { ascending: false });
+
+        if (error) throw error;
+
+        container.innerHTML = "";
+        if(!posts || posts.length === 0) { container.innerHTML = "<p style='color:#999;'>No content found.</p>"; return; }
+
+        posts.forEach((post) => {
+            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
+            const isAnnounce = post.type === 'announcement';
+            const isDraft = post.status === 'draft';
+            
+            container.innerHTML += `
+                <div class="post-card" style="${isAnnounce ? 'border-left: 5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.8; border-left:5px solid #64748b;' : ''}">
+                    <div>
+                        ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
+                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
+                            ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 BLOG POST'}
+                        </span>
+                        <span class="badge" style="background:#dcfce7; color:#15803d;">🏷️ ${post.category}</span>
+                    </div>
+                    <h3>${post.title || ""}</h3>
+                    ${post.image ? `<img src="${post.image}">` : ""}
+                    <p style="margin-top:10px; color:#4a5568; line-height:1.6;">${post.content || ""}</p>
+                    <div class="post-meta-info">
+                        <div>📅 Created: ${dateFormatted}</div>
+                        <div style="color: #009245; font-weight:600;">👁️ Views: ${post.views || 0}</div>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <button class="edit-btn" onclick="editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Edit</button>
+                        ${isDraft ? `<button class="publish-btn" style="padding:6px 12px; font-size:13px;" onclick="publishDraft('${post.id}')">🚀 Go Live</button>` : ''}
+                        <button class="delete-btn" onclick="deletePost('${post.id}')">🗑️ Delete</button>
+                    </div>
                 </div>
-                <h3>${post.title || ""}</h3>
-                ${post.image ? `<img src="${post.image}">` : ""}
-                <p style="margin-top:10px; color:#4a5568; line-height:1.6;">${post.content || ""}</p>
-                
-                <div class="post-meta-info">
-                    <div>📅 Created: ${dateFormatted}</div>
-                    <div style="color: #009245; font-weight:600;">👁️ Views: ${post.views || 0}</div>
-                </div>
-                
-                <div style="margin-top:15px;">
-                    <button class="edit-btn" onclick="editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Edit</button>
-                    ${isDraft ? `<button class="publish-btn" style="padding:6px 12px; font-size:13px;" onclick="publishDraft('${post.id}')">🚀 Go Live</button>` : ''}
-                    <button class="delete-btn" onclick="deletePost('${post.id}')">🗑️ Delete</button>
-                </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    } catch(err) {
+        container.innerHTML = "Error loading posts. Please check database tables.";
+        console.error(err);
+    }
 }
 
 window.publishDraft = async function(id) {

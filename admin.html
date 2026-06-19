@@ -90,7 +90,7 @@ button { padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font
             <label>Post Title</label>
             <input type="text" id="postTitle" placeholder="Post Title">
             
-            <label>Featured Image (Select from Gallery)</label>
+            <label>Featured Image (Optional)</label>
             <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Choose Image</label>
             <input type="file" id="imageFile" accept="image/*">
             <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
@@ -124,7 +124,7 @@ button { padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
 const SUPABASE_URL = "https://bxbrejqwkofkptqmwqg.supabase.co"; 
-const SUPABASE_KEY = "Sb_publishable_S9E61UZanfJ859eK6PoU4A_5fS92g7Q"; 
+const SUPABASE_KEY = "sb_publishable_S9E61UZanfJ859eK6PoU4A_5fS92g7Q"; 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
@@ -177,10 +177,9 @@ async function loadAnalytics() {
     try {
         const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
         if(analytics) document.getElementById("totalVisitors").innerText = analytics.visitor_count;
-        
         const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
         document.getElementById("totalPostsCount").innerText = count || 0;
-    } catch (e) { console.error("Analytics failed", e); }
+    } catch (e) { console.error(e); }
 }
 
 window.saveContent = async function(status) {
@@ -205,28 +204,20 @@ window.saveContent = async function(status) {
             const fileExt = file.name.split('.').pop();
             const fileName = `${Math.random()}.${fileExt}`;
             const filePath = `uploads/${fileName}`;
-
-            const { error: uploadError } = await supabase.storage.from('post-images').upload(filePath, file);
-            if(uploadError) throw uploadError;
-
+            await supabase.storage.from('post-images').upload(filePath, file);
             const { data: urlData } = supabase.storage.from('post-images').getPublicUrl(filePath);
             imageUrl = urlData.publicUrl;
         }
 
-        const { error: dbError } = await supabase
-            .from('posts')
-            .insert([{ title, content, type, category, status, image: imageUrl }]);
-
+        const { error: dbError } = await supabase.from('posts').insert([{ title, content, type, category, status, image: imageUrl }]);
         if (dbError) throw dbError;
 
         alert(status === 'published' ? "Post Published Live! 🚀" : "Saved as Draft! 📁");
-        
         document.getElementById("postTitle").value = "";
         document.getElementById("postContent").value = "";
         document.getElementById("imageFile").value = "";
         document.getElementById("previewImage").style.display = "none";
         document.getElementById("uploadBtnLabel").innerText = "📁 Click to Choose Image";
-        
         loadAnalytics();
         loadPosts();
     } catch (error) {
@@ -244,12 +235,8 @@ window.loadPosts = async function() {
 
     try {
         let query = supabase.from('posts').select('*');
-        if(filterCat !== "All") {
-            query = query.eq('category', filterCat);
-        }
-        
+        if(filterCat !== "All") { query = query.eq('category', filterCat); }
         const { data: posts, error } = await query.order('id', { ascending: false });
-
         if (error) throw error;
 
         container.innerHTML = "";
@@ -259,14 +246,11 @@ window.loadPosts = async function() {
             const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
             const isAnnounce = post.type === 'announcement';
             const isDraft = post.status === 'draft';
-            
             container.innerHTML += `
                 <div class="post-card" style="${isAnnounce ? 'border-left: 5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.8; border-left:5px solid #64748b;' : ''}">
                     <div>
                         ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
-                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
-                            ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 BLOG POST'}
-                        </span>
+                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 BLOG POST'}</span>
                         <span class="badge" style="background:#dcfce7; color:#15803d;">🏷️ ${post.category}</span>
                     </div>
                     <h3>${post.title || ""}</h3>
@@ -285,33 +269,26 @@ window.loadPosts = async function() {
             `;
         });
     } catch(err) {
-        container.innerHTML = "Error loading posts. Please check database tables.";
-        console.error(err);
+        container.innerHTML = "No posts found yet. Create your first post above!";
     }
 }
 
 window.publishDraft = async function(id) {
-    const { error } = await supabase.from('posts').update({ status: 'published' }).eq('id', id);
-    if (error) alert(error.message);
-    else loadPosts();
+    await supabase.from('posts').update({ status: 'published' }).eq('id', id);
+    loadPosts();
 }
-
 window.deletePost = async function(id) {
     if (!confirm("Are you sure?")) return;
-    const { error } = await supabase.from('posts').delete().eq('id', id);
-    if (error) alert(error.message);
-    else { loadAnalytics(); loadPosts(); }
+    await supabase.from('posts').delete().eq('id', id);
+    loadAnalytics(); loadPosts();
 }
-
 window.editPost = async function(id, currentTitle, currentContent) {
     const newTitle = prompt("Update Title:", unescape(currentTitle));
-    if (newTitle === null) return;
+    if (!newTitle) return;
     const newContent = prompt("Update Content Description:", unescape(currentContent));
-    if (newContent === null) return;
-
-    const { error } = await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
-    if (error) alert(error.message);
-    else loadPosts();
+    if (!newContent) return;
+    await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
+    loadPosts();
 }
 </script>
 </body>

@@ -3,72 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prime Accounting Solutions - Ultimate Admin Panel</title>
+<title>Prime Accounting Solutions - Admin Panel</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { background:#f4f7fc; color: #333; }
-.header { background:linear-gradient(135deg,#002d72,#009245); padding:25px; text-align:center; color:white; font-size:28px; font-weight:700; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.container { max-width:1000px; margin:auto; padding:20px; }
-.card { background:white; border-radius:16px; padding:30px; box-shadow:0 10px 25px rgba(0,0,0,0.05); margin-bottom:25px; border: 1px solid rgba(0,0,0,0.03); }
-h2 { font-size: 20px; color: #002d72; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-label { font-size: 14px; font-weight: 500; color: #555; display: block; margin-top: 15px; }
-input[type="text"], textarea, select { width:100%; padding:14px; margin:8px 0 15px 0; border:1px solid #e0e0e0; border-radius:10px; font-size:15px; background: #f9fbfd; transition: all 0.3s; }
-input[type="text"]:focus, textarea:focus, select:focus { border-color: #009245; background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(0,146,69,0.1); }
-textarea { min-height:140px; resize:vertical; }
+body { background:#f5f7fb; color: #333; }
+.header { background:linear-gradient(135deg,#002d72,#009245); padding:20px; text-align:center; color:white; font-size:28px; font-weight:700; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.container { max-width:1200px; margin:auto; padding:20px; }
+.card { background:white; border-radius:15px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,.1); margin-bottom:20px; }
 
 /* Analytics Style */
-.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px; }
-.stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); border-top: 4px solid #002d72; text-align: center; }
+.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 20px; }
+.stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); border-top: 4px solid #002d72; text-align: center; }
 .stat-card.visitors { border-top-color: #009245; }
-.stat-number { font-size: 28px; font-weight: 700; color: #1e293b; margin-top: 5px; }
+.stat-number { font-size: 26px; font-weight: 700; margin-top: 5px; color: #1e293b; }
 
-/* Custom Row Layout */
-.row { display: flex; gap: 15px; }
+.row { display: flex; gap: 15px; margin-bottom: 10px; }
 .row > div { flex: 1; }
 
-/* File Upload */
-.file-upload-wrapper { position: relative; margin: 10px 0; }
-.custom-file-btn { display: block; background: #f0f4f8; border: 2px dashed #cbd5e1; padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; color: #475569; font-weight: 500; transition: all 0.3s; }
-.custom-file-btn:hover { background: #e2e8f0; border-color: #002d72; color: #002d72; }
-input[type="file"] { display: none; }
-.img-preview { width:100%; max-height:280px; object-fit:cover; border-radius:12px; margin-top:15px; display:none; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+label { font-size: 14px; font-weight: 500; color: #555; display: block; margin-top: 10px; }
+input[type="text"], input[type="email"], input[type="password"], textarea, select { width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:8px; font-size:15px; background: #f9fbfd; transition: all 0.3s; }
+input:focus, textarea:focus, select:focus { border-color: #009245; background: #fff; outline: none; }
+textarea { min-height:140px; resize:vertical; }
 
-/* Buttons */
-button { padding:12px 24px; border:none; border-radius:10px; cursor:pointer; font-weight:600; font-size: 15px; transition: all 0.3s; margin-right: 5px; }
+/* Premium Upload Design */
+.custom-file-btn { display: block; background: #f0f4f8; border: 2px dashed #cbd5e1; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer; color: #475569; font-weight: 500; margin: 8px 0; }
+input[type="file"] { display: none; }
+
+button { padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-size: 15px; transition: all 0.2s; margin-right: 5px; }
 button:active { transform: scale(0.98); }
-.login-btn { background:#002d72; color:white; width:100%; padding: 14px; box-shadow: 0 4px 12px rgba(0,45,114,0.2); }
-.publish-btn { background:#009245; color:white; box-shadow: 0 4px 12px rgba(0,146,69,0.2); }
+.login-btn { background:#002d72; color:white; width:100%; margin-top: 10px; }
+.publish-btn { background:#009245; color:white; }
 .draft-btn { background:#64748b; color:white; }
-.logout-btn { background:#fee2e2; color:#ef4444; float:right; font-size: 13px; padding: 8px 16px; }
-.delete-btn { background:#fee2e2; color:#ef4444; }
-.edit-btn { background:#fef3c7; color:#d97706; }
+.logout-btn { background:#d62828; color:white; float:right; padding: 8px 16px; font-size: 13px; }
+.edit-btn { background:#ffb703; color:black; }
+.delete-btn { background:#d62828; color:white; }
 
 #adminPanel { display:none; }
-.post-card { background:#fff; padding:20px; border-radius:14px; border: 1px solid #edf2f7; margin-bottom:20px; position: relative; }
+.post-card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,.08); margin-bottom:15px; border: 1px solid #edf2f7; }
 .post-card img { width:100%; border-radius:10px; margin:15px 0; max-height:300px; object-fit:cover; }
-.post-meta-info { font-size:12px; color:#718096; margin-top:12px; display: flex; flex-wrap: wrap; gap: 15px; background: #f8fafc; padding: 8px 12px; border-radius: 6px; }
-.badge { display: inline-block; padding: 4px 10px; font-size: 11px; font-weight: 600; border-radius: 20px; margin-right: 5px; margin-bottom: 10px; }
+.post-meta-info { font-size:12px; color:#666; margin-top:10px; display: flex; gap: 20px; background: #f8fafc; padding: 8px; border-radius: 6px; }
+.badge { display: inline-block; padding: 4px 10px; font-size: 11px; font-weight: 600; border-radius: 20px; margin-bottom: 10px; margin-right: 5px; }
 .badge-news { background: #e0f2fe; color: #0369a1; }
 .badge-announcement { background: #fef3c7; color: #d97706; }
-.badge-draft { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
-.badge-cat { background: #dcfce7; color: #15803d; }
+.badge-draft { background: #f1f5f9; color: #475569; }
 </style>
 </head>
 <body>
 
-<div class="header">Prime Accounting Solutions</div>
+<div class="header">Prime Accounting Solutions - Admin Panel</div>
 
 <div class="container">
-    <div class="card" id="loginBox" style="max-width: 450px; margin: 60px auto;">
-        <h2>🔐 Admin Login</h2>
-        <label>Email Address</label>
-        <input type="email" id="email" placeholder="Enter your email">
-        <label>Password</label>
-        <input type="password" id="password" placeholder="Enter your password">
-        <button class="login-btn" onclick="loginAdmin()">Secure Login</button>
+    <div class="card" id="loginBox" style="max-width: 450px; margin: 50px auto;">
+        <h2>Admin Login</h2>
+        <input type="email" id="email" placeholder="Email Address">
+        <input type="password" id="password" placeholder="Password">
+        <button class="login-btn" onclick="loginAdmin()">Login</button>
     </div>
 
     <div id="adminPanel">
@@ -85,7 +78,7 @@ button:active { transform: scale(0.98); }
 
         <div class="card">
             <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
-            <h2>✍️ Create New Content</h2>
+            <h2>Publish New Post</h2>
             
             <div class="row">
                 <div>
@@ -96,7 +89,7 @@ button:active { transform: scale(0.98); }
                     </select>
                 </div>
                 <div>
-                    <label>Category Filter</label>
+                    <label>Category</label>
                     <select id="postCategory">
                         <option value="General">General</option>
                         <option value="GST">GST Updates</option>
@@ -108,27 +101,25 @@ button:active { transform: scale(0.98); }
             </div>
 
             <label>Post Title</label>
-            <input type="text" id="postTitle" placeholder="Enter post title...">
+            <input type="text" id="postTitle" placeholder="Post Title">
             
             <label>Featured Image (Select from Gallery)</label>
-            <div class="file-upload-wrapper">
-                <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Choose Image</label>
-                <input type="file" id="imageFile" accept="image/*">
-                <img id="previewImage" class="img-preview">
-            </div>
+            <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Choose Image</label>
+            <input type="file" id="imageFile" accept="image/*">
+            <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
             
-            <label>Content Description</label>
-            <textarea id="postContent" placeholder="Write detailed content here..."></textarea>
-            
-            <button class="publish-btn" onclick="saveContent('published')" id="submitBtn">🚀 Publish Live</button>
-            <button class="draft-btn" onclick="saveContent('draft')" id="draftBtn">📁 Save as Draft</button>
+            <label>Post Content</label>
+            <textarea id="postContent" placeholder="Write Post Content"></textarea>
+
+            <button class="publish-btn" onclick="saveContent('published')" id="submitBtn">Publish Post</button>
+            <button class="draft-btn" onclick="saveContent('draft')">Save as Draft</button>
         </div>
 
         <div class="card">
-            <h2>📦 Live Feed Management</h2>
+            <h2>Manage Posts</h2>
             <div style="margin-bottom: 15px;">
-                <label style="display:inline; margin-right: 10px;">Filter list by category:</label>
-                <select id="filterCategory" onchange="loadPosts()" style="width: auto; padding: 8px; margin: 0;">
+                <label style="display:inline; margin-right:10px;">Filter list by category:</label>
+                <select id="filterCategory" onchange="loadPosts()" style="width:auto; padding:6px; margin:0;">
                     <option value="All">All Categories</option>
                     <option value="General">General</option>
                     <option value="GST">GST Updates</option>
@@ -152,7 +143,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
 
-// Image Preview Setup
+// Live Image Preview Connection
 document.getElementById("imageFile").addEventListener("change", (e) => {
     const file = e.target.files[0];
     if(!file) return;
@@ -169,11 +160,12 @@ document.getElementById("imageFile").addEventListener("change", (e) => {
 window.loginAdmin = function() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+
     if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
         sessionStorage.setItem("isAdminIn", "true");
         checkAuth();
     } else {
-        alert("Incorrect Email or Password!");
+        alert("गलत ईमेल या पासवर्ड!");
     }
 }
 
@@ -196,17 +188,14 @@ function checkAuth() {
 }
 window.onload = checkAuth;
 
-// Analytics Loader (Visitors & Total Posts)
 async function loadAnalytics() {
-    // 1. Load Visitors
-    const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').single();
-    if(analytics) {
-        document.getElementById("totalVisitors").innerText = analytics.visitor_count;
-    }
-    
-    // 2. Load Total Posts Count
-    const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
-    document.getElementById("totalPostsCount").innerText = count || 0;
+    try {
+        const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').single();
+        if(analytics) document.getElementById("totalVisitors").innerText = analytics.visitor_count;
+        
+        const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
+        document.getElementById("totalPostsCount").innerText = count || 0;
+    } catch (e) { console.error(e); }
 }
 
 window.saveContent = async function(status) {
@@ -218,11 +207,11 @@ window.saveContent = async function(status) {
     const submitBtn = document.getElementById("submitBtn");
 
     if(!title || !content) {
-        alert("Title and Content are required!");
+        alert("Title और Content डालना आवश्यक है!");
         return;
     }
 
-    submitBtn.innerText = "⏳ Saving content...";
+    submitBtn.innerText = "⏳ Saving...";
     submitBtn.disabled = true;
     let imageUrl = "";
 
@@ -245,9 +234,8 @@ window.saveContent = async function(status) {
 
         if (dbError) throw dbError;
 
-        alert(status === 'published' ? "Post Published Live! 🚀" : "Saved as Draft successfully! 📁");
+        alert(status === 'published' ? "Post Published Live! 🚀" : "Saved as Draft! 📁");
         
-        // Reset Inputs
         document.getElementById("postTitle").value = "";
         document.getElementById("postContent").value = "";
         document.getElementById("imageFile").value = "";
@@ -256,11 +244,10 @@ window.saveContent = async function(status) {
         
         loadAnalytics();
         loadPosts();
-
     } catch (error) {
         alert("Error: " + error.message);
     } finally {
-        submitBtn.innerText = "🚀 Publish Live";
+        submitBtn.innerText = "Publish Post";
         submitBtn.disabled = false;
     }
 }
@@ -268,7 +255,7 @@ window.saveContent = async function(status) {
 window.loadPosts = async function() {
     const container = document.getElementById("postsContainer");
     const filterCat = document.getElementById("filterCategory").value;
-    container.innerHTML = "<p>Loading feed list...</p>";
+    container.innerHTML = "Loading posts...";
 
     let query = supabase.from('posts').select('*');
     if(filterCat !== "All") {
@@ -278,12 +265,12 @@ window.loadPosts = async function() {
     const { data: posts, error } = await query.order('id', { ascending: false });
 
     if (error) {
-        container.innerHTML = "Error loading data.";
+        container.innerHTML = "Error loading posts.";
         return;
     }
 
     container.innerHTML = "";
-    if(posts.length === 0) { container.innerHTML = "<p style='color:#999;'>No content found in this category.</p>"; return; }
+    if(posts.length === 0) { container.innerHTML = "<p style='color:#999;'>No content found.</p>"; return; }
 
     posts.forEach((post) => {
         const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
@@ -291,13 +278,13 @@ window.loadPosts = async function() {
         const isDraft = post.status === 'draft';
         
         container.innerHTML += `
-            <div class="post-card" style="${isAnnounce ? 'border-left: 5px solid #d97706;' : ''} ${isDraft ? 'opacity: 0.75; border-left: 5px solid #64748b;' : ''}">
+            <div class="post-card" style="${isAnnounce ? 'border-left: 5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.8; border-left:5px solid #64748b;' : ''}">
                 <div>
                     ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
                     <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
                         ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 BLOG POST'}
                     </span>
-                    <span class="badge badge-cat">🏷️ ${post.category}</span>
+                    <span class="badge" style="background:#dcfce7; color:#15803d;">🏷️ ${post.category}</span>
                 </div>
                 <h3>${post.title || ""}</h3>
                 ${post.image ? `<img src="${post.image}">` : ""}
@@ -310,7 +297,7 @@ window.loadPosts = async function() {
                 
                 <div style="margin-top:15px;">
                     <button class="edit-btn" onclick="editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Edit</button>
-                    ${isDraft ? `<button class="publish-btn" style="padding: 6px 14px; font-size:13px;" onclick="publishDraft('${post.id}')">🚀 Go Live</button>` : ''}
+                    ${isDraft ? `<button class="publish-btn" style="padding:6px 12px; font-size:13px;" onclick="publishDraft('${post.id}')">🚀 Go Live</button>` : ''}
                     <button class="delete-btn" onclick="deletePost('${post.id}')">🗑️ Delete</button>
                 </div>
             </div>
@@ -325,7 +312,7 @@ window.publishDraft = async function(id) {
 }
 
 window.deletePost = async function(id) {
-    if (!confirm("Delete permanently?")) return;
+    if (!confirm("Are you sure?")) return;
     const { error } = await supabase.from('posts').delete().eq('id', id);
     if (error) alert(error.message);
     else { loadAnalytics(); loadPosts(); }

@@ -13,29 +13,19 @@ body { background:#f4f7fc; color: #333; }
 .navbar { background: linear-gradient(135deg,#002d72,#009245); padding: 20px; text-align: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 .navbar h1 { font-size: 26px; font-weight: 700; }
 .container { max-width: 900px; margin: auto; padding: 20px; }
-
-/* Announcement Ribbon */
-#announcementBar { display: none; background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-weight: 500; animation: pulse 2s infinite; }
-
-/* Category Navigation */
+#announcementBar { display: none; background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-weight: 500; }
 .cat-nav { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 20px; scrollbar-width: none; }
 .cat-nav::-webkit-scrollbar { display: none; }
 .cat-btn { background: white; padding: 8px 18px; border-radius: 20px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.3s; color: #475569; }
 .cat-btn.active, .cat-btn:hover { background: #002d72; color: white; border-color: #002d72; }
-
-/* Blog Feed cards */
 .post-card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); margin-bottom: 25px; border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; cursor: pointer; }
-.post-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
+.post-card:hover { transform: translateY(-3px); }
 .post-card img { width: 100%; max-height: 350px; object-fit: cover; border-radius: 12px; margin: 15px 0; }
 .post-title { font-size: 22px; color: #002d72; font-weight: 600; margin: 5px 0; }
 .post-content { color: #4a5568; line-height: 1.6; font-size: 15px; margin-top: 10px; white-space: pre-wrap; }
-
-/* Badges & Meta */
 .badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 600; border-radius: 20px; text-transform: uppercase; margin-bottom: 5px; }
 .badge-cat { background: #dcfce7; color: #15803d; }
 .post-meta { display: flex; gap: 20px; font-size: 12px; color: #718096; background: #f8fafc; padding: 10px 15px; border-radius: 8px; margin-top: 15px; }
-
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
 </style>
 </head>
 <body>
@@ -56,109 +46,87 @@ body { background:#f4f7fc; color: #333; }
         <button class="cat-btn" onclick="filterCategory('Accounting', this)">🏷️ Accounting</button>
     </div>
 
-    <div id="userFeedContainer">Latest updates लोड हो रहे हैं...</div>
+    <div id="userFeedContainer">नवीनतम अपडेट लोड हो रहे हैं...</div>
 </div>
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
+// यहाँ 'sb_publishable' को पूरी तरह स्मॉल लेटर्स में सही कर दिया गया है
 const SUPABASE_URL = "https://bxbrejqwkofkptqmwqg.supabase.co"; 
-const SUPABASE_KEY = "Sb_publishable_S9E61UZanfJ859eK6PoU4A_5fS92g7Q"; 
+const SUPABASE_KEY = "sb_publishable_S9E61UZanfJ859eK6PoU4A_5fS92g7Q"; 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let currentCategory = "All";
 
-// 1. VISITORS COUNT TRACKING (ऑटोमैटिक विजिटर ट्रैकर)
 async function trackVisitor() {
     try {
-        const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').single();
-        if(analytics) {
-            let currentCount = analytics.visitor_count || 0;
-            await supabase.from('site_analytics').update({ visitor_count: currentCount + 1 }).eq('id', 'main_site');
+        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
+        if(data) {
+            await supabase.from('site_analytics').update({ visitor_count: (data.visitor_count || 0) + 1 }).eq('id', 'main_site');
         }
-    } catch(e) {
-        console.log("Analytics tracking error");
-    }
+    } catch(e) { console.log("Analytics bypass"); }
 }
 
-// 2. LOAD LATEST POSTS & ANNOUNCEMENTS
 async function loadUserFeed() {
     const feedContainer = document.getElementById("userFeedContainer");
     const announceBar = document.getElementById("announcementBar");
 
-    // A. सबसे पहले अनाउंसमेंट लोड करें (जो सबसे ज़रूरी अलर्ट है)
-    const { data: announcements } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('type', 'announcement')
-        .eq('status', 'published')
-        .order('id', { ascending: false })
-        .limit(1);
+    try {
+        const { data: announcements } = await supabase.from('posts').select('*').eq('type', 'announcement').eq('status', 'published').order('id', { ascending: false }).limit(1);
+        if(announcements && announcements.length > 0) {
+            announceBar.innerHTML = `<strong>🚨 ज़रुरी सूचना:</strong> ${announcements[0].title} - ${announcements[0].content}`;
+            announceBar.style.display = "block";
+        } else {
+            announceBar.style.display = "none";
+        }
 
-    if(announcements && announcements.length > 0) {
-        announceBar.innerHTML = `<strong>🚨 ज़रुरी सूचना:</strong> ${announcements[0].title} - ${announcements[0].content}`;
-        announceBar.style.display = "block";
-    } else {
-        announceBar.style.display = "none";
-    }
+        let query = supabase.from('posts').select('*').eq('type', 'news').eq('status', 'published');
+        if(currentCategory !== "All") { query = query.eq('category', currentCategory); }
 
-    // B. नॉर्मल ब्लॉग पोस्ट्स लोड करें
-    let query = supabase.from('posts').select('*').eq('type', 'news').eq('status', 'published');
-    
-    if(currentCategory !== "All") {
-        query = query.eq('category', currentCategory);
-    }
+        const { data: posts, error } = await query.order('id', { ascending: false });
 
-    const { data: posts, error } = await query.order('id', { ascending: false });
+        if (error || !posts || posts.length === 0) {
+            feedContainer.innerHTML = "<p style='text-align:center; color:#666; margin-top:40px;'>अभी कोई लाइव पोस्ट उपलब्ध नहीं है। आप एडमिन पैनल से पहली पोस्ट पब्लिश करें!</p>";
+            return;
+        }
 
-    if (error) {
-        feedContainer.innerHTML = "<p>डेटा लोड करने में समस्या आ रही है, कृपया पेज रिफ्रेश करें...</p>";
-        return;
-    }
-
-    if(posts.length === 0) {
-        feedContainer.innerHTML = "<p style='text-align:center; color:#999; margin-top:40px;'>इस कैटेगरी में अभी कोई पोस्ट नहीं है।</p>";
-        return;
-    }
-
-    feedContainer.innerHTML = "";
-    posts.forEach((post) => {
-        const dateStr = post.created_at ? new Date(post.created_at).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'}) : "Recently";
-        
-        feedContainer.innerHTML += `
-            <div class="post-card" onclick="incrementPostView('${post.id}', ${post.views || 0})">
-                <span class="badge badge-cat">🏷️ ${post.category}</span>
-                <h2 class="post-title">${post.title}</h2>
-                ${post.image ? `<img src="${post.image}" alt="Update Image">` : ""}
-                <p class="post-content">${post.content}</p>
-                <div class="post-meta">
-                    <div>📅 पब्लिश तिथि: ${dateStr}</div>
-                    <div style="color:#009245; font-weight:600;">👁️ व्यूज: ${post.views || 0}</div>
+        feedContainer.innerHTML = "";
+        posts.forEach((post) => {
+            const dateStr = post.created_at ? new Date(post.created_at).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'}) : "Recently";
+            feedContainer.innerHTML += `
+                <div class="post-card" onclick="incrementPostView('${post.id}', ${post.views || 0})">
+                    <span class="badge badge-cat">🏷️ ${post.category}</span>
+                    <h2 class="post-title">${post.title}</h2>
+                    ${post.image ? `<img src="${post.image}" alt="Update Image">` : ""}
+                    <p class="post-content">${post.content}</p>
+                    <div class="post-meta">
+                        <div>📅 दिनांक: ${dateStr}</div>
+                        <div style="color:#009245; font-weight:600;">👁️ व्यूज: ${post.views || 0}</div>
+                    </div>
                 </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    } catch (err) {
+        feedContainer.innerHTML = "<p style='text-align:center; color:#666;'>सर्वर से कनेक्ट होने में थोड़ा समय लग रहा है। कृपया कुछ सेकंड बाद पेज रिफ्रेश करें।</p>";
+    }
 }
 
-// 3. INCREMENT VIEW COUNT ON CLICK (क्लिक करने पर व्यू +1 बढ़ाएं)
 window.incrementPostView = async function(id, currentViews) {
-    await supabase.from('posts').update({ views: currentViews + 1 }).eq('id', id);
-    loadUserFeed(); // रिफ्रेश करें ताकि यूजर को तुरंत बढ़ा हुआ व्यू दिखे
+    try {
+        await supabase.from('posts').update({ views: currentViews + 1 }).eq('id', id);
+        loadUserFeed();
+    } catch(e){}
 }
 
-// 4. CATEGORY FILTER SYSTEM
 window.filterCategory = function(category, element) {
     currentCategory = category;
-    
-    // एक्टिव बटन का कलर बदलने के लिए
     const buttons = document.querySelectorAll('.cat-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     element.classList.add('active');
-    
     loadUserFeed();
 }
 
-// पेज खुलते ही दोनों सिस्टम शुरू हो जाएंगे
 window.onload = function() {
     trackVisitor();
     loadUserFeed();

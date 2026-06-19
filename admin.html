@@ -178,10 +178,7 @@ type="text"
 id="postImage"
 placeholder="Image URL">
 
-<input type="file" id="imageFile" accept="image/*">
-
-<img
-id="previewImage"
+<input
 style="
 display:none;
 max-width:250px;
@@ -450,15 +447,14 @@ container.innerHTML += `
 <h3>${data.title || ""}</h3>
 
 ${
+${
 data.image
 ?
 `<img src="${data.image}"
 style="width:100%;max-height:300px;object-fit:cover;border-radius:10px;margin:10px 0;">`
 :
 ""
-:
-""
-}
+ }
 
 <p>${data.content || ""}</p>
 

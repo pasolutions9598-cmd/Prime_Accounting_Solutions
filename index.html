@@ -324,12 +324,22 @@ async function loadLiveFeed() {
 
 async function safeTrackVisitor() {
     try {
+        // Check karega ki kya yeh device pehle aa chuka hai
+        const hasVisited = localStorage.getItem('prime_site_visited');
+        if (hasVisited) {
+            console.log("Welcome back, Admin! Visit not counted.");
+            return; // Agar pehle aa chuke ho, toh count nahi badhayega
+        }
+
         const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
         if(data) {
             await supabase.from('site_analytics').update({ visitor_count: data.visitor_count + 1 }).eq('id', 'main_site');
+            // Device mein save kar lega ki yeh user ab aa chuka hai
+            localStorage.setItem('prime_site_visited', 'true');
         }
     } catch(e) {}
 }
+
 
 window.onload = () => { 
     loadLiveFeed(); 

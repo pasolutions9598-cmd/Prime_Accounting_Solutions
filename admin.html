@@ -299,7 +299,11 @@ alert("Login Successful");
 
 }catch(error){
 
-alert(error.message);
+alert("CODE: " + error.code);
+
+alert("MESSAGE: " + error.message);
+
+console.error(error);
 
 }
 

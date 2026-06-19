@@ -15,62 +15,115 @@ gtag('config', 'G-LT271NRJ2Q');
 <meta name="description" content="Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services in Prayagraj.">
 <meta name="keywords" content="Accounting Services, Bookkeeping, GST, Tally Data Entry, MIS Reporting, Prayagraj">
 <meta name="author" content="Prime Accounting Solutions">
-<link class="favicon" rel="icon" type="image/png" href="favicon.png?v=5">
-<meta property="og:title" content="Prime Accounting Solutions">
-<meta property="og:description" content="Professional Accounting, Bookkeeping, GST, Tally & MIS Reporting Services.">
-<meta property="og:image" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png">
-<meta property="og:url" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/">
-<meta property="og:type" content="website">
-
+<link rel="icon" type="image/png" href="favicon.png?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root { --primary: #002d72; --secondary: #009245; --dark: #001845; --light: #f5f7fb; --text: #2d3748; }
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+:root { 
+    --primary: #002d72; 
+    --secondary: #009245; 
+    --dark: #0f172a; 
+    --light: #f8fafc; 
+    --text: #334155;
+    --card-bg: #ffffff;
+}
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
 html { scroll-behavior:smooth; }
-body { background: var(--light); color: var(--text); line-height:1.6; }
+body { background: var(--light); color: var(--text); line-height:1.7; overflow-x: hidden; }
 
-.welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 24, 69, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100000; opacity: 1; transition: opacity 0.5s ease; }
-.welcome-box { background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); max-width: 500px; width: 90%; border-top: 6px solid var(--secondary); }
-.welcome-box img { width: 120px; margin-bottom: 20px; }
-.welcome-box h2 { color: var(--primary); font-size: 28px; margin-bottom: 10px; font-weight: 700; }
-.welcome-box p { color: #4a5568; font-size: 16px; margin-bottom: 25px; }
-.welcome-btn { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; padding: 12px 35px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+/* Welcome Popup Premium Styles */
+.welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; z-index: 100000; opacity: 1; transition: opacity 0.5s ease; }
+.welcome-box { background: var(--card-bg); padding: 45px 35px; border-radius: 24px; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.15); max-width: 480px; width: 90%; border-top: 6px solid var(--secondary); transform: scale(1); transition: transform 0.3s ease; }
+.welcome-box img { width: 110px; margin-bottom: 20px; }
+.welcome-box h2 { font-family: 'Outfit', sans-serif; color: var(--primary); font-size: 26px; margin-bottom: 12px; font-weight: 700; }
+.welcome-box p { color: #64748b; font-size: 15px; margin-bottom: 30px; }
+.welcome-btn { background: linear-gradient(135deg, var(--primary), #0044aa); color: white; border: none; padding: 14px 40px; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,45,114,0.3); transition: 0.3s ease; }
+.welcome-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,45,114,0.4); }
 
-header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center; padding: 80px 20px; position: relative; overflow: hidden; }
-header img { width:220px; max-width:85%; display:block; margin:auto; }
-header h1 { font-size:46px; font-weight:700; margin-top: 15px; }
-.tagline { font-size:20px; font-weight:500; opacity: 0.9; margin: 5px 0 15px; }
-.focus-line { font-weight:600; font-size:16px; background: rgba(255,255,255,0.15); display: inline-block; padding: 6px 20px; border-radius: 50px; }
-nav { text-align:center; margin-top:35px; }
-nav a { color:white; text-decoration:none; margin:0 15px; font-weight:500; font-size:16px; padding: 5px 10px; }
+/* Premium Floating Header */
+.nav-container { position: fixed; top: 0; left: 0; width: 100%; z-index: 999; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); border-bottom: 1px solid rgba(255, 255, 255, 0.4); transition: 0.3s; }
+.nav-content { max-width: 1200px; margin: auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { height: 45px; }
+.nav-logo span { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); }
+nav a { color: #475569; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 15px; transition: 0.2s; position: relative; padding: 5px 0; }
+nav a:hover, nav a.active { color: var(--primary); }
+nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--secondary); transition: 0.3s; }
+nav a:hover::after { width: 100%; }
 
-.hero { background: var(--dark); color:white; text-align:center; padding:60px 20px; font-size: 18px; }
-.hero h2 { color: #fff !important; font-size: 32px; margin-bottom: 10px; }
-section { padding:80px 20px; max-width:1200px; margin:auto; }
-h2 { text-align:center; margin-bottom:40px; color: var(--primary); font-size: 34px; font-weight: 700; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
-.card, .package { background:white; padding:25px; border-radius:16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); text-align:center; border: 1px solid #edf2f7; }
-.package-img, .package img { width:100%; height: auto; max-width: 100%; object-fit: contain; border-radius:12px; display:block; }
-.price { font-size:36px; font-weight:700; color: var(--secondary); margin:20px 0; }
-.contact { background: linear-gradient(135deg, var(--primary), var(--dark)); color:white; border-radius:20px; padding:50px; text-align:center; }
-input, textarea { width:100%; padding:14px; margin:12px 0; border:1px solid #e2e8f0; border-radius:10px; background: #f8fafc; }
-button[type="submit"] { padding:14px 35px; background: var(--primary); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:600; width: 100%; }
+/* Hero Section */
+.hero-section { background: linear-gradient(135deg, #071630 0%, #1e293b 100%); color: white; padding: 160px 20px 100px; text-align: center; position: relative; }
+.hero-section h1 { font-family: 'Outfit', sans-serif; font-size: 48px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 15px; background: linear-gradient(to right, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-section .tagline { font-size: 22px; color: #38bdf8; font-weight: 500; margin-bottom: 25px; font-family: 'Outfit', sans-serif; }
+.focus-line { font-weight: 600; font-size: 15px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: inline-block; padding: 8px 24px; border-radius: 50px; color: #e2e8f0; }
 
-.post-live-card { text-align: left; padding: 0; display: flex; flex-direction: column; }
-.post-live-card .inner-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-.post-live-card img { width: auto; height: auto; max-height: 400px; object-fit: contain; background: #f8fafc; }
-.post-badge { display: inline-block; padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 30px; margin-bottom: 12px; }
+/* Dynamic Typing Effect Placeholder */
+.type-wrap { margin-top: 15px; font-size: 16px; color: #94a3b8; font-weight: 500; }
+.type-text { color: #facc15; font-weight: 600; border-right: 2px solid #facc15; animation: blink 0.7s infinite; padding-right: 3px; }
+
+@keyframes blink { 50% { border-color: transparent; } }
+
+section { padding: 90px 20px; max-width: 1200px; margin: auto; }
+h2 { font-family: 'Outfit', sans-serif; text-align: center; margin-bottom: 50px; color: var(--primary); font-size: 36px; font-weight: 700; position: relative; }
+h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin: 12px auto 0; border-radius: 2px; }
+
+/* Modern Cards Grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.card, .package { background: var(--card-bg); padding: 35px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.02); border: 1px solid #f1f5f9; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.card:hover, .package:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(15,23,42,0.08); border-color: #e2e8f0; }
+
+.package { text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+.package-img, .package img { width: 100%; height: auto; border-radius: 14px; display: block; margin-bottom: 10px; }
+.price { font-family: 'Outfit', sans-serif; font-size: 38px; font-weight: 800; color: var(--secondary); margin: 15px 0; }
+.package p { color: #64748b; font-size: 15px; }
+
+/* About Section Custom */
+.about-card { background: var(--card-bg); border-radius: 24px; padding: 45px; box-shadow: 0 10px 30px rgba(0,0,0,0.01); border: 1px solid #f1f5f9; text-align: left; max-width: 950px; margin: auto; position: relative; overflow: hidden; }
+.about-card::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 5px; background: var(--primary); }
+
+/* Live Feed Updates Section */
+.post-live-card { text-align: left; padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+.post-live-card .inner-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+.post-live-card img { width: 100%; height: 230px; object-fit: contain; background: #f8fafc; border-bottom: 1px solid #f1f5f9; }
+.post-badge { display: inline-block; padding: 4px 14px; font-size: 11px; font-weight: 700; border-radius: 30px; margin-bottom: 15px; letter-spacing: 0.5px; text-transform: uppercase; }
 .badge-news { background: #e0f2fe; color: #0369a1; }
 .badge-announcement { background: #fef3c7; color: #d97706; }
-footer { background: var(--dark); color:white; text-align:center; padding:40px 20px; margin-top:60px; }
+.post-live-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; color: var(--dark); margin-bottom: 10px; font-weight: 600; line-height: 1.4; }
 
-.sticky-actions { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
-.action-fab { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; color: white; text-decoration: none; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-.fab-whatsapp { background: #25D366; } .fab-call { background: var(--primary); }
-.action-fab svg { width: 26px; height: 26px; fill: currentColor; }
-@media(max-width:768px){ header h1 { font-size:32px; } nav { display: flex; flex-wrap: wrap; justify-content: center; } }
+/* Contact & Forms */
+.contact-hero { background: linear-gradient(135deg, var(--primary), #001e4e); color: white; border-radius: 24px; padding: 60px 40px; text-align: center; box-shadow: 0 15px 35px rgba(0,45,114,0.15); }
+.contact-hero h2 { color: white; }
+.contact-hero h2::after { background: #fff; }
+.contact-info-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 30px; font-size: 16px; }
+.info-item { background: rgba(255,255,255,0.06); padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); }
+
+.form-container { max-width: 650px; margin: auto; }
+input, textarea { width: 100%; padding: 16px; margin: 10px 0 18px; border: 1px solid #cbd5e1; border-radius: 12px; background: #fff; font-size: 15px; transition: 0.3s; }
+input:focus, textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(0,45,114,0.08); }
+button[type="submit"] { padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px; width: 100%; transition: 0.3s; box-shadow: 0 4px 12px rgba(0,45,114,0.2); }
+button[type="submit"]:hover { background: #002256; transform: translateY(-1px); }
+
+/* Utilities */
+.map-box { border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
+footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 50px 20px; margin-top: 100px; border-top: 1px solid #1e293b; }
+footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px; font-size: 22px; }
+
+/* Sticky Premium Quick Actions */
+.action-btn { position: fixed; right: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50px; color: white; text-decoration: none; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 9999; font-weight: 600; font-size: 14px; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); padding: 0 20px; height: 52px; }
+.action-btn:hover { transform: scale(1.05) translateY(-2px); }
+.whatsapp-btn { bottom: 25px; background: #25D366; box-shadow: 0 8px 25px rgba(37,211,102,0.3); }
+.call-btn { bottom: 90px; background: var(--primary); box-shadow: 0 8px 25px rgba(0,45,114,0.3); }
+
+@media (max-width: 768px) {
+    .nav-content { padding: 12px 15px; }
+    nav { display: none; } /* Simplified for premium clean look on mobile mobile menu can be added later */
+    .hero-section { padding: 130px 15px 70px; }
+    .hero-section h1 { font-size: 32px; }
+    .hero-section .tagline { font-size: 18px; }
+    h2 { font-size: 28px; }
+    .about-card { padding: 25px; }
+}
 </style>
 </head>
 <body>
@@ -84,160 +137,205 @@ footer { background: var(--dark); color:white; text-align:center; padding:40px 2
   </div>
 </div>
 
-<header>
-  <img src="logo.png" alt="Logo">
+<div class="nav-container">
+  <div class="nav-content">
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Logo">
+      <span>Prime Accounting Solutions</span>
+    </a>
+    <nav>
+      <a href="#about" class="active">About</a>
+      <a href="#services">Services</a>
+      <a href="#updates">Latest Updates</a>
+      <a href="#packages">Packages</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<div class="hero-section">
   <h1>Prime Accounting Solutions</h1>
   <p class="tagline">Accurate • Reliable • Affordable</p>
   <p class="focus-line">FOCUS ON YOUR BUSINESS, WE'LL MANAGE YOUR ACCOUNTS</p>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#updates">Latest Updates</a>
-    <a href="#packages">Packages</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h2>Professional Accounting & Bookkeeping Services</h2>
-  <p>GST • Tally • MIS Reporting • Financial Statements</p>
-</section>
+  <div class="type-wrap">
+    <span>We manage your: </span><span class="type-text" id="changingText">GST Returns</span>
+  </div>
+</div>
 
 <section id="about">
-  <h2>About Us</h2>
-  <div class="card" style="text-align: left; max-width: 900px; margin: auto;">
-    <p style="font-size: 17px; color: #4a5568;">
-      Prime Accounting Solutions provides high-quality professional Accounting, Bookkeeping, Tally Data Entry, GST Data Preparation, MIS Reporting, and customized Corporate Financial Services tailored for Small Businesses, Retailers, Traders, and growing Startups.
+  <h2>About Our Firm</h2>
+  <div class="about-card">
+    <p style="font-size: 17px; color: #475569; line-height: 1.8;">
+      Prime Accounting Solutions provides high-quality professional Accounting, Bookkeeping, Tally Data Entry, GST Data Preparation, MIS Reporting, and customized Corporate Financial Services tailored perfectly for Small Businesses, Retailers, Traders, and growing Startups.
     </p>
   </div>
 </section>
 
-<section id="updates" style="background: #edf2f7; max-width: 100%; padding: 80px 20px;">
+<section id="updates" style="background: #f1f5f9; max-width: 100%; padding: 100px 20px;">
   <div style="max-width: 1200px; margin: auto;">
     <h2>Latest Financial & Tax Updates</h2>
     <div id="postsContainer" class="grid">
-      <div style="text-align:center; grid-column: 1/-1; color: #718096; padding: 30px;">⏳ Fetching live updates...</div>
+      <div style="text-align:center; grid-column: 1/-1; color: #64748b; padding: 30px;">⏳ Fetching live executive updates...</div>
     </div>
   </div>
 </section>
 
 <section id="services">
   <h2>One-Time Services</h2>
-  <img src="IMG-20260610-WA0002.jpg" class="package-img" alt="One Time Services">
-  <br><br><br>
+  <img src="IMG-20260610-WA0002.jpg" class="package-img" style="border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.03);" alt="One Time Services">
+  <br><br><br><br>
   <h2>Advanced Accounting Services</h2>
-  <img src="Image .png" class="package-img" alt="Advanced Accounting Services">
+  <img src="Image .png" class="package-img" style="border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.03);" alt="Advanced Accounting Services">
 </section>
 
 <section id="packages">
   <h2>Our Flexible Monthly Packages</h2>
   <div class="grid">
     <div class="package">
-      <img src="IMG-20260610-WA0000.jpg" alt="Basic Package">
-      <h3 style="margin-top:15px;">Basic Package</h3>
-      <div class="price">₹2,000<span style="font-size:14px;font-weight:400;color:#718096;">/mo</span></div>
-      <p>Sales Entry • Purchase Entry • Expense Recording • Basic Bookkeeping</p>
+      <div>
+        <img src="IMG-20260610-WA0000.jpg" alt="Basic Package">
+        <h3 style="margin-top:20px; font-family:'Outfit'; font-size:22px;">Basic Package</h3>
+        <div class="price">₹2,000</div>
+        <p>Sales & Purchase Entry • Expense Recording • Basic Bookkeeping Layout</p>
+      </div>
+    </div>
+    <div class="package" style="border-color: var(--primary); position: relative;">
+      <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 4px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px;">POPULAR</div>
+      <div>
+        <img src="IMG-20260610-WA0001.jpg" alt="Standard Package">
+        <h3 style="margin-top:20px; font-family:'Outfit'; font-size:22px;">Standard Package</h3>
+        <div class="price">₹5,000</div>
+        <p>Complete Bookkeeping • Accounts Payable/Receivable • Full Bank Reconciliation</p>
+      </div>
     </div>
     <div class="package">
-      <img src="IMG-20260610-WA0001.jpg" alt="Standard Package">
-      <h3 style="margin-top:15px;">Standard Package</h3>
-      <div class="price">₹5,000<span style="font-size:14px;font-weight:400;color:#718096;">/mo</span></div>
-      <p>Complete Bookkeeping • Accounts Receivable/Payable • Bank Reconciliation • Monthly Summary</p>
-    </div>
-    <div class="package">
-      <img src="IMG-20260610-WA0004.jpg" alt="Premium Package">
-      <h3 style="margin-top:15px;">Premium Package</h3>
-      <div class="price">₹8,000+<span style="font-size:14px;font-weight:400;color:#718096;">/mo</span></div>
-      <p>Inventory Management • End-to-End Accounting • GST Data Prep • Customized MIS Reporting</p>
+      <div>
+        <img src="IMG-20260610-WA0004.jpg" alt="Premium Package">
+        <h3 style="margin-top:20px; font-family:'Outfit'; font-size:22px;">Premium Package</h3>
+        <div class="price">₹8,000+</div>
+        <p>Inventory Management • End-to-End Advanced Accounting • GST Data Prep • MIS Reports</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="contact">
-    <h2>Connect With Our Experts</h2>
-    <p>📍 Prayagraj, Uttar Pradesh, India</p>
-    <p>📞 +91 6394748563</p>
-    <p>📧 p.a.solutions9598@gmail.com</p>
+  <div class="contact-hero">
+    <h2>Connect With Our Corporate Experts</h2>
+    <div class="contact-info-grid">
+      <div class="info-item">📍 Prayagraj, Uttar Pradesh, India</div>
+      <div class="info-item">📞 +91 6394748563</div>
+      <div class="info-item">📧 p.a.solutions9598@gmail.com</div>
+    </div>
   </div>
 </section>
 
-<section style="max-width: 700px;">
+<section class="form-container">
   <h2>Send Instant Inquiry</h2>
-  <div class="card">
+  <div class="card" style="padding: 40px 35px;">
     <form action="https://formspree.io/f/xknkyjzv" method="POST">
-      <input type="text" name="Name" placeholder="Your Name" required>
+      <input type="text" name="Name" placeholder="Your Full Name" required>
       <input type="email" name="Email" placeholder="Your Email Address" required>
-      <input type="tel" name="Mobile" placeholder="Mobile Number" required>
-      <textarea name="Message" placeholder="How can we help your business accounts?" required></textarea>
-      <button type="submit">Submit Inquiry</button>
+      <input type="tel" name="Mobile" placeholder="Mobile Number (WhatsApp Link)" required>
+      <textarea name="Message" placeholder="How can our experts help your business accounts?" style="min-height: 120px;" required></textarea>
+      <button type="submit">Submit Corporate Inquiry</button>
     </form>
   </div>
 </section>
 
 <section>
   <h2>Find Our Office</h2>
-  <div style="border-radius:16px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: #e5e7eb;">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115255.11645169032!2d81.7281822434685!3d25.480053158028742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399ec37740b4ca19%3A0x1da9f697479713b1!2sPrayagraj%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1718810000000!5m2!1sen!2sin" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="map-box">
+    <iframe src="https://maps.google.com/maps?q=Prayagraj&t=&z=13&ie=UTF-8&iwloc=&output=embed" width="100%" height="400" style="border:0; display: block;" allowfullscreen="" loading="lazy"></iframe>
   </div>
 </section>
 
 <footer>
   <h3>Prime Accounting Solutions</h3>
-  <p>© 2026 Prime Accounting Solutions. All Rights Reserved.</p>
+  <p>© 2026 Prime Accounting Solutions. All Rights Reserved. Crafted with Executive Standards.</p>
 </footer>
 
-<div class="sticky-actions">
-  <a href="tel:6394748563" class="action-fab fab-call">
-    <svg viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/></svg>
-  </a>
-  <a href="https://wa.me/916394748563" class="action-fab fab-whatsapp" target="_blank">
-    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24M11 7v5h4v-1.5h-2.5V7H11z"/></svg>
-  </a>
-</div>
+<a href="https://wa.me/916394748563" class="action-btn whatsapp-btn" target="_blank">💬 WhatsApp Experts</a>
+<a href="tel:6394748563" class="action-btn call-btn">📞 Call Now</a>
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
 const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co"; 
 const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp"; 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 window.closeWelcomePopup = function() {
     const overlay = document.getElementById("welcomeOverlay");
-    overlay.style.opacity = "0";
-    setTimeout(() => { overlay.style.display = "none"; }, 500);
+    if(overlay) {
+        overlay.style.opacity = "0";
+        setTimeout(() => { overlay.style.display = "none"; }, 500);
+    }
 }
+
+// Auto Typing Tagline Logic
+const terms = ["GST Returns", "Income Tax", "Bookkeeping", "MIS Reporting", "Tally Entries"];
+let currentIdx = 0;
+setInterval(() => {
+    currentIdx = (currentIdx + 1) % terms.length;
+    const textEl = document.getElementById("changingText");
+    if(textEl) textEl.innerText = terms[currentIdx];
+}, 2500);
 
 async function loadLiveFeed() {
     const container = document.getElementById("postsContainer");
+    if(!container) return;
+
     try {
-        const { data: posts, error } = await supabase.from('posts').select('*').eq('status', 'published').order('id', { ascending: false });
+        const { data: posts, error } = await supabase
+            .from('posts')
+            .select('*')
+            .eq('status', 'published')
+            .order('id', { ascending: false });
+
         if (error) throw error;
+
         if(!posts || posts.length === 0) {
-            container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#718096; padding:30px;">📢 Stay tuned! Important Tax & Financial updates will be posted here soon.</div>`;
+            container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#64748b; padding:30px;">📢 Stay tuned! Important premium updates will be posted here soon.</div>`;
             return;
         }
+
         container.innerHTML = "";
         posts.forEach((post) => {
-            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'}) : "Recent";
             const isAnnounce = post.type === 'announcement';
             container.innerHTML += `
                 <div class="card post-live-card" style="${isAnnounce ? 'border-top: 5px solid #d97706;' : ''}">
-                    ${post.image ? `<img src="${post.image}" alt="Update Image">` : ''}
+                    ${post.image ? `<img src="${post.image}" alt="Update Graphic Image">` : ''}
                     <div class="inner-content">
-                        <span class="post-badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 UPDATE'}</span>
-                        <span class="post-badge" style="background:#e6f4ea; color:#137333; margin-left:5px;">🏷️ ${post.category || 'General'}</span>
+                        <span class="post-badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
+                            ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 TAX UPDATE'}
+                        </span>
+                        <span class="post-badge" style="background:#e2f0d9; color:#385723; margin-left:5px;">🏷️ ${post.category || 'General'}</span>
                         <h3>${post.title || ''}</h3>
-                        <p>${post.content || ''}</p>
-                        <div class="post-date">📅 Published on: ${dateFormatted}</div>
+                        <p style="white-space: pre-wrap; font-size:14px; color:#475569;">${post.content || ''}</p>
                     </div>
-                </div>`;
+                </div>
+            `;
         });
     } catch (err) {
-        container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#e53e3e; padding:30px;">⚠️ Connection issue while loading updates.</div>`;
+        container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#ef4444; padding:30px;">⚠️ Connection issue while loading platform updates.</div>`;
     }
 }
-window.onload = () => { loadLiveFeed(); };
+
+async function safeTrackVisitor() {
+    try {
+        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
+        if(data) {
+            await supabase.from('site_analytics').update({ visitor_count: data.visitor_count + 1 }).eq('id', 'main_site');
+        }
+    } catch(e) {}
+}
+
+window.onload = () => { 
+    loadLiveFeed(); 
+    safeTrackVisitor();
+};
 </script>
+
 </body>
 </html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Accounting Solutions - Admin Panel</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+.header{
+background:linear-gradient(135deg,#002d72,#009245);
+padding:20px;
+text-align:center;
+color:white;
+font-size:28px;
+font-weight:700;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:25px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+margin-bottom:20px;
+}
+
+input,
+textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+}
+
+textarea{
+min-height:140px;
+resize:vertical;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+.login-btn{
+background:#002d72;
+color:white;
+width:100%;
+}
+
+.publish-btn{
+background:#009245;
+color:white;
+}
+
+.logout-btn{
+background:#d62828;
+color:white;
+float:right;
+}
+
+.edit-btn{
+background:#ffb703;
+color:black;
+margin-right:10px;
+}
+
+.delete-btn{
+background:#d62828;
+color:white;
+}
+
+#adminPanel{
+display:none;
+}
+
+.post-card{
+background:#fff;
+padding:15px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+margin-bottom:15px;
+}
+
+.post-card img{
+width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+.post-date{
+font-size:12px;
+color:#666;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+Prime Accounting Solutions - Admin Panel
+</div>
+
+<div class="container">
+
+<div class="card" id="loginBox">
+<h2>Admin Login</h2>
+<input type="email" id="email" placeholder="Email Address">
+<input type="password" id="password" placeholder="Password">
+<button class="login-btn" onclick="loginAdmin()">Login</button>
+</div>
+
+<div id="adminPanel">
+<div class="card">
+<button class="logout-btn" onclick="logoutAdmin()">Logout</button>
+<h2>Publish New Post</h2>
+
+<input type="text" id="postTitle" placeholder="Post Title">
+<input type="text" id="postImage" placeholder="Image URL (Alternative to file upload)">
+
+<input type="file" id="imageFile" accept="image/*">
+<img id="previewImage" style="display:none;width:100%;max-height:250px;object-fit:cover;border-radius:10px;margin-bottom:10px;">
+  
+<textarea id="postContent" placeholder="Write Post Content"></textarea>
+
+<button class="publish-btn" onclick="publishPost()">Publish Post</button>
+</div>
+
+<div class="card">
+<h2>Manage Posts</h2>
+<div id="postsContainer"></div>
+</div>
+</div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCGnpn5pXnC_2TA2LOmfKpTP_0WmctQu-M",
+    authDomain: "prime-accounting-solutio-d8335.firebaseapp.com",
+    projectId: "prime-accounting-solutio-d8335",
+    storageBucket: "prime-accounting-solutio-d8335.firebasestorage.app",
+    messagingSenderId: "819768877274",
+    appId: "1:819768877274:web:be1eda6c04a4e6210bc5e3"
+};
+
+// Initialize Firebase once
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// Authentication Listeners
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        loadPosts();
+    } else {
+        document.getElementById("loginBox").style.display = "block";
+        document.getElementById("adminPanel").style.display = "none";
+    }
+});
+
+window.loginAdmin = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        alert("Please enter both email and password.");
+        return;
+    }
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login Successful");
+    } catch (error) {
+        alert("Error: " + error.message);
+        console.error(error);
+    }
+};
+
+window.logoutAdmin = async function() {
+    await signOut(auth);
+};
+
+// Image Preview Handler
+document.getElementById("imageFile").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        const img = document.getElementById("previewImage");
+        img.src = ev.target.result;
+        img.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+});
+
+// Post Management Actions
+window.publishPost = async function() {
+    const title = document.getElementById("postTitle").value;
+    let image = document.getElementById("postImage").value;
+    const file = document.getElementById("imageFile").files[0];
+    const content = document.getElementById("postContent").value;
+
+    if (!title || !content) {
+        alert("Please fill in required fields (Title and Content)");
+        return;
+    }
+
+    try {
+        // If a file is selected, upload it to Firebase Storage first
+        if (file) {
+            const storageRef = ref(storage, 'posts/' + Date.now() + '_' + file.name);
+            const snapshot = await uploadBytes(storageRef, file);
+            image = await getDownloadURL(snapshot.ref);
+        }
+
+        await addDoc(collection(db, "posts"), {
+            title: title,
+            image: image,
+            content: content,
+            likes: 0,
+            views: 0,
+            createdAt: serverTimestamp()
+        });
+
+        alert("Post Published Successfully");
+
+        // Clear Inputs
+        document.getElementById("postTitle").value = "";
+        document.getElementById("postImage").value = "";
+        document.getElementById("postContent").value = "";
+        document.getElementById("imageFile").value = "";
+        document.getElementById("previewImage").style.display = "none";
+
+        loadPosts();
+    } catch (error) {
+        alert("Error publishing post: " + error.message);
+    }
+};
+
+window.loadPosts = async function() {
+    const container = document.getElementById("postsContainer");
+    container.innerHTML = "";
+
+    try {
+        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+
+        snapshot.forEach((post) => {
+            const data = post.data();
+            
+            // Fixed the syntax template error here
+            container.innerHTML += `
+                <div class="post-card">
+                    <h3>${data.title || ""}</h3>
+                    ${data.image ? `<img src="${data.image}" style="width:100%;max-height:300px;object-fit:cover;border-radius:10px;margin:10px 0;">` : ""}
+                    <p>${data.content || ""}</p>
+                    <div class="post-date">
+                        📅 ${data.createdAt?.toDate?.().toLocaleString() || "Recently"}
+                    </div>
+                    <br>
+                    <button class="edit-btn" onclick="editPost('${post.id}')">Edit</button>
+                    <button class="delete-btn" onclick="deletePost('${post.id}')">Delete</button>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Error loading posts: ", error);
+    }
+};
+
+window.deletePost = async function(id) {
+    const confirmDelete = confirm("Delete this post?");
+    if (!confirmDelete) return;
+
+    try {
+        await deleteDoc(doc(db, "posts", id));
+        loadPosts();
+    } catch (error) {
+        alert(error.message);
+    }
+};
+
+window.editPost = async function(id) {
+    const newTitle = prompt("New Title");
+    if (!newTitle) return;
+
+    try {
+        await updateDoc(doc(db, "posts", id), {
+            title: newTitle
+        });
+        loadPosts();
+    } catch (error) {
+        alert(error.message);
+    }
+};
+</script>
+
+</body>
+</html>

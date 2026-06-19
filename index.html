@@ -1,440 +1,168 @@
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT271NRJ2Q"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Accounting Solutions - Insights & Updates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-gtag('config', 'G-LT271NRJ2Q');
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Prime Accounting Solutions | Prayagraj</title><meta name="google-site-verification" content="PhFriIkenF6SZ7oVqGO74qHymk5cZpt16BFnEt6dyJ8"><meta name="description" content="Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services in Prayagraj."><meta name="keywords" content="Accounting Services, Bookkeeping, GST, Tally Data Entry, MIS Reporting, Prayagraj"><meta name="author" content="Prime Accounting Solutions"><link rel="icon" type="image/png" href="favicon.png?v=5">
-<meta property="og:title" content="Prime Accounting Solutions">
-<meta property="og:description" content="Professional Accounting, Bookkeeping, GST, Tally & MIS Reporting Services.">
-<meta property="og:image" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png">
-<meta property="og:url" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/">
-<meta property="og:type" content="website">
 <style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body { background:#f4f7fc; color: #333; }
+.navbar { background: linear-gradient(135deg,#002d72,#009245); padding: 20px; text-align: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.navbar h1 { font-size: 26px; font-weight: 700; }
+.container { max-width: 900px; margin: auto; padding: 20px; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+/* Announcement Ribbon */
+#announcementBar { display: none; background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-weight: 500; animation: pulse 2s infinite; }
 
-html{
-scroll-behavior:smooth;
-}
+/* Category Navigation */
+.cat-nav { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 20px; scrollbar-width: none; }
+.cat-nav::-webkit-scrollbar { display: none; }
+.cat-btn { background: white; padding: 8px 18px; border-radius: 20px; border: 1px solid #e2e8f0; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.3s; color: #475569; }
+.cat-btn.active, .cat-btn:hover { background: #002d72; color: white; border-color: #002d72; }
 
-body{
-background:#f5f7fb;
-color:#222;
-line-height:1.6;
-}
+/* Blog Feed cards */
+.post-card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); margin-bottom: 25px; border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; cursor: pointer; }
+.post-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
+.post-card img { width: 100%; max-height: 350px; object-fit: cover; border-radius: 12px; margin: 15px 0; }
+.post-title { font-size: 22px; color: #002d72; font-weight: 600; margin: 5px 0; }
+.post-content { color: #4a5568; line-height: 1.6; font-size: 15px; margin-top: 10px; white-space: pre-wrap; }
 
-header{
-background:linear-gradient(135deg,#002d72,#009245);
-color:white;
-text-align:center;
-padding:60px 20px;
-}
+/* Badges & Meta */
+.badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 600; border-radius: 20px; text-transform: uppercase; margin-bottom: 5px; }
+.badge-cat { background: #dcfce7; color: #15803d; }
+.post-meta { display: flex; gap: 20px; font-size: 12px; color: #718096; background: #f8fafc; padding: 10px 15px; border-radius: 8px; margin-top: 15px; }
 
-header img{
-width:250px;
-max-width:90%;
-display:block;
-margin:auto;
-}
-
-header h1{
-font-family:Arial,sans-serif;
-font-size:42px;
-font-weight:bold;
-}
-
-.tagline{
-font-size:22px;
-font-weight:bold;
-}
-
-.focus-line{
-font-family:Arial,sans-serif;
-font-weight:bold;
-font-size:18px;
-}
-
-nav{
-text-align:center;
-margin-top:25px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-margin:0 12px;
-font-weight:bold;
-font-size:18px;
-}
-
-nav a:hover{
-text-decoration:underline;
-}
-
-.btn{
-display:inline-block;
-margin-top:25px;
-padding:14px 28px;
-background:white;
-color:#002d72;
-text-decoration:none;
-font-weight:bold;
-border-radius:30px;
-transition:.3s;
-}
-
-.btn:hover{
-transform:translateY(-3px);
-}
-
-.hero{
-background:#001845;
-color:white;
-text-align:center;
-padding:50px 20px;
-}
-
-section{
-padding:60px 20px;
-max-width:1200px;
-margin:auto;
-}
-
-h2{
-text-align:center;
-margin-bottom:30px;
-color:#002d72;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.card,
-.package{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-transition:.3s;
-text-align:center;
-}
-
-.card:hover,
-.package:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 25px rgba(0,0,0,.2);
-}
-
-.package-img,
-.package img{
-width:100%;
-border-radius:15px;
-display:block;
-}
-
-.price{
-font-size:32px;
-font-weight:bold;
-color:#009245;
-margin:15px 0;
-} 
-    .contact{
-background:#002d72;
-color:white;
-border-radius:15px;
-padding:40px;
-text-align:center;
-}
-
-input,
-textarea{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:1px solid #ddd;
-border-radius:8px;
-}
-
-button{
-padding:12px 25px;
-background:#002d72;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-footer{
-background:#001845;
-color:white;
-text-align:center;
-padding:25px;
-margin-top:40px;
-}
-
-.whatsapp-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:14px 18px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-z-index:1000;
-}
-
-.call-btn{
-position:fixed;
-bottom:80px;
-right:20px;
-background:#001845;
-color:white;
-padding:14px 18px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-z-index:1000;
-}
-
-@media(max-width:768px){
-
-header h1{
-font-size:34px;
-}
-
-.tagline{
-font-size:18px;
-}
-
-.focus-line{
-font-size:18px;
-margin-top:15px;
-opacity:.95;
-font-family:Arial,sans-serif;
-font-weight:bold;
-}
-
-nav a{
-display:block;
-margin:8px 0;
-}
-@media(max-width:768px){
-nav a{
-display:inline-block;
-margin:0 10px;
-}
-}
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AccountingService",
-  "name": "Prime Accounting Solutions",
-  "url": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/",
-  "logo": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png",
-  "telephone": "+91 6394748563",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Prayagraj",
-    "addressRegion": "Uttar Pradesh",
-    "addressCountry": "IN"
-  },
-  "areaServed": "India",
-  "serviceType": [
-    "Accounting Services",
-    "Bookkeeping",
-    "GST Data Preparation",
-    "Tally Data Entry",
-    "MIS Reporting"
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AccountingService",
-  "name": "Prime Accounting Solutions",
-  "image": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png",
-  "url": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/",
-  "telephone": "+91-6394748563",
-  "email": "p.a.solutions9598@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Prayagraj",
-    "addressRegion": "Uttar Pradesh",
-    "addressCountry": "IN"
-  },
-  "areaServed": "India",
-  "priceRange": "₹₹",
-  "description": "Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services."
-}
-</script>
-</head><body><header><img src="logo.png" alt="Prime Accounting Solutions Logo"><h1>Prime Accounting Solutions</h1><p class="tagline">
-Accurate • Reliable • Affordable
-</p><p class="focus-line">
-FOCUS ON YOUR BUSINESS,<br>
-WE'LL MANAGE YOUR ACCOUNTS
-</p><nav>
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#packages">Packages</a>
-<a href="#contact">Contact</a>
-</nav><a
-</a></header><section class="hero"><h2 style="color:white;">
-Professional Accounting & Bookkeeping Services
-</h2><p>
-GST • Tally • MIS Reporting • Financial Statements
-</p></section><section id="about"><h2>About Us</h2><div class="card"><p>
-Prime Accounting Solutions provides professional Accounting,
-Bookkeeping, Tally Data Entry, GST Data Preparation,
-MIS Reporting and Financial Services for Small Businesses,
-Retailers, Traders and Startups.
-   <!-- Post Publish System -->
+</head>
+<body>
 
-<section id="news">
-    <h2>Latest Updates</h2>
-    <div id="postsContainer" class="grid"></div>
-</section>
+<div class="navbar">
+    <h1>Prime Accounting Solutions</h1>
+    <p style="font-size:13px; opacity:0.8; margin-top:5px;">Latest Financial, GST & Tax Updates</p>
+</div>
+
+<div class="container">
+    <div id="announcementBar"></div>
+
+    <div class="cat-nav">
+        <button class="cat-btn active" onclick="filterCategory('All', this)">🌐 All Updates</button>
+        <button class="cat-btn" onclick="filterCategory('GST', this)">🏷️ GST Updates</button>
+        <button class="cat-btn" onclick="filterCategory('Income Tax', this)">🏷️ Income Tax</button>
+        <button class="cat-btn" onclick="filterCategory('Audit', this)">🏷️ Audit</button>
+        <button class="cat-btn" onclick="filterCategory('Accounting', this)">🏷️ Accounting</button>
+    </div>
+
+    <div id="userFeedContainer">Latest updates लोड हो रहे हैं...</div>
+</div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCGnpn5pXnC_2TA2LOmfKpTP_0WmctQu-M",
-  authDomain: "prime-accounting-solutio-d8335.firebaseapp.com",
-  projectId: "prime-accounting-solutio-d8335",
-  storageBucket: "prime-accounting-solutio-d8335.firebasestorage.app",
-  messagingSenderId: "819768877274",
-  appId: "1:819768877274:web:be1eda6c04a4e6210bc5e3",
-  measurementId: "G-3EQ7S3Z6TG"
-};
+const SUPABASE_URL = "https://bxbrejqwkofkptqmwqg.supabase.co"; 
+const SUPABASE_KEY = "Sb_publishable_S9E61UZanfJ859eK6PoU4A_5fS92g7Q"; 
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+let currentCategory = "All";
 
-window.publishPost = async function() {
-  const title = document.getElementById("postTitle").value;
-  const content = document.getElementById("postContent").value;
-
-  if(!title || !content){
-    alert("Please fill all fields");
-    return;
-  }
-
-  await addDoc(collection(db, "posts"), {
-    title: title,
-    content: content,
-    createdAt: serverTimestamp()
-  });
-
-  alert("Post Published Successfully");
-
-  document.getElementById("postTitle").value = "";
-  document.getElementById("postContent").value = "";
-
-  loadPosts();
+// 1. VISITORS COUNT TRACKING (ऑटोमैटिक विजिटर ट्रैकर)
+async function trackVisitor() {
+    try {
+        const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').single();
+        if(analytics) {
+            let currentCount = analytics.visitor_count || 0;
+            await supabase.from('site_analytics').update({ visitor_count: currentCount + 1 }).eq('id', 'main_site');
+        }
+    } catch(e) {
+        console.log("Analytics tracking error");
+    }
 }
 
-async function loadPosts() {
-  const container = document.getElementById("postsContainer");
-  container.innerHTML = "";
+// 2. LOAD LATEST POSTS & ANNOUNCEMENTS
+async function loadUserFeed() {
+    const feedContainer = document.getElementById("userFeedContainer");
+    const announceBar = document.getElementById("announcementBar");
 
-  const q = query(collection(db, "posts"));
-  const snapshot = await getDocs(q);
+    // A. सबसे पहले अनाउंसमेंट लोड करें (जो सबसे ज़रूरी अलर्ट है)
+    const { data: announcements } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('type', 'announcement')
+        .eq('status', 'published')
+        .order('id', { ascending: false })
+        .limit(1);
 
-  snapshot.forEach((doc) => {
-    const data = doc.data();
+    if(announcements && announcements.length > 0) {
+        announceBar.innerHTML = `<strong>🚨 ज़रुरी सूचना:</strong> ${announcements[0].title} - ${announcements[0].content}`;
+        announceBar.style.display = "block";
+    } else {
+        announceBar.style.display = "none";
+    }
 
-    container.innerHTML += `
-      <div class="card">
-        <h3>${data.title || ""}</h3>
-        <p>${data.content || ""}</p>
-      </div>
-    `;
-  });
+    // B. नॉर्मल ब्लॉग पोस्ट्स लोड करें
+    let query = supabase.from('posts').select('*').eq('type', 'news').eq('status', 'published');
+    
+    if(currentCategory !== "All") {
+        query = query.eq('category', currentCategory);
+    }
+
+    const { data: posts, error } = await query.order('id', { ascending: false });
+
+    if (error) {
+        feedContainer.innerHTML = "<p>डेटा लोड करने में समस्या आ रही है, कृपया पेज रिफ्रेश करें...</p>";
+        return;
+    }
+
+    if(posts.length === 0) {
+        feedContainer.innerHTML = "<p style='text-align:center; color:#999; margin-top:40px;'>इस कैटेगरी में अभी कोई पोस्ट नहीं है।</p>";
+        return;
+    }
+
+    feedContainer.innerHTML = "";
+    posts.forEach((post) => {
+        const dateStr = post.created_at ? new Date(post.created_at).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'}) : "Recently";
+        
+        feedContainer.innerHTML += `
+            <div class="post-card" onclick="incrementPostView('${post.id}', ${post.views || 0})">
+                <span class="badge badge-cat">🏷️ ${post.category}</span>
+                <h2 class="post-title">${post.title}</h2>
+                ${post.image ? `<img src="${post.image}" alt="Update Image">` : ""}
+                <p class="post-content">${post.content}</p>
+                <div class="post-meta">
+                    <div>📅 पब्लिश तिथि: ${dateStr}</div>
+                    <div style="color:#009245; font-weight:600;">👁️ व्यूज: ${post.views || 0}</div>
+                </div>
+            </div>
+        `;
+    });
 }
 
-loadPosts();
+// 3. INCREMENT VIEW COUNT ON CLICK (क्लिक करने पर व्यू +1 बढ़ाएं)
+window.incrementPostView = async function(id, currentViews) {
+    await supabase.from('posts').update({ views: currentViews + 1 }).eq('id', id);
+    loadUserFeed(); // रिफ्रेश करें ताकि यूजर को तुरंत बढ़ा हुआ व्यू दिखे
+}
+
+// 4. CATEGORY FILTER SYSTEM
+window.filterCategory = function(category, element) {
+    currentCategory = category;
+    
+    // एक्टिव बटन का कलर बदलने के लिए
+    const buttons = document.querySelectorAll('.cat-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    element.classList.add('active');
+    
+    loadUserFeed();
+}
+
+// पेज खुलते ही दोनों सिस्टम शुरू हो जाएंगे
+window.onload = function() {
+    trackVisitor();
+    loadUserFeed();
+}
 </script>
-</p></div></section><section id="services"><h2>One-Time Services</h2><img src="IMG-20260610-WA0002.jpg"
-class="package-img"
-alt="One Time Services">
-
-<br><br>
-
-<h2>Advanced Accounting Services</h2><img src="Image .png"
-class="package-img"
-alt="Advanced Accounting Services">
-
-</section><section><h2>Why Choose Us?</h2><div class="grid"><div class="card">
-<h3>✅ 100% Accuracy</h3>
-<p>Accurate accounting and bookkeeping services.</p>
-</div><div class="card">
-<h3>⏰ On-Time Delivery</h3>
-<p>All reports delivered on schedule.</p>
-</div><div class="card">
-<h3>🔒 Data Security</h3>
-<p>Your business data remains safe and confidential.</p>
-</div><div class="card">
-<h3>💼 Professional Support</h3>
-<p>Dedicated accounting assistance for your business.</p>
-</div></div></section>
-<section id="packages"><h2>Monthly Packages</h2><div class="grid"><div class="package">
-<img src="IMG-20260610-WA0000.jpg" alt="Basic Package"><h3>Basic Package</h3><div class="price">₹2,000</div><p>Sales Entry</p>
-<p>Purchase Entry</p>
-<p>Expense Recording</p>
-<p>Basic Bookkeeping</p></div><div class="package"><img src="IMG-20260610-WA0001.jpg" alt="Standard Package"><h3>Standard Package</h3><div class="price">₹5,000</div><p>Complete Bookkeeping</p>
-<p>Accounts Receivable</p>
-<p>Accounts Payable</p>
-<p>Bank Reconciliation</p>
-<p>Monthly Summary Report</p></div><div class="package"><img src="IMG-20260610-WA0004.jpg" alt="Premium Package"><h3>Premium Package</h3><div class="price">₹8,000+</div><p>Inventory Management</p>
-<p>Complete Accounting Management</p>
-<p>GST Data Preparation</p>
-<p>MIS Reporting</p></div></div></section><section><h2>Client Reviews</h2><div class="grid"><div class="card">
-<h3>⭐⭐⭐⭐⭐</h3>
-<p>Excellent Accounting Service.</p>
-<b>Local Business Owner</b>
-</div><div class="card">
-<h3>⭐⭐⭐⭐⭐</h3>
-<p>Professional and Affordable Service.</p>
-<b>Retail Client</b>
-</div></div></section><section id="contact"><div class="contact"><h2 style="color:white;">Contact Us</h2><p>📍 Prayagraj, Uttar Pradesh, India</p>
-<p>📞 +91 6394748563</p>
-<p>📧 p.a.solutions9598@gmail.com</p></div></section><section><h2>Send Inquiry</h2><div class="card"><form><input type="text" placeholder="Your Name"><input type="email" placeholder="Your Email"><input type="tel" placeholder="Mobile Number"><textarea placeholder="Your Message"></textarea><button type="submit">
-Send Inquiry
-</button></form></div></section><section><h2>Our Location</h2><iframe
-src="https://maps.google.com/maps?q=Prayagraj&t=&z=13&ie=UTF8&iwloc=&output=embed"
-width="100%"
-height="350"
-style="border:0;border-radius:15px;">
-</iframe></section><footer><h3>Prime Accounting Solutions</h3><p>Accurate • Reliable • Affordable</p>FOCUS ON YOUR BUSINESS, 
-WE'LL MANAGE YOUR ACCOUNTS<p>📞 6394748563</p><p>📧 p.a.solutions9598@gmail.com</p><p>📍 Prayagraj, Uttar Pradesh, India</p><hr style="margin:15px 0;"><p>© 2026 Prime Accounting Solutions. All Rights Reserved.</p></footer><a href="https://wa.me/916394748563" class="whatsapp-btn">
-WhatsApp
-</a><a href="tel:6394748563" class="call-btn">
-Call Now
-</a></body>                                                                                                                                                                                                                                                                                                    </html>
+</body>
+</html>

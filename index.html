@@ -1,246 +1,132 @@
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<!-- Google Analytics -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT271NRJ2Q"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-
 gtag('config', 'G-LT271NRJ2Q');
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Prime Accounting Solutions | Prayagraj</title><meta name="google-site-verification" content="PhFriIkenF6SZ7oVqGO74qHymk5cZpt16BFnEt6dyJ8"><meta name="description" content="Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services in Prayagraj."><meta name="keywords" content="Accounting Services, Bookkeeping, GST, Tally Data Entry, MIS Reporting, Prayagraj"><meta name="author" content="Prime Accounting Solutions"><link rel="icon" type="image/png" href="favicon.png?v=5">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Accounting Solutions | Prayagraj</title>
+<meta name="google-site-verification" content="PhFriIkenF6SZ7oVqGO74qHymk5cZpt16BFnEt6dyJ8">
+<meta name="description" content="Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services in Prayagraj.">
+<meta name="keywords" content="Accounting Services, Bookkeeping, GST, Tally Data Entry, MIS Reporting, Prayagraj">
+<meta name="author" content="Prime Accounting Solutions">
+<link rel="icon" type="image/png" href="favicon.png?v=5">
 <meta property="og:title" content="Prime Accounting Solutions">
 <meta property="og:description" content="Professional Accounting, Bookkeeping, GST, Tally & MIS Reporting Services.">
 <meta property="og:image" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png">
 <meta property="og:url" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/">
 <meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+:root {
+  --primary: #002d72;
+  --secondary: #009245;
+  --dark: #001845;
+  --light: #f5f7fb;
+  --text: #2d3748;
 }
 
-html{
-scroll-behavior:smooth;
-}
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+html { scroll-behavior:smooth; }
+body { background: var(--light); color: var(--text); line-height:1.6; }
 
-body{
-background:#f5f7fb;
-color:#222;
-line-height:1.6;
+/* Premium Header */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
 }
+header::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23f5f7fb" d="M0,96L120,122.7C240,149,480,203,720,202.7C960,203,1200,149,1320,122.7L1440,96L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>');
+  background-size: cover;
+}
+header img { width:220px; max-width:85%; display:block; margin:auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: 0.4s; }
+header img:hover { transform: scale(1.05); }
+header h1 { font-size:46px; font-weight:700; margin-top: 15px; letter-spacing: -0.5px; }
+.tagline { font-size:20px; font-weight:500; opacity: 0.9; margin: 5px 0 15px; letter-spacing: 1px; }
+.focus-line { font-weight:600; font-size:16px; background: rgba(255,255,255,0.15); display: inline-block; padding: 6px 20px; border-radius: 50px; text-transform: uppercase; }
 
-header{
-background:linear-gradient(135deg,#002d72,#009245);
-color:white;
-text-align:center;
-padding:60px 20px;
-}
+/* Navigation */
+nav { text-align:center; margin-top:35px; }
+nav a { color:white; text-decoration:none; margin:0 15px; font-weight:500; font-size:16px; transition: 0.3s; padding: 5px 10px; border-radius: 5px; }
+nav a:hover { background: rgba(255,255,255,0.2); }
 
-header img{
-width:250px;
-max-width:90%;
-display:block;
-margin:auto;
-}
+.hero { background: var(--dark); color:white; text-align:center; padding:60px 20px; font-size: 18px; box-shadow: inset 0 10px 30px rgba(0,0,0,0.2); }
+.hero h2 { color: #fff !important; font-size: 32px; margin-bottom: 10px; }
 
-header h1{
-font-family:Arial,sans-serif;
-font-size:42px;
-font-weight:bold;
-}
+section { padding:80px 20px; max-width:1200px; margin:auto; }
+h2 { text-align:center; margin-bottom:40px; color: var(--primary); font-size: 34px; font-weight: 700; position: relative; }
+h2::after { content:''; display:block; width: 60px; height: 4px; background: var(--secondary); margin: 10px auto 0; border-radius: 2px; }
 
-.tagline{
-font-size:22px;
-font-weight:bold;
-}
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
 
-.focus-line{
-font-family:Arial,sans-serif;
-font-weight:bold;
-font-size:18px;
+/* Card Premium Design */
+.card, .package {
+  background:white; padding:35px 25px; border-radius:16px; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition:.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  text-align:center; border: 1px solid #edf2f7; position: relative; overflow: hidden;
 }
+.card:hover, .package:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,45,114,.08); border-color: rgba(0,146,69,0.2); }
 
-nav{
-text-align:center;
-margin-top:25px;
-}
+.package-img { width:100%; border-radius:12px; display:block; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.price { font-size:36px; font-weight:700; color: var(--secondary); margin:20px 0; display: flex; align-items: center; justify-content: center; }
 
-nav a{
-color:white;
-text-decoration:none;
-margin:0 12px;
-font-weight:bold;
-font-size:18px;
-}
+/* Contact Premium Banner */
+.contact { background: linear-gradient(135deg, var(--primary), var(--dark)); color:white; border-radius:20px; padding:50px; text-align:center; box-shadow: 0 15px 35px rgba(0,45,114,0.2); }
+.contact h2 { color: white !important; }
+.contact h2::after { background: #fff; }
+.contact p { margin: 12px 0; font-size: 18px; }
 
-nav a:hover{
-text-decoration:underline;
-}
+/* Form Elements */
+input, textarea { width:100%; padding:14px; margin:12px 0; border:1px solid #e2e8f0; border-radius:10px; font-size: 15px; background: #f8fafc; transition: 0.3s; }
+input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; box-shadow: 0 0 0 3px rgba(0,45,114,0.1); }
+button[type="submit"] { padding:14px 35px; background: var(--primary); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:600; font-size:16px; width: 100%; transition: 0.3s; }
+button[type="submit"]:hover { background: var(--dark); transform: translateY(-2px); }
 
-.btn{
-display:inline-block;
-margin-top:25px;
-padding:14px 28px;
-background:white;
-color:#002d72;
-text-decoration:none;
-font-weight:bold;
-border-radius:30px;
-transition:.3s;
-}
+/* News Dynamic Section */
+.post-live-card { text-align: left; padding: 0; display: flex; flex-direction: column; }
+.post-live-card .inner-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+.post-live-card img { width: 100%; height: 200px; object-fit: cover; border-top-left-radius: 16px; border-top-right-radius: 16px; }
+.post-badge { display: inline-block; padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 30px; margin-bottom: 12px; align-self: flex-start; }
+.badge-news { background: #e0f2fe; color: #0369a1; }
+.badge-announcement { background: #fef3c7; color: #d97706; }
+.post-live-card h3 { font-size: 20px; color: var(--primary); margin-bottom: 10px; }
+.post-live-card p { color: #4a5568; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+.post-date { font-size: 12px; color: #a0aec0; margin-top: auto; padding-top: 15px; }
 
-.btn:hover{
-transform:translateY(-3px);
-}
+footer { background: var(--dark); color:white; text-align:center; padding:40px 20px; margin-top:60px; font-size: 15px; }
+footer h3 { font-size: 24px; margin-bottom: 5px; }
+footer p { opacity: 0.8; margin: 4px 0; }
 
-.hero{
-background:#001845;
-color:white;
-text-align:center;
-padding:50px 20px;
-}
-
-section{
-padding:60px 20px;
-max-width:1200px;
-margin:auto;
-}
-
-h2{
-text-align:center;
-margin-bottom:30px;
-color:#002d72;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.card,
-.package{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-transition:.3s;
-text-align:center;
-}
-
-.card:hover,
-.package:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 25px rgba(0,0,0,.2);
-}
-
-.package-img,
-.package img{
-width:100%;
-border-radius:15px;
-display:block;
-}
-
-.price{
-font-size:32px;
-font-weight:bold;
-color:#009245;
-margin:15px 0;
-} 
-    .contact{
-background:#002d72;
-color:white;
-border-radius:15px;
-padding:40px;
-text-align:center;
-}
-
-input,
-textarea{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:1px solid #ddd;
-border-radius:8px;
-}
-
-button{
-padding:12px 25px;
-background:#002d72;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-footer{
-background:#001845;
-color:white;
-text-align:center;
-padding:25px;
-margin-top:40px;
-}
-
-.whatsapp-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:14px 18px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-z-index:1000;
-}
-
-.call-btn{
-position:fixed;
-bottom:80px;
-right:20px;
-background:#001845;
-color:white;
-padding:14px 18px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-z-index:1000;
-}
+/* Sticky Modern Actions */
+.sticky-actions { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+.action-fab { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; color: white; text-decoration: none; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.action-fab:hover { transform: scale(1.1) translateY(-4px); }
+.fab-whatsapp { background: #25D366; }
+.fab-call { background: var(--primary); }
+.action-fab svg { width: 26px; height: 26px; fill: currentColor; }
 
 @media(max-width:768px){
-
-header h1{
-font-size:34px;
-}
-
-.tagline{
-font-size:18px;
-}
-
-.focus-line{
-font-size:18px;
-margin-top:15px;
-opacity:.95;
-font-family:Arial,sans-serif;
-font-weight:bold;
-}
-
-nav a{
-display:block;
-margin:8px 0;
-}
-@media(max-width:768px){
-nav a{
-display:inline-block;
-margin:0 10px;
-}
+  header h1 { font-size:32px; }
+  .tagline { font-size:16px; }
+  nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+  nav a { font-size: 14px; margin: 0 5px; }
+  .contact { padding: 30px 20px; }
 }
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -256,6 +142,7 @@ margin:0 10px;
     "addressCountry": "IN"
   },
   "areaServed": "India",
+  "priceRange": "₹₹",
   "serviceType": [
     "Accounting Services",
     "Bookkeeping",
@@ -265,190 +152,231 @@ margin:0 10px;
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AccountingService",
-  "name": "Prime Accounting Solutions",
-  "image": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/logo.png",
-  "url": "https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/",
-  "telephone": "+91-6394748563",
-  "email": "p.a.solutions9598@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Prayagraj",
-    "addressRegion": "Uttar Pradesh",
-    "addressCountry": "IN"
-  },
-  "areaServed": "India",
-  "priceRange": "₹₹",
-  "description": "Professional Accounting, Bookkeeping, GST Data Preparation, Tally Data Entry and MIS Reporting Services."
-}
-</script>
-</head><body><header><img src="logo.png" alt="Prime Accounting Solutions Logo"><h1>Prime Accounting Solutions</h1><p class="tagline">
-Accurate • Reliable • Affordable
-</p><p class="focus-line">
-FOCUS ON YOUR BUSINESS,<br>
-WE'LL MANAGE YOUR ACCOUNTS
-</p><nav>
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#packages">Packages</a>
-<a href="#contact">Contact</a>
-</nav><a
-</a></header><section class="hero"><h2 style="color:white;">
-Professional Accounting & Bookkeeping Services
-</h2><p>
-GST • Tally • MIS Reporting • Financial Statements
-</p></section><section id="about"><h2>About Us</h2><div class="card"><p>
-Prime Accounting Solutions provides professional Accounting,
-Bookkeeping, Tally Data Entry, GST Data Preparation,
-MIS Reporting and Financial Services for Small Businesses,
-Retailers, Traders and Startups.
-   <!-- Post Publish System -->
+</head>
+<body>
 
-<section id="news">
-    <h2>Latest Updates</h2>
-    <div id="postsContainer" class="grid"></div>
+<header>
+  <img src="logo.png" alt="Prime Accounting Solutions Logo">
+  <h1>Prime Accounting Solutions</h1>
+  <p class="tagline">Accurate • Reliable • Affordable</p>
+  <p class="focus-line">FOCUS ON YOUR BUSINESS, WE'LL MANAGE YOUR ACCOUNTS</p>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#updates">Latest Updates</a>
+    <a href="#packages">Packages</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Professional Accounting & Bookkeeping Services</h2>
+  <p>GST • Tally • MIS Reporting • Financial Statements</p>
 </section>
+
+<section id="about">
+  <h2>About Us</h2>
+  <div class="card" style="text-align: left; max-width: 900px; margin: auto;">
+    <p style="font-size: 17px; color: #4a5568;">
+      Prime Accounting Solutions provides high-quality professional Accounting, Bookkeeping, Tally Data Entry, GST Data Preparation, MIS Reporting, and customized Corporate Financial Services tailored for Small Businesses, Retailers, Traders, and growing Startups.
+    </p>
+  </div>
+</section>
+
+<section id="updates" style="background: #edf2f7; max-width: 100%; padding: 80px 20px;">
+  <div style="max-width: 1200px; margin: auto;">
+    <h2>Latest Financial & Tax Updates</h2>
+    <div id="postsContainer" class="grid">
+      <div style="text-align:center; grid-column: 1/-1; color: #718096; padding: 30px;">⏳ Fetching live updates...</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2>One-Time Services</h2>
+  <img src="IMG-20260610-WA0002.jpg" class="package-img" alt="One Time Services">
+  <br><br><br>
+  <h2>Advanced Accounting Services</h2>
+  <img src="Image .png" class="package-img" alt="Advanced Accounting Services">
+</section>
+
+<section style="background: #fff; max-width: 100%;">
+  <div style="max-width:1200px; margin:auto; padding: 20px 0;">
+    <h2>Why Choose Us?</h2>
+    <div class="grid">
+      <div class="card">
+        <h3 style="color:var(--primary); margin-bottom:10px;">✅ 100% Accuracy</h3>
+        <p>Zero-error accounting and bookkeeping meticulously managed.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--primary); margin-bottom:10px;">⏰ On-Time Delivery</h3>
+        <p>All compliance data, reports, and files delivered strictly on schedule.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--primary); margin-bottom:10px;">🔒 Data Security</h3>
+        <p>Your sensitive corporate business data remains 100% safe and confidential.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--primary); margin-bottom:10px;">💼 Professional Support</h3>
+        <p>Instant expert accounting guidance and consultations when you need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <h2>Our Flexible Monthly Packages</h2>
+  <div class="grid">
+    <div class="package">
+      <img src="IMG-20260610-WA0000.jpg" alt="Basic Package">
+      <h3 style="margin-top:15px;">Basic Package</h3>
+      <div class="price">₹2,000<span style="font-size:14px;font-weight:400;color:#718096;">/mo</span></div>
+      <p>Sales Entry • Purchase Entry • Expense Recording • Basic Bookkeeping</p>
+    </div>
+    <div class="package">
+      <img src="IMG-20260610-WA0001.jpg" alt="Standard Package">
+      <h3 style="margin-top:15px;">Standard Package</h3>
+      <div class="price">₹5,000<span style="font-size:14px;font-weight:400;color:#718096;">/mo</span></div>
+      <p>Complete Bookkeeping • Accounts Receivable/Payable • Bank Reconciliation • Monthly Summary</p>
+    </div>
+    <div class="package">
+      <img src="IMG-20260610-WA0004.jpg" alt="Premium Package">
+      <h3 style="margin-top:15px;">Premium Package</h3>
+      <div class="price">₹8,000+<span style="font-size:14px;font-weight:400;color:#718096;">/mo</span></div>
+      <p>Inventory Management • End-to-End Accounting • GST Data Prep • Customized MIS Reporting</p>
+    </div>
+  </div>
+</section>
+
+<section style="background: #f8fafc; max-width: 100%;">
+  <div style="max-width:1200px; margin:auto; padding: 20px 0;">
+    <h2>What Our Clients Say</h2>
+    <div class="grid">
+      <div class="card">
+        <div style="color:#ffb703; font-size:20px; margin-bottom:10px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-style:italic; color:#4a5568;">"Excellent Accounting Service. Very precise, fast, and took complete ownership of our accounting sheets."</p>
+        <b style="display:block; margin-top:15px; color:var(--primary);">- Local Business Owner</b>
+      </div>
+      <div class="card">
+        <div style="color:#ffb703; font-size:20px; margin-bottom:10px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-style:italic; color:#4a5568;">"Extremely professional, reliable and highly affordable service structure in Prayagraj. Highly recommended!"</p>
+        <b style="display:block; margin-top:15px; color:var(--primary);">- Retail Client</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <h2>Connect With Our Experts</h2>
+    <p>📍 Prayagraj, Uttar Pradesh, India</p>
+    <p>📞 +91 6394748563</p>
+    <p>📧 p.a.solutions9598@gmail.com</p>
+  </div>
+</section>
+
+<section style="max-width: 700px;">
+  <h2>Send Instant Inquiry</h2>
+  <div class="card">
+    <form action="https://formspree.io/f/xknkyjzv" method="POST">
+      <input type="text" name="Name" placeholder="Your Name" required>
+      <input type="email" name="Email" placeholder="Your Email Address" required>
+      <input type="tel" name="Mobile" placeholder="Mobile Number" required>
+      <textarea name="Message" placeholder="How can we help your business accounts?" required></textarea>
+      <button type="submit">Submit Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<section>
+  <h2>Find Our Office</h2>
+  <div style="border-radius:16px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+    <iframe src="http://googleusercontent.com/maps.google.com/3" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <h3>Prime Accounting Solutions</h3>
+  <p style="font-weight:500; letter-spacing:1px; margin: 5px 0 15px;">Accurate • Reliable • Affordable</p>
+  <p>FOCUS ON YOUR BUSINESS, WE'LL MANAGE YOUR ACCOUNTS</p>
+  <p style="margin-top:15px;">📞 6394748563  |  📧 p.a.solutions9598@gmail.com</p>
+  <hr style="margin:20px 0; border:0; border-top:1px solid rgba(255,255,255,0.1);">
+  <p>© 2026 Prime Accounting Solutions. All Rights Reserved.</p>
+</footer>
+
+<div class="sticky-actions">
+  <a href="tel:6394748563" class="action-fab fab-call" title="Call Now">
+    <svg viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/></svg>
+  </a>
+  <a href="https://wa.me/916394748563" class="action-fab fab-whatsapp" target="_blank" title="WhatsApp Us">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24M11 7v5h4v-1.5h-2.5V7H11z"/></svg>
+  </a>
+</div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCGnpn5pXnC_2TA2LOmfKpTP_0WmctQu-M",
-  authDomain: "prime-accounting-solutio-d8335.firebaseapp.com",
-  projectId: "prime-accounting-solutio-d8335",
-  storageBucket: "prime-accounting-solutio-d8335.firebasestorage.app",
-  messagingSenderId: "819768877274",
-  appId: "1:819768877274:web:be1eda6c04a4e6210bc5e3",
-  measurementId: "G-3EQ7S3Z6TG"
+// EXACT CONFIGURATION MATCHED TO YOUR ADMIN FILE
+const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co"; 
+const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp"; 
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function loadLiveFeed() {
+    const container = document.getElementById("postsContainer");
+    try {
+        const { data: posts, error } = await supabase
+            .from('posts')
+            .select('*')
+            .eq('status', 'published')
+            .order('id', { ascending: false });
+
+        if (error) throw error;
+
+        if(!posts || posts.length === 0) {
+            container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#718096; padding:30px;">📢 Stay tuned! Important Tax & Financial updates will be posted here soon.</div>`;
+            return;
+        }
+
+        container.innerHTML = "";
+        posts.forEach((post) => {
+            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'}) : "Recent";
+            const isAnnounce = post.type === 'announcement';
+            
+            container.innerHTML += `
+                <div class="card post-live-card" style="${isAnnounce ? 'border-top: 5px solid #d97706;' : ''}">
+                    ${post.image ? `<img src="${post.image}" alt="Update Image">` : ''}
+                    <div class="inner-content">
+                        <span class="post-badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
+                            ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 UPDATE'}
+                        </span>
+                        <span class="post-badge" style="background:#e6f4ea; color:#137333; margin-left:5px;">🏷️ ${post.category || 'General'}</span>
+                        <h3>${post.title || ''}</h3>
+                        <p>${post.content || ''}</p>
+                        <div class="post-date">📅 Published on: ${dateFormatted}</div>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (err) {
+        container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#e53e3e; padding:30px;">⚠️ Connection issue while loading updates. Please try refreshing.</div>`;
+    }
+}
+
+// Track Anonymous Visitor Count Analytics
+async function updateAnalytics() {
+    try {
+        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
+        if(data) {
+            await supabase.from('site_analytics').update({ visitor_count: data.visitor_count + 1 }).eq('id', 'main_site');
+        }
+    } catch(err){}
+}
+
+window.onload = () => {
+    loadLiveFeed();
+    updateAnalytics();
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.publishPost = async function() {
-  const title = document.getElementById("postTitle").value;
-  const content = document.getElementById("postContent").value;
-
-  if(!title || !content){
-    alert("Please fill all fields");
-    return;
-  }
-
-  await addDoc(collection(db, "posts"), {
-    title: title,
-    content: content,
-    createdAt: serverTimestamp()
-  });
-
-  alert("Post Published Successfully");
-
-  document.getElementById("postTitle").value = "";
-  document.getElementById("postContent").value = "";
-
-  loadPosts();
-}
-
-async function loadPosts() {
-  const container = document.getElementById("postsContainer");
-  container.innerHTML = "";
-
-  const q = query(collection(db, "posts"));
-  const snapshot = await getDocs(q);
-
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-
-    container.innerHTML += `
-      <div class="card">
-        <h3>${data.title || ""}</h3>
-        <p>${data.content || ""}</p>
-      </div>
-    `;
-  });
-}
-
-loadPosts();
 </script>
-</p></div></section><section id="services"><h2>One-Time Services</h2><img src="IMG-20260610-WA0002.jpg"
-class="package-img"
-alt="One Time Services">
 
-<br><br>
-
-<h2>Advanced Accounting Services</h2><img src="Image .png"
-class="package-img"
-alt="Advanced Accounting Services">
-
-</section><section><h2>Why Choose Us?</h2><div class="grid"><div class="card">
-<h3>✅ 100% Accuracy</h3>
-<p>Accurate accounting and bookkeeping services.</p>
-</div><div class="card">
-<h3>⏰ On-Time Delivery</h3>
-<p>All reports delivered on schedule.</p>
-</div><div class="card">
-<h3>🔒 Data Security</h3>
-<p>Your business data remains safe and confidential.</p>
-</div><div class="card">
-<h3>💼 Professional Support</h3>
-<p>Dedicated accounting assistance for your business.</p>
-</div></div></section>
-<section id="packages"><h2>Monthly Packages</h2><div class="grid"><div class="package">
-<img src="IMG-20260610-WA0000.jpg" alt="Basic Package"><h3>Basic Package</h3><div class="price">₹2,000</div><p>Sales Entry</p>
-<p>Purchase Entry</p>
-<p>Expense Recording</p>
-<p>Basic Bookkeeping</p></div><div class="package"><img src="IMG-20260610-WA0001.jpg" alt="Standard Package"><h3>Standard Package</h3><div class="price">₹5,000</div><p>Complete Bookkeeping</p>
-<p>Accounts Receivable</p>
-<p>Accounts Payable</p>
-<p>Bank Reconciliation</p>
-<p>Monthly Summary Report</p></div><div class="package"><img src="IMG-20260610-WA0004.jpg" alt="Premium Package"><h3>Premium Package</h3><div class="price">₹8,000+</div><p>Inventory Management</p>
-<p>Complete Accounting Management</p>
-<p>GST Data Preparation</p>
-<p>MIS Reporting</p></div></div></section><section><h2>Client Reviews</h2><div class="grid"><div class="card">
-<h3>⭐⭐⭐⭐⭐</h3>
-<p>Excellent Accounting Service.</p>
-<b>Local Business Owner</b>
-</div><div class="card">
-<h3>⭐⭐⭐⭐⭐</h3>
-<p>Professional and Affordable Service.</p>
-<b>Retail Client</b>
-<section>
-<h2>Publish New Post</h2>
-
-<div class="card">
-<input type="text" id="postTitle" placeholder="Post Title">
-
-<textarea id="postContent"
-placeholder="Write your post here..."></textarea>
-
-<button onclick="publishPost()">
-📢 Publish Post
-</button>
-</div>
-</section>
-</div></div></section><section id="contact"><div class="contact"><h2 style="color:white;">Contact Us</h2><p>📍 Prayagraj, Uttar Pradesh, India</p>
-<p>📞 +91 6394748563</p>
-<p>📧 p.a.solutions9598@gmail.com</p></div></section><section><h2>Send Inquiry</h2><div class="card"><form><input type="text" placeholder="Your Name"><input type="email" placeholder="Your Email"><input type="tel" placeholder="Mobile Number"><textarea placeholder="Your Message"></textarea><button type="submit">
-Send Inquiry
-</button></form></div></section><section><h2>Our Location</h2><iframe
-src="https://maps.google.com/maps?q=Prayagraj&t=&z=13&ie=UTF8&iwloc=&output=embed"
-width="100%"
-height="350"
-style="border:0;border-radius:15px;">
-</iframe></section><footer><h3>Prime Accounting Solutions</h3><p>Accurate • Reliable • Affordable</p>FOCUS ON YOUR BUSINESS, 
-WE'LL MANAGE YOUR ACCOUNTS<p>📞 6394748563</p><p>📧 p.a.solutions9598@gmail.com</p><p>📍 Prayagraj, Uttar Pradesh, India</p><hr style="margin:15px 0;"><p>© 2026 Prime Accounting Solutions. All Rights Reserved.</p></footer><a href="https://wa.me/916394748563" class="whatsapp-btn">
-WhatsApp
-</a><a href="tel:6394748563" class="call-btn">
-Call Now
-</a></body>                                                                                                                                                                                                                                                                                                    </html>
+</body>
+</html>

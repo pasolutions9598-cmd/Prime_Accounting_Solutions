@@ -250,7 +250,7 @@ getDownloadURL
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
 
-const firebaseConfig = {
+const firebaseConfig = { //
 
 apiKey: "AIzaSyCGnpn5pXnC_2TA2LOmfKpTP_0WmctQu-M",
 
@@ -277,7 +277,7 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-const storage = getStorage(app);
+const storage = getStorage(app);//
 
 window.loginAdmin = async function(){
 
@@ -369,15 +369,7 @@ const file =
 document.getElementById("imageFile").files[0];
 
 if(file){
-
-    const storageRef = ref(
-        storage,
-        "posts/" + Date.now() + "_" + file.name
-    );
-
-    await uploadBytes(storageRef, file);
-
-    image = await getDownloadURL(storageRef);
+  image = "";
 }
 
 const content =

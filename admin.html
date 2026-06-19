@@ -90,7 +90,6 @@ button { padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font
         </div>
     </div>
 </div>
-
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -98,137 +97,70 @@ const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
 const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp"; 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-async function uploadImageFile() {
-    const fileInput = document.getElementById("postImageFile");
-    const uploadStatus = document.getElementById("uploadStatus");
-    
-    if (!fileInput.files || fileInput.files.length === 0) {
-        return null; 
-    }
-
-    const file = fileInput.files[0];
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
-
-    uploadStatus.innerText = "⏳ Uploading image file to storage...";
-    uploadStatus.style.color = "#002d72";
-
-    const { data, error } = await supabase.storage
-        .from('post-images')
-        .upload(fileName, file);
-
-    if (error) {
-        uploadStatus.innerText = "❌ Image upload failed: " + error.message;
-        uploadStatus.style.color = "#e53e3e";
-        return null;
-    }
-
-    const { data: publicUrlData } = supabase.storage
-        .from('post-images')
-        .getPublicUrl(fileName);
-
-    uploadStatus.innerText = "✅ Image uploaded successfully!";
-    uploadStatus.style.color = "#009245";
-    return publicUrlData.publicUrl;
-}
-
-window.submitPost = async function(statusText) {
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const type = document.getElementById("postType").value;
-    const category = document.getElementById("postCategory").value;
-
-    if(!title || !content) {
-        alert("Please fill out Title and Content fields.");
-        return;
-    }
-
-    const imageUrl = await uploadImageFile();
-
-    const { error } = await supabase.from('posts').insert([{
-        title, content, type, category, status: statusText, image: imageUrl
-    }]);
-
-    if(error) {
-        alert("Database connection error: " + error.message);
-    } else {
-        alert(statusText === 'published' ? "🎉 Post has gone Live!" : "💾 Saved to Drafts.");
-        document.getElementById("postForm").reset();
-        document.getElementById("uploadStatus").innerText = "";
-        loadAnalytics(); loadPosts();
+window.closeWelcomePopup = function() {
+    const overlay = document.getElementById("welcomeOverlay");
+    if(overlay) {
+        overlay.style.opacity = "0";
+        setTimeout(() => { overlay.style.display = "none"; }, 500);
     }
 }
 
-async function loadAnalytics() {
-    try {
-        const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
-        document.getElementById("totalPosts").innerText = count || 0;
-
-        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
-        if(data) document.getElementById("totalVisitors").innerText = data.visitor_count;
-    } catch(err){}
-}
-
-async function loadPosts() {
+async function loadLiveFeed() {
     const container = document.getElementById("postsContainer");
+    if(!container) return;
+
     try {
-        const { data: posts, error } = await supabase.from('posts').select('*').order('id', { ascending: false });
-        if(error) throw error;
-        
+        const { data: posts, error } = await supabase
+            .from('posts')
+            .select('*')
+            .eq('status', 'published')
+            .order('id', { ascending: false });
+
+        if (error) throw error;
+
         if(!posts || posts.length === 0) {
-            container.innerHTML = "<p style='color:#718096;'>No entries found.</p>";
+            container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#718096; padding:30px;">📢 Stay tuned! Important updates will be posted here soon.</div>`;
             return;
         }
 
         container.innerHTML = "";
-        posts.forEach(post => {
-            const isDraft = post.status === 'draft';
+        posts.forEach((post) => {
+            const isAnnounce = post.type === 'announcement';
             container.innerHTML += `
-                <div class="post-card">
-                    <div>
-                        ${post.image ? `<img src="${post.image}" alt="Post image">` : ''}
-                        <span class="badge ${post.type==='announcement'?'badge-announcement':'badge-news'}">${post.type.toUpperCase()}</span>
-                        <span class="badge ${isDraft?'badge-draft':'badge-live'}">${post.status.toUpperCase()}</span>
-                        <h3 style="margin-top:10px;">${post.title}</h3>
-                        <p>${post.content}</p>
-                    </div>
-                    <div style="margin-top:15px;">
-                        <button class="edit-btn" onclick="editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Edit</button>
-                        ${isDraft ? `<button class="publish-btn" onclick="publishDraft('${post.id}')">🚀 Go Live</button>` : ''}
-                        <button class="delete-btn" onclick="deletePost('${post.id}')">🗑️ Delete</button>
+                <div class="card post-live-card" style="${isAnnounce ? 'border-top: 5px solid #d97706;' : ''}">
+                    ${post.image ? `<img src="${post.image}" alt="Update Image">` : ''}
+                    <div class="inner-content">
+                        <span class="post-badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">
+                            ${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 UPDATE'}
+                        </span>
+                        <span class="post-badge" style="background:#e6f4ea; color:#137333; margin-left:5px;">🏷️ ${post.category || 'General'}</span>
+                        <h3>${post.title || ''}</h3>
+                        <p style="white-space: pre-wrap;">${post.content || ''}</p>
                     </div>
                 </div>
             `;
         });
-    } catch(err) {
-        container.innerHTML = "Error rendering posts.";
+    } catch (err) {
+        container.innerHTML = `<div style="text-align:center; grid-column:1/-1; color:#e53e3e; padding:30px;">⚠️ Connection issue while loading updates.</div>`;
     }
 }
 
-window.publishDraft = async function(id) {
-    await supabase.from('posts').update({ status: 'published' }).eq('id', id);
-    loadPosts();
+async function safeTrackVisitor() {
+    try {
+        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
+        if(data) {
+            await supabase.from('site_analytics').update({ visitor_count: data.visitor_count + 1 }).eq('id', 'main_site');
+        }
+    } catch(e) {
+        console.log("Analytics skipped");
+    }
 }
 
-window.deletePost = async function(id) {
-    if (!confirm("Are you sure you want to delete this post?")) return;
-    await supabase.from('posts').delete().eq('id', id);
-    loadAnalytics(); loadPosts();
-}
-
-window.editPost = async function(id, currentTitle, currentContent) {
-    const newTitle = prompt("Update Title:", unescape(currentTitle));
-    if (!newTitle) return;
-    const newContent = prompt("Update Content Description:", unescape(currentContent));
-    if (!newContent) return;
-    await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
-    loadPosts();
-}
-
-window.onload = () => {
-    loadAnalytics();
-    loadPosts();
+window.onload = () => { 
+    loadLiveFeed(); 
+    safeTrackVisitor();
 };
 </script>
+
 </body>
 </html>

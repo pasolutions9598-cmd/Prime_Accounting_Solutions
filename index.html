@@ -9,32 +9,20 @@
     <meta name="keywords" content="Accounting, Bookkeeping, GST filing Prayagraj, Tally Entry, MIS Reporting, Financial Consultant Prayagraj, Tax Consultant">
     <meta name="author" content="Prime Accounting Solutions">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/">
-    <meta property="og:title" content="Prime Accounting Solutions | Professional Accounting & GST in Prayagraj">
-    <meta property="og:description" content="Affordable alternative to a full-time accountant. Expert Bookkeeping, GST Preparation, Tally Entries, and MIS Reporting for small businesses in Prayagraj.">
-    <meta property="og:image" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/Logo.png">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/">
-    <meta name="twitter:title" content="Prime Accounting Solutions | Prayagraj">
-    <meta name="twitter:description" content="Professional Bookkeeping, Tally Entries, and GST Preparation customized for traders and startups.">
-    <meta name="twitter:image" content="https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/Logo.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            /* Logo Brand Palette */
-            --primary-color: #0d1b2a;    /* Deep Professional Corporate Blue */
-            --secondary-color: #1b4965;  /* Balanced Navy Accent */
-            --accent-color: #00b4d8;     /* Tech Blue for Highlights */
-            --green-accent: #2ec4b6;     /* Logo Premium Emerald/Teal Green */
-            --text-dark: #1e293b;        /* Crisp Charcoal Dark Text */
-            --text-light: #f8fafc;       /* Off-White for clean contrasts */
-            --bg-light: #f8fafc;         /* Smooth background */
+            /* Premium Golden & Blue Brand Palette */
+            --primary-color: #0b132b;    /* Deep Corporate Blue */
+            --secondary-color: #1c2541;  /* Rich Navy Blue Accent */
+            --gold-color: #e5c158;       /* Premium Light Gold for Text & Highlights */
+            --gold-dark: #d4af37;        /* Rich Metallic Gold for Buttons/Accents */
+            --text-dark: #1e293b;        
+            --text-light: #f8fafc;       
+            --bg-light: #f8fafc;         
             --card-bg: #ffffff;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -54,42 +42,45 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            padding-top: 80px;
+            padding-top: 90px; /* Adjusted for larger header */
         }
 
         /* ==========================================================================
-           1. FIXED HEADER & NAVBAR (Symmetric & Sharp Line Alignment)
+           1. FIXED HEADER & NAVBAR (Blue Background + Golden Text + Bigger Size)
            ========================================================================== */
         header {
             background-color: var(--primary-color);
-            padding: 15px 5%;
+            padding: 18px 5%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.25);
+            border-bottom: 2px solid var(--gold-dark);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
-            color: white;
+            color: var(--gold-color);
             font-weight: 700;
-            font-size: 20px;
+            font-size: 25px; /* Increased Font Size */
+            letter-spacing: 0.5px;
+            transition: var(--transition);
         }
 
         .logo img {
-            height: 45px;
+            height: 60px; /* Increased Logo Image Size */
             width: auto;
             object-fit: contain;
         }
@@ -104,13 +95,12 @@
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: #ffffff;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
             position: relative;
             padding: 5px 0;
-            line-height: 1;
             transition: var(--transition);
         }
 
@@ -121,7 +111,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--green-accent);
+            background-color: var(--gold-color);
             transition: var(--transition);
         }
 
@@ -130,17 +120,92 @@
         }
 
         .nav-links a:hover {
-            color: var(--green-accent);
+            color: var(--gold-color);
         }
 
         /* ==========================================================================
-           2. TYPING HERO SECTION
+           2. WELCOME POPUP MODAL STYLES
+           ========================================================================== */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 19, 43, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 3px solid var(--gold-dark);
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .popup-overlay.show .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-content h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .popup-content h2 span {
+            color: var(--gold-dark);
+        }
+
+        .popup-content p {
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .popup-close-btn {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: var(--gold-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .popup-close-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION
            ========================================================================== */
         .hero {
-            background: linear-gradient(135deg, rgba(13, 27, 42, 0.95), rgba(27, 73, 101, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 75vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -149,38 +214,26 @@
             padding: 60px 20px;
         }
 
-        .hero-content {
-            max-width: 850px;
-        }
-
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 20px;
-            letter-spacing: -0.5px;
         }
 
         .hero h1 span {
-            color: var(--green-accent);
-            border-right: 3px solid var(--green-accent);
+            color: var(--gold-color);
+            border-right: 3px solid var(--gold-color);
             padding-right: 5px;
             animation: blink 0.75s step-end infinite;
         }
 
         @keyframes blink {
             from, to { border-color: transparent }
-            50% { border-color: var(--green-accent); }
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 35px auto;
-            opacity: 0.9;
+            50% { border-color: var(--gold-color); }
         }
 
         .cta-btn {
-            background: linear-gradient(90deg, var(--green-accent), var(--accent-color));
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
             color: var(--primary-color);
             padding: 15px 40px;
             border: none;
@@ -190,19 +243,16 @@
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(46, 196, 182, 0.3);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
             transition: var(--transition);
         }
 
         .cta-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(46, 196, 182, 0.5);
-            color: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
         }
 
-        /* ==========================================================================
-           3. SECTIONS WRAPPER
-           ========================================================================== */
+        /* Sections General */
         .section-wrapper {
             padding: 80px 5%;
             max-width: 1200px;
@@ -214,23 +264,20 @@
             font-size: 2.2rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 50px;
-            position: relative;
+            margin-bottom: 10px;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--green-accent);
-            margin: 10px auto 0 auto;
-            border-radius: 2px;
+        .section-subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* ==========================================================================
-           4. SERVICES SECTION
-           ========================================================================== */
+        /* Cards Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -242,297 +289,76 @@
             border-radius: 12px;
             padding: 35px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border-top: 4px solid var(--secondary-color);
+            border-top: 4px solid var(--primary-color);
             transition: var(--transition);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            border-top-color: var(--green-accent);
-            box-shadow: 0 15px 35px rgba(13, 27, 42, 0.08);
+            border-top-color: var(--gold-dark);
+            box-shadow: 0 15px 35px rgba(11, 19, 43, 0.08);
         }
 
         .card i {
             font-size: 40px;
-            color: var(--green-accent);
+            color: var(--gold-dark);
             margin-bottom: 20px;
         }
 
-        .card h3 {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-        }
-
-        /* ==========================================================================
-           5. LIVE TAX UPDATES FEED (Supabase Integration)
-           ========================================================================== */
-        .feed-section {
-            background-color: #f1f5f9;
-        }
-        
-        #liveFeedContainer {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .feed-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            border-left: 4px solid var(--accent-color);
-        }
-
-        .feed-card.announcement {
-            border-left-color: #ef4444;
-        }
-
-        .feed-badge {
-            display: inline-block;
-            padding: 3px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
+        /* Live Feed */
+        .feed-section { background-color: #f1f5f9; }
+        #liveFeedContainer { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .feed-card { background: white; padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary-color); }
+        .feed-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 700; border-radius: 20px; margin-bottom: 10px; }
         .badge-general { background: #e0f2fe; color: #0369a1; }
         .badge-gst { background: #dcfce7; color: #15803d; }
         .badge-tax { background: #fee2e2; color: #b91c1c; }
 
-        /* ==========================================================================
-           6. PRICING SECTION
-           ========================================================================== */
-        .price-card {
-            text-align: center;
-            position: relative;
-        }
+        /* Pricing Card */
+        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 20px 0; }
+        .price-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: left; }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; }
+        .price-features li i { color: var(--gold-dark); margin-right: 10px; }
 
-        .price-card.featured {
-            border-top-color: var(--green-accent);
-            transform: scale(1.03);
-            box-shadow: 0 15px 35px rgba(13, 27, 42, 0.08);
-        }
+        /* FAQ Section */
+        .faq-container { max-width: 850px; margin: 0 auto; }
+        .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
+        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #475569; font-size: 14.5px; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid #f1f5f9; }
 
-        .price-card .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 20px 0;
-        }
+        /* Contact Section */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; }
+        .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .contact-info-block i { font-size: 24px; color: var(--gold-dark); background: rgba(229, 193, 88, 0.1); padding: 15px; border-radius: 50%; }
 
-        .price-card .price span {
-            font-size: 1rem;
-            color: #64748b;
-        }
+        /* Footer */
+        footer { background-color: var(--primary-color); color: var(--text-light); padding: 50px 5% 20px 5%; text-align: center; border-top: 3px solid var(--gold-dark); }
+        .footer-links { display: flex; justify-content: center; gap: 40px; list-style: none; margin: 25px 0; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-light); text-decoration: none; }
+        .footer-links a:hover { color: var(--gold-color); }
 
-        .price-features {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0 30px 0;
-            text-align: left;
-        }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
-        .price-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 14.5px;
-        }
-
-        .price-features li i {
-            color: #2ec4b6;
-            font-size: 16px;
-            margin-right: 10px;
-        }
-
-        /* ==========================================================================
-           7. FAQ SECTION (100% Professional English Accordion)
-           ========================================================================== */
-        .faq-container {
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--card-bg);
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
-            border: 1px solid #e2e8f0;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .faq-question {
-            padding: 20px 25px;
-            font-weight: 600;
-            color: var(--primary-color);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-            user-select: none;
-        }
-
-        .faq-question:hover {
-            background-color: rgba(46, 196, 182, 0.03);
-            color: var(--green-accent);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            padding: 0 25px;
-            color: #475569;
-            font-size: 14.5px;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-            padding: 0 25px 20px 25px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .faq-question span {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-question span {
-            transform: rotate(45deg);
-            color: var(--green-accent);
-        }
-
-        /* ==========================================================================
-           8. CONTACT SECTION
-           ========================================================================== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 20px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            border-color: var(--green-accent);
-            box-shadow: 0 0 0 4px rgba(46, 196, 182, 0.1);
-        }
-
-        .contact-info-block {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .contact-info-block i {
-            font-size: 24px;
-            color: var(--green-accent);
-            background: rgba(46, 196, 182, 0.1);
-            padding: 15px;
-            border-radius: 50%;
-        }
-
-        /* ==========================================================================
-           9. FOOTER (Perfect Structural Balance)
-           ========================================================================== */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 50px 5% 20px 5%;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            list-style: none;
-            padding: 0;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1;
-            opacity: 0.8;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--green-accent);
-            opacity: 1;
-        }
-
-        .footer-bottom {
-            font-size: 13px;
-            opacity: 0.5;
-            border-top: 1px solid rgba(248, 250, 252, 0.1);
-            padding-top: 20px;
-            margin-top: 20px;
-        }
-
-        /* Floating Utilities */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
-        /* Responsive Elements */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2.1rem;
-            }
-            .footer-links {
-                gap: 20px;
-            }
-            .price-card.featured {
-                transform: scale(1);
-            }
+            .nav-links { display: none; }
+            .logo { font-size: 20px; }
+            .logo img { height: 45px; }
+            .hero h1 { font-size: 2.1rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ======================== WELCOME POPUP ======================== -->
+    <div class="popup-overlay" id="welcomePopup">
+        <div class="popup-content">
+            <h2>Welcome to <br><span>Prime Accounting Solutions</span></h2>
+            <p>Grow your business with Prayagraj's finest bookkeeping, corporate ledger setup, and streamlined GST data management desk. Let's make financial monitoring stress-free!</p>
+            <button class="popup-close-btn" id="closePopupBtn">Explore Services</button>
+        </div>
+    </div>
 
     <header>
         <nav>
@@ -567,8 +393,12 @@
         </div>
     </section>
 
+    <!-- ======================== UPDATED SERVICES SECTION ======================== -->
     <section class="section-wrapper" id="services">
         <div class="section-title">Our Premium Financial Services</div>
+        <!-- Requested Subtitle Added -->
+        <div class="section-subtitle">One time services or charges will be based on your data.</div>
+        
         <div class="cards-grid">
             <div class="card">
                 <i class="fa-solid fa-book"></i>
@@ -582,7 +412,7 @@
             </div>
             <div class="card">
                 <i class="fa-solid fa-calculator"></i>
-                <h3>Tally Prime & Zoho Books Data Entry</h3>
+                <h3>Tally Prime Data Entry</h3>
                 <p>Systematic processing of physical/digital trade records inside advanced accounting applications.</p>
             </div>
             <div class="card">
@@ -605,21 +435,20 @@
                 <h3>Basic Plan</h3>
                 <div class="price">₹2,500<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Basic Bookkeeping</li>
-                    <li><i class="fa-solid fa-check"></i> Purchases & Sales Entries</li>
-                    <li><i class="fa-solid fa-check"></i> Expenses Recording</li>
+                    <li><i class="fa-solid fa-check"></i> Standard Tally Entries</li>
+                    <li><i class="fa-solid fa-check"></i> Ledger Maintenance</li>
+                    <li><i class="fa-solid fa-check"></i> Monthly Trial Balance</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Basic</a>
             </div>
-            <div class="card price-card featured">
-                <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:var(--primary-color); color:white; padding:3px 15px; font-size:11px; font-weight:700; border-radius:30px;">RECOMMENDED</div>
+            <div class="card price-card" style="border-top-color: var(--gold-dark);">
                 <h3>Standard Plan</h3>
                 <div class="price">₹5,000<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Full Bookkeeping</li>
+                    <li><i class="fa-solid fa-check"></i> Full Bookkeeping Entries</li>
                     <li><i class="fa-solid fa-check"></i> Bank Reconciliation (BRS)</li>
                     <li><i class="fa-solid fa-check"></i> Vendor/Customer Matching</li>
-                    <li><i class="fa-solid fa-check"></i> Monthly Summary Reports</li>
+                    <li><i class="fa-solid fa-check"></i> Basic GST Data Sheet</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Standard</a>
             </div>
@@ -630,7 +459,7 @@
                     <li><i class="fa-solid fa-check"></i> Unlimited Financial Entries</li>
                     <li><i class="fa-solid fa-check"></i> Complex Inventory Tracking</li>
                     <li><i class="fa-solid fa-check"></i> Monthly Executive MIS Reports</li>
-                    <li><i class="fa-solid fa-check"></i> Complete Ready GST Data Preparation</li>
+                    <li><i class="fa-solid fa-check"></i> Complete Ready GST Data Sheets</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Contact Custom</a>
             </div>
@@ -667,7 +496,6 @@
         <div class="section-title">Get In Touch With Us</div>
         <div class="contact-grid">
             <div class="contact-form">
-                <!-- Direct WhatsApp Submission Engine -->
                 <form id="whatsappForm">
                     <input type="text" id="formName" placeholder="Your Name / Enterprise Name" required>
                     <input type="email" id="formEmail" placeholder="Email Address" required>
@@ -704,7 +532,7 @@
 
     <footer>
         <div class="footer-content">
-            <h3 style="font-size:22px; font-weight:600; color:white; margin-bottom:5px;">Prime Accounting Solutions</h3>
+            <h3 style="font-size:24px; font-weight:600; color:var(--gold-color); margin-bottom:5px;">Prime Accounting Solutions</h3>
             <p style="opacity:0.7; font-size:14px;">Professional Bookkeeping, Tally & GST Management Desk</p>
             <ul class="footer-links">
                 <li><a href="#">Home</a></li>
@@ -731,7 +559,18 @@
         const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // 1. Interactive Accordion Control Engine
+        // Welcome Popup Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('welcomePopup').classList.add('show');
+            }, 1000); // 1 Second delay before popup triggers
+        });
+
+        document.getElementById('closePopupBtn').addEventListener('click', () => {
+            document.getElementById('welcomePopup').classList.remove('show');
+        });
+
+        // Interactive Accordion Control Engine
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
@@ -744,7 +583,7 @@
             });
         });
 
-        // 2. Automated Typewriting Effect Core
+        // Automated Typewriting Effect Core
         const phrases = ["Traders & Startups", "Retailers & MSMEs", "Small Businesses"];
         let count = 0;
         let index = 0;
@@ -768,7 +607,7 @@
             }
         }());
 
-        // 3. Supabase Real-Time Updates Synchronization
+        // Supabase Real-Time Updates Synchronization
         async function fetchLiveFeed() {
             const feedContainer = document.getElementById("liveFeedContainer");
             try {
@@ -801,37 +640,21 @@
             }
         }
 
-        // 4. Analytics Tracker Log
-        async function logVisitor() {
-            try {
-                const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
-                if (data) {
-                    await supabase.from('site_analytics').update({ visitor_count: data.visitor_count + 1 }).eq('id', 'main_site');
-                }
-            } catch (e) { console.error("Analytics log skipped."); }
-        }
-
-        // 5. Custom Form Submission Handler to WhatsApp
+        // Custom Form Submission Handler to WhatsApp
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const name = document.getElementById('formName').value;
             const email = document.getElementById('formEmail').value;
             const phone = document.getElementById('formPhone').value;
             const msg = document.getElementById('formMessage').value;
-            
             const whatsappNumber = "916394748563"; 
-            
             const textMessage = `*New Enquiry Recieved* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
-            
             const encodedMessage = encodeURIComponent(textMessage);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            
             window.open(whatsappUrl, '_blank');
         });
 
         fetchLiveFeed();
-        logVisitor();
     </script>
 </body>
 </html>

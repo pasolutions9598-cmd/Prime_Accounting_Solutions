@@ -19,10 +19,10 @@
             --secondary-color: #1c2541;  
             --gold-color: #e5c158;       
             --gold-dark: #d4af37;        
-            --text-dark: #1e293b;        
-            --text-light: #f8fafc;       
-            --bg-light: #f8fafc;         
-            --card-bg: #ffffff;
+            --text-dark: #e5c158;        /* Badla gaya: Saare text ko golden karne ke liye */
+            --text-light: #e5c158;       /* Badla gaya: Hero aur sections me text light gold rahe */
+            --bg-light: #0b132b;         /* Badla gaya: Background ko poora blue karne ke liye */
+            --card-bg: #1c2541;          /* Badla gaya: White cards ko blue theme me integrate karne ke liye */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -99,7 +99,7 @@
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: var(--gold-color); /* Badla gaya */
             text-decoration: none;
             font-size: 17px; 
             font-weight: 500;
@@ -125,7 +125,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--gold-color);
+            color: #ffffff;
         }
 
         /* ==========================================================================
@@ -153,7 +153,7 @@
         }
 
         .popup-content {
-            background: white;
+            background: var(--secondary-color); /* Badla gaya */
             padding: 40px;
             border-radius: 16px;
             max-width: 500px;
@@ -170,24 +170,25 @@
         }
 
         .popup-content h2 {
-            color: var(--primary-color);
+            color: var(--gold-color); /* Badla gaya */
             font-size: 24px;
             margin-bottom: 15px;
         }
 
         .popup-content h2 span {
-            color: var(--gold-dark);
+            color: #ffffff; /* Badla gaya */
         }
 
         .popup-content p {
-            color: #475569;
+            color: var(--gold-color); /* Badla gaya */
             font-size: 15px;
             margin-bottom: 25px;
+            opacity: 0.9;
         }
 
         .popup-close-btn {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            color: var(--gold-color);
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color)); /* Badla gaya */
+            color: var(--primary-color); /* Badla gaya */
             padding: 12px 30px;
             border: none;
             border-radius: 30px;
@@ -199,8 +200,8 @@
 
         .popup-close-btn:hover {
             transform: translateY(-2px);
-            color: white;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(229, 193, 88, 0.4);
         }
 
         /* ==========================================================================
@@ -223,6 +224,7 @@
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 20px;
+            color: #ffffff; /* Headings standout karne ke liye white */
         }
 
         .hero h1 span {
@@ -235,6 +237,11 @@
         @keyframes blink {
             from, to { border-color: transparent }
             50% { border-color: var(--gold-color); }
+        }
+
+        .hero p {
+            color: var(--gold-color); /* Badla gaya */
+            opacity: 0.9;
         }
 
         .cta-btn {
@@ -268,14 +275,14 @@
             text-align: center;
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--gold-color); /* Badla gaya */
             margin-bottom: 10px;
         }
 
         .section-subtitle {
             text-align: center;
             font-size: 16px;
-            color: var(--gold-dark);
+            color: #ffffff; /* Badla gaya */
             font-weight: 600;
             margin-bottom: 40px;
             text-transform: uppercase;
@@ -293,15 +300,15 @@
             background: var(--card-bg);
             border-radius: 12px;
             padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border-top: 4px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Badla gaya */
+            border-top: 4px solid var(--gold-dark); /* Badla gaya */
             transition: var(--transition);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            border-top-color: var(--gold-dark);
-            box-shadow: 0 15px 35px rgba(11, 19, 43, 0.08);
+            border-top-color: #ffffff; /* Badla gaya */
+            box-shadow: 0 15px 35px rgba(229, 193, 88, 0.15); /* Badla gaya */
         }
 
         .card i {
@@ -313,47 +320,50 @@
         .card h3 {
             font-size: 19px;
             margin-bottom: 12px;
-            color: var(--primary-color);
+            color: #ffffff; /* Cards heading standout karegi */
         }
 
         .card p {
             font-size: 14.5px;
-            color: #475569;
+            color: var(--gold-color); /* Badla gaya */
+            opacity: 0.85;
         }
 
         /* Live Feed */
-        .feed-section { background-color: #f1f5f9; }
+        .feed-section { background-color: var(--secondary-color); } /* Badla gaya */
         #liveFeedContainer { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .feed-card { background: white; padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary-color); }
+        .feed-card { background: var(--primary-color); padding: 25px; border-radius: 12px; border-left: 4px solid var(--gold-dark); color: var(--gold-color); } /* Badla gaya */
         .feed-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 700; border-radius: 20px; margin-bottom: 10px; }
         .badge-general { background: #e0f2fe; color: #0369a1; }
         .badge-gst { background: #dcfce7; color: #15803d; }
         .badge-tax { background: #fee2e2; color: #b91c1c; }
 
         /* Pricing Card */
-        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 20px 0; }
+        .price-card .price { font-size: 2.5rem; font-weight: 700; color: #ffffff; margin: 20px 0; } /* Badla gaya */
         .price-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: left; }
-        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; color: #475569; }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid rgba(229, 193, 88, 0.15); font-size: 14.5px; color: var(--gold-color); opacity: 0.9; } /* Badla gaya */
         .price-features li i { color: var(--gold-dark); margin-right: 10px; }
 
         /* FAQ Section */
         .faq-container { max-width: 850px; margin: 0 auto; }
-        .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
-        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #475569; font-size: 14.5px; transition: max-height 0.3s ease-out; }
-        .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid #f1f5f9; }
+        .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 8px; border: 1px solid rgba(229, 193, 88, 0.2); overflow: hidden; } /* Badla gaya */
+        .faq-question { padding: 20px 25px; font-weight: 600; color: #ffffff; cursor: pointer; display: flex; justify-content: space-between; } /* Badla gaya */
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: var(--gold-color); font-size: 14.5px; transition: max-height 0.3s ease-out; opacity: 0.9; } /* Badla gaya */
+        .faq-item.active .faq-answer { max-height: 500px; padding: 0 25px 20px 25px; border-top: 1px solid rgba(229, 193, 88, 0.15); } /* Badla gaya */
 
         /* Contact Section */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid var(--gold-dark); border-radius: 8px; background: var(--secondary-color); color: var(--gold-color); } /* Badla gaya */
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--gold-color); opacity: 0.6; }
         .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .contact-info-block i { font-size: 24px; color: var(--gold-dark); background: rgba(229, 193, 88, 0.1); padding: 15px; border-radius: 50%; }
+        .contact-info-block p { color: var(--gold-color); opacity: 0.85; }
 
         /* Footer */
-        footer { background-color: var(--primary-color); color: var(--text-light); padding: 50px 5% 20px 5%; text-align: center; border-top: 3px solid var(--gold-dark); }
+        footer { background-color: var(--primary-color); color: var(--gold-color); padding: 50px 5% 20px 5%; text-align: center; border-top: 3px solid var(--gold-dark); } /* Badla gaya */
         .footer-links { display: flex; justify-content: center; gap: 40px; list-style: none; margin: 25px 0; flex-wrap: wrap; }
-        .footer-links a { color: var(--text-light); text-decoration: none; }
-        .footer-links a:hover { color: var(--gold-color); }
+        .footer-links a { color: var(--gold-color); text-decoration: none; } /* Badla gaya */
+        .footer-links a:hover { color: #ffffff; }
 
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
@@ -409,7 +419,7 @@
 
     <section class="section-wrapper" id="about">
         <div class="section-title">Why Choose Us?</div>
-        <div style="text-align: center; max-width: 800px; margin: 0 auto; color: #475569; font-size: 16px;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--gold-color); font-size: 16px; opacity: 0.9;">
             <p>We provide a reliable, highly accurate, and affordable alternative to employing a full-time accountant. By streamlining your bookkeeping routines and ensuring timely statutory compliance, we protect your data confidentiality and let you focus entirely on growing your core business operations.</p>
         </div>
     </section>
@@ -494,7 +504,7 @@
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Basic</a>
             </div>
             <!-- Standard Plan -->
-            <div class="card price-card" style="border-top-color: var(--gold-dark);">
+            <div class="card price-card" style="border-top-color: #ffffff;">
                 <h3>Standard Plan</h3>
                 <div class="price">₹5,000<span>/month</span></div>
                 <ul class="price-features">
@@ -521,17 +531,33 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- ======================== FAQ SECTION (UPDATED) ======================== -->
     <section class="section-wrapper" id="faq">
         <div class="section-title">Frequently Asked Questions</div>
         <div class="faq-container">
             <div class="faq-item">
-                <div class="faq-question">What services do you provide? <span>+</span></div>
-                <div class="faq-answer">We offer comprehensive monthly financial solutions tailored for small businesses, traders, and startups. Our services include end-to-end bookkeeping, routine Tally/Zoho/Excel data entry, bank reconciliation statement (BRS) preparation, customer & vendor account reconciliation, inventory tracking management, and structured monthly management information system (MIS) reporting.</div>
+                <div class="faq-question">Mera financial data kitna secure hai? <span>+</span></div>
+                <div class="faq-answer">Data security hamari sabse badi priority hai. Hum "Confidentiality First" policy follow karte hain. Aapka data puri tarah encrypted rahta hai aur sirf authorized personnel hi access kar sakte hain. Hum kisi bhi 3rd party ke sath aapki business details share nahi karte.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Are you an affordable alternative to a full-time accountant? <span>+</span></div>
-                <div class="faq-answer">Yes, absolutely. Hiring a dedicated full-time accountant often demands a significant salary and infrastructure cost. We act as your outsourced corporate accounting department, delivering identical accuracy, systematic data structure, and timely statutory compliance at a fraction of the cost.</div>
+                <div class="faq-question">Aapki expertise kis level ki hai? <span>+</span></div>
+                <div class="faq-answer">Hum corporate-grade accounting standards maintain karte hain. Humari team Tally, Zoho, aur Advanced Excel mein expert hai. Hum sirf entries nahi karte, balki aapke business ke liye structured financial insights aur MIS reports taiyar karte hain jo aapko better business decisions lene mein madad karte hain.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Kya aap sirf GST filing karte hain ya puri accounting? <span>+</span></div>
+                <div class="faq-answer">Hum end-to-end accounting partner hain. GST filing hamare services ka ek part hai, lekin hum primary focus Bookkeeping, Bank Reconciliation, Vendor/Customer ledger management, aur Inventory control par karte hain, taaki aapka financial record hamesha audit-ready rahe.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Mera business chhota hai, kya mujhe professional accounting ki zarurat hai? <span>+</span></div>
+                <div class="faq-answer">Chhota ya bada, business ki growth ke liye sahi "Financial Health" ka pata hona bahut zaruri hai. Professional accounting se aap apna cash flow control kar sakte hain, tax penalties se bach sakte hain, aur bank loan ke liye strong financial statements ready rakh sakte hain.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Kya mujhe aapko office bulane ki zarurat hogi? <span>+</span></div>
+                <div class="faq-answer">Bilkul nahi! Hum remote, digital-first model par kaam karte hain. Hum aapke data ko digital platforms (Tally/Zoho/Cloud) ke zariye manage karte hain. Aapko bas apna data humare secure email ya digital portal par share karna hota hai.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Pricing ka model kya hai? <span>+</span></div>
+                <div class="faq-answer">Hamara pricing model "Transparent & Predictable" hai. Humne fixed monthly packages design kiye hain (Basic, Standard, Premium), jisse aapko har mahine billing ki chinta nahi karni padegi. Koi hidden charges nahi hain.</div>
             </div>
         </div>
     </section>
@@ -553,22 +579,22 @@
                 <div class="contact-info-block">
                     <i class="fa-solid fa-phone"></i>
                     <div>
-                        <h4 style="color:var(--primary-color);">Call/WhatsApp Communication</h4>
-                        <p style="color:#64748b;">+91 6394748563</p>
+                        <h4 style="color: #ffffff;">Call/WhatsApp Communication</h4>
+                        <p>+91 6394748563</p>
                     </div>
                 </div>
                 <div class="contact-info-block">
                     <i class="fa-solid fa-envelope"></i>
                     <div>
-                        <h4 style="color:var(--primary-color);">Corporate Email Desk</h4>
-                        <p style="color:#64748b;">p.a.solutions9598@gmail.com</p>
+                        <h4 style="color: #ffffff;">Corporate Email Desk</h4>
+                        <p>p.a.solutions9598@gmail.com</p>
                     </div>
                 </div>
                 <div class="contact-info-block">
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
-                        <h4 style="color:var(--primary-color);">Service Location Coordinates</h4>
-                        <p style="color:#64748b;">Prayagraj, Uttar Pradesh, India</p>
+                        <h4 style="color: #ffffff;">Service Location Coordinates</h4>
+                        <p>Prayagraj, Uttar Pradesh, India</p>
                     </div>
                 </div>
             </div>
@@ -578,7 +604,7 @@
     <footer>
         <div class="footer-content">
             <h3 style="font-size:24px; font-weight:600; color:var(--gold-color); margin-bottom:5px;">Prime Accounting Solutions</h3>
-            <p style="opacity:0.7; font-size:14px;">Professional Bookkeeping, Tally & GST Management Desk</p>
+            <p style="opacity:0.7; font-size:14px; color: var(--gold-color);">Professional Bookkeeping, Tally & GST Management Desk</p>
             <ul class="footer-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -587,7 +613,7 @@
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact Desk</a></li>
             </ul>
-            <div class="footer-bottom">
+            <div class="footer-bottom" style="opacity: 0.8; font-size: 13px;">
                 &copy; 2026 Prime Accounting Solutions. All Rights Reserved.
             </div>
         </div>
@@ -665,7 +691,7 @@
                 if (error) throw error;
 
                 if (!posts || posts.length === 0) {
-                    feedContainer.innerHTML = "<p style='color:#64748b;'>No recent announcements logged in the broadcast registry.</p>";
+                    feedContainer.innerHTML = "<p style='color:var(--gold-color); opacity:0.8;'>No recent announcements logged in the broadcast registry.</p>";
                     return;
                 }
 
@@ -675,8 +701,8 @@
                     feedContainer.innerHTML += `
                         <div class="feed-card ${isAnnounce ? 'announcement' : ''}">
                             <span class="feed-badge badge-${(post.category || 'general').toLowerCase().replace(' ', '')}">${post.category || 'General'}</span>
-                            <h4 style="color:var(--primary-color); margin-bottom:10px; font-size:17px;">${post.title}</h4>
-                            <p style="font-size:14px; color:#475569; white-space:pre-wrap;">${post.content}</p>
+                            <h4 style="color:#ffffff; margin-bottom:10px; font-size:17px;">${post.title}</h4>
+                            <p style="font-size:14px; color:var(--gold-color); white-space:pre-wrap; opacity:0.9;">${post.content}</p>
                         </div>
                     `;
                 });

@@ -52,7 +52,7 @@ nav a:hover, nav a.active { color: var(--primary); }
 nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--secondary); transition: 0.3s; }
 nav a:hover::after { width: 100%; }
 
-/* Mobile Menu Toggle Styling (Hidden on Desktop) */
+/* Mobile Menu Toggle Styling */
 .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; z-index: 1000; }
 .menu-toggle span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; transition: 0.3s ease; }
 
@@ -119,10 +119,10 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
 .whatsapp-btn { bottom: 25px; background: #25D366; box-shadow: 0 8px 25px rgba(37,211,102,0.3); }
 .call-btn { bottom: 90px; background: var(--primary); box-shadow: 0 8px 25px rgba(0,45,114,0.3); }
 
-/* Updated Media Query for Premium Mobile Menu */
+/* Media Query for Premium Mobile Menu */
 @media (max-width: 768px) {
     .nav-content { padding: 12px 15px; position: relative; }
-    .menu-toggle { display: flex; } /* Shows hamburger icon */
+    .menu-toggle { display: flex; }
     
     nav { 
         display: none; 
@@ -138,7 +138,6 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
         z-index: 999; 
     }
     
-    /* When active class is added via JS, show the menu */
     nav.active { display: flex; } 
     
     nav a { 
@@ -147,7 +146,7 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
         font-size: 16px; 
         border-bottom: 1px solid #f8fafc; 
     }
-    nav a::after { display: none; } /* Remove hover lines on mobile */
+    nav a::after { display: none; }
     
     .hero-section { padding: 130px 15px 70px; }
     .hero-section h1 { font-size: 32px; }
@@ -175,7 +174,6 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
       <span>Prime Accounting Solutions</span>
     </a>
     
-    <!-- Mobile Hamburger Menu Button -->
     <div class="menu-toggle" id="mobileMenuBtn">
       <span></span>
       <span></span>
@@ -220,12 +218,47 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
   </div>
 </section>
 
+<!-- Updated HTML Text Grid Services Section (Highly Optimized for Google SEO) -->
 <section id="services">
   <h2>One-Time Services</h2>
-  <img src="One Time Service.png" class="package-img" style="border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.03);" alt="One Time Services">
-  <br><br><br><br>
+  <div class="grid" style="margin-bottom: 60px;">
+    <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">GST Registration</h3>
+      <p style="font-size:14px; color:#64748b;">New GST registration setup, fast approval tracking, amendments, and legal cancellations for businesses.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Income Tax Return (ITR)</h3>
+      <p style="font-size:14px; color:#64748b;">Accurate and error-free ITR filing for salaried individuals, business owners, retail traders, and corporate firms.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Business Registration</h3>
+      <p style="font-size:14px; color:#64748b;">MSME/Udyam Aadhaar setup, Proprietorship documentation, Partnership firm registration, and compliance certificates.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">PAN & TAN Services</h3>
+      <p style="font-size:14px; color:#64748b;">Application processing for new corporate/personal PAN cards, TAN registration, and corrections.</p>
+    </div>
+  </div>
+
   <h2>Advanced Accounting Services</h2>
-  <img src="One Time Service 1.png" class="package-img" style="border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.03);" alt="Advanced Accounting Services">
+  <div class="grid">
+    <div class="card" style="border-left: 5px solid var(--primary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--secondary); margin-bottom:10px; font-weight:600;">End-to-End Bookkeeping</h3>
+      <p style="font-size:14px; color:#64748b;">Professional ledger maintenance, systematic sales and purchase logs, and complete expense tracking.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--primary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--secondary); margin-bottom:10px; font-weight:600;">GST Data Preparation</h3>
+      <p style="font-size:14px; color:#64748b;">Accurate compilation of GSTR-1 and GSTR-3B monthly/quarterly reports ensuring perfect tax computation.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--primary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--secondary); margin-bottom:10px; font-weight:600;">Tally & Bank Reconciliation</h3>
+      <p style="font-size:14px; color:#64748b;">Seamless Tally Prime data entry mapped precisely against periodic physical bank statements and cash books.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--primary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--secondary); margin-bottom:10px; font-weight:600;">Monthly MIS Reporting</h3>
+      <p style="font-size:14px; color:#64748b;">Corporate executive level Balance Sheets, Profit & Loss summaries, and business performance tracking analytics.</p>
+    </div>
+  </div>
 </section>
 
 <section id="packages">
@@ -287,7 +320,7 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
           <strong style="color: var(--secondary);">1. गोपनीय जानकारी (CONFIDENTIAL INFORMATION):</strong> क्लाइंट का सारा वित्तीय डेटा, bank details, tax records, business strategies और customer list पूरी तरह से secret और safe रहेगी।
         </li>
         <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
-          <strong style="color: var(--secondary);">2. गैर-प्रकटीकरण (NO DISCLOSURE):</strong> सेवा प्रदाता यह वचन देता है कि वह डेटा को किसी भी third party के साथ साझा नहीं करेगा, जब तक कि कानून द्वारा आवश्यक न हो।
+          <strong style="color: var(--secondary);">2. गैर-प्रकटीकरण (NO DISCLOSURE):</strong> सेवा प्रदाता यह वचन देता है कि वह डेटा को किसी भी third party के साथ साझा नहीं करेगा, जब तक कि कानून द्वारा आवश्यक n ho।
         </li>
         <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
           <strong style="color: var(--secondary);">3. डेटा सुरक्षा (DATA SECURITY):</strong> सेवा प्रदाता डेटा को सुरक्षित रखने के लिए सही digital tools, secure internet और strong password का उपयोग करेगा।
@@ -360,7 +393,6 @@ if (mobileMenuBtn && navLinks) {
         navLinks.classList.toggle("active");
     });
 
-    // Links par click karte hi menu apne aap band ho jaye
     navLinks.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
             navLinks.classList.remove("active");

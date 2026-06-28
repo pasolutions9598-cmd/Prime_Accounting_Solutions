@@ -15,11 +15,10 @@
 
     <style>
         :root {
-            /* Premium Golden & Blue Brand Palette */
-            --primary-color: #0b132b;    /* Deep Corporate Blue */
-            --secondary-color: #1c2541;  /* Rich Navy Blue Accent */
-            --gold-color: #e5c158;       /* Premium Light Gold for Text & Highlights */
-            --gold-dark: #d4af37;        /* Rich Metallic Gold for Buttons/Accents */
+            --primary-color: #0b132b;    
+            --secondary-color: #1c2541;  
+            --gold-color: #e5c158;       
+            --gold-dark: #d4af37;        
             --text-dark: #1e293b;        
             --text-light: #f8fafc;       
             --bg-light: #f8fafc;         
@@ -42,7 +41,7 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            padding-top: 160px; /* Increased padding because header is now beautifully stacked in 2 lines */
+            padding-top: 170px; /* Space for the gorgeous 2-line header */
         }
 
         /* ==========================================================================
@@ -63,13 +62,12 @@
             max-width: 1240px;
             margin: 0 auto;
             display: flex;
-            flex-direction: column; /* Stack Logo and Links vertically */
+            flex-direction: column; 
             align-items: center;
             gap: 15px;
             padding: 0 5%;
         }
 
-        /* Line 1: Logo & Company Name (Bigger & Centered) */
         .logo {
             display: flex;
             align-items: center;
@@ -77,35 +75,33 @@
             text-decoration: none;
             color: var(--gold-color);
             font-weight: 700;
-            font-size: 40px; /* Bigger Company Name Font Size */
+            font-size: 30px; 
             letter-spacing: 0.8px;
             transition: var(--transition);
         }
 
         .logo img {
-            height: 100px; /* Bigger Logo Image Size */
+            height: 75px; 
             width: auto;
             object-fit: contain;
         }
 
-        /* Line 2: All Navigation Links in One Single Line */
         .nav-links {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 35px; /* Increased spacing between links */
+            gap: 35px; 
             list-style: none;
             margin: 0;
-            padding: 5px 0;
             width: 100%;
-            border-top: 1px solid rgba(229, 193, 88, 0.2); /* Soft separator line */
+            border-top: 1px solid rgba(229, 193, 88, 0.2); 
             padding-top: 12px;
         }
 
         .nav-links a {
             color: #ffffff;
             text-decoration: none;
-            font-size: 17px; /* Increased Link Font Size */
+            font-size: 17px; 
             font-weight: 500;
             position: relative;
             padding: 5px 0;
@@ -214,7 +210,7 @@
             background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 65vh;
+            min-height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -314,6 +310,17 @@
             margin-bottom: 20px;
         }
 
+        .card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 14.5px;
+            color: #475569;
+        }
+
         /* Live Feed */
         .feed-section { background-color: #f1f5f9; }
         #liveFeedContainer { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
@@ -326,7 +333,7 @@
         /* Pricing Card */
         .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 20px 0; }
         .price-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: left; }
-        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; color: #475569; }
         .price-features li i { color: var(--gold-dark); margin-right: 10px; }
 
         /* FAQ Section */
@@ -351,7 +358,7 @@
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
         @media (max-width: 768px) {
-            body { padding-top: 150px; }
+            body { padding-top: 160px; }
             .nav-links { gap: 15px; flex-wrap: wrap; }
             .nav-links a { font-size: 14px; }
             .logo { font-size: 22px; }
@@ -371,21 +378,21 @@
         </div>
     </div>
 
-    <!-- Beautiful Balanced Two Line Header Section -->
+    <!-- Balanced 2-Line Header Setup -->
     <header>
         <nav>
-            <!-- Line 1: Centered Brand Info (Bigger) -->
+            <!-- Line 1: Main Brand Name & Logo Area -->
             <a href="#" class="logo">
                 <img src="Logo.png" alt="Prime Accounting Solutions Logo">
                 Prime Accounting Solutions
             </a>
-            <!-- Line 2: All links perfectly combined in one block -->
+            <!-- Line 2: Sorted Navigation Grid -->
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#feed">Live Feed</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -407,104 +414,127 @@
         </div>
     </section>
 
+    <!-- ======================== SERVICES SECTION (8 CARDS) ======================== -->
     <section class="section-wrapper" id="services">
         <div class="section-title">Our Premium Financial Services</div>
-        <div class="section-subtitle">One time services</div>
-       <div class="section-subtitle">charges will be based on your data.</div>
+        <div class="section-subtitle">One time services or charges will be based on your data.</div>
         
         <div class="cards-grid">
+            <!-- 1. Bookkeeping -->
             <div class="card">
                 <i class="fa-solid fa-book"></i>
                 <h3>End-to-End Bookkeeping</h3>
                 <p>Meticulous data archiving, system recording, ledgers logging, and general accounts maintenance.</p>
             </div>
+            <!-- 2. GST Data Prep (Edited) -->
             <div class="card">
                 <i class="fa-solid fa-receipt"></i>
                 <h3>GST Data Preparation</h3>
-                <p>Accurate monthly compilation for ready-to-file GSTR-1 & GSTR-3B compliance templates.</p>
+                <p>Comprehensive compilation of monthly sales/purchase invoices into audit-ready sheets, matching every transaction with purchase registers.</p>
             </div>
+            <!-- 3. Tally, Zoho & Excel (Edited) -->
             <div class="card">
                 <i class="fa-solid fa-calculator"></i>
-                <h3>Tally Prime Data Entry</h3>
-                <p>Systematic processing of physical/digital trade records inside advanced accounting applications.</p>
+                <h3>Tally, Zoho & Excel Entry</h3>
+                <p>Accurate digital bookkeeping across major platforms. We handle systematic processing inside Tally, Zoho Books, or custom Excel spreadsheets.</p>
             </div>
+            <!-- 4. MIS Reporting -->
             <div class="card">
                 <i class="fa-solid fa-chart-pie"></i>
                 <h3>Executive MIS Reporting</h3>
-                <p>Monthly analytics briefs detailing your operational expenditures, profit parameters, and metrics.</p>
+                <p>Monthly analytics briefs detailing your operational expenditures, profit parameters, and core business metrics.</p>
+            </div>
+            <!-- 5. Bank Reconciliation (New) -->
+            <div class="card">
+                <i class="fa-solid fa-building-columns"></i>
+                <h3>Bank Reconciliation (BRS)</h3>
+                <p>Eliminating accounting mismatches by checking bank statements against cash books to track banking charges and uncleared cheques.</p>
+            </div>
+            <!-- 6. Inventory Setup (New) -->
+            <div class="card">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <h3>Inventory Setup & Control</h3>
+                <p>Configuring structured digital stock tracking dashboards, opening valuations, and item-wise categories for flawless stock monitoring.</p>
+            </div>
+            <!-- 7. Accounts Payable/Receivable (New) -->
+            <div class="card">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <h3>Payable & Receivable Mgmt</h3>
+                <p>Comprehensive tracking of your outstanding invoices. We monitor your upcoming pipelines to optimize your enterprise cash flow seamlessly.</p>
+            </div>
+            <!-- 8. Customer & Vendor Reconciliation (New) -->
+            <div class="card">
+                <i class="fa-solid fa-handshake"></i>
+                <h3>Vendor & Client Matching</h3>
+                <p>Conducting systematic monthly ledger reconciliations with your active suppliers and customers to resolve balance disputes instantly.</p>
             </div>
         </div>
     </section>
 
+    <!-- ======================== LIVE FEED SECTION ======================== -->
     <section class="feed-section section-wrapper" id="feed">
         <div class="section-title">Live Tax & Compliance Feed</div>
         <div id="liveFeedContainer">Loading real-time updates registry...</div>
     </section>
 
+    <!-- ======================== UPDATED PRICING PLANS SECTION ======================== -->
     <section class="section-wrapper" id="pricing">
         <div class="section-title">Transparent Monthly Pricing Plans</div>
         <div class="cards-grid">
+            <!-- Basic Plan -->
             <div class="card price-card">
                 <h3>Basic Plan</h3>
                 <div class="price">₹2,500<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Basic Bookkeeping</li>
-                    <li><i class="fa-solid fa-check"></i> Purchases & Sales Entries</li>
-                    <li><i class="fa-solid fa-check"></i> Expenses Recording</li>
+                    <li><i class="fa-solid fa-check"></i> Tally/Zoho/Excel Data Entry</li>
+                    <li><i class="fa-solid fa-check"></i> Bank Reconciliation (BRS)</li>
+                    <li><i class="fa-solid fa-check"></i> Ledger Maintenance</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Basic</a>
             </div>
+            <!-- Standard Plan -->
             <div class="card price-card" style="border-top-color: var(--gold-dark);">
                 <h3>Standard Plan</h3>
                 <div class="price">₹5,000<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Full Bookkeeping</li>
-                    <li><i class="fa-solid fa-check"></i> Bank Reconciliation (BRS)</li>
-                    <li><i class="fa-solid fa-check"></i> Vendor/Customer Management</li>
-                    <li><i class="fa-solid fa-check"></i> MonthlySummaryReports</li>
+                    <li><i class="fa-solid fa-check"></i> All Features of Basic Plan</li>
+                    <li><i class="fa-solid fa-check"></i> GST Data Preparation</li>
+                    <li><i class="fa-solid fa-check"></i> Customer & Vendor Matching</li>
+                    <li><i class="fa-solid fa-check"></i> Monthly Trial Balance</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Standard</a>
             </div>
+            <!-- Premium Plan -->
             <div class="card price-card">
                 <h3>Premium Plan</h3>
                 <div class="price">₹8,000+<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Unlimited Financial Entries</li>
+                    <li><i class="fa-solid fa-check"></i> All Features of Standard Plan</li>
                     <li><i class="fa-solid fa-check"></i> Complex Inventory Tracking</li>
-                    <li><i class="fa-solid fa-check"></i> Monthly Executive MIS Reports</li>
-                    <li><i class="fa-solid fa-check"></i> Complete GST Data Preparation</li>
+                    <li><i class="fa-solid fa-check"></i> Executive MIS Reporting</li>
+                    <li><i class="fa-solid fa-check"></i> Dedicated Custom Consultation</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Contact Custom</a>
             </div>
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section class="section-wrapper" id="faq">
         <div class="section-title">Frequently Asked Questions</div>
         <div class="faq-container">
             <div class="faq-item">
                 <div class="faq-question">What services do you provide? <span>+</span></div>
-                <div class="faq-answer">We offer comprehensive monthly financial solutions tailored for small businesses, traders, and startups. Our services include end-to-end bookkeeping, routine Tally Prime data entry, bank reconciliation statement (BRS) preparation, customer & vendor account reconciliation, inventory tracking management, and structured monthly management information system (MIS) reporting. Additionally, we handle end-to-end GST data preparation (GSTR-1 and GSTR-3B filings) to keep your business fully compliant.</div>
+                <div class="faq-answer">We offer comprehensive monthly financial solutions tailored for small businesses, traders, and startups. Our services include end-to-end bookkeeping, routine Tally/Zoho/Excel data entry, bank reconciliation statement (BRS) preparation, customer & vendor account reconciliation, inventory tracking management, and structured monthly management information system (MIS) reporting.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Are you an affordable alternative to a full-time accountant? <span>+</span></div>
-                <div class="faq-answer">Yes, absolutely. Hiring a dedicated full-time accountant often demands a significant salary and infrastructure cost. We act as your outsourced corporate accounting department, delivering identical accuracy, systematic data structure, and timely statutory compliance at a fraction of the cost. Our flexible monthly subscriptions are designed to easily fit the operational budgets of growing MSMEs.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">How does your monthly subscription work? <span>+</span></div>
-                <div class="faq-answer">Our pricing model is completely transparent and structured into three tiers based on your business volume and operational requirements. The 'Basic' package is optimized for startups or service professionals needing fundamental data logging. The 'Standard' tier is designed for expanding trading businesses that require regular bank reconciliations and precise ledger oversight. The 'Premium' package offers comprehensive corporate-grade financial management, including detailed monthly management reports and dedicated data consultation.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">How will I share my data with you? <span>+</span></div>
-                <div class="faq-answer">Data transmission is entirely streamlined for your convenience. You can securely share your raw purchase/sale invoices, bank statements, and relevant financial receipts via WhatsApp, email, or cloud shared folders on a weekly or monthly basis. Our team processes the documentation digitally, updates your books systematically, and provides clean reporting summaries without disrupting your daily operations.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Is my financial data secure with Prime Accounting Solutions? <span>+</span></div>
-                <div class="faq-answer">Data security and strict client confidentiality are the foundational principles of our firm. We implement robust access controls and isolated storage frameworks to ensure your corporate ledgers, turnover records, and banking transactions remain completely secure. Your information is strictly utilized for professional processing and compliance reporting, and is never disclosed to any third party under any circumstances.</div>
+                <div class="faq-answer">Yes, absolutely. Hiring a dedicated full-time accountant often demands a significant salary and infrastructure cost. We act as your outsourced corporate accounting department, delivering identical accuracy, systematic data structure, and timely statutory compliance at a fraction of the cost.</div>
             </div>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="section-wrapper" id="contact">
         <div class="section-title">Get In Touch With Us</div>
         <div class="contact-grid">
@@ -536,7 +566,7 @@
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
                         <h4 style="color:var(--primary-color);">Service Location Coordinates</h4>
-                        <p style="color:#64748b;">Prayagraj, Uttar Pradesh, India (Service Area Setup)</p>
+                        <p style="color:#64748b;">Prayagraj, Uttar Pradesh, India</p>
                     </div>
                 </div>
             </div>
@@ -556,7 +586,7 @@
                 <li><a href="#contact">Contact Desk</a></li>
             </ul>
             <div class="footer-bottom">
-                &copy; 2026 Prime Accounting Solutions. All Rights Reserved. Managed by secure terminal frameworks.
+                &copy; 2026 Prime Accounting Solutions. All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -583,7 +613,7 @@
             document.getElementById('welcomePopup').classList.remove('show');
         });
 
-        // Interactive Accordion Control Engine
+        // Interactive Accordion Engine
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
@@ -596,7 +626,7 @@
             });
         });
 
-        // Automated Typewriting Effect Core
+        // Typewriting Effect
         const phrases = ["Traders & Startups", "Retailers & MSMEs", "Small Businesses"];
         let count = 0;
         let index = 0;
@@ -620,7 +650,7 @@
             }
         }());
 
-        // Supabase Real-Time Updates Synchronization
+        // Supabase Live Feed Integration
         async function fetchLiveFeed() {
             const feedContainer = document.getElementById("liveFeedContainer");
             try {
@@ -653,7 +683,7 @@
             }
         }
 
-        // Custom Form Submission Handler to WhatsApp
+        // WhatsApp Form Integration
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('formName').value;

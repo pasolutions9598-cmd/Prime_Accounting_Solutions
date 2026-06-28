@@ -62,9 +62,9 @@ nav a:hover::after { width: 100%; }
 .hero-section .tagline { font-size: 22px; color: #38bdf8; font-weight: 500; margin-bottom: 25px; font-family: 'Outfit', sans-serif; }
 .focus-line { font-weight: 600; font-size: 15px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: inline-block; padding: 8px 24px; border-radius: 50px; color: #e2e8f0; }
 
-/* Dynamic Typing Effect Placeholder */
-.type-wrap { margin-top: 15px; font-size: 16px; color: #94a3b8; font-weight: 500; }
-.type-text { color: #facc15; font-weight: 600; border-right: 2px solid #facc15; animation: blink 0.7s infinite; padding-right: 3px; }
+/* Dynamic Typing Effect with Typing Cursor */
+.type-wrap { margin-top: 15px; font-size: 16px; color: #94a3b8; font-weight: 500; min-height: 28px; }
+.type-text { color: #facc15; font-weight: 600; border-right: 2px solid #facc15; animation: blink 0.7s infinite; padding-right: 3px; white-space: nowrap; }
 
 @keyframes blink { 50% { border-color: transparent; } }
 
@@ -200,7 +200,7 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
   <p class="tagline">Accurate • Reliable • Affordable</p>
   <p class="focus-line">FOCUS ON YOUR BUSINESS, WE'LL MANAGE YOUR ACCOUNTS</p>
   <div class="type-wrap">
-    <span>We manage your: </span><span class="type-text" id="changingText">GST Returns</span>
+    <span>We manage your: </span><span class="type-text" id="changingText"></span>
   </div>
 </div>
 
@@ -222,7 +222,6 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
   </div>
 </section>
 
-<!-- Updated Services Section with Requested One-Time Items & Pricing Notice -->
 <section id="services">
   <h2>One-Time Services</h2>
   <div class="charge-notice">💡 Charges will be based on your data</div>
@@ -331,7 +330,7 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
       <h3 style="font-family: 'Outfit', sans-serif; color: var(--secondary); margin-bottom: 20px; font-size: 22px; font-weight: 600;">हिंदी संस्करण (Hindi)</h3>
       <ul style="list-style: none; padding: 0;">
         <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
-          <strong style="color: var(--secondary);">1. गोपनीय जानकारी (CONFIDENTIAL INFORMATION):</strong> क्लाइंट का सारा वित्तीय डेटा, bank details, tax records, business strategies और customer list पूरी तरह से secret और safe रहेगी।
+          <strong style="color: var(--secondary);">1. गोपनीय जानकारी (CONFIDENTIAL INFORMATION):</strong> क्लाइंट का सारा वित्तीय डेटा, bank details, tax records, business strategies और customer list पूरी तरह से secret and safe रहेगी।
         </li>
         <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
           <strong style="color: var(--secondary);">2. गैर-प्रकटीकरण (NO DISCLOSURE):</strong> सेवा प्रदाता यह वचन देता है कि वह डेटा को किसी भी third party के साथ साझा नहीं करेगा, जब तक कि कानून द्वारा आवश्यक n ho।
@@ -414,14 +413,47 @@ if (mobileMenuBtn && navLinks) {
     });
 }
 
-// Auto Typing Tagline Logic
-const terms = ["Complete Accounting Management", "Inventory Management", "Bookkeeping", "Monthly MIS Reporting", "GST Data Preparation", "Tally Entries"];
-let currentIdx = 0;
-setInterval(() => {
-    currentIdx = (currentIdx + 1) % terms.length;
+// Premium Premium Character-by-Character Auto Typing Logic
+const terms = [
+    "Complete Accounting Management", 
+    "Inventory Management", 
+    "Bookkeeping", 
+    "Monthly MIS Reporting", 
+    "GST Data Preparation", 
+    "Tally Entries"
+];
+let termIdx = 0;
+let charIdx = 0;
+let isDeleting = false;
+
+function typeAnimation() {
     const textEl = document.getElementById("changingText");
-    if(textEl) textEl.innerText = terms[currentIdx];
-}, 2500);
+    if (!textEl) return;
+
+    const currentTerm = terms[termIdx];
+    
+    if (isDeleting) {
+        textEl.innerText = currentTerm.substring(0, charIdx - 1);
+        charIdx--;
+    } else {
+        textEl.innerText = currentTerm.substring(0, charIdx + 1);
+        charIdx++;
+    }
+
+    // Adjust speed based on actions
+    let typingSpeed = isDeleting ? 40 : 80;
+
+    if (!isDeleting && charIdx === currentTerm.length) {
+        typingSpeed = 2000; // Pause at full word
+        isDeleting = true;
+    } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        termIdx = (termIdx + 1) % terms.length;
+        typingSpeed = 600; // Pause before typing next word
+    }
+
+    setTimeout(typeAnimation, typingSpeed);
+}
 
 async function loadLiveFeed() {
     const container = document.getElementById("postsContainer");
@@ -480,6 +512,7 @@ async function safeTrackVisitor() {
 }
 
 window.onload = () => { 
+    typeAnimation();
     loadLiveFeed(); 
     safeTrackVisitor();
 };

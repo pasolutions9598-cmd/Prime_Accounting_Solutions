@@ -605,10 +605,9 @@
                 <h3>Basic Plan</h3>
                 <div class="price">₹2,500<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Sale Entries</li>
-                    <li><i class="fa-solid fa-check"></i> Purchase Enteries</li>
-                    <li><i class="fa-solid fa-check"></i> Expenses Recording</li>
-                    <li><i class="fa-solid fa-check"></i> Basic Bookkeeping</li>
+                    <li><i class="fa-solid fa-check"></i> Standard Tally Entries</li>
+                    <li><i class="fa-solid fa-check"></i> Ledger Maintenance</li>
+                    <li><i class="fa-solid fa-check"></i> Monthly Trial Balance</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Basic</a>
             </div>
@@ -617,10 +616,9 @@
                 <h3>Standard Plan</h3>
                 <div class="price">₹5,000<span>/month</span></div>
                 <ul class="price-features">
-                    <li><i class="fa-solid fa-check"></i> Complete Bookkeeping</li>
+                    <li><i class="fa-solid fa-check"></i> Full Bookkeeping Entries</li>
                     <li><i class="fa-solid fa-check"></i> Bank Reconciliation (BRS)</li>
-                    <li><i class="fa-solid fa-check"></i> Accounts Receivable Tracking</li>
-                    <li><i class="fa-solid fa-check"></i> Accounts Payable Tracking</li>
+                    <li><i class="fa-solid fa-check"></i> Vendor/Customer Matching</li>
                     <li><i class="fa-solid fa-check"></i> Monthly Summary Reports</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Standard</a>
@@ -633,7 +631,6 @@
                     <li><i class="fa-solid fa-check"></i> Complex Inventory Tracking</li>
                     <li><i class="fa-solid fa-check"></i> Monthly Executive MIS Reports</li>
                     <li><i class="fa-solid fa-check"></i> Complete Ready GST Data Sheets</li>
-                    <li><i class="fa-solid fa-check"></i> Accounts Receivable & Payable Management</li>
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Contact Custom</a>
             </div>
@@ -670,12 +667,13 @@
         <div class="section-title">Get In Touch With Us</div>
         <div class="contact-grid">
             <div class="contact-form">
-                <form action="https://formspree.io/f/your-id-here" method="POST">
-                    <input type="text" name="name" placeholder="Your Name / Enterprise Name" required>
-                    <input type="email" name="email" placeholder="Email Address" required>
-                    <input type="text" name="phone" placeholder="Phone Number" required>
-                    <textarea name="message" placeholder="Describe your corporate accounting or GST requirements here..." required></textarea>
-                    <button type="submit" class="cta-btn" style="border-radius:8px; width:100%;">Transmit Request Securely</button>
+                <!-- Direct WhatsApp Submission Engine -->
+                <form id="whatsappForm">
+                    <input type="text" id="formName" placeholder="Your Name / Enterprise Name" required>
+                    <input type="email" id="formEmail" placeholder="Email Address" required>
+                    <input type="text" id="formPhone" placeholder="Phone Number" required>
+                    <textarea id="formMessage" placeholder="Describe your corporate accounting or GST requirements here..." required></textarea>
+                    <button type="submit" class="cta-btn" style="border-radius:8px; width:100%;">Transmit Request Via WhatsApp</button>
                 </form>
             </div>
             <div>
@@ -812,6 +810,25 @@
                 }
             } catch (e) { console.error("Analytics log skipped."); }
         }
+
+        // 5. Custom Form Submission Handler to WhatsApp
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('formName').value;
+            const email = document.getElementById('formEmail').value;
+            const phone = document.getElementById('formPhone').value;
+            const msg = document.getElementById('formMessage').value;
+            
+            const whatsappNumber = "916394748563"; 
+            
+            const textMessage = `*New Enquiry Recieved* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
+            
+            const encodedMessage = encodeURIComponent(textMessage);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
 
         fetchLiveFeed();
         logVisitor();

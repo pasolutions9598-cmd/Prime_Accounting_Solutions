@@ -148,6 +148,7 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
       <a href="#services">Services</a>
       <a href="#updates">Latest Updates</a>
       <a href="#packages">Packages</a>
+      <a href="#privacy">Privacy Policy</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -215,6 +216,44 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
         <div class="price">₹8,000+</div>
         <p>Inventory Management • End-to-End Advanced Accounting • GST Data Prep • MIS Reports</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy & Data Security Policy Section -->
+<section id="privacy">
+  <h2>Privacy & Data Security Policy</h2>
+  <div class="grid">
+    <!-- English Version -->
+    <div class="card" style="border-top: 4px solid var(--primary); text-align: left;">
+      <h3 style="font-family: 'Outfit', sans-serif; color: var(--primary); margin-bottom: 20px; font-size: 22px; font-weight: 600;">English Version</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 18px; font-size: 15px; color: var(--text);">
+          <strong style="color: var(--primary);">1. CONFIDENTIAL INFORMATION:</strong> All financial data, bank details, tax records, business strategies, and customer lists of the client will remain completely confidential and secure.
+        </li>
+        <li style="margin-bottom: 18px; font-size: 15px; color: var(--text);">
+          <strong style="color: var(--primary);">2. NO DISCLOSURE:</strong> The Service Provider promises that they will not share any data with any third party, unless required by law.
+        </li>
+        <li style="margin-bottom: 18px; font-size: 15px; color: var(--text);">
+          <strong style="color: var(--primary);">3. DATA SECURITY:</strong> The Service Provider will use appropriate digital tools, secure internet connections, and strong passwords to keep the data safe.
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Hindi Version -->
+    <div class="card" style="border-top: 4px solid var(--secondary); text-align: left;">
+      <h3 style="font-family: 'Outfit', sans-serif; color: var(--secondary); margin-bottom: 20px; font-size: 22px; font-weight: 600;">हिंदी संस्करण (Hindi)</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
+          <strong style="color: var(--secondary);">1. गोपनीय जानकारी (CONFIDENTIAL INFORMATION):</strong> क्लाइंट का सारा वित्तीय डेटा, बैंक विवरण, टैक्स रिकॉर्ड, व्यावसायिक रणनीतियाँ और ग्राहकों की सूची पूरी तरह से सुरक्षित और गोपनीय रहेगी।
+        </li>
+        <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
+          <strong style="color: var(--secondary);">2. गैर-प्रकटीकरण (NO DISCLOSURE):</strong> सेवा प्रदाता यह वचन देता है कि वह किसी भी तीसरे पक्ष (Third Party) के साथ डेटा साझा नहीं करेगा, जब तक कि कानून द्वारा ऐसा करना आवश्यक न हो।
+        </li>
+        <li style="margin-bottom: 18px; font-size: 15px; color: var(--text); line-height: 1.8;">
+          <strong style="color: var(--secondary);">3. डेटा सुरक्षा (DATA SECURITY):</strong> सेवा प्रदाता डेटा को सुरक्षित रखने के लिए सही डिजिटल टूल्स, सुरक्षित इंटरनेट और मजबूत पासवर्ड का उपयोग करेगा।
+        </li>
+      </ul>
     </div>
   </div>
 </section>
@@ -324,22 +363,19 @@ async function loadLiveFeed() {
 
 async function safeTrackVisitor() {
     try {
-        // Check karega ki kya yeh device pehle aa chuka hai
         const hasVisited = localStorage.getItem('prime_site_visited');
         if (hasVisited) {
             console.log("Welcome back, Admin! Visit not counted.");
-            return; // Agar pehle aa chuke ho, toh count nahi badhayega
+            return;
         }
 
         const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
         if(data) {
             await supabase.from('site_analytics').update({ visitor_count: data.visitor_count + 1 }).eq('id', 'main_site');
-            // Device mein save kar lega ki yeh user ab aa chuka hai
             localStorage.setItem('prime_site_visited', 'true');
         }
     } catch(e) {}
 }
-
 
 window.onload = () => { 
     loadLiveFeed(); 

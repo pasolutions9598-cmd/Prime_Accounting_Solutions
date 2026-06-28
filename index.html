@@ -42,66 +42,75 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            padding-top: 90px; /* Adjusted for larger header */
+            padding-top: 160px; /* Increased padding because header is now beautifully stacked in 2 lines */
         }
 
         /* ==========================================================================
-           1. FIXED HEADER & NAVBAR (Blue Background + Golden Text + Bigger Size)
+           1. TWO-LINE FIXED HEADER & NAVBAR (Bigger Logo + Ordered Links Line)
            ========================================================================== */
         header {
             background-color: var(--primary-color);
-            padding: 18px 5%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 25px rgba(0,0,0,0.25);
-            border-bottom: 2px solid var(--gold-dark);
+            border-bottom: 3px solid var(--gold-dark);
+            padding: 15px 0;
         }
 
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             max-width: 1240px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column; /* Stack Logo and Links vertically */
+            align-items: center;
+            gap: 15px;
+            padding: 0 5%;
         }
 
+        /* Line 1: Logo & Company Name (Bigger & Centered) */
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
             text-decoration: none;
             color: var(--gold-color);
             font-weight: 700;
-            font-size: 25px; /* Increased Font Size */
-            letter-spacing: 0.5px;
+            font-size: 30px; /* Bigger Company Name Font Size */
+            letter-spacing: 0.8px;
             transition: var(--transition);
         }
 
         .logo img {
-            height: 60px; /* Increased Logo Image Size */
+            height: 75px; /* Bigger Logo Image Size */
             width: auto;
             object-fit: contain;
         }
 
+        /* Line 2: All Navigation Links in One Single Line */
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 30px;
+            justify-content: center;
+            gap: 35px; /* Increased spacing between links */
             list-style: none;
             margin: 0;
-            padding: 0;
+            padding: 5px 0;
+            width: 100%;
+            border-top: 1px solid rgba(229, 193, 88, 0.2); /* Soft separator line */
+            padding-top: 12px;
         }
 
         .nav-links a {
             color: #ffffff;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 17px; /* Increased Link Font Size */
             font-weight: 500;
             position: relative;
             padding: 5px 0;
             transition: var(--transition);
+            letter-spacing: 0.5px;
         }
 
         .nav-links a::after {
@@ -205,7 +214,7 @@
             background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 70vh;
+            min-height: 65vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -342,9 +351,11 @@
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .logo { font-size: 20px; }
-            .logo img { height: 45px; }
+            body { padding-top: 150px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; }
+            .nav-links a { font-size: 14px; }
+            .logo { font-size: 22px; }
+            .logo img { height: 50px; }
             .hero h1 { font-size: 2.1rem; }
         }
     </style>
@@ -360,12 +371,15 @@
         </div>
     </div>
 
+    <!-- Beautiful Balanced Two Line Header Section -->
     <header>
         <nav>
+            <!-- Line 1: Centered Brand Info (Bigger) -->
             <a href="#" class="logo">
                 <img src="Logo.png" alt="Prime Accounting Solutions Logo">
                 Prime Accounting Solutions
             </a>
+            <!-- Line 2: All links perfectly combined in one block -->
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -393,10 +407,8 @@
         </div>
     </section>
 
-    <!-- ======================== UPDATED SERVICES SECTION ======================== -->
     <section class="section-wrapper" id="services">
         <div class="section-title">Our Premium Financial Services</div>
-        <!-- Requested Subtitle Added -->
         <div class="section-subtitle">One time services or charges will be based on your data.</div>
         
         <div class="cards-grid">
@@ -563,7 +575,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('welcomePopup').classList.add('show');
-            }, 1000); // 1 Second delay before popup triggers
+            }, 1000);
         });
 
         document.getElementById('closePopupBtn').addEventListener('click', () => {

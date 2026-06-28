@@ -72,6 +72,9 @@ section { padding: 90px 20px; max-width: 1200px; margin: auto; }
 h2 { font-family: 'Outfit', sans-serif; text-align: center; margin-bottom: 50px; color: var(--primary); font-size: 36px; font-weight: 700; position: relative; }
 h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin: 12px auto 0; border-radius: 2px; }
 
+/* Highlight Badge Styling */
+.charge-notice { text-align: center; font-weight: 700; color: #d97706; margin-top: -35px; margin-bottom: 45px; font-size: 14px; letter-spacing: 0.5px; background: #fffbeb; display: block; padding: 8px 20px; border-radius: 50px; border: 1px solid #fef3c7; margin-left: auto; margin-right: auto; width: fit-content; box-shadow: 0 4px 12px rgba(217,119,6,0.05); }
+
 /* Modern Cards Grid */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 .card, .package { background: var(--card-bg); padding: 35px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(15,23,42,0.02); border: 1px solid #f1f5f9; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -153,6 +156,7 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
     .hero-section .tagline { font-size: 18px; }
     h2 { font-size: 28px; }
     .about-card { padding: 25px; }
+    .charge-notice { margin-top: -30px; font-size: 12px; }
 }
 </style>
 </head>
@@ -218,29 +222,41 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
   </div>
 </section>
 
-<!-- Updated HTML Text Grid Services Section (Highly Optimized for Google SEO) -->
+<!-- Updated Services Section with Requested One-Time Items & Pricing Notice -->
 <section id="services">
   <h2>One-Time Services</h2>
-  <div class="grid" style="margin-bottom: 60px;">
+  <div class="charge-notice">💡 Charges will be based on your data</div>
+  
+  <div class="grid" style="margin-bottom: 70px;">
     <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
-      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">GST Registration</h3>
-      <p style="font-size:14px; color:#64748b;">New GST registration setup, fast approval tracking, amendments, and legal cancellations for businesses.</p>
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Accounts Payable and Receivable Management</h3>
+      <p style="font-size:14px; color:#64748b;">Efficient tracking of outstanding customer invoices, pending vendor bills, and regular aging analysis.</p>
     </div>
     <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
-      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Income Tax Return (ITR)</h3>
-      <p style="font-size:14px; color:#64748b;">Accurate and error-free ITR filing for salaried individuals, business owners, retail traders, and corporate firms.</p>
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Customer & Vendor Reconciliation</h3>
+      <p style="font-size:14px; color:#64748b;">Thorough cross-verification and matching of ledgers with clients and suppliers to completely resolve mismatches.</p>
     </div>
     <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
-      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Business Registration</h3>
-      <p style="font-size:14px; color:#64748b;">MSME/Udyam Aadhaar setup, Proprietorship documentation, Partnership firm registration, and compliance certificates.</p>
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Financial Reports Preparation</h3>
+      <p style="font-size:14px; color:#64748b;">Preparation of formal Trial Balances, Balance Sheets, and Profit & Loss summaries tailored for internal use or banking needs.</p>
     </div>
     <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
-      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">PAN & TAN Services</h3>
-      <p style="font-size:14px; color:#64748b;">Application processing for new corporate/personal PAN cards, TAN registration, and corrections.</p>
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Inventory Setup</h3>
+      <p style="font-size:14px; color:#64748b;">Configuring stock items, establishing appropriate measurement units, and systematic grouping configurations.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Excel Accounting & Reporting</h3>
+      <p style="font-size:14px; color:#64748b;">Designing smart spreadsheet trackers, automated formula logs, and highly interactive business reporting tools.</p>
+    </div>
+    <div class="card" style="border-left: 5px solid var(--secondary); text-align: left;">
+      <h3 style="font-family:'Outfit'; font-size:20px; color:var(--primary); margin-bottom:10px; font-weight:600;">Monthly Summary Report</h3>
+      <p style="font-size:14px; color:#64748b;">Clean and concise executive aggregation of all financial trends, key numbers, and basic data points for the month.</p>
     </div>
   </div>
 
   <h2>Advanced Accounting Services</h2>
+  <div class="charge-notice">💡 Charges will be based on your data</div>
+  
   <div class="grid">
     <div class="card" style="border-left: 5px solid var(--primary); text-align: left;">
       <h3 style="font-family:'Outfit'; font-size:20px; color:var(--secondary); margin-bottom:10px; font-weight:600;">End-to-End Bookkeeping</h3>
@@ -296,7 +312,6 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
 <section id="privacy">
   <h2>Privacy & Data Security Policy</h2>
   <div class="grid">
-    <!-- English Version -->
     <div class="card" style="border-top: 4px solid var(--primary); text-align: left;">
       <h3 style="font-family: 'Outfit', sans-serif; color: var(--primary); margin-bottom: 20px; font-size: 22px; font-weight: 600;">English Version</h3>
       <ul style="list-style: none; padding: 0;">
@@ -312,7 +327,6 @@ footer h3 { font-family: 'Outfit', sans-serif; color: white; margin-bottom: 10px
       </ul>
     </div>
     
-    <!-- Hindi Version -->
     <div class="card" style="border-top: 4px solid var(--secondary); text-align: left;">
       <h3 style="font-family: 'Outfit', sans-serif; color: var(--secondary); margin-bottom: 20px; font-size: 22px; font-weight: 600;">हिंदी संस्करण (Hindi)</h3>
       <ul style="list-style: none; padding: 0;">

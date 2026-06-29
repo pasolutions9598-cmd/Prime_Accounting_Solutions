@@ -318,15 +318,70 @@
             margin-bottom: 15px;
         }
 
-        /* 3. Operational Review Button Widget */
+        /* 3. Operational Review Widget & Form */
         .review-widget {
-            text-align: center;
             background: var(--primary-color);
             color: white;
             padding: 40px;
             border-radius: 16px;
             margin-top: 40px;
             border: 2px dashed var(--gold-color);
+            text-align: left;
+        }
+
+        .review-form-toggle-btn {
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .review-form-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(229, 193, 88, 0.4);
+        }
+
+        .review-box-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            margin-top: 0;
+        }
+
+        .review-box-container.open {
+            max-height: 600px;
+            margin-top: 25px;
+        }
+
+        .inner-review-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(229, 193, 88, 0.2);
+        }
+
+        .star-rating-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .star-rating-input i {
+            cursor: pointer;
+            color: #475569;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating-input i.active {
+            color: #f59e0b;
         }
 
         /* 8. Post Image Box Layout */
@@ -374,7 +429,8 @@
         }
 
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
-        .app-form input, .app-form select, .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; }
+        .app-form input, .app-form select, .contact-form input, .contact-form textarea, .inner-review-form input, .inner-review-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; }
+        .inner-review-form input, .inner-review-form textarea { background: rgba(255,255,255,0.9); color: var(--text-dark); border: 1px solid transparent; }
         .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .contact-info-block i { font-size: 24px; color: var(--gold-dark); background: rgba(229, 193, 88, 0.1); padding: 15px; border-radius: 50%; }
 
@@ -619,7 +675,7 @@
         </div>
     </section>
 
-    <!-- Client Testimonials & Review Section Moved Below Appointment -->
+    <!-- Client Testimonials & Review Section Fixed As Requested -->
     <section class="section-wrapper" id="testimonials">
         <div class="section-title">Client Testimonials</div>
         <div class="section-subtitle">What local business owners say about our accuracy</div>
@@ -639,11 +695,36 @@
         </div>
 
         <div class="review-widget">
-            <h4 style="font-size: 20px; color: var(--gold-color); margin-bottom: 10px;">Satisfied With Our Corporate Support?</h4>
-            <p style="font-size: 14.5px; margin-bottom: 20px; color: #f8fafc;">Click below to document your direct audit experience or check live client parameters on our digital business network map.</p>
-            <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK_HERE/review" target="_blank" class="cta-btn" style="background: white; color: var(--primary-color);">
-                <i class="fa-brands fa-google" style="margin-right: 8px;"></i> Write A Live Google Review
-            </a>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h4 style="font-size: 20px; color: var(--gold-color); margin-bottom: 5px;">Satisfied With Our Corporate Support?</h4>
+                    <p style="font-size: 14.5px; color: #f8fafc; margin-bottom: 0;">Share your direct experience with us right here instantly.</p>
+                </div>
+                <button type="button" class="review-form-toggle-btn" id="toggleReviewBtn">
+                    <i class="fa-solid fa-pen-to-square"></i> Write A Review Here
+                </button>
+            </div>
+
+            <!-- Embedded Direct Review Form Container -->
+            <div class="review-box-container" id="reviewFormContainer">
+                <form id="directReviewForm" class="inner-review-form">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <input type="text" id="revName" placeholder="Your Name / Business Name" required>
+                        <div>
+                            <label style="display:block; font-size:13px; color:var(--gold-color); margin-bottom:5px;">Select Rating:</label>
+                            <div class="star-rating-input" id="starRatingInput">
+                                <i class="fa-solid fa-star active" data-rating="1"></i>
+                                <i class="fa-solid fa-star active" data-rating="2"></i>
+                                <i class="fa-solid fa-star active" data-rating="3"></i>
+                                <i class="fa-solid fa-star active" data-rating="4"></i>
+                                <i class="fa-solid fa-star active" data-rating="5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea id="revMessage" rows="3" placeholder="Write your review or feedback about our accounting desk here..." required></textarea>
+                    <button type="submit" class="cta-btn" style="width:100%; border-radius:8px;">Submit Review via WhatsApp</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -790,7 +871,7 @@
             }
         }());
 
-        // 3. Live Feed Image Fix - Added fallback and strict dynamic layout conditions
+        // Live Feed Image Fix
         async function fetchLiveFeed() {
             const feedContainer = document.getElementById("liveFeedContainer");
             try {
@@ -809,7 +890,6 @@
 
                 feedContainer.innerHTML = "";
                 posts.forEach(post => {
-                    // Fixed: ensures image tags are explicitly rendered when a valid image path exists
                     let imageTag = "";
                     if (post.image && post.image.trim() !== "") {
                         imageTag = `<img src="${post.image}" alt="Post Compliance Image" class="feed-image" onerror="this.style.display='none';">`;
@@ -829,7 +909,7 @@
             }
         }
 
-        // 4. Appointment Form Validation & Submission Redirection Router
+        // Appointment Form Router
         document.getElementById('appointmentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('aptName').value;
@@ -853,7 +933,27 @@
             window.open(`https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`, '_blank');
         });
 
-        fetchLiveFeed();
-    </script>
-</body>
-</html>
+        // --- NEW REVIEW SECTION LOGIC ---
+        let selectedRating = 5;
+        const toggleBtn = document.getElementById('toggleReviewBtn');
+        const formContainer = document.getElementById('reviewFormContainer');
+        const stars = document.querySelectorAll('#starRatingInput i');
+
+        // Accordion Slide Toggle for Review Box
+        toggleBtn.addEventListener('click', () => {
+            if (formContainer.classList.contains('open')) {
+                formContainer.classList.remove('open');
+                toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
+            } else {
+                formContainer.classList.add('open');
+                toggleBtn.innerHTML = `<i class="fa-solid fa-xmark"></i> Close Review Form`;
+            }
+        });
+
+        // Interactive Star Rating Selection Handler
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.getAttribute('data-rating'));
+                stars.forEach(s => {
+                    if (parseInt(s.getAttribute('data-rating')) <= selectedRating) {
+                        s.classList.add('Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.

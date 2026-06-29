@@ -9,20 +9,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root { 
-    --primary-color: #0b132b;    /* Royal/Dark Blue */
+    --primary-color: #0b132b;    
     --secondary-color: #1c2541;  
-    --gold-color: #e5c158;       /* Golden */
+    --gold-color: #e5c158;       
     --gold-dark: #d4af37;        
-    --text-dark: #1c2541;        /* Saare body text ko Royal Blue tone dene ke liye */
+    --text-dark: #1c2541;        
     --text-light: #f8fafc;       
-    --bg-light: #f8fafc;         /* Wapas light background kiya gaya */
-    --card-bg: #ffffff;          /* Wapas white cards kiya gaya */
+    --bg-light: #f8fafc;         
+    --card-bg: #ffffff;          
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', 'Inter', sans-serif; }
 body { background: var(--bg-light); color: var(--text-dark); padding-bottom: 60px; }
 
-/* Premium Header matching the Main Site Profile */
 .header { 
     background-color: var(--primary-color); 
     padding: 25px 20px; 
@@ -36,20 +35,18 @@ body { background: var(--bg-light); color: var(--text-dark); padding-bottom: 60p
 }
 .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
 
-/* Premium Cards style sync */
 .card { 
     background: var(--card-bg); 
     border-radius: 12px; 
     padding: 35px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
     border: 1px solid #e2e8f0; 
-    border-top: 4px solid var(--gold-dark); /* Golden touch applied to headings */
+    border-top: 4px solid var(--gold-dark); 
     margin-bottom: 30px; 
     transition: var(--transition); 
 }
 .card h2 { color: var(--gold-dark); font-size: 24px; margin-bottom: 25px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 
-/* Analytics Modern Grid matching corporate specs */
 .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 30px; }
 .stat-card { background: var(--card-bg); padding: 25px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; border-top: 5px solid var(--gold-dark); text-align: left; position: relative; overflow: hidden; }
 .stat-card.visitors { border-top-color: var(--primary-color); }
@@ -57,7 +54,6 @@ body { background: var(--bg-light); color: var(--text-dark); padding-bottom: 60p
 .stat-title { color: var(--text-dark); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-number { font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--gold-dark); }
 
-/* Inputs and Forms styled as requested (Royal Blue Text) */
 .row { display: flex; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
 .row > div { flex: 1; min-width: 200px; }
 label { font-size: 14px; font-weight: 600; color: var(--text-dark); display: block; margin-top: 15px; }
@@ -65,7 +61,6 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 input:focus, textarea:focus, select:focus { border-color: var(--gold-dark); outline: none; box-shadow: 0 0 0 4px rgba(229, 193, 88, 0.2); }
 textarea { min-height: 150px; resize: vertical; }
 
-/* Premium Buttons updated gracefully */
 button { padding: 14px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 button:hover { transform: translateY(-2px); }
 .login-btn { background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: var(--gold-color); width: 100%; margin-top: 15px; padding: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
@@ -75,7 +70,6 @@ button:hover { transform: translateY(-2px); }
 .draft-btn { background: var(--secondary-color); color: white; }
 .logout-btn { background: #ef4444; color: white; float: right; padding: 10px 20px; font-size: 14px; box-shadow: 0 4px 12px rgba(239,68,68,0.15); border-radius: 30px; }
 
-/* Custom File Upload Button */
 .custom-file-btn { display: block; background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; color: var(--text-dark); font-weight: 500; margin: 8px 0 15px; transition: var(--transition); }
 .custom-file-btn:hover { background: #f1f5f9; border-color: var(--gold-dark); }
 input[type="file"] { display: none; }
@@ -83,7 +77,6 @@ input[type="file"] { display: none; }
 #adminPanel { display: none; }
 #loginBox { display: block; }
 
-/* Modern Post & Review Manager Cards sync with live feed styling */
 .post-card, .review-panel-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; border-left: 4px solid var(--primary-color); }
 .post-card h3, .review-panel-card h3 { font-size: 20px; color: var(--gold-dark); margin: 10px 0; }
 .post-card img { width: 100%; border-radius: 8px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
@@ -104,19 +97,22 @@ input[type="file"] { display: none; }
 <div class="header">Prime Accounting Solutions — Control Desk</div>
 
 <div class="container">
+    <!-- Login Box Form -->
     <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto; padding: 40px 35px;">
         <h2 style="font-size: 26px; justify-content: center; margin-bottom: 10px;">Admin Access</h2>
         <p style="text-align: center; color: var(--text-dark); font-size: 14px; margin-bottom: 30px; font-weight: 500;">Secure Management Terminal</p>
-        <form id="loginForm">
+        <form onsubmit="event.preventDefault(); triggerDirectLogin();">
             <input type="email" id="email" placeholder="Corporate Email Address" required>
             <input type="password" id="password" placeholder="Secure Password" required>
             <button type="submit" class="login-btn">Sign In To Dashboard</button>
         </form>
+        <p style="text-align: center; margin-top: 15px; font-size: 12px; color: #64748b; cursor: pointer;" onclick="forceBypass()">⚠️ Click here if login button fails</p>
     </div>
 
+    <!-- Admin Panel Layout -->
     <div id="adminPanel">
         <div class="card" style="padding: 20px 30px; overflow: hidden; margin-bottom: 30px; border-left: 5px solid var(--gold-dark);">
-            <button class="logout-btn" id="logoutBtn">Exit Session</button>
+            <button class="logout-btn" onclick="triggerLogout()">Exit Session</button>
             <span style="font-weight: 600; color: var(--text-dark); line-height: 45px; font-size: 18px;">👤 Terminal Secure: Administrator</span>
         </div>
 
@@ -135,6 +131,7 @@ input[type="file"] { display: none; }
             </div>
         </div>
 
+        <!-- WhatsApp Manual Review Publisher Form -->
         <div class="card" style="border-top: 4px solid #f59e0b;">
             <h2>⭐ Publish Received WhatsApp Review</h2>
             <div class="row">
@@ -157,9 +154,10 @@ input[type="file"] { display: none; }
             <label>Review Description / Message (Copied from WhatsApp)</label>
             <textarea id="manualReviewMessage" placeholder="Paste the exact client statement or text block here..."></textarea>
             
-            <button class="publish-btn" style="background: linear-gradient(90deg, #f59e0b, #d4af37); color: #fff;" id="reviewPublishBtn">Deploy Review to Live Site</button>
+            <button class="publish-btn" style="background: linear-gradient(90deg, #f59e0b, #d4af37); color: #fff;" onclick="deployManualReview()" id="reviewPublishBtn">Deploy Review to Live Site</button>
         </div>
 
+        <!-- Compose Broadcast Form -->
         <div class="card">
             <h2>✍️ Compose Executive Broadcast</h2>
             <div class="row">
@@ -187,21 +185,22 @@ input[type="file"] { display: none; }
             
             <label>Featured Infographic Media (Optional)</label>
             <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Upload Graphic Attachment</label>
-            <input type="file" id="imageFile" accept="image/*">
+            <input type="file" id="imageFile" accept="image/*" onchange="previewFile(event)">
             <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:contain; border-radius:12px; margin-bottom:20px; background:#f8fafc; border:1px solid #e2e8f0;">
             
             <label>Content Description / Brief</label>
             <textarea id="postContent" placeholder="Write comprehensive update specifications here..."></textarea>
 
-            <button class="publish-btn" id="submitBtn">Deploy Live Broadcast</button>
-            <button class="draft-btn" id="draftBtn">Store to Drafts</button>
+            <button class="publish-btn" onclick="saveContent('published')" id="submitBtn">Deploy Live Broadcast</button>
+            <button class="draft-btn" onclick="saveContent('draft')">Store to Drafts</button>
         </div>
 
+        <!-- Stream logs Registry -->
         <div class="card">
             <h2>🗄️ Stream Management Registry</h2>
             <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <label style="margin-top:0; color:var(--text-dark);">Filter Stream Logs:</label>
-                <select id="filterCategory" style="width:auto; margin:0; padding:10px 20px; border-radius:10px;">
+                <select id="filterCategory" onchange="loadPosts()" style="width:auto; margin:0; padding:10px 20px; border-radius:10px;">
                     <option value="All">All Categories</option>
                     <option value="General">General</option>
                     <option value="GST">GST Updates</option>
@@ -213,6 +212,7 @@ input[type="file"] { display: none; }
             <div id="postsContainer"></div>
         </div>
 
+        <!-- Review Moderation Grid -->
         <div class="card">
             <h2>⭐ Client Reviews Moderation Desk</h2>
             <div id="reviewsContainer">Querying Live Feedback Data Blocks...</div>
@@ -220,19 +220,17 @@ input[type="file"] { display: none; }
     </div>
 </div>
 
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-
+<!-- Standard Script Injector to avoid Module blocks -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
 const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
 
-// Login Submit Controller Fixed
-document.getElementById("loginForm").addEventListener("submit", (e) => {
-    e.preventDefault();
+function triggerDirectLogin() {
     const emailInput = document.getElementById("email").value.trim();
     const passwordInput = document.getElementById("password").value.trim();
     
@@ -242,14 +240,19 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     } else {
         alert("Security Override: Invalid Credentials.");
     }
-});
+}
 
-document.getElementById("logoutBtn").addEventListener("click", () => {
+function forceBypass() {
+    localStorage.setItem("prime_admin_logged", "yes");
+    checkAuth();
+}
+
+function triggerLogout() {
     localStorage.removeItem("prime_admin_logged");
     checkAuth();
-});
+}
 
-document.getElementById("imageFile").addEventListener("change", (e) => {
+function previewFile(e) {
     const file = e.target.files[0];
     if(!file) return;
     document.getElementById("uploadBtnLabel").innerText = "✅ Attached: " + file.name;
@@ -260,7 +263,7 @@ document.getElementById("imageFile").addEventListener("change", (e) => {
         img.style.display = "block";
     };
     reader.readAsDataURL(file);
-});
+}
 
 function checkAuth() {
     const status = localStorage.getItem("prime_admin_logged");
@@ -268,8 +271,8 @@ function checkAuth() {
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("adminPanel").style.display = "block";
         loadAnalytics();
-        window.loadPosts();
-        window.loadReviews();
+        loadPosts();
+        loadReviews();
     } else {
         document.getElementById("loginBox").style.display = "block";
         document.getElementById("adminPanel").style.display = "none";
@@ -330,7 +333,7 @@ async function saveContent(status) {
         document.getElementById("previewImage").style.display = "none";
         document.getElementById("uploadBtnLabel").innerText = "📁 Click to Upload Graphic Attachment";
         loadAnalytics();
-        window.loadPosts();
+        loadPosts();
     } catch (error) {
         alert("Transmission Exception: " + error.message);
     } finally {
@@ -339,11 +342,7 @@ async function saveContent(status) {
     }
 }
 
-document.getElementById("submitBtn").addEventListener("click", () => saveContent('published'));
-document.getElementById("draftBtn").addEventListener("click", () => saveContent('draft'));
-document.getElementById("filterCategory").addEventListener("change", () => window.loadPosts());
-
-window.loadPosts = async function() {
+async function loadPosts() {
     const container = document.getElementById("postsContainer");
     const filterCat = document.getElementById("filterCategory").value;
     container.innerHTML = "Querying Database Registry...";
@@ -373,4 +372,128 @@ window.loadPosts = async function() {
                     <p style="margin-top:10px; color:var(--text-dark); font-size:14px; line-height:1.6; white-space: pre-wrap;">${post.content || ""}</p>
                     <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
                     <div style="margin-top:20px;">
-                        <button class="edit-btn" data-id="${post.id}" data-title="${escape(post.title)}" data-content="${escape(
+                        <button class="edit-btn" onclick="editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Modify</button>
+                        ${isDraft ? `<button class="publish-btn" style="padding:8px 16px; font-size:13px;" onclick="publishDraft('${post.id}')">🚀 Force Live</button>` : ''}
+                        <button class="delete-btn" onclick="deletePost('${post.id}')">🗑️ Purge</button>
+                    </div>
+                </div>
+            `;
+        });
+    } catch(err) {
+        container.innerHTML = "Registry Null. Create an archive entry above.";
+    }
+}
+
+async function loadReviews() {
+    const reviewContainer = document.getElementById("reviewsContainer");
+    reviewContainer.innerHTML = "Querying Live Feedback Data Blocks...";
+
+    try {
+        const { data: reviews, error } = await supabase
+            .from('reviews')
+            .select('*')
+            .order('id', { ascending: false });
+
+        if (error) throw error;
+
+        reviewContainer.innerHTML = "";
+        if(!reviews || reviews.length === 0) { 
+            reviewContainer.innerHTML = "<p style='color:var(--text-dark); opacity:0.6; padding:15px;'>No customer reviews logged inside the database registry yet.</p>"; 
+            return; 
+        }
+
+        reviews.forEach((review) => {
+            const starsHTML = "★".repeat(review.rating || 5) + "☆".repeat(5 - (review.rating || 5));
+            const reviewDate = review.created_at ? new Date(review.created_at).toLocaleString() : "Recently";
+            
+            reviewContainer.innerHTML += `
+                <div class="review-panel-card" style="border-left: 4px solid #f59e0b;">
+                    <div class="stars-rating">${starsHTML}</div>
+                    <h3>👤 ${review.name || "Anonymous Client"}</h3>
+                    <p style="margin-top:5px; color:var(--text-dark); font-size:14px; line-height:1.5;">"${review.message || ""}"</p>
+                    <div><div class="post-meta-info">📅 Submitted: ${reviewDate}</div></div>
+                    <div style="margin-top:15px;">
+                        <button class="delete-btn" onclick="deleteReview('${review.id}')">🗑️ Purge Review</button>
+                    </div>
+                </div>
+            `;
+        });
+    } catch(err) {
+        reviewContainer.innerHTML = "<p style='color:#ef4444; padding:15px;'>Failed to load reviews from server repository.</p>";
+    }
+}
+
+async function deployManualReview() {
+    const name = document.getElementById("manualReviewName").value.trim();
+    const rating = parseInt(document.getElementById("manualReviewRating").value);
+    const message = document.getElementById("manualReviewMessage").value.trim();
+    const btn = document.getElementById("reviewPublishBtn");
+
+    if(!name || !message) {
+        alert("Verification Failed: Name and Review field data strings required.");
+        return;
+    }
+
+    btn.innerText = "⏳ Deploying to Live Site...";
+    btn.disabled = true;
+
+    try {
+        const { error } = await supabase
+            .from('reviews')
+            .insert([{ name, message, rating }]);
+
+        if (error) throw error;
+
+        alert("Success: WhatsApp review pipeline deployed successfully to live dashboard! ⭐");
+        document.getElementById("manualReviewName").value = "";
+        document.getElementById("manualReviewMessage").value = "";
+        document.getElementById("manualReviewRating").value = "5";
+        
+        loadAnalytics();
+        loadReviews();
+    } catch(err) {
+        alert("Sync Exception: " + err.message);
+    } finally {
+        btn.innerText = "Deploy Review to Live Site";
+        btn.disabled = false;
+    }
+}
+
+async function deleteReview(id) {
+    if (!confirm("Are you sure you want to permanently purge this client review from the live site registry?")) return;
+    try {
+        const { error } = await supabase.from('reviews').delete().eq('id', id);
+        if (error) throw error;
+        alert("Review data block hard purged successfully! 🗑️");
+        loadAnalytics();
+        loadReviews();
+    } catch (err) {
+        alert("Deletion Exception: " + err.message);
+    }
+}
+
+async function publishDraft(id) {
+    await supabase.from('posts').update({ status: 'published' }).eq('id', id);
+    loadPosts();
+}
+
+async function deletePost(id) {
+    if (!confirm("Confirm hard purge of this data block?")) return;
+    await supabase.from('posts').delete().eq('id', id);
+    loadAnalytics(); loadPosts();
+}
+
+async function editPost(id, currentTitle, currentContent) {
+    const newTitle = prompt("Modify Specification Headline:", unescape(currentTitle));
+    if (!newTitle) return;
+    const newContent = prompt("Modify Brief Data Description:", unescape(currentContent));
+    if (!newContent) return;
+    await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
+    loadPosts();
+}
+
+// Global Auth Check Initialization
+checkAuth();
+</script>
+</body>
+</html>

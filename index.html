@@ -912,6 +912,45 @@
             }
         }
         fetchLiveFeed();
+        async function fetchWebTestimonials() {
+    const testimonialContainer = document.getElementById("liveTestimonialsContainer");
+    try {
+        const { data: testimonials, error } = await supabase
+            .from('testimonials')
+            .select('*')
+            .eq('status', 'published')
+            .order('id', { ascending: false });
+
+        if (error) throw error;
+
+        if (!testimonials || testimonials.length === 0) {
+            testimonialContainer.innerHTML = "<p style='color:#64748b;'>No client testimonials published yet.</p>";
+            return;
+        }
+
+        testimonialContainer.innerHTML = ""; 
+        
+        testimonials.forEach(item => {
+            let starIcons = "";
+            for (let i = 0; i < item.rating; i++) {
+                starIcons += `<i class="fa-solid fa-star"></i>`;
+            }
+
+            testimonialContainer.innerHTML += `
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-right quote-icon"></i>
+                    <div class="stars-rating">${starIcons}</div>
+                    <p style="color:#475569; font-size:14.5px; margin-bottom:15px;">"${item.review}"</p>
+                    <strong style="color:var(--primary-color);">${item.client_name}</strong>
+                    ${item.company_name ? `<br><small style="color:#64748b; font-size:12px;">${item.company_name}</small>` : ''}
+                </div>
+            `;
+        });
+    } catch (err) {
+        testimonialContainer.innerHTML = "<p style='color:#ef4444;'>Unable to load client testimonials at this moment.</p>";
+    }
+        }
+        fetchWebTestimonials();
 
         // Appointment Form Router
         document.getElementById('appointmentForm').addEventListener('submit', function(e) {

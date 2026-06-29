@@ -804,9 +804,10 @@
                 posts.forEach(post => {
                     // Fixed: ensures image tags are explicitly rendered when a valid image path exists
                     let imageTag = "";
-                    if (post.image_url && post.image_url.trim() !== "") {
-                        imageTag = `<img src="${post.image_url}" alt="Post Compliance Image" class="feed-image" onerror="this.style.display='none';">`;
-                    }
+                    if (post.image && post.image.trim() !== "") {
+    imageTag = `<img src="${post.image}" alt="Post Compliance Image" class="feed-image" onerror="this.style.display='none';">`;
+}
+
                     
                     feedContainer.innerHTML += `
                         <div class="feed-card">

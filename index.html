@@ -9,6 +9,16 @@
     <meta name="keywords" content="Accounting, Bookkeeping, GST filing Prayagraj, Tally Entry, MIS Reporting, Financial Consultant Prayagraj, Tax Consultant">
     <meta name="author" content="Prime Accounting Solutions">
 
+    <!-- Point 8: Browser Tab Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Point 9: Open Graph Tags for Social Media Sharing (WhatsApp, Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Prime Accounting Solutions | Professional MIS & Audits">
+    <meta property="og:description" content="Focus on your business, we will manage your accounts. Get error-free accounting, monthly MIS updates, and tax compliances.">
+    <meta property="og:image" content="assets/og-share-preview.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -45,7 +55,7 @@
         }
 
         /* ==========================================================================
-           1. TWO-LINE FIXED HEADER & NAVBAR (Bigger Logo + Ordered Links Line)
+           1. TWO-LINE FIXED HEADER & NAVBAR
            ========================================================================== */
         header {
             background-color: var(--primary-color);
@@ -129,7 +139,7 @@
         }
 
         /* ==========================================================================
-           2. WELCOME POPUP MODAL STYLES
+           WELCOME POPUP MODAL STYLES
            ========================================================================== */
         .popup-overlay {
             position: fixed;
@@ -204,13 +214,13 @@
         }
 
         /* ==========================================================================
-           3. HERO SECTION
+           3. HERO SECTION (Point 6: Speed Optimized Background Integration)
            ========================================================================== */
         .hero {
-            background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('assets/hero-bg-compressed.jpg');
             background-size: cover;
             background-position: center;
-            min-height: 60vh;
+            min-height: 65vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -221,12 +231,19 @@
 
         .hero h1 {
             font-size: 3rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
-        .hero h1 span {
+        .hero h1 span.highlight-gold {
             color: var(--gold-color);
+            border: none;
+            animation: none;
+        }
+
+        .hero h1 span.typing-cursor {
             border-right: 3px solid var(--gold-color);
             padding-right: 5px;
             animation: blink 0.75s step-end infinite;
@@ -321,6 +338,83 @@
             color: #475569;
         }
 
+        /* Point 3: Portfolio Layout Configuration */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .portfolio-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+        }
+        .portfolio-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        .portfolio-card h4 {
+            text-align: center;
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        /* Point 2: Client Reviews Design Structure */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold-dark);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .review-card p {
+            font-style: italic;
+            color: #475569;
+            font-size: 15px;
+        }
+        .review-card h5 {
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Point 4: Founder Area Profile */
+        .founder-block {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .founder-photo {
+            flex: 1;
+            min-width: 260px;
+            max-width: 320px;
+        }
+        .founder-photo img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 2px solid var(--gold-color);
+        }
+        .founder-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
         /* Live Feed */
         .feed-section { background-color: #f1f5f9; }
         #liveFeedContainer { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
@@ -343,17 +437,20 @@
         .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #475569; font-size: 14.5px; transition: max-height 0.3s ease-out; }
         .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid #f1f5f9; }
 
-        /* Contact Section */
+        /* Contact Section Grid Configuration */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; }
         .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .contact-info-block i { font-size: 24px; color: var(--gold-dark); background: rgba(229, 193, 88, 0.1); padding: 15px; border-radius: 50%; }
 
-        /* Footer */
+        /* Footer & Social Media Media (Point 5) */
         footer { background-color: var(--primary-color); color: var(--text-light); padding: 50px 5% 20px 5%; text-align: center; border-top: 3px solid var(--gold-dark); }
         .footer-links { display: flex; justify-content: center; gap: 40px; list-style: none; margin: 25px 0; flex-wrap: wrap; }
         .footer-links a { color: var(--text-light); text-decoration: none; }
         .footer-links a:hover { color: var(--gold-color); }
+        .footer-social-icons { margin: 20px 0; display: flex; justify-content: center; gap: 25px; }
+        .footer-social-icons a { color: #ffffff; font-size: 22px; transition: var(--transition); text-decoration: none; }
+        .footer-social-icons a:hover { color: var(--gold-color); transform: translateY(-2px); }
 
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; }
 
@@ -364,6 +461,7 @@
             .logo { font-size: 22px; }
             .logo img { height: 50px; }
             .hero h1 { font-size: 2.1rem; }
+            .founder-block { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -391,6 +489,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#feed">Live Feed</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
@@ -399,18 +498,34 @@
         </nav>
     </header>
 
+    <!-- HERO SECTION WITH RE-ADDED LOGIC AND REQUIRED MAIN TAGLINE -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Expert Financial Management for <br><span id="typing-text"></span></h1>
-            <p>Your premium outsourced corporate accounting department. Professional Bookkeeping, accurate GST Data Prep, Tally entry, and custom executive MIS reporting tailored for small businesses and startups in Prayagraj.</p>
+            <h1>FOCUS ON YOUR BUSINESS, <span class="highlight-gold">WE'LL MANAGE YOUR ACCOUNTS</span></h1>
+            <h2 style="font-size:1.8rem; font-weight:500; margin-bottom:15px; color:#94A3B8;">
+                Expert Financial Management for <span id="typing-text" class="typing-cursor"></span>
+            </h2>
+            <p style="max-width:850px; margin:0 auto 30px auto;">Your premium outsourced corporate accounting department. Professional Bookkeeping, accurate GST Data Prep, Tally entry, and custom executive MIS reporting tailored for small businesses and startups in Prayagraj.</p>
             <a href="#contact" class="cta-btn">Schedule Free Consultation</a>
         </div>
     </section>
 
+    <!-- Point 4: ABOUT SECTION INTEGRATING PROFESSIONAL FOUNDER PHOTO BLOCK -->
     <section class="section-wrapper" id="about">
         <div class="section-title">Why Choose Us?</div>
-        <div style="text-align: center; max-width: 800px; margin: 0 auto; color: #475569; font-size: 16px;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; color: #475569; font-size: 16px;">
             <p>We provide a reliable, highly accurate, and affordable alternative to employing a full-time accountant. By streamlining your bookkeeping routines and ensuring timely statutory compliance, we protect your data confidentiality and let you focus entirely on growing your core business operations.</p>
+        </div>
+
+        <div class="founder-block">
+            <div class="founder-photo">
+                <img src="assets/founder-photo.jpg" alt="Founder Professional Photo">
+            </div>
+            <div class="founder-info">
+                <h3 style="color:var(--primary-color); margin-bottom:15px; font-size:22px;">Meet Our Founder</h3>
+                <p style="color:#475569; margin-bottom:15px;">Welcome to Prime Accounting Solutions. We fill the critical gap between complex numbers and clear business scaling strategies. Our dedicated cloud systems and reporting dashboards make corporate ledger auditing stress-free.</p>
+                <p style="color:#475569;">Our core philosophy ensures you can focus 100% of your operational strength on enterprise expansions while we manage compliance alignment, ledger matching, and custom MIS sheet compilation with zero data leaks.</p>
+            </div>
         </div>
     </section>
 
@@ -427,13 +542,13 @@
                 <h3>End-to-End Bookkeeping</h3>
                 <p>Meticulous data archiving, system recording, ledgers logging, and general accounts maintenance.</p>
             </div>
-            <!-- 2. GST Data Prep (Edited) -->
+            <!-- 2. GST Data Prep -->
             <div class="card">
                 <i class="fa-solid fa-receipt"></i>
                 <h3>GST Data Preparation</h3>
                 <p>Comprehensive compilation of monthly sales/purchase invoices into audit-ready sheets, matching every transaction with purchase registers.</p>
             </div>
-            <!-- 3. Tally, Zoho & Excel (Edited) -->
+            <!-- 3. Tally, Zoho & Excel -->
             <div class="card">
                 <i class="fa-solid fa-calculator"></i>
                 <h3>Tally, Zoho & Excel Entry</h3>
@@ -445,29 +560,69 @@
                 <h3>Executive MIS Reporting</h3>
                 <p>Monthly analytics briefs detailing your operational expenditures, profit parameters, and core business metrics.</p>
             </div>
-            <!-- 5. Bank Reconciliation (New) -->
+            <!-- 5. Bank Reconciliation -->
             <div class="card">
                 <i class="fa-solid fa-building-columns"></i>
                 <h3>Bank Reconciliation (BRS)</h3>
                 <p>Eliminating accounting mismatches by checking bank statements against cash books to track banking charges and uncleared cheques.</p>
             </div>
-            <!-- 6. Inventory Setup (New) -->
+            <!-- 6. Inventory Setup -->
             <div class="card">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 <h3>Inventory Setup & Control</h3>
                 <p>Configuring structured digital stock tracking dashboards, opening valuations, and item-wise categories for flawless stock monitoring.</p>
             </div>
-            <!-- 7. Accounts Payable/Receivable (New) -->
+            <!-- 7. Accounts Payable/Receivable -->
             <div class="card">
                 <i class="fa-solid fa-money-bill-transfer"></i>
                 <h3>Payable & Receivable Mgmt</h3>
                 <p>Comprehensive tracking of your outstanding invoices. We monitor your upcoming pipelines to optimize your enterprise cash flow seamlessly.</p>
             </div>
-            <!-- 8. Customer & Vendor Reconciliation (New) -->
+            <!-- 8. Customer & Vendor Reconciliation -->
             <div class="card">
                 <i class="fa-solid fa-handshake"></i>
                 <h3>Vendor & Client Matching</h3>
                 <p>Conducting systematic monthly ledger reconciliations with your active suppliers and customers to resolve balance disputes instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Point 3: PORTFOLIO SECTION (MIS Reports, Dashboard, Tally Screenshots) -->
+    <section class="section-wrapper" id="portfolio" style="background-color: #ffffff;">
+        <div class="container">
+            <div class="section-title">Our Work Portfolio</div>
+            <div class="section-subtitle">Visual MIS Graphic & Dashboard Previews</div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <img src="assets/portfolio-mis.png" alt="MIS Reports Screenshot Dashboard">
+                    <h4>Executive MIS Financial Dashboard</h4>
+                </div>
+                <div class="portfolio-card">
+                    <img src="assets/portfolio-tally.png" alt="Tally Reports Screenshot Ledger">
+                    <h4>Automated Tally ERP Ledger Insights</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Point 2: CLIENT REVIEWS SECTION (3-5 Testimonials Added) -->
+    <section class="section-wrapper" id="reviews">
+        <div class="container">
+            <div class="section-title">Client Reviews</div>
+            <div class="section-subtitle">Trusted by local traders & corporate enterprises</div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p>"Prime Accounting handled our complex monthly MIS reports seamlessly. Their layout generated crystal-clear executive accounting inputs."</p>
+                    <h5>- Rajesh Kumar, CEO TechCorp</h5>
+                </div>
+                <div class="review-card">
+                    <p>"All pending audit books and ledger balances were sorted out perfectly. Their customers & vendors reconciliation engine is top notch."</p>
+                    <h5>- Anita Desai, Managing Director, StyleMe</h5>
+                </div>
+                <div class="review-card">
+                    <p>"Extremely reliable corporate tax consulting partner. Our transaction errors minimized completely after outsourcing to their desk."</p>
+                    <h5>- Vikram Shah, Founder, Alpha Logistics</h5>
+                </div>
             </div>
         </div>
     </section>
@@ -505,13 +660,13 @@
                 </ul>
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Standard</a>
             </div>
-            <!-- Premium Plan -->
+            <!-- Premium Plan (Point 7: Fixed Venders/Vendors Spelling Mistake) -->
             <div class="card price-card">
                 <h3>Premium Plan</h3>
                 <div class="price">₹8,000+<span>/month</span></div>
                 <ul class="price-features">
                     <li><i class="fa-solid fa-check"></i> Unlimited Financial Entries</li>
-                    <li><i class="fa-solid fa-check"></i> Customers & Venders Reconciliation</li>
+                    <li><i class="fa-solid fa-check"></i> Customers & Vendors Reconciliation</li>
                     <li><i class="fa-solid fa-check"></i> Complex Inventory Tracking</li>
                     <li><i class="fa-solid fa-check"></i> Executive MIS Reporting</li>
                     <li><i class="fa-solid fa-check"></i> GST Data Preparation</li>
@@ -521,22 +676,34 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- FAQ Section (5 Detailed FAQs Added) -->
     <section class="section-wrapper" id="faq">
         <div class="section-title">Frequently Asked Questions</div>
         <div class="faq-container">
             <div class="faq-item">
-                <div class="faq-question">What services do you provide? <span>+</span></div>
+                <div class="faq-question">1. What accounting services do you provide? <span>+</span></div>
                 <div class="faq-answer">We offer comprehensive monthly financial solutions tailored for small businesses, traders, and startups. Our services include end-to-end bookkeeping, routine Tally/Zoho/Excel data entry, bank reconciliation statement (BRS) preparation, customer & vendor account reconciliation, inventory tracking management, and structured monthly management information system (MIS) reporting.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Are you an affordable alternative to a full-time accountant? <span>+</span></div>
+                <div class="faq-question">2. Are you an affordable alternative to a full-time accountant? <span>+</span></div>
                 <div class="faq-answer">Yes, absolutely. Hiring a dedicated full-time accountant often demands a significant salary and infrastructure cost. We act as your outsourced corporate accounting department, delivering identical accuracy, systematic data structure, and timely statutory compliance at a fraction of the cost.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">3. How do you share financial dashboards with clients? <span>+</span></div>
+                <div class="faq-answer">We compile clean, high-resolution visual infographics and analytical sheets directly. They are dispatched via cloud sheets, encrypted mail summaries, or client dashboards so that you can view and monitor financial graphs cleanly on all responsive mobile or desktop screens.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">4. Is my enterprise data secure and kept confidential? <span>+</span></div>
+                <div class="faq-answer">Data privacy is our supreme guideline. All your ledgers, tax preparation files, incoming invoices, and custom business MIS parameters are cataloged safely under strict internal processing protocols with redundant localized structural cloud backups.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">5. Can you clean up backlogged or disordered account registers? <span>+</span></div>
+                <div class="faq-answer">Yes, we specialize in retrospective ledger management. Our team can rebuild data backlogs, spot discrepancies, audit old statements, settle entry errors, and perform deep historical cross-verifications to bring your active books 100% up to date.</div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section (Point 1: Embedded Google Maps Integration Added) -->
     <section class="section-wrapper" id="contact">
         <div class="section-title">Get In Touch With Us</div>
         <div class="contact-grid">
@@ -571,6 +738,14 @@
                         <p style="color:#64748b;">Prayagraj, Uttar Pradesh, India</p>
                     </div>
                 </div>
+
+                <!-- Google Map Embedded Element Integration -->
+                <div style="border-radius: 12px; overflow: hidden; border: 2px solid var(--primary-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.2699742461615!2d81.861226!3d25.454238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI3JzE1LjMiTiA4McKwNTEnNDAuNCJF!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" 
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -579,10 +754,19 @@
         <div class="footer-content">
             <h3 style="font-size:24px; font-weight:600; color:var(--gold-color); margin-bottom:5px;">Prime Accounting Solutions</h3>
             <p style="opacity:0.7; font-size:14px;">Professional Bookkeeping, Tally & GST Management Desk</p>
+            
+            <!-- Point 5: Footer Social Media Icons Grid Added -->
+            <div class="footer-social-icons">
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+
             <ul class="footer-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact Desk</a></li>
@@ -685,7 +869,7 @@
             }
         }
 
-        // WhatsApp Form Integration
+        // WhatsApp Form Integration (Point 7: Fixed "Enquiry Received" Spelling typo)
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('formName').value;
@@ -693,7 +877,7 @@
             const phone = document.getElementById('formPhone').value;
             const msg = document.getElementById('formMessage').value;
             const whatsappNumber = "916394748563"; 
-            const textMessage = `*New Enquiry Recieved* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
+            const textMessage = `*New Enquiry Received* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
             const encodedMessage = encodeURIComponent(textMessage);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');

@@ -50,9 +50,10 @@ body { background: var(--bg-light); color: var(--text-dark); padding-bottom: 60p
 .card h2 { color: var(--gold-dark); font-size: 24px; margin-bottom: 25px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 
 /* Analytics Modern Grid matching corporate specs */
-.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
+.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 30px; }
 .stat-card { background: var(--card-bg); padding: 25px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; border-top: 5px solid var(--gold-dark); text-align: left; position: relative; overflow: hidden; }
 .stat-card.visitors { border-top-color: var(--primary-color); }
+.stat-card.reviews-stat { border-top-color: #f59e0b; }
 .stat-title { color: var(--text-dark); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-number { font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--gold-dark); }
 
@@ -82,9 +83,9 @@ input[type="file"] { display: none; }
 #adminPanel { display: none; }
 #loginBox { display: block; }
 
-/* Modern Post Manager Cards sync with live feed styling */
-.post-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; border-left: 4px solid var(--primary-color); }
-.post-card h3 { font-size: 20px; color: var(--gold-dark); margin: 10px 0; }
+/* Modern Post & Review Manager Cards sync with live feed styling */
+.post-card, .review-panel-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; border-left: 4px solid var(--primary-color); }
+.post-card h3, .review-panel-card h3 { font-size: 20px; color: var(--gold-dark); margin: 10px 0; }
 .post-card img { width: 100%; border-radius: 8px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
 .post-meta-info { font-size: 13px; color: var(--text-dark); margin-top: 15px; background: #f8fafc; padding: 10px 15px; border-radius: 8px; display: inline-block; font-weight: 500; }
 .badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 30px; text-transform: uppercase; margin-right: 5px; }
@@ -92,6 +93,7 @@ input[type="file"] { display: none; }
 .badge-announcement { background: #fee2e2; color: #b91c1c; }
 .badge-draft { background: #f1f5f9; color: #475569; }
 
+.stars-rating { color: #f59e0b; margin-bottom: 10px; font-size: 16px; }
 .edit-btn { background: #facc15; color: #0f172a; padding: 8px 16px; font-size: 13px; }
 .delete-btn { background: #fee2e2; color: #ef4444; padding: 8px 16px; font-size: 13px; }
 .delete-btn:hover { background: #ef4444; color: white; }
@@ -126,6 +128,10 @@ input[type="file"] { display: none; }
             <div class="stat-card">
                 <div class="stat-title">📝 Total Feed Analytics</div>
                 <div class="stat-number" id="totalPostsCount">0</div>
+            </div>
+            <div class="stat-card reviews-stat">
+                <div class="stat-title">⭐ Total Live Reviews</div>
+                <div class="stat-number" id="totalReviewsCount">0</div>
             </div>
         </div>
 
@@ -181,6 +187,12 @@ input[type="file"] { display: none; }
             </div>
             <div id="postsContainer"></div>
         </div>
+
+        <!-- NEW: Client Reviews Management Registry Section -->
+        <div class="card">
+            <h2>⭐ Client Reviews Moderation Desk</h2>
+            <div id="reviewsContainer">Querying Live Feedback Data Blocks...</div>
+        </div>
     </div>
 </div>
 
@@ -231,6 +243,7 @@ function checkAuth() {
         document.getElementById("adminPanel").style.display = "block";
         loadAnalytics();
         window.loadPosts();
+        window.loadReviews();
     } else {
         document.getElementById("loginBox").style.display = "block";
         document.getElementById("adminPanel").style.display = "none";
@@ -241,8 +254,12 @@ async function loadAnalytics() {
     try {
         const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
         if(analytics) document.getElementById("totalVisitors").innerText = analytics.visitor_count;
-        const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
-        document.getElementById("totalPostsCount").innerText = count || 0;
+        
+        const { count: postCount } = await supabase.from('posts').select('*', { count: 'exact', head: true });
+        document.getElementById("totalPostsCount").innerText = postCount || 0;
+
+        const { count: reviewCount } = await supabase.from('reviews').select('*', { count: 'exact', head: true });
+        document.getElementById("totalReviewsCount").innerText = reviewCount || 0;
     } catch (e) { console.error(e); }
 }
 
@@ -335,6 +352,60 @@ window.loadPosts = async function() {
         });
     } catch(err) {
         container.innerHTML = "Registry Null. Create an archive entry above.";
+    }
+}
+
+// --- NEW: Load Reviews Logic ---
+window.loadReviews = async function() {
+    const reviewContainer = document.getElementById("reviewsContainer");
+    reviewContainer.innerHTML = "Querying Live Feedback Data Blocks...";
+
+    try {
+        const { data: reviews, error } = await supabase
+            .from('reviews')
+            .select('*')
+            .order('id', { ascending: false });
+
+        if (error) throw error;
+
+        reviewContainer.innerHTML = "";
+        if(!reviews || reviews.length === 0) { 
+            reviewContainer.innerHTML = "<p style='color:var(--text-dark); opacity:0.6; padding:15px;'>No customer reviews logged inside the database registry yet.</p>"; 
+            return; 
+        }
+
+        reviews.forEach((review) => {
+            const starsHTML = "★".repeat(review.rating || 5) + "☆".repeat(5 - (review.rating || 5));
+            const reviewDate = review.created_at ? new Date(review.created_at).toLocaleString() : "Recently";
+            
+            reviewContainer.innerHTML += `
+                <div class="review-panel-card" style="border-left: 4px solid #f59e0b;">
+                    <div class="stars-rating">${starsHTML}</div>
+                    <h3>👤 ${review.name || "Anonymous Client"}</h3>
+                    <p style="margin-top:5px; color:var(--text-dark); font-size:14px; line-height:1.5;">"${review.message || ""}"</p>
+                    <div><div class="post-meta-info">📅 Submitted: ${reviewDate}</div></div>
+                    <div style="margin-top:15px;">
+                        <button class="delete-btn" onclick="window.deleteReview('${review.id}')">🗑️ Purge Review</button>
+                    </div>
+                </div>
+            `;
+        });
+    } catch(err) {
+        reviewContainer.innerHTML = "<p style='color:#ef4444; padding:15px;'>Failed to load reviews from server repository.</p>";
+    }
+}
+
+// --- NEW: Delete Review Logic ---
+window.deleteReview = async function(id) {
+    if (!confirm("Are you sure you want to permanently purge this client review from the live site registry?")) return;
+    try {
+        const { error } = await supabase.from('reviews').delete().eq('id', id);
+        if (error) throw error;
+        alert("Review data block hard purged successfully! 🗑️");
+        loadAnalytics();
+        window.loadReviews();
+    } catch (err) {
+        alert("Deletion Exception: " + err.message);
     }
 }
 

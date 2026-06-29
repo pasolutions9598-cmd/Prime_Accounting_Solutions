@@ -23,6 +23,7 @@
             --text-light: #f8fafc;       
             --bg-light: #f8fafc;         
             --card-bg: #ffffff;
+            --success-color: #10b981;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -227,7 +228,7 @@
         }
 
         .animated-tagline {
-            font-size: 1.6rem; /* Enhanced Bolder Size */
+            font-size: 1.6rem; 
             font-weight: 800;
             color: var(--gold-color);
             letter-spacing: 2.5px;
@@ -235,7 +236,6 @@
             border-right: 4px solid var(--gold-color);
             white-space: nowrap;
             display: inline-block;
-            /* Slower animation for perfect premium readability */
             animation: typing 6s steps(45) infinite, cursor-blink 0.8s step-end infinite;
             overflow: hidden;
             max-width: 100%;
@@ -244,7 +244,7 @@
 
         @keyframes typing {
             0%, 95%, 100% { width: 0; }
-            40%, 85% { width: 100%; } /* Extended hold duration so clients can easily read */
+            40%, 85% { width: 100%; } 
         }
 
         @keyframes cursor-blink {
@@ -376,6 +376,67 @@
         .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #475569; font-size: 14.5px; transition: max-height 0.3s ease-out; }
         .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid #f1f5f9; }
 
+        /* Review Trust Buttons & Components */
+        .review-summary-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .review-score {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .review-score h4 {
+            font-size: 32px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .review-stars {
+            color: var(--gold-color);
+            font-size: 16px;
+        }
+        .write-review-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14.5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .write-review-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--success-color);
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
         /* Contact Section */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; }
@@ -398,6 +459,7 @@
             .logo img { height: 50px; }
             .hero h1 { font-size: 2.1rem; }
             .animated-tagline { font-size: 1rem; letter-spacing: 1px; border-right-width: 3px; }
+            .review-summary-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -589,25 +651,43 @@
         <div class="section-title">What Our Clients Say</div>
         <div class="section-subtitle">Stories of Growth & Trust</div>
         
+        <!-- Trust Box with 'Write a Review' Action Button -->
+        <div class="review-summary-box">
+            <div class="review-score">
+                <h4>4.9</h4>
+                <div>
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-size: 13px; color: #64748b; margin-top: 2px; text-align: left;">Based on client feedback</p>
+                </div>
+            </div>
+            <!-- Google Review Integration (Replace '#' with your actual Google Business Review link) -->
+            <a href="#" class="write-review-btn" target="_blank">
+                <i class="fab fa-google"></i> Write a Review
+            </a>
+        </div>
+
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left;">
             <!-- Testimonial 1 -->
-            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--gold-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-                <div style="color: var(--gold-color); margin-bottom: 15px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin-bottom: 20px; line-height: 1.6;">"Prime Accounting Solutions handled our complex pending GST filings with ease. Their monthly bookkeeping reports keep us stress-free."</p>
+            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--gold-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border: 1px solid #e2e8f0;">
+                <div style="color: var(--gold-color); margin-bottom: 5px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div><span class="verified-badge"><i class="fas fa-check-circle"></i> Verified Client</span></div>
+                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin: 15px 0; line-height: 1.6;">"Prime Accounting Solutions handled our complex pending GST filings with ease. Their monthly bookkeeping reports keep us stress-free."</p>
                 <h4 style="color: var(--primary-color); font-weight: 600; font-size: 16px; margin-bottom: 2px;">— Rajat Gupta</h4>
                 <span style="font-size: 13px; color: #64748b; font-weight: 500;">Proprietor, Gupta Trading Co.</span>
             </div>
             <!-- Testimonial 2 -->
-            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-                <div style="color: var(--gold-color); margin-bottom: 15px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin-bottom: 20px; line-height: 1.6;">"The best part is their clarity in pricing and zero hidden costs. Absolute professionals when it comes to Income Tax Return processing."</p>
+            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border: 1px solid #e2e8f0;">
+                <div style="color: var(--gold-color); margin-bottom: 5px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div><span class="verified-badge"><i class="fas fa-check-circle"></i> Verified Client</span></div>
+                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin: 15px 0; line-height: 1.6;">"The best part is their clarity in pricing and zero hidden costs. Absolute professionals when it comes to Income Tax Return processing."</p>
                 <h4 style="color: var(--primary-color); font-weight: 600; font-size: 16px; margin-bottom: 2px;">— Mishra & Sons Enterprises</h4>
                 <span style="font-size: 13px; color: #64748b; font-weight: 500;">Manufacturing Unit Owner</span>
             </div>
             <!-- Testimonial 3 -->
-            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--gold-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-                <div style="color: var(--gold-color); margin-bottom: 15px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin-bottom: 20px; line-height: 1.6;">"As a growing firm, managing bills was a mess. Their 3-step digital process simplified our audit prep completely. Highly recommended!"</p>
+            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--gold-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border: 1px solid #e2e8f0;">
+                <div style="color: var(--gold-color); margin-bottom: 5px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div><span class="verified-badge"><i class="fas fa-check-circle"></i> Local Guide</span></div>
+                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin: 15px 0; line-height: 1.6;">"As a growing firm, managing bills was a mess. Their 3-step digital process simplified our audit prep completely. Highly recommended!"</p>
                 <h4 style="color: var(--primary-color); font-weight: 600; font-size: 16px; margin-bottom: 2px;">— Dr. Alok Verma</h4>
                 <span style="font-size: 13px; color: #64748b; font-weight: 500;">Managing Director, Clinik-Care</span>
             </div>
@@ -629,17 +709,17 @@
                 <div class="faq-question">Are you an affordable alternative to a full-time accountant? <span>+</span></div>
                 <div class="faq-answer">Yes, absolutely. Hiring a dedicated full-time accountant often demands a significant salary and infrastructure cost. We act as your outsourced corporate accounting department, delivering identical accuracy, systematic data structure, and timely statutory compliance at a fraction of the cost.</div>
             </div>
-            <!-- Q3 (New) -->
+            <!-- Q3 -->
             <div class="faq-item">
                 <div class="faq-question">How safe and confidential is my financial data with your firm? <span>+</span></div>
                 <div class="faq-answer">Data security is our top priority. We implement strict digital protection rules and privacy protocols. Your raw files, invoices, and accounting dashboards are accessible only to specialized assigned professionals, ensuring complete data confidentiality and zero leak risks.</div>
             </div>
-            <!-- Q4 (New) -->
+            <!-- Q4 -->
             <div class="faq-item">
                 <div class="faq-question">Which accounting software and platforms do you use? <span>+</span></div>
                 <div class="faq-answer">We are fully proficient in all industry-standard software, including Tally Prime, Zoho Books, and advanced custom Microsoft Excel templates. Based on your business choice or current setup, we seamlessly integrate and handle your ledgers natively.</div>
             </div>
-            <!-- Q5 (New) -->
+            <!-- Q5 -->
             <div class="faq-item">
                 <div class="faq-question">How do I share my monthly financial bills or vouchers with you? <span>+</span></div>
                 <div class="faq-answer">It is incredibly simple and 100% digital. You do not need to ship physical paper bundles. You can just scan or capture clear photos of your receipts or bills and share them seamlessly via our official WhatsApp or Email channels at your convenience.</div>

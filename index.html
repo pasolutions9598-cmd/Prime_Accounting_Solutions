@@ -827,9 +827,108 @@
         // Popup initialization logic 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                document.getElementById('welcomePopup').classList.add('show');
+                const popup = document.getElementById('welcomePopup');
+                if(popup) popup.classList.add('show');
             }, 1000);
+            
+            // Page load hote hi database se live reviews automatic fetch honge
+            window.loadLiveReviews();
         });
+
+        document.getElementById('closePopupBtn').addEventListener('click', () => {
+            document.getElementById('welcomePopup').classList.remove('show');
+        });
+
+        // --- DYNAMIC LIVE REVIEWS DISPLAY LOGIC ---
+        window.loadLiveReviews = async function() {
+            // Yeh aapke testimonial container (jahan reviews show hote hain) ko target karega
+            const testimonialContainer = document.getElementById("testimonialContainer") || document.querySelector(".testimonials-grid") || document.querySelector(".swiper-wrapper");
+            if (!testimonialContainer) return;
+
+            try {
+                const { data: reviews, error } = await supabase
+                    .from('reviews')
+                    .select('*')
+                    .order('id', { ascending: false });
+
+                if (error) throw error;
+
+                if (reviews && reviews.length > 0) {
+                    testimonialContainer.innerHTML = ""; // Hardcoded static reviews ko clear karein
+                    
+                    reviews.forEach((review) => {
+                        const starsHTML = "★".repeat(review.rating || 5) + "☆".repeat(5 - (review.rating || 5));
+                        
+                        // Aapke modern framework template design ke anusar card create hoga
+                        testimonialContainer.innerHTML += `
+                            <div class="testimonial-card" style="background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.02); border:1px solid #e2e8f0; margin-bottom: 20px;">
+                                <div class="stars" style="color:#f59e0b; margin-bottom:10px; font-size:16px;">${starsHTML}</div>
+                                <p style="font-style:italic; color:#1c2541; font-size:14px; line-height:1.6;">"${review.message}"</p>
+                                <h4 style="margin-top:15px; color:#d4af37; font-weight:600;">- ${review.name}</h4>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (err) {
+                console.error("Error loading reviews onto website:", err.message);
+            }
+        }
+
+        // --- DIRECT WEBSITE DATABASE REVIEW SUBMIT LOGIC ---
+        document.getElementById('directReviewForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('revName').value.trim();
+            const message = document.getElementById('revMessage').value.trim();
+            const submitBtn = document.getElementById('reviewSubmitBtn');
+
+            // Agar selectedRating variable defined nahi hai, toh fallback default 5 star lega
+            const finalRating = typeof selectedRating !== 'undefined' ? selectedRating : 5;
+
+            if (submitBtn) {
+                submitBtn.innerText = "⏳ Submitting to Website...";
+                submitBtn.disabled = true;
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('reviews')
+                    .insert([{ 
+                        name: name, 
+                        message: message, 
+                        rating: finalRating
+                    }]);
+
+                if (error) throw error;
+
+                alert("Thank you! Your review has been saved directly to the website repository. ⭐");
+                
+                // Fields reset karne ke liye
+                document.getElementById('revName').value = "";
+                document.getElementById('revMessage').value = "";
+                
+                // Form submit hote hi instantly website ke testimonial container ko live update karega
+                window.loadLiveReviews();
+                
+                // Review box widget ko band karne ke liye trigger
+                const formContainer = document.getElementById('formContainer') || document.querySelector('.inner-review-form');
+                const toggleBtn = document.getElementById('toggleBtn');
+                if (formContainer && formContainer.classList.contains('open')) {
+                    formContainer.classList.remove('open');
+                    if(toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
+                }
+
+            } catch (err) {
+                alert("Server Sync Error: " + err.message);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.innerText = "Submit Review on Website";
+                    submitBtn.disabled = false;
+                }
+            }
+        });
+</script>
+
 
         document.getElementById('closePopupBtn').addEventListener('click', () => {
             document.getElementById('welcomePopup').classList.remove('show');

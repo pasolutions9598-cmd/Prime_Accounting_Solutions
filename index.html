@@ -928,13 +928,100 @@
             }
         });
 </script>
+        // --- DYNAMIC LIVE REVIEWS DISPLAY LOGIC ---
+        window.loadLiveReviews = async function() {
+            const testimonialContainer = document.getElementById("testimonialContainer") || document.querySelector(".testimonials-grid") || document.querySelector(".swiper-wrapper");
+            if (!testimonialContainer) return;
 
+            try {
+                const { data: reviews, error } = await supabase
+                    .from('reviews')
+                    .select('*')
+                    .order('id', { ascending: false });
 
-        document.getElementById('closePopupBtn').addEventListener('click', () => {
-            document.getElementById('welcomePopup').classList.remove('show');
-        });
+                if (error) throw error;
 
-        // FAQ interactive framework toggle logic
+                if (reviews && reviews.length > 0) {
+                    testimonialContainer.innerHTML = ""; 
+                    
+                    reviews.forEach((review) => {
+                        const starsHTML = "★".repeat(review.rating || 5) + "☆".repeat(5 - (review.rating || 5));
+                        
+                        testimonialContainer.innerHTML += `
+                            <div class="testimonial-card" style="background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.02); border:1px solid #e2e8f0; margin-bottom: 20px;">
+                                <div class="stars" style="color:#f59e0b; margin-bottom:10px; font-size:16px;">${starsHTML}</div>
+                                <p style="font-style:italic; color:#1c2541; font-size:14px; line-height:1.6;">"${review.message}"</p>
+                                <h4 style="margin-top:15px; color:#d4af37; font-weight:600;">- ${review.name}</h4>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (err) {
+                console.error("Error loading reviews:", err.message);
+            }
+        };
+
+        // --- DIRECT WEBSITE DATABASE REVIEW SUBMIT LOGIC ---
+        const reviewForm = document.getElementById('directReviewForm');
+        if(reviewForm) {
+            reviewForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('revName').value.trim();
+                const message = document.getElementById('revMessage').value.trim();
+                const submitBtn = document.getElementById('reviewSubmitBtn');
+                const finalRating = typeof selectedRating !== 'undefined' ? selectedRating : 5;
+
+                if (submitBtn) {
+                    submitBtn.innerText = "⏳ Submitting to Website...";
+                    submitBtn.disabled = true;
+                }
+
+                try {
+                    const { error } = await supabase
+                        .from('reviews')
+                        .insert([{ 
+                            name: name, 
+                            message: message, 
+                            rating: finalRating
+                        }]);
+
+                    if (error) throw error;
+
+                    alert("Thank you! Your review has been saved directly to the website repository. ⭐");
+                    
+                    document.getElementById('revName').value = "";
+                    document.getElementById('revMessage').value = "";
+                    
+                    window.loadLiveReviews();
+                    
+                    const formContainer = document.getElementById('formContainer') || document.querySelector('.inner-review-form');
+                    const toggleBtn = document.getElementById('toggleBtn');
+                    if (formContainer && formContainer.classList.contains('open')) {
+                        formContainer.classList.remove('open');
+                        if(toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
+                    }
+
+                } catch (err) {
+                    alert("Server Sync Error: " + err.message);
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.innerText = "Submit Review on Website";
+                        submitBtn.disabled = false;
+                    }
+                }
+            });
+        }
+
+        // --- OTHER SYSTEM ROUTERS (FAQ, Typing, Live Feed, Leads) ---
+        const closePopupBtn = document.getElementById('closePopupBtn');
+        if (closePopupBtn) {
+            closePopupBtn.addEventListener('click', () => {
+                const popup = document.getElementById('welcomePopup');
+                if(popup) popup.classList.remove('show');
+            });
+        }
+
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
@@ -947,171 +1034,74 @@
             });
         });
 
-        // Typing automation strings
         const phrases = ["Traders & Startups", "Retailers & MSMEs", "Small Businesses"];
         let count = 0; let index = 0; let currentText = ""; let letter = "";
-
         (function type() {
             if (count === phrases.length) { count = 0; }
             currentText = phrases[count];
             letter = currentText.slice(0, ++index);
-
             const typingElement = document.getElementById("typing-text");
-            if (typingElement) {
-                typingElement.textContent = letter;
-            }
-            if (letter.length === currentText.length) {
-                setTimeout(() => {
-                    index = 0; count++;
-                    setTimeout(type, 200);
-                }, 2000);
-            } else {
-                setTimeout(type, 100);
-            }
+            if (typingElement) { typingElement.textContent = letter; }
+            if (letter.length === currentText.length) { index = 0; count++; setTimeout(type, 2000); }
+            else { setTimeout(type, 100); }
         }());
 
-        // Live Feed Image Fix
         async function fetchLiveFeed() {
             const feedContainer = document.getElementById("liveFeedContainer");
+            if (!feedContainer) return;
             try {
-                const { data: posts, error } = await supabase
-                    .from('posts')
-                    .select('*')
-                    .eq('status', 'published')
-                    .order('id', { ascending: false });
-
+                const { data: posts, error } = await supabase.from('posts').select('*').eq('status', 'published').order('id', { ascending: false });
                 if (error) throw error;
-
-                if (!posts || posts.length === 0) {
-                    feedContainer.innerHTML = "<p style='color:#64748b;'>No recent announcements logged in the broadcast registry.</p>";
-                    return;
-                }
-
+                if (!posts || posts.length === 0) { feedContainer.innerHTML = "<p>No recent announcements logged in the broadcast registry.</p>"; return; }
                 feedContainer.innerHTML = "";
                 posts.forEach(post => {
                     let imageTag = "";
-                    if (post.image && post.image.trim() !== "") {
-                        imageTag = `<img src="${post.image}" alt="Post Compliance Image" class="feed-image" onerror="this.style.display='none';">`;
-                    }
-
+                    if (post.image && post.image.trim() !== "") { imageTag = `<img src="${post.image}" style="width:100%; max-height:200px; object-fit:cover; border-radius:6px; margin-bottom:10px;">`; }
                     feedContainer.innerHTML += `
-                        <div class="feed-card">
+                        <div class="feed-card" style="background:#fff; padding:15px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); margin-bottom:15px;">
                             ${imageTag}
-                            <span class="feed-badge badge-${(post.category || 'general').toLowerCase().replace(' ', '')}">${post.category || 'General'}</span>
-                            <h4 style="color:var(--primary-color); margin-bottom:10px; font-size:17px;">${post.title}</h4>
-                            <p style="font-size:14px; color:#475569; white-space:pre-wrap;">${post.content}</p>
-                        </div>
-                    `;
+                            <h4 style="color:#1c2541; font-weight:600; margin-bottom:5px;">${post.title}</h4>
+                            <p style="color:#555; font-size:13px; line-height:1.5;">${post.content}</p>
+                        </div>`;
                 });
-            } catch (err) {
-                feedContainer.innerHTML = "<p style='color:#ef4444;'>Unable to load real-time compliance feed repository.</p>";
-            }
+            } catch (err) { feedContainer.innerHTML = "<p style='color:red;'>Unable to load real-time compliance feed repository.</p>"; }
         }
         fetchLiveFeed();
 
-        // Appointment Form Router
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('aptName').value;
-            const phone = document.getElementById('aptPhone').value;
-            const date = document.getElementById('aptDate').value;
-            const service = document.getElementById('aptService').value;
-            
-            const messageString = `*New Booking Request Received*\n\n*Client Name:* ${name}\n*Contact Line:* ${phone}\n*Date Window:* ${date}\n*Target Module:* ${service}`;
-            window.open(`https://wa.me/916394748563?text=${encodeURIComponent(messageString)}`, '_blank');
-        });
-
-        // Contact Box Dispatch Integration Router
-        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('formName').value;
-            const email = document.getElementById('formEmail').value;
-            const phone = document.getElementById('formPhone').value;
-            const msg = document.getElementById('formMessage').value;
-            
-            const textMessage = `*New Enquiry Received* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
-            window.open(`https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`, '_blank');
-        });
-
-        // --- REVIEW SECTION LOGIC ---
-        let selectedRating = 5;
-        const toggleBtn = document.getElementById('toggleReviewBtn');
-        const formContainer = document.getElementById('reviewFormContainer');
-        const stars = document.querySelectorAll('#starRatingInput i');
-
-        // Accordion Toggle for Review Box
-        toggleBtn.addEventListener('click', () => {
-            if (formContainer.classList.contains('open')) {
-                formContainer.classList.remove('open');
-                toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
-            } else {
-                formContainer.classList.add('open');
-                toggleBtn.innerHTML = `<i class="fa-solid fa-xmark"></i> Close Review Form`;
-            }
-        });
-
-        // Star Rating Selection
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                selectedRating = parseInt(star.getAttribute('data-rating'));
-                stars.forEach(s => {
-                    if (parseInt(s.getAttribute('data-rating')) <= selectedRating) {
-                        s.classList.add('active');
-                    } else {
-                        s.classList.remove('active');
-                    }
-                });
+        const aptForm = document.getElementById('appointmentForm');
+        if (aptForm) {
+            aptForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('aptName').value;
+                const phone = document.getElementById('aptPhone').value;
+                const date = document.getElementById('aptDate').value;
+                const service = document.getElementById('aptService').value;
+                const messageString = `*New Booking Request Received*\n\n*Client Name:* ${name}\n*Contact Line:* ${phone}\n*Date Window:* ${date}\n*Target Module:* ${service}`;
+                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(messageString)}`, '_blank');
             });
-        });
-
-        // Direct WhatsApp Review Dispatch
-        // Direct Website Database Dashboard me Review Submit karne ka Logic
-document.getElementById('directReviewForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('revName').value.trim();
-    const message = document.getElementById('revMessage').value.trim();
-    const submitBtn = document.getElementById('reviewSubmitBtn');
-
-    if (submitBtn) {
-        submitBtn.innerText = "⏳ Submitting to Website...";
-        submitBtn.disabled = true;
-    }
-
-    try {
-        // Direct Supabase table 'reviews' me insert pipeline
-        const { error } = await supabase
-            .from('reviews')
-            .insert([{ 
-                name: name, 
-                message: message, 
-                rating: selectedRating // Yeh line 938 waale selectedRating variable ko automatic use karega
-            }]);
-
-        if (error) throw error;
-
-        alert("Thank you! Your review has been saved directly to the website repository. ⭐");
-        
-        // Fields reset karne ke liye
-        document.getElementById('revName').value = "";
-        document.getElementById('revMessage').value = "";
-        
-        // Review box widget ko band karne ke liye trigger
-        if (formContainer.classList.contains('open')) {
-            formContainer.classList.remove('open');
-            toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
         }
 
-    } catch (err) {
-        alert("Server Sync Error: " + err.message);
-    } finally {
-        if (submitBtn) {
-            submitBtn.innerText = "Submit Review on Website";
-            submitBtn.disabled = false;
+        const whatsappForm = document.getElementById('whatsappForm');
+        if (whatsappForm) {
+            whatsappForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('formName').value;
+                const email = document.getElementById('formEmail').value;
+                const phone = document.getElementById('formPhone').value;
+                const msg = document.getElementById('formMessage').value;
+                const textMessage = `*New Enquiry Received*\n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
+                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`, '_blank');
+            });
         }
-    }
-});
 
+        // --- AUTOMATIC REVIEWS TRIGGER ON BOOT ---
+        if (typeof window.loadLiveReviews === 'function') { 
+            window.loadLiveReviews(); 
+        }
+</script>
+
+
+        
     </script>
 </body>
 </html>

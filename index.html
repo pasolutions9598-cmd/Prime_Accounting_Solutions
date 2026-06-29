@@ -638,12 +638,25 @@
             </div>
         </div>
 
-        <div class="review-widget">
-            <h4 style="font-size: 20px; color: var(--gold-color); margin-bottom: 10px;">Satisfied With Our Corporate Support?</h4>
-            <p style="font-size: 14.5px; margin-bottom: 20px; color: #f8fafc;">Click below to document your direct audit experience or check live client parameters on our digital business network map.</p>
-            <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK_HERE/review" target="_blank" class="cta-btn" style="background: white; color: var(--primary-color);">
-                <i class="fa-brands fa-google" style="margin-right: 8px;"></i> Write A Live Google Review
-            </a>
+        <div class="review-box-container" id="reviewFormContainer">
+                <form id="directReviewForm" class="inner-review-form">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <input type="text" id="revName" placeholder="Your Name / Business Name" required>
+                        <div>
+                            <label style="display:block; font-size:13px; color:var(--gold-color); margin-bottom:5px;">Select Rating:</label>
+                            <div class="star-rating-input" id="starRatingInput">
+                                <i class="fa-solid fa-star active" data-rating="1"></i>
+                                <i class="fa-solid fa-star active" data-rating="2"></i>
+                                <i class="fa-solid fa-star active" data-rating="3"></i>
+                                <i class="fa-solid fa-star active" data-rating="4"></i>
+                                <i class="fa-solid fa-star active" data-rating="5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea id="revMessage" rows="3" placeholder="Write your review or feedback about our accounting desk here..." required></textarea>
+                    <button type="submit" class="cta-btn" style="width:100%; border-radius:8px;">Submit Review via WhatsApp</button>
+                </form>
+            </div>
         </div>
     </section>
 

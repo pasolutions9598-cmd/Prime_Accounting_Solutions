@@ -706,27 +706,24 @@
             </div>
 
             <!-- Embedded Direct Review Form Container -->
-            <div class="review-box-container" id="reviewFormContainer">
-                <form id="directReviewForm" class="inner-review-form">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <input type="text" id="revName" placeholder="Your Name / Business Name" required>
-                        <div>
-                            <label style="display:block; font-size:13px; color:var(--gold-color); margin-bottom:5px;">Select Rating:</label>
-                            <div class="star-rating-input" id="starRatingInput">
-                                <i class="fa-solid fa-star active" data-rating="1"></i>
-                                <i class="fa-solid fa-star active" data-rating="2"></i>
-                                <i class="fa-solid fa-star active" data-rating="3"></i>
-                                <i class="fa-solid fa-star active" data-rating="4"></i>
-                                <i class="fa-solid fa-star active" data-rating="5"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <textarea id="revMessage" rows="3" placeholder="Write your review or feedback about our accounting desk here..." required></textarea>
-                    <button type="submit" class="cta-btn" style="width:100%; border-radius:8px;">Submit Review via WhatsApp</button>
-                </form>
+            <form id="directReviewForm" class="inner-review-form">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+        <input type="text" id="revName" placeholder="Your Name / Business Name" required>
+        <div>
+            <label style="display:block; font-size:13px; color:var(--gold-color); margin-bottom:5px;">Select Rating:</label>
+            <div class="star-rating-input" id="starRatingInput">
+                <i class="fa-solid fa-star active" data-rating="1"></i>
+                <i class="fa-solid fa-star active" data-rating="2"></i>
+                <i class="fa-solid fa-star active" data-rating="3"></i>
+                <i class="fa-solid fa-star active" data-rating="4"></i>
+                <i class="fa-solid fa-star active" data-rating="5"></i>
             </div>
         </div>
-    </section>
+    </div>
+    <textarea id="revMessage" rows="3" placeholder="Write your review or feedback about our accounting desk here..." required></textarea>
+    <button type="submit" id="reviewSubmitBtn" class="cta-btn" style="width:100%; border-radius:8px;">Submit Review on Website</button>
+</form>
+
 
     <section class="section-wrapper" id="faq">
         <div class="section-title">Frequently Asked Questions</div>
@@ -969,15 +966,53 @@
         });
 
         // Direct WhatsApp Review Dispatch
-        document.getElementById('directReviewForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('revName').value;
-            const message = document.getElementById('revMessage').value;
-            let starString = "⭐".repeat(selectedRating);
-            
-            const waMessage = `*New Client Review Logs*\n\n*Enterprise/Name:* ${name}\n*Rating Score:* ${starString}\n*Feedback Note:* ${message}`;
-            window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');
-        });
+        // Direct Website Database Dashboard me Review Submit karne ka Logic
+document.getElementById('directReviewForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('revName').value.trim();
+    const message = document.getElementById('revMessage').value.trim();
+    const submitBtn = document.getElementById('reviewSubmitBtn');
+
+    if (submitBtn) {
+        submitBtn.innerText = "⏳ Submitting to Website...";
+        submitBtn.disabled = true;
+    }
+
+    try {
+        // Direct Supabase table 'reviews' me insert pipeline
+        const { error } = await supabase
+            .from('reviews')
+            .insert([{ 
+                name: name, 
+                message: message, 
+                rating: selectedRating // Yeh line 938 waale selectedRating variable ko automatic use karega
+            }]);
+
+        if (error) throw error;
+
+        alert("Thank you! Your review has been saved directly to the website repository. ⭐");
+        
+        // Fields reset karne ke liye
+        document.getElementById('revName').value = "";
+        document.getElementById('revMessage').value = "";
+        
+        // Review box widget ko band karne ke liye trigger
+        if (formContainer.classList.contains('open')) {
+            formContainer.classList.remove('open');
+            toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
+        }
+
+    } catch (err) {
+        alert("Server Sync Error: " + err.message);
+    } finally {
+        if (submitBtn) {
+            submitBtn.innerText = "Submit Review on Website";
+            submitBtn.disabled = false;
+        }
+    }
+});
+
     </script>
 </body>
 </html>

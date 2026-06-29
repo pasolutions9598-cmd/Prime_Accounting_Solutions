@@ -9,20 +9,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root { 
-    --primary-color: #0b132b;    /* Royal/Dark Blue */
+    --primary-color: #0b132b;    
     --secondary-color: #1c2541;  
-    --gold-color: #e5c158;       /* Golden */
+    --gold-color: #e5c158;       
     --gold-dark: #d4af37;        
-    --text-dark: #1c2541;        /* Saare body text ko Royal Blue tone dene ke liye */
+    --text-dark: #1c2541;        
     --text-light: #f8fafc;       
-    --bg-light: #f8fafc;         /* Wapas light background kiya gaya */
-    --card-bg: #ffffff;          /* Wapas white cards kiya gaya */
+    --bg-light: #f8fafc;         
+    --card-bg: #ffffff;          
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', 'Inter', sans-serif; }
 body { background: var(--bg-light); color: var(--text-dark); padding-bottom: 60px; }
 
-/* Premium Header matching the Main Site Profile */
 .header { 
     background-color: var(--primary-color); 
     padding: 25px 20px; 
@@ -36,27 +35,24 @@ body { background: var(--bg-light); color: var(--text-dark); padding-bottom: 60p
 }
 .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
 
-/* Premium Cards style sync */
 .card { 
     background: var(--card-bg); 
     border-radius: 12px; 
     padding: 35px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
     border: 1px solid #e2e8f0; 
-    border-top: 4px solid var(--gold-dark); /* Golden touch applied to headings */
+    border-top: 4px solid var(--gold-dark); 
     margin-bottom: 30px; 
     transition: var(--transition); 
 }
 .card h2 { color: var(--gold-dark); font-size: 24px; margin-bottom: 25px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 
-/* Analytics Modern Grid matching corporate specs */
 .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
 .stat-card { background: var(--card-bg); padding: 25px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; border-top: 5px solid var(--gold-dark); text-align: left; position: relative; overflow: hidden; }
 .stat-card.visitors { border-top-color: var(--primary-color); }
 .stat-title { color: var(--text-dark); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-number { font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--gold-dark); }
 
-/* Inputs and Forms styled as requested (Royal Blue Text) */
 .row { display: flex; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
 .row > div { flex: 1; min-width: 200px; }
 label { font-size: 14px; font-weight: 600; color: var(--text-dark); display: block; margin-top: 15px; }
@@ -64,7 +60,6 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 input:focus, textarea:focus, select:focus { border-color: var(--gold-dark); outline: none; box-shadow: 0 0 0 4px rgba(229, 193, 88, 0.2); }
 textarea { min-height: 150px; resize: vertical; }
 
-/* Premium Buttons updated gracefully */
 button { padding: 14px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 button:hover { transform: translateY(-2px); }
 .login-btn { background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: var(--gold-color); width: 100%; margin-top: 15px; padding: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
@@ -74,7 +69,6 @@ button:hover { transform: translateY(-2px); }
 .draft-btn { background: var(--secondary-color); color: white; }
 .logout-btn { background: #ef4444; color: white; float: right; padding: 10px 20px; font-size: 14px; box-shadow: 0 4px 12px rgba(239,68,68,0.15); border-radius: 30px; }
 
-/* Custom File Upload Button */
 .custom-file-btn { display: block; background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; color: var(--text-dark); font-weight: 500; margin: 8px 0 15px; transition: var(--transition); }
 .custom-file-btn:hover { background: #f1f5f9; border-color: var(--gold-dark); }
 input[type="file"] { display: none; }
@@ -82,7 +76,6 @@ input[type="file"] { display: none; }
 #adminPanel { display: none; }
 #loginBox { display: block; }
 
-/* Modern Post Manager Cards sync with live feed styling */
 .post-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; border-left: 4px solid var(--primary-color); }
 .post-card h3 { font-size: 20px; color: var(--gold-dark); margin: 10px 0; }
 .post-card img { width: 100%; border-radius: 8px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
@@ -187,176 +180,4 @@ input[type="file"] { display: none; }
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
-const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
-const ADMIN_PASSWORD = "aqibsolutions@9598";
-
-document.getElementById("imageFile").addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if(!file) return;
-    document.getElementById("uploadBtnLabel").innerText = "✅ Attached: " + file.name;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-        const img = document.getElementById("previewImage");
-        img.src = ev.target.result;
-        img.style.display = "block";
-    };
-    reader.readAsDataURL(file);
-});
-
-window.loginAdmin = function() {
-    const emailInput = document.getElementById("email").value.trim();
-    const passwordInput = document.getElementById("password").value.trim();
-    
-    if(emailInput === ADMIN_EMAIL && passwordInput === ADMIN_PASSWORD) {
-        localStorage.setItem("prime_admin_logged", "yes");
-        checkAuth();
-    } else {
-        alert("Security Override: Invalid Credentials.");
-    }
-}
-
-window.logoutAdmin = function() {
-    localStorage.removeItem("prime_admin_logged");
-    checkAuth();
-}
-
-function checkAuth() {
-    const status = localStorage.getItem("prime_admin_logged");
-    if(status === "yes") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        loadAnalytics();
-        window.loadPosts();
-    } else {
-        document.getElementById("loginBox").style.display = "block";
-        document.getElementById("adminPanel").style.display = "none";
-    }
-}
-
-async function loadAnalytics() {
-    try {
-        const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
-        if(analytics) document.getElementById("totalVisitors").innerText = analytics.visitor_count;
-        const { count } = await supabase.from('posts').select('*', { count: 'exact', head: true });
-        document.getElementById("totalPostsCount").innerText = count || 0;
-    } catch (e) { console.error(e); }
-}
-
-window.saveContent = async function(status) {
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const type = document.getElementById("postType").value;
-    const category = document.getElementById("postCategory").value;
-    const file = document.getElementById("imageFile").files[0];
-    const submitBtn = document.getElementById("submitBtn");
-
-    if(!title || !content) {
-        alert("Error: Core parameters missing.");
-        return;
-    }
-
-    submitBtn.innerText = "⏳ Synchronizing Server...";
-    submitBtn.disabled = true;
-    let imageUrl = "";
-
-    try {
-        if(file) {
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('post-images')
-                .upload(fileName, file);
-                
-            if (uploadError) throw uploadError;
-
-            const { data: urlData } = supabase.storage.from('post-images').getPublicUrl(fileName);
-            imageUrl = urlData.publicUrl;
-        }
-
-        const { error: dbError } = await supabase.from('posts').insert([{ title, content, type, category, status, image: imageUrl }]);
-        if (dbError) throw dbError;
-
-        alert(status === 'published' ? "Broadcast Synchronized Live! 🚀" : "Saved to Repository Drafts! 📁");
-        document.getElementById("postTitle").value = "";
-        document.getElementById("postContent").value = "";
-        document.getElementById("imageFile").value = "";
-        document.getElementById("previewImage").style.display = "none";
-        document.getElementById("uploadBtnLabel").innerText = "📁 Click to Upload Graphic Attachment";
-        loadAnalytics();
-        window.loadPosts();
-    } catch (error) {
-        alert("Transmission Exception: " + error.message);
-    } finally {
-        submitBtn.innerText = "Deploy Live Broadcast";
-        submitBtn.disabled = false;
-    }
-}
-
-window.loadPosts = async function() {
-    const container = document.getElementById("postsContainer");
-    const filterCat = document.getElementById("filterCategory").value;
-    container.innerHTML = "Querying Database Registry...";
-
-    try {
-        let query = supabase.from('posts').select('*');
-        if(filterCat !== "All") { query = query.eq('category', filterCat); }
-        const { data: posts, error } = await query.order('id', { ascending: false });
-        if (error) throw error;
-
-        container.innerHTML = "";
-        if(!posts || posts.length === 0) { container.innerHTML = "<p style='color:var(--text-dark); opacity:0.6; padding:15px;'>Registry clear. No matching data blocks.</p>"; return; }
-
-        posts.forEach((post) => {
-            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
-            const isAnnounce = post.type === 'announcement';
-            const isDraft = post.status === 'draft';
-            container.innerHTML += `
-                <div class="post-card" style="${isAnnounce ? 'border-left: 5px solid var(--gold-dark);' : ''} ${isDraft ? 'opacity:0.8; border-left:5px solid #64748b;' : ''}">
-                    <div>
-                        ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
-                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 LOGGED BLOCK'}</span>
-                        <span class="badge" style="background:rgba(229,193,88,0.15); color:var(--text-dark);">🏷️ ${post.category}</span>
-                    </div>
-                    <h3>${post.title || ""}</h3>
-                    ${post.image ? `<img src="${post.image}">` : ""}
-                    <p style="margin-top:10px; color:var(--text-dark); font-size:14px; line-height:1.6; white-space: pre-wrap;">${post.content || ""}</p>
-                    <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
-                    <div style="margin-top:20px;">
-                        <button class="edit-btn" onclick="window.editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Modify</button>
-                        ${isDraft ? `<button class="publish-btn" style="padding:8px 16px; font-size:13px;" onclick="window.publishDraft('${post.id}')">🚀 Force Live</button>` : ''}
-                        <button class="delete-btn" onclick="window.deletePost('${post.id}')">🗑️ Purge</button>
-                    </div>
-                </div>
-            `;
-        });
-    } catch(err) {
-        container.innerHTML = "Registry Null. Create an archive entry above.";
-    }
-}
-
-window.publishDraft = async function(id) {
-    await supabase.from('posts').update({ status: 'published' }).eq('id', id);
-    window.loadPosts();
-}
-window.deletePost = async function(id) {
-    if (!confirm("Confirm hard purge of this data block?")) return;
-    await supabase.from('posts').delete().eq('id', id);
-    loadAnalytics(); window.loadPosts();
-}
-window.editPost = async function(id, currentTitle, currentContent) {
-    const newTitle = prompt("Modify Specification Headline:", unescape(currentTitle));
-    if (!newTitle) return;
-    const newContent = prompt("Modify Brief Data Description:", unescape(currentContent));
-    if (!newContent) return;
-    await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
-    window.loadPosts();
-}
-
-checkAuth();
-</script>
-</body>
-</html>
+const SUPABASE_URL =

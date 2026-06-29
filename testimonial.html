@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prime Accounting Solutions - Testimonial Admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+:root{
+
+--primary:#0b132b;
+--secondary:#1c2541;
+--gold:#d4af37;
+--bg:#f8fafc;
+--card:#fff;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:var(--bg);
+
+}
+
+.header{
+
+background:var(--primary);
+padding:25px;
+text-align:center;
+font-size:30px;
+font-weight:700;
+color:var(--gold);
+
+}
+
+.container{
+
+width:95%;
+max-width:1100px;
+margin:auto;
+padding:30px;
+
+}
+
+.card{
+
+background:white;
+padding:30px;
+border-radius:12px;
+margin-bottom:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+color:var(--gold);
+margin-bottom:20px;
+
+}
+
+input,textarea,select{
+
+width:100%;
+padding:14px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+
+}
+
+textarea{
+
+height:140px;
+resize:vertical;
+
+}
+
+button{
+
+padding:14px 22px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+
+}
+
+.publish{
+
+background:var(--gold);
+color:#000;
+
+}
+
+.draft{
+
+background:#1c2541;
+color:white;
+
+}
+
+.logout{
+
+background:#ef4444;
+color:white;
+float:right;
+
+}
+
+.analytics{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+
+}
+
+.box{
+
+background:white;
+padding:25px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.box h3{
+
+font-size:16px;
+margin-bottom:10px;
+
+}
+
+.box h1{
+
+font-size:38px;
+color:var(--gold);
+
+}
+
+#adminPanel{
+
+display:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+Prime Accounting Solutions
+<br>
+Testimonial Dashboard
+
+</div>
+
+<div class="container">
+
+<div class="card" id="loginBox">
+
+<h2>Admin Login</h2>
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button
+class="publish"
+onclick="loginAdmin()">
+
+Login
+
+</button>
+
+</div>
+
+<div id="adminPanel">
+
+<div class="card">
+
+<button
+class="logout"
+onclick="logoutAdmin()">
+
+Logout
+
+</button>
+
+<h2>
+
+Welcome Admin
+
+</h2>
+
+</div>
+
+<div class="analytics">
+
+<div class="box">
+
+<h3>Total Testimonials</h3>
+
+<h1 id="totalTestimonials">
+
+0
+
+</h1>
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>⭐ Add Client Testimonial</h2>
+
+<label>Client Name</label>
+<input type="text" id="clientName" placeholder="Enter Client Name">
+
+<label>Company Name</label>
+<input type="text" id="companyName" placeholder="Enter Company Name">
+
+<label>Rating</label>
+<select id="rating">
+    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+    <option value="4">⭐⭐⭐⭐ (4)</option>
+    <option value="3">⭐⭐⭐ (3)</option>
+    <option value="2">⭐⭐ (2)</option>
+    <option value="1">⭐ (1)</option>
+</select>
+
+<label>Review</label>
+<textarea id="review"
+placeholder="Write client testimonial here..."></textarea>
+
+<div style="display:flex;gap:15px;flex-wrap:wrap;margin-top:15px;">
+
+<button
+class="publish"
+onclick="saveTestimonial('published')">
+
+🚀 Publish
+
+</button>
+
+<button
+class="draft"
+onclick="saveTestimonial('draft')">
+
+📁 Save Draft
+
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📋 Manage Testimonials</h2>
+
+<div id="testimonialContainer">
+
+Loading testimonials...
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<script type="module">
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
+const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const ADMIN_EMAIL="p.a.solutions9598@gmail.com";
+const ADMIN_PASSWORD="aqibsolutions@9598";
+
+function checkAuth(){
+
+const status=localStorage.getItem("testimonial_admin");
+
+if(status==="yes"){
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("adminPanel").style.display="block";
+
+loadAnalytics();
+loadTestimonials();
+
+}else{
+
+document.getElementById("loginBox").style.display="block";
+document.getElementById("adminPanel").style.display="none";
+
+}
+
+}
+
+window.loginAdmin=function(){
+
+const email=document.getElementById("email").value.trim();
+
+const password=document.getElementById("password").value.trim();
+
+if(email===ADMIN_EMAIL && password===ADMIN_PASSWORD){
+
+localStorage.setItem("testimonial_admin","yes");
+
+checkAuth();
+
+}else{
+
+alert("Invalid Login");
+
+}
+
+}
+
+window.logoutAdmin=function(){
+
+localStorage.removeItem("testimonial_admin");
+
+checkAuth();
+
+}
+
+async function loadAnalytics(){
+
+const {count}=await supabase
+.from("testimonials")
+.select("*",{count:"exact",head:true});
+
+document.getElementById("totalTestimonials").innerText=count||0;
+
+}
+
+window.saveTestimonial=async function(status){
+
+const client_name=document.getElementById("clientName").value.trim();
+
+const company_name=document.getElementById("companyName").value.trim();
+
+const rating=parseInt(document.getElementById("rating").value);
+
+const review=document.getElementById("review").value.trim();
+
+if(!client_name || !review){
+
+alert("Please fill all required fields.");
+
+return;
+
+}
+
+const {error}=await supabase
+
+.from("testimonials")
+
+.insert([{
+
+client_name,
+
+company_name,
+
+rating,
+
+review,
+
+status
+
+}]);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert("Testimonial Saved Successfully.");
+
+document.getElementById("clientName").value="";
+document.getElementById("companyName").value="";
+document.getElementById("review").value="";
+document.getElementById("rating").value="5";
+
+loadAnalytics();
+loadTestimonials();
+
+}
+
+checkAuth();
+async function loadTestimonials() {
+
+const container = document.getElementById("testimonialContainer");
+
+container.innerHTML = "Loading...";
+
+const { data, error } = await supabase
+.from("testimonials")
+.select("*")
+.order("id", { ascending: false });
+
+if (error) {
+container.innerHTML = error.message;
+return;
+}
+
+if (!data || data.length == 0) {
+container.innerHTML = "No testimonials found.";
+return;
+}
+
+container.innerHTML = "";
+
+data.forEach(item => {
+
+let stars = "";
+
+for (let i = 0; i < item.rating; i++) {
+stars += "⭐";
+}
+
+container.innerHTML += `
+
+<div style="padding:20px;border:1px solid #ddd;border-radius:10px;margin-bottom:20px;">
+
+<h3>${item.client_name}</h3>
+
+<p style="color:#777;">
+${item.company_name || ""}
+</p>
+
+<p style="font-size:20px;">
+${stars}
+</p>
+
+<p style="margin:15px 0;">
+${item.review}
+</p>
+
+<p>
+<b>Status :</b> ${item.status}
+</p>
+
+<div style="margin-top:15px;display:flex;gap:10px;flex-wrap:wrap;">
+
+<button
+onclick="editTestimonial(${item.id})"
+class="publish">
+
+✏ Edit
+
+</button>
+
+<button
+onclick="deleteTestimonial(${item.id})"
+style="background:red;color:white;">
+
+Delete
+
+</button>
+
+${
+item.status=="draft"
+?
+
+`<button
+onclick="publishDraft(${item.id})"
+class="draft">
+
+Publish
+
+</button>`
+
+:
+
+""
+
+}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+window.deleteTestimonial = async function(id){
+
+if(!confirm("Delete testimonial?")) return;
+
+await supabase
+
+.from("testimonials")
+
+.delete()
+
+.eq("id",id);
+
+loadAnalytics();
+
+loadTestimonials();
+
+}
+
+window.publishDraft = async function(id){
+
+await supabase
+
+.from("testimonials")
+
+.update({
+
+status:"published"
+
+})
+
+.eq("id",id);
+
+loadTestimonials();
+
+}
+
+window.editTestimonial = async function(id){
+
+const {data}=await supabase
+
+.from("testimonials")
+
+.select("*")
+
+.eq("id",id)
+
+.single();
+
+const name=prompt("Client Name",data.client_name);
+
+if(name==null) return;
+
+const company=prompt("Company Name",data.company_name);
+
+const review=prompt("Review",data.review);
+
+const rating=prompt("Rating (1-5)",data.rating);
+
+await supabase
+
+.from("testimonials")
+
+.update({
+
+client_name:name,
+
+company_name:company,
+
+review:review,
+
+rating:parseInt(rating)
+
+})
+
+.eq("id",id);
+
+loadTestimonials();
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -15,14 +15,14 @@
 
     <style>
         :root {
-            --primary-color: #0b132b;    /* Royal/Dark Blue */
+            --primary-color: #0b132b;    
             --secondary-color: #1c2541;  
-            --gold-color: #e5c158;       /* Golden */
+            --gold-color: #e5c158;       
             --gold-dark: #d4af37;        
-            --text-dark: #1c2541;        /* Badla gaya: Saare body text ko Royal Blue tone dene ke liye */
+            --text-dark: #1e293b;        
             --text-light: #f8fafc;       
-            --bg-light: #f8fafc;         /* Wapas light background kiya gaya */
-            --card-bg: #ffffff;          /* Wapas white cards kiya gaya */
+            --bg-light: #f8fafc;         
+            --card-bg: #ffffff;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -180,7 +180,7 @@
         }
 
         .popup-content p {
-            color: var(--text-dark); /* Royal Blue */
+            color: #475569;
             font-size: 15px;
             margin-bottom: 25px;
         }
@@ -204,7 +204,7 @@
         }
 
         /* ==========================================================================
-           3. HERO SECTION
+           3. HERO SECTION & TAGLINE ANIMATION
            ========================================================================== */
         .hero {
             background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
@@ -230,6 +230,36 @@
             border-right: 3px solid var(--gold-color);
             padding-right: 5px;
             animation: blink 0.75s step-end infinite;
+        }
+
+        .tagline-animation-container {
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .animated-tagline {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-right: 3px solid var(--gold-color);
+            white-space: nowrap;
+            display: inline-block;
+            animation: typing 4.5s steps(40) infinite, cursor-blink 0.75s step-end infinite;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        @keyframes typing {
+            0%, 90%, 100% { width: 0; }
+            30%, 80% { width: 100%; }
+        }
+
+        @keyframes cursor-blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--gold-color); }
         }
 
         @keyframes blink {
@@ -268,14 +298,14 @@
             text-align: center;
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--gold-dark); /* Badla gaya: Headings ko golden karne ke liye */
+            color: var(--primary-color);
             margin-bottom: 10px;
         }
 
         .section-subtitle {
             text-align: center;
             font-size: 16px;
-            color: var(--text-dark); /* Royal Blue */
+            color: var(--gold-dark);
             font-weight: 600;
             margin-bottom: 40px;
             text-transform: uppercase;
@@ -294,13 +324,13 @@
             border-radius: 12px;
             padding: 35px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border-top: 4px solid var(--gold-dark); /* Badla gaya: Borders ko golden touch diya */
+            border-top: 4px solid var(--primary-color);
             transition: var(--transition);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            border-top-color: var(--primary-color);
+            border-top-color: var(--gold-dark);
             box-shadow: 0 15px 35px rgba(11, 19, 43, 0.08);
         }
 
@@ -313,45 +343,41 @@
         .card h3 {
             font-size: 19px;
             margin-bottom: 12px;
-            color: var(--gold-dark); /* Badla gaya: Card headings golden */
+            color: var(--primary-color);
         }
 
         .card p {
             font-size: 14.5px;
-            color: var(--text-dark); /* Royal Blue */
+            color: #475569;
         }
 
         /* Live Feed */
         .feed-section { background-color: #f1f5f9; }
         #liveFeedContainer { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .feed-card { background: white; padding: 25px; border-radius: 12px; border-left: 4px solid var(--gold-dark); color: var(--text-dark); }
+        .feed-card { background: white; padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary-color); }
         .feed-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 700; border-radius: 20px; margin-bottom: 10px; }
         .badge-general { background: #e0f2fe; color: #0369a1; }
         .badge-gst { background: #dcfce7; color: #15803d; }
         .badge-tax { background: #fee2e2; color: #b91c1c; }
 
         /* Pricing Card */
-        .price-card h3 { color: var(--gold-dark) !important; } /* Plan titles golden */
-        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--text-dark); margin: 20px 0; }
+        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 20px 0; }
         .price-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: left; }
-        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; color: var(--text-dark); }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; color: #475569; }
         .price-features li i { color: var(--gold-dark); margin-right: 10px; }
 
         /* FAQ Section */
         .faq-container { max-width: 850px; margin: 0 auto; }
         .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
-        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-question:hover { color: var(--gold-dark); }
-        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: var(--text-dark); font-size: 14.5px; transition: max-height 0.3s ease-out; }
+        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #475569; font-size: 14.5px; transition: max-height 0.3s ease-out; }
         .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid #f1f5f9; }
 
         /* Contact Section */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; color: var(--text-dark); }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; }
         .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .contact-info-block i { font-size: 24px; color: var(--gold-dark); background: rgba(229, 193, 88, 0.1); padding: 15px; border-radius: 50%; }
-        .contact-info-block h4 { color: var(--gold-dark); } /* Info headings golden */
-        .contact-info-block p { color: var(--text-dark); }
 
         /* Footer */
         footer { background-color: var(--primary-color); color: var(--text-light); padding: 50px 5% 20px 5%; text-align: center; border-top: 3px solid var(--gold-dark); }
@@ -368,6 +394,7 @@
             .logo { font-size: 22px; }
             .logo img { height: 50px; }
             .hero h1 { font-size: 2.1rem; }
+            .animated-tagline { font-size: 0.85rem; letter-spacing: 1px; }
         }
     </style>
 </head>
@@ -405,6 +432,9 @@
 
     <section class="hero">
         <div class="hero-content">
+            <div class="tagline-animation-container">
+                <span class="animated-tagline">FOCUS ON YOUR BUSINESS, WE'LL MANAGE YOUR ACCOUNTS</span>
+            </div>
             <h1>Expert Financial Management for <br><span id="typing-text"></span></h1>
             <p>Your premium outsourced corporate accounting department. Professional Bookkeeping, accurate GST Data Prep, Tally entry, and custom executive MIS reporting tailored for small businesses and startups in Prayagraj.</p>
             <a href="#contact" class="cta-btn">Schedule Free Consultation</a>
@@ -413,7 +443,7 @@
 
     <section class="section-wrapper" id="about">
         <div class="section-title">Why Choose Us?</div>
-        <div style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-dark); font-size: 16px;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto; color: #475569; font-size: 16px;">
             <p>We provide a reliable, highly accurate, and affordable alternative to employing a full-time accountant. By streamlining your bookkeeping routines and ensuring timely statutory compliance, we protect your data confidentiality and let you focus entirely on growing your core business operations.</p>
         </div>
     </section>
@@ -421,8 +451,7 @@
     <!-- ======================== SERVICES SECTION (8 CARDS) ======================== -->
     <section class="section-wrapper" id="services">
         <div class="section-title">Our Premium Financial Services</div>
-        <div class="section-subtitle">One time services</div>
-        <div class="section-subtitle">charges will be based on your data.</div>
+        <div class="section-subtitle">One time services / Charges will be based on your data.</div>
         
         <div class="cards-grid">
             <!-- 1. Bookkeeping -->
@@ -476,13 +505,40 @@
         </div>
     </section>
 
+    <!-- ======================== NEW: PROCESS SEAMLESS WORKFLOW SECTION ======================== -->
+    <section class="process-section" style="padding: 80px 5%; background: #f8fafc; text-align: center; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+        <div class="section-title">Our Seamless Workflow</div>
+        <div class="section-subtitle">3 Simple Steps to Financial Compliance</div>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+            <!-- Step 1 -->
+            <div style="flex: 1; min-width: 280px; background: #fff; padding: 35px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border-top: 4px solid var(--primary-color);">
+                <div style="width: 50px; height: 50px; background: var(--primary-color); color: var(--gold-color); font-weight: 700; font-size: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 20px;">1</div>
+                <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 12px; font-weight: 600;">Share Raw Documents</h3>
+                <p style="color: #475569; font-size: 14px;">Simply scan or take photos of your receipts, invoices, and bank statements, then share them via WhatsApp or Email.</p>
+            </div>
+            <!-- Step 2 -->
+            <div style="flex: 1; min-width: 280px; background: #fff; padding: 35px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border-top: 4px solid var(--gold-dark);">
+                <div style="width: 50px; height: 50px; background: var(--gold-dark); color: var(--primary-color); font-weight: 700; font-size: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 20px;">2</div>
+                <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 12px; font-weight: 600;">Expert Processing</h3>
+                <p style="color: #475569; font-size: 14px;">Our specialized accountants process your data into advanced tools, ensuring flawless ledger maintenance and error-free tax structures.</p>
+            </div>
+            <!-- Step 3 -->
+            <div style="flex: 1; min-width: 280px; background: #fff; padding: 35px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border-top: 4px solid var(--primary-color);">
+                <div style="width: 50px; height: 50px; background: var(--primary-color); color: var(--gold-color); font-weight: 700; font-size: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 20px;">3</div>
+                <h3 style="color: var(--primary-color); font-size: 18px; margin-bottom: 12px; font-weight: 600;">Relax & Track Growth</h3>
+                <p style="color: #475569; font-size: 14px;">Receive clean, audit-ready financial sheets, streamlined filing slips, and timely MIS insights to maximize business deductions.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- ======================== LIVE FEED SECTION ======================== -->
     <section class="feed-section section-wrapper" id="feed">
         <div class="section-title">Live Tax & Compliance Feed</div>
         <div id="liveFeedContainer">Loading real-time updates registry...</div>
     </section>
 
-    <!-- ======================== UPDATED PRICING PLANS SECTION ======================== -->
+    <!-- ======================== PRICING PLANS SECTION ======================== -->
     <section class="section-wrapper" id="pricing">
         <div class="section-title">Transparent Monthly Pricing Plans</div>
         <div class="cards-grid">
@@ -498,7 +554,7 @@
                 <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Basic</a>
             </div>
             <!-- Standard Plan -->
-            <div class="card price-card">
+            <div class="card price-card" style="border-top-color: var(--gold-dark);">
                 <h3>Standard Plan</h3>
                 <div class="price">₹5,000<span>/month</span></div>
                 <ul class="price-features">
@@ -525,33 +581,47 @@
         </div>
     </section>
 
-    <!-- ======================== FAQ SECTION (ENGLISH) ======================== -->
+    <!-- ======================== NEW: CLIENT TESTIMONIALS SECTION ======================== -->
+    <section class="testimonials-section" style="padding: 80px 5%; background: #ffffff; text-align: center; border-top: 1px solid #e2e8f0;">
+        <div class="section-title">What Our Clients Say</div>
+        <div class="section-subtitle">Stories of Growth & Trust</div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left;">
+            <!-- Testimonial 1 -->
+            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--gold-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+                <div style="color: var(--gold-color); margin-bottom: 15px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin-bottom: 20px; line-height: 1.6;">"Prime Accounting Solutions handled our complex pending GST filings with ease. Their monthly bookkeeping reports keep us stress-free."</p>
+                <h4 style="color: var(--primary-color); font-weight: 600; font-size: 16px; margin-bottom: 2px;">— Rajat Gupta</h4>
+                <span style="font-size: 13px; color: #64748b; font-weight: 500;">Proprietor, Gupta Trading Co.</span>
+            </div>
+            <!-- Testimonial 2 -->
+            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+                <div style="color: var(--gold-color); margin-bottom: 15px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin-bottom: 20px; line-height: 1.6;">"The best part is their clarity in pricing and zero hidden costs. Absolute professionals when it comes to Income Tax Return processing."</p>
+                <h4 style="color: var(--primary-color); font-weight: 600; font-size: 16px; margin-bottom: 2px;">— Mishra & Sons Enterprises</h4>
+                <span style="font-size: 13px; color: #64748b; font-weight: 500;">Manufacturing Unit Owner</span>
+            </div>
+            <!-- Testimonial 3 -->
+            <div style="background: #f8fafc; padding: 30px; border-radius: 12px; border-top: 4px solid var(--gold-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.01); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+                <div style="color: var(--gold-color); margin-bottom: 15px; font-size: 14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p style="color: #475569; font-style: italic; font-size: 14.5px; margin-bottom: 20px; line-height: 1.6;">"As a growing firm, managing bills was a mess. Their 3-step digital process simplified our audit prep completely. Highly recommended!"</p>
+                <h4 style="color: var(--primary-color); font-weight: 600; font-size: 16px; margin-bottom: 2px;">— Dr. Alok Verma</h4>
+                <span style="font-size: 13px; color: #64748b; font-weight: 500;">Managing Director, Clinik-Care</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
     <section class="section-wrapper" id="faq">
         <div class="section-title">Frequently Asked Questions</div>
         <div class="faq-container">
             <div class="faq-item">
-                <div class="faq-question">How secure is my financial data? <span>+</span></div>
-                <div class="faq-answer">Data security is our top priority. We operate under a strict "Confidentiality First" policy. Your financial records are fully encrypted and accessible only by authorized personnel. We never share your business details with any third party.</div>
+                <div class="faq-question">What services do you provide? <span>+</span></div>
+                <div class="faq-answer">We offer comprehensive monthly financial solutions tailored for small businesses, traders, and startups. Our services include end-to-end bookkeeping, routine Tally/Zoho/Excel data entry, bank reconciliation statement (BRS) preparation, customer & vendor account reconciliation, inventory tracking management, and structured monthly management information system (MIS) reporting.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">What level of accounting expertise do you offer? <span>+</span></div>
-                <div class="faq-answer">We maintain corporate-grade accounting standards. Our team is highly proficient in Tally Prime, Zoho Books, and Advanced Excel. Moving beyond simple data entry, we deliver structured financial insights and MIS reports to help you make informed business decisions.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Do you only handle GST filing or complete bookkeeping? <span>+</span></div>
-                <div class="faq-answer">We are your end-to-end accounting partner. While GST data prep is part of our flow, our core focus is on daily bookkeeping, bank reconciliation (BRS), vendor/customer ledger management, and inventory control to keep your books completely audit-ready.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">My business is small, do I really need professional accounting? <span>+</span></div>
-                <div class="faq-answer">Absolutely. Regardless of scale, tracking your "Financial Health" is vital for real growth. Professional bookkeeping helps you manage cash flow efficiently, avoid costly tax penalties, and keep strong financial statements ready for bank loans or scaling.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Do I need to host an accountant at my office premises? <span>+</span></div>
-                <div class="faq-answer">Not at all. We operate on a modern, remote, digital-first model. Your books are managed seamlessly via cloud platforms or secure software environments. All you need to do is share your financial data documents through our secure digital channels.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">What is your pricing model? <span>+</span></div>
-                <div class="faq-answer">Our pricing structure is completely transparent and predictable. We have designed flat monthly packages (Basic, Standard, and Premium) based on data volume, ensuring you never face unexpected billing surges or hidden costs.</div>
+                <div class="faq-question">Are you an affordable alternative to a full-time accountant? <span>+</span></div>
+                <div class="faq-answer">Yes, absolutely. Hiring a dedicated full-time accountant often demands a significant salary and infrastructure cost. We act as your outsourced corporate accounting department, delivering identical accuracy, systematic data structure, and timely statutory compliance at a fraction of the cost.</div>
             </div>
         </div>
     </section>
@@ -573,22 +643,22 @@
                 <div class="contact-info-block">
                     <i class="fa-solid fa-phone"></i>
                     <div>
-                        <h4>Call/WhatsApp Communication</h4>
-                        <p>+91 6394748563</p>
+                        <h4 style="color:var(--primary-color);">Call/WhatsApp Communication</h4>
+                        <p style="color:#64748b;">+91 6394748563</p>
                     </div>
                 </div>
                 <div class="contact-info-block">
                     <i class="fa-solid fa-envelope"></i>
                     <div>
-                        <h4>Corporate Email Desk</h4>
-                        <p>p.a.solutions9598@gmail.com</p>
+                        <h4 style="color:var(--primary-color);">Corporate Email Desk</h4>
+                        <p style="color:#64748b;">p.a.solutions9598@gmail.com</p>
                     </div>
                 </div>
                 <div class="contact-info-block">
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
-                        <h4>Service Location Coordinates</h4>
-                        <p>Atala, Prayagraj, Uttar Pradesh, India</p>
+                        <h4 style="color:var(--primary-color);">Service Location Coordinates</h4>
+                        <p style="color:#64748b;">Prayagraj, Uttar Pradesh, India</p>
                     </div>
                 </div>
             </div>
@@ -695,8 +765,8 @@
                     feedContainer.innerHTML += `
                         <div class="feed-card ${isAnnounce ? 'announcement' : ''}">
                             <span class="feed-badge badge-${(post.category || 'general').toLowerCase().replace(' ', '')}">${post.category || 'General'}</span>
-                            <h4 style="color:var(--gold-dark); margin-bottom:10px; font-size:17px;">${post.title}</h4>
-                            <p style="font-size:14px; color:var(--text-dark); white-space:pre-wrap;">${post.content}</p>
+                            <h4 style="color:var(--primary-color); margin-bottom:10px; font-size:17px;">${post.title}</h4>
+                            <p style="font-size:14px; color:#475569; white-space:pre-wrap;">${post.content}</p>
                         </div>
                     `;
                 });

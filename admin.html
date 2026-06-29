@@ -107,7 +107,7 @@ input[type="file"] { display: none; }
     <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto; padding: 40px 35px;">
         <h2 style="font-size: 26px; justify-content: center; margin-bottom: 10px;">Admin Access</h2>
         <p style="text-align: center; color: var(--text-dark); font-size: 14px; margin-bottom: 30px; font-weight: 500;">Secure Management Terminal</p>
-        <form id="loginForm" onsubmit="event.preventDefault(); window.loginAdmin();">
+        <form id="loginForm">
             <input type="email" id="email" placeholder="Corporate Email Address" required>
             <input type="password" id="password" placeholder="Secure Password" required>
             <button type="submit" class="login-btn">Sign In To Dashboard</button>
@@ -116,7 +116,7 @@ input[type="file"] { display: none; }
 
     <div id="adminPanel">
         <div class="card" style="padding: 20px 30px; overflow: hidden; margin-bottom: 30px; border-left: 5px solid var(--gold-dark);">
-            <button class="logout-btn" onclick="window.logoutAdmin()">Exit Session</button>
+            <button class="logout-btn" id="logoutBtn">Exit Session</button>
             <span style="font-weight: 600; color: var(--text-dark); line-height: 45px; font-size: 18px;">👤 Terminal Secure: Administrator</span>
         </div>
 
@@ -157,7 +157,7 @@ input[type="file"] { display: none; }
             <label>Review Description / Message (Copied from WhatsApp)</label>
             <textarea id="manualReviewMessage" placeholder="Paste the exact client statement or text block here..."></textarea>
             
-            <button class="publish-btn" style="background: linear-gradient(90deg, #f59e0b, #d4af37); color: #fff;" onclick="window.deployManualReview()" id="reviewPublishBtn">Deploy Review to Live Site</button>
+            <button class="publish-btn" style="background: linear-gradient(90deg, #f59e0b, #d4af37); color: #fff;" id="reviewPublishBtn">Deploy Review to Live Site</button>
         </div>
 
         <div class="card">
@@ -193,15 +193,15 @@ input[type="file"] { display: none; }
             <label>Content Description / Brief</label>
             <textarea id="postContent" placeholder="Write comprehensive update specifications here..."></textarea>
 
-            <button class="publish-btn" onclick="window.saveContent('published')" id="submitBtn">Deploy Live Broadcast</button>
-            <button class="draft-btn" onclick="window.saveContent('draft')">Store to Drafts</button>
+            <button class="publish-btn" id="submitBtn">Deploy Live Broadcast</button>
+            <button class="draft-btn" id="draftBtn">Store to Drafts</button>
         </div>
 
         <div class="card">
             <h2>🗄️ Stream Management Registry</h2>
             <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <label style="margin-top:0; color:var(--text-dark);">Filter Stream Logs:</label>
-                <select id="filterCategory" onchange="window.loadPosts()" style="width:auto; margin:0; padding:10px 20px; border-radius:10px;">
+                <select id="filterCategory" style="width:auto; margin:0; padding:10px 20px; border-radius:10px;">
                     <option value="All">All Categories</option>
                     <option value="General">General</option>
                     <option value="GST">GST Updates</option>
@@ -230,6 +230,25 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
 
+// Login Submit Controller Fixed
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById("email").value.trim();
+    const passwordInput = document.getElementById("password").value.trim();
+    
+    if(emailInput === ADMIN_EMAIL && passwordInput === ADMIN_PASSWORD) {
+        localStorage.setItem("prime_admin_logged", "yes");
+        checkAuth();
+    } else {
+        alert("Security Override: Invalid Credentials.");
+    }
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("prime_admin_logged");
+    checkAuth();
+});
+
 document.getElementById("imageFile").addEventListener("change", (e) => {
     const file = e.target.files[0];
     if(!file) return;
@@ -242,23 +261,6 @@ document.getElementById("imageFile").addEventListener("change", (e) => {
     };
     reader.readAsDataURL(file);
 });
-
-window.loginAdmin = function() {
-    const emailInput = document.getElementById("email").value.trim();
-    const passwordInput = document.getElementById("password").value.trim();
-    
-    if(emailInput === ADMIN_EMAIL && passwordInput === ADMIN_PASSWORD) {
-        localStorage.setItem("prime_admin_logged", "yes");
-        checkAuth();
-    } else {
-        alert("Security Override: Invalid Credentials.");
-    }
-}
-
-window.logoutAdmin = function() {
-    localStorage.removeItem("prime_admin_logged");
-    checkAuth();
-}
 
 function checkAuth() {
     const status = localStorage.getItem("prime_admin_logged");
@@ -287,7 +289,7 @@ async function loadAnalytics() {
     } catch (e) { console.error(e); }
 }
 
-window.saveContent = async function(status) {
+async function saveContent(status) {
     const title = document.getElementById("postTitle").value;
     const content = document.getElementById("postContent").value;
     const type = document.getElementById("postType").value;
@@ -337,6 +339,10 @@ window.saveContent = async function(status) {
     }
 }
 
+document.getElementById("submitBtn").addEventListener("click", () => saveContent('published'));
+document.getElementById("draftBtn").addEventListener("click", () => saveContent('draft'));
+document.getElementById("filterCategory").addEventListener("change", () => window.loadPosts());
+
 window.loadPosts = async function() {
     const container = document.getElementById("postsContainer");
     const filterCat = document.getElementById("filterCategory").value;
@@ -367,5 +373,4 @@ window.loadPosts = async function() {
                     <p style="margin-top:10px; color:var(--text-dark); font-size:14px; line-height:1.6; white-space: pre-wrap;">${post.content || ""}</p>
                     <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
                     <div style="margin-top:20px;">
-                        <button class="edit-btn" onclick="window.editPost('${post.id}', '${escape(post.title)}', '${escape(post.content)}')">✏️ Modify</button>
-                        ${isDraft ? `<button class="publish-btn" style="padding:8px 16px; font-size:13px;" onclick="window.publishDraft('${post.id}')">🚀 Force Live</button>` 
+                        <button class="edit-btn" data-id="${post.id}" data-title="${escape(post.title)}" data-content="${escape(

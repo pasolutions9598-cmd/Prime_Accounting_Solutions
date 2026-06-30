@@ -25,9 +25,9 @@ label { font-size: 14px; font-weight: 600; color: #475569; display: block; margi
 input[type="text"], input[type="email"], input[type="password"], textarea, select { width: 100%; padding: 14px; margin: 8px 0 15px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; background: #fff; color: var(--dark); }
 input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(0,45,114,0.06); }
 textarea { min-height: 150px; resize: vertical; }
-button { padding: 14px 24px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 15px; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+button { padding: 12px 20px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-right: 5px; }
 button:hover { transform: translateY(-1px); }
-.login-btn { background: var(--primary); color: white; width: 100%; margin-top: 15px; padding: 16px; }
+.login-btn { background: var(--primary); color: white; width: 100%; margin-top: 15px; padding: 16px; font-size: 15px; }
 .publish-btn { background: var(--secondary); color: white; }
 .draft-btn { background: #64748b; color: white; }
 .logout-btn { background: #ef4444; color: white; float: right; padding: 10px 20px; font-size: 14px; }
@@ -35,16 +35,18 @@ button:hover { transform: translateY(-1px); }
 input[type="file"] { display: none; }
 #adminPanel { display: none; }
 #loginBox { display: block; }
-.post-card { background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15 rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; }
+.post-card { background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; }
 .post-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; color: var(--dark); margin: 10px 0; }
 .post-card img { width: 100%; border-radius: 12px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
 .post-meta-info { font-size: 13px; color: #64748b; margin-top: 15px; background: #f8fafc; padding: 10px 15px; border-radius: 8px; display: inline-block; }
 .badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 30px; text-transform: uppercase; margin-right: 5px; }
 .badge-news { background: #e0f2fe; color: #0369a1; }
 .badge-announcement { background: #fef3c7; color: #d97706; }
-.badge-draft { background: #f1f5f9; color: #475569; }
-.edit-btn { background: #facc15; color: #0f172a; padding: 8px 16px; font-size: 13px; }
-.delete-btn { background: #fee2e2; color: #ef4444; padding: 8px 16px; font-size: 13px; }
+.badge-draft { background: #cbd5e1; color: #334155; }
+.edit-btn { background: #facc15; color: #0f172a; }
+.delete-btn { background: #fee2e2; color: #ef4444; }
+.delete-btn:hover { background: #ef4444; color: white; }
+.force-live-btn { background: #dcfce7; color: #15803d; }
 </style>
 </head>
 <body>
@@ -106,7 +108,7 @@ input[type="file"] { display: none; }
             <label>Featured Infographic Media</label>
             <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Upload Attachment</label>
             <input type="file" id="imageFile" accept="image/*">
-            <img id="previewImage" style="display:none;">
+            <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:contain; border-radius:12px; margin-bottom:20px; background:#f8fafc; border:1px solid #e2e8f0;">
             
             <label>Content Description / Brief</label>
             <textarea id="postContent" placeholder="Write comprehensive update specifications here..."></textarea>
@@ -117,7 +119,7 @@ input[type="file"] { display: none; }
 
         <div class="card">
             <h2>🗄️ Stream Management Registry</h2>
-            <select id="filterCategory" onchange="window.loadPosts()" style="width:auto;">
+            <select id="filterCategory" onchange="window.loadPosts()" style="width:auto; margin-bottom: 20px;">
                 <option value="All">All Categories</option>
                 <option value="General">General</option>
                 <option value="GST">GST Updates</option>
@@ -208,7 +210,7 @@ window.saveContent = async function(status) {
             imageUrl = supabase.storage.from('post-images').getPublicUrl(fileName).data.publicUrl;
         }
         await supabase.from('posts').insert([{ title, content, type, category, status, image: imageUrl }]);
-        alert("Done!");
+        alert(status === 'published' ? "Broadcast Synchronized Live! 🚀" : "Saved to Repository Drafts! 📁");
         location.reload();
     } catch (error) { alert(error.message); }
 }
@@ -218,7 +220,6 @@ window.loadPosts = async function() {
     const filterCat = document.getElementById("filterCategory").value;
     container.innerHTML = "Querying Database Registry...";
     try {
-        // BYPASS TRICK: Directly request specific columns to ignore database design flaws
         let query = supabase.from('posts').select('id, title, content, type, category, status, image, created_at');
         if(filterCat !== "All") { query = query.eq('category', filterCat); }
         const { data: posts, error } = await query.order('created_at', { ascending: false });
@@ -227,14 +228,28 @@ window.loadPosts = async function() {
         container.innerHTML = "";
         if(!posts || posts.length === 0) { container.innerHTML = "<p>No posts found.</p>"; return; }
         posts.forEach((post) => {
+            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
             const isAnnounce = post.type === 'announcement';
             const isDraft = post.status === 'draft';
+            
+            // Safe JSON strings conversion for edit click handler
+            const safeTitle = encodeURIComponent(post.title || "");
+            const safeContent = encodeURIComponent(post.content || "");
+
             container.innerHTML += `
-                <div class="post-card" style="${isAnnounce ? 'border-left:5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.5;' : ''}">
+                <div class="post-card" style="${isAnnounce ? 'border-left:5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.75; border-left:5px solid #64748b;' : ''}">
+                    <div>
+                        ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
+                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 LOGGED BLOCK'}</span>
+                        <span class="badge" style="background:#e2f0d9; color:#385723;">🏷️ ${post.category}</span>
+                    </div>
                     <h3>${post.title || ""}</h3>
                     ${post.image ? `<img src="${post.image}">` : ""}
-                    <p style="white-space: pre-wrap;">${post.content || ""}</p>
-                    <div style="margin-top:15px;">
+                    <p style="white-space: pre-wrap; margin-top:10px; color:#475569; font-size:14px;">${post.content || ""}</p>
+                    <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
+                    <div style="margin-top:20px;">
+                        <button class="edit-btn" onclick="window.editPost('${post.id}', '${safeTitle}', '${safeContent}')">✏️ Modify</button>
+                        ${isDraft ? `<button class="force-live-btn" onclick="window.publishDraft('${post.id}')">🚀 Force Live</button>` : ''}
                         <button class="delete-btn" onclick="window.deletePost('${post.id}')">🗑️ Purge</button>
                     </div>
                 </div>`;
@@ -242,11 +257,44 @@ window.loadPosts = async function() {
     } catch(err) { container.innerHTML = "Error loading data."; console.error(err); }
 }
 
-window.deletePost = async function(id) {
-    if (!confirm("Delete this post?")) return;
-    await supabase.from('posts').delete().eq('id', id);
+window.publishDraft = async function(id) {
+    const { error } = await supabase.from('posts').update({ status: 'published' }).eq('id', id);
+    if(error) alert(error.message);
     window.loadPosts();
 }
+
+window.deletePost = async function(id) {
+    if (!confirm("Confirm hard purge of this data block?")) return;
+    const { error } = await supabase.from('posts').delete().eq('id', id);
+    if(error) alert(error.message);
+    loadAnalytics(); 
+    window.loadPosts();
+}
+
+window.editPost = async function(id, encTitle, encContent) {
+    const currentTitle = decodeURIComponent(encTitle);
+    const currentContent = decodeURIComponent(encContent);
+    
+    const newTitle = prompt("Modify Specification Headline:", currentTitle);
+    if (newTitle === null) return; // User canceled
+    
+    const newContent = prompt("Modify Brief Data Description:", currentContent);
+    if (newContent === null) return; // User canceled
+    
+    if(!newTitle.trim() || !newContent.trim()) {
+        alert("Parameters cannot be left empty.");
+        return;
+    }
+
+    const { error } = await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
+    if(error) {
+        alert("Update Failed: " + error.message);
+    } else {
+        alert("Post updated successfully!");
+        window.loadPosts();
+    }
+}
+
 checkAuth();
 </script>
 </body>

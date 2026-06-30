@@ -45,7 +45,7 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.7;
-            padding-top: 90px; 
+            padding-top: 175px; /* Increased padding to give breathing room for the new 2-line header */
             -webkit-font-smoothing: antialiased;
         }
 
@@ -76,7 +76,7 @@
             letter-spacing: 2px;
         }
 
-        /* Ultra-Sleek Single Row Corporate Navbar */
+        /* Ultra-Sleek 2-Line Centered Corporate Navbar */
         header {
             background-color: rgba(15, 23, 42, 0.96);
             backdrop-filter: blur(12px);
@@ -86,7 +86,7 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 18px 0;
+            padding: 20px 0 15px 0;
             transition: var(--transition);
         }
 
@@ -94,38 +94,40 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            flex-direction: row; 
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column; /* Stack logo and links into 2 lines */
+            align-items: center;    /* Center align horizontally */
+            justify-content: center; /* Center align vertically */
+            gap: 18px;              /* Perfect spacing between logo line and nav links line */
             padding: 0 5%;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 18px;
             text-decoration: none;
             color: #ffffff;
-            font-weight: 600;
-            font-size: 20px; 
-            letter-spacing: -0.3px;
+            font-weight: 700;       /* Bolder corporate weight */
+            font-size: 32px;        /* Prominent Big 4 corporate font size */
+            letter-spacing: -0.8px;
         }
 
         .logo img {
-            height: 42px; 
+            height: 65px;           /* Enhanced logo size */
             width: auto;
             object-fit: contain;
-            filter: brightness(1) invert(0);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 32px; 
+            justify-content: center; /* Center the links on the second line */
+            gap: 36px; 
             list-style: none;
             margin: 0;
-            padding-top: 0;
-            border-top: none;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.06); /* Elegant clean separator rule */
+            padding-top: 14px;
         }
 
         .nav-links a {
@@ -134,7 +136,7 @@
             font-size: 14px; 
             font-weight: 500;
             transition: var(--transition);
-            letter-spacing: 0.2px;
+            letter-spacing: 0.3px;
         }
 
         .nav-links a:hover {
@@ -182,13 +184,13 @@
             background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 80vh;
+            min-height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--text-light);
-            padding: 100px 20px;
+            padding: 80px 20px;
         }
 
         .hero-content {
@@ -589,9 +591,11 @@
         .footer-links a:hover { color: #ffffff; }
 
         @media (max-width: 968px) {
-            body { padding-top: 80px; }
-            nav { flex-direction: column; gap: 20px; text-align: center; }
-            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            body { padding-top: 160px; }
+            nav { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { gap: 18px; flex-wrap: wrap; justify-content: center; padding-top: 10px; }
+            .logo { font-size: 24px; }
+            .logo img { height: 50px; }
             .hero h2 { font-size: 2.4rem; }
             .founder-grid { grid-template-columns: 1fr; text-align: center; padding: 40px 25px; gap: 35px; }
             .founder-img-wrapper { max-width: 240px; margin: 0 auto; }

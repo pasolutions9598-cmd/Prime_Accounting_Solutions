@@ -827,16 +827,53 @@
         const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // --- NEW VISITOR COUNTER LOGIC (DIRECT BYPASS) ---
+        async function incrementVisitorCount() {
+            try {
+                // 1. Database se current count uthayein
+                const { data: analytics, error: fetchError } = await supabase
+                    .from('site_analytics')
+                    .select('visitor_count')
+                    .eq('id', 'main_site')
+                    .maybeSingle();
+
+                if (fetchError) throw fetchError;
+
+                if (analytics) {
+                    const currentCount = analytics.visitor_count || 0;
+                    const newCount = currentCount + 1;
+
+                    // 2. Wapas database me direct +1 karke update kar dein
+                    const { error: updateError } = await supabase
+                        .from('site_analytics')
+                        .update({ visitor_count: newCount })
+                        .eq('id', 'main_site');
+
+                    if (updateError) throw updateError;
+                    console.log("Visitor count updated to: " + newCount);
+                }
+            } catch (err) {
+                console.error("Counter Error: ", err);
+            }
+        }
+        // Website load hote hi counter chalayein
+        incrementVisitorCount();
+
+
         // Popup initialization logic 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                document.getElementById('welcomePopup').classList.add('show');
+                const popup = document.getElementById('welcomePopup');
+                if(popup) popup.classList.add('show');
             }, 1000);
         });
 
-        document.getElementById('closePopupBtn').addEventListener('click', () => {
-            document.getElementById('welcomePopup').classList.remove('show');
-        });
+        const closeBtn = document.getElementById('closePopupBtn');
+        if(closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                document.getElementById('welcomePopup').classList.remove('show');
+            });
+        }
 
         // FAQ interactive framework toggle logic
         document.querySelectorAll('.faq-question').forEach(item => {
@@ -874,15 +911,17 @@
             }
         }());
 
-        // Live Feed Image Fix
+        // Live Feed Image Fix + Error Bypass
         async function fetchLiveFeed() {
             const feedContainer = document.getElementById("liveFeedContainer");
+            if(!feedContainer) return;
             try {
+                // FIXED: Requesting specific columns to bypass the database 'posts' relation bug
                 const { data: posts, error } = await supabase
                     .from('posts')
-                    .select('*')
+                    .select('id, title, content, type, category, status, image, created_at')
                     .eq('status', 'published')
-                    .order('id', { ascending: false });
+                    .order('created_at', { ascending: false });
 
                 if (error) throw error;
 
@@ -908,73 +947,82 @@
                     `;
                 });
             } catch (err) {
+                console.error(err);
                 feedContainer.innerHTML = "<p style='color:#ef4444;'>Unable to load real-time compliance feed repository.</p>";
             }
         }
         fetchLiveFeed();
+
         async function fetchWebTestimonials() {
-    const testimonialContainer = document.getElementById("liveTestimonialsContainer");
-    try {
-        const { data: testimonials, error } = await supabase
-            .from('testimonials')
-            .select('*')
-            .eq('status', 'published')
-            .order('id', { ascending: false });
+            const testimonialContainer = document.getElementById("liveTestimonialsContainer");
+            if(!testimonialContainer) return;
+            try {
+                const { data: testimonials, error } = await supabase
+                    .from('testimonials')
+                    .select('*')
+                    .eq('status', 'published')
+                    .order('id', { ascending: false });
 
-        if (error) throw error;
+                if (error) throw error;
 
-        if (!testimonials || testimonials.length === 0) {
-            testimonialContainer.innerHTML = "<p style='color:#64748b;'>No client testimonials published yet.</p>";
-            return;
-        }
+                if (!testimonials || testimonials.length === 0) {
+                    testimonialContainer.innerHTML = "<p style='color:#64748b;'>No client testimonials published yet.</p>";
+                    return;
+                }
 
-        testimonialContainer.innerHTML = ""; 
-        
-        testimonials.forEach(item => {
-            let starIcons = "";
-            for (let i = 0; i < item.rating; i++) {
-                starIcons += `<i class="fa-solid fa-star"></i>`;
+                testimonialContainer.innerHTML = ""; 
+
+                testimonials.forEach(item => {
+                    let starIcons = "";
+                    for (let i = 0; i < item.rating; i++) {
+                        starIcons += `<i class="fa-solid fa-star"></i>`;
+                    }
+
+                    testimonialContainer.innerHTML += `
+                        <div class="testimonial-card">
+                            <i class="fa-solid fa-quote-right quote-icon"></i>
+                            <div class="stars-rating">${starIcons}</div>
+                            <p style="color:#475569; font-size:14.5px; margin-bottom:15px;">"${item.review}"</p>
+                            <strong style="color:var(--primary-color);">${item.client_name}</strong>
+                            ${item.company_name ? `<br><small style="color:#64748b; font-size:12px;">${item.company_name}</small>` : ''}
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                testimonialContainer.innerHTML = "<p style='color:#ef4444;'>Unable to load client testimonials at this moment.</p>";
             }
-
-            testimonialContainer.innerHTML += `
-                <div class="testimonial-card">
-                    <i class="fa-solid fa-quote-right quote-icon"></i>
-                    <div class="stars-rating">${starIcons}</div>
-                    <p style="color:#475569; font-size:14.5px; margin-bottom:15px;">"${item.review}"</p>
-                    <strong style="color:var(--primary-color);">${item.client_name}</strong>
-                    ${item.company_name ? `<br><small style="color:#64748b; font-size:12px;">${item.company_name}</small>` : ''}
-                </div>
-            `;
-        });
-    } catch (err) {
-        testimonialContainer.innerHTML = "<p style='color:#ef4444;'>Unable to load client testimonials at this moment.</p>";
-    }
         }
         fetchWebTestimonials();
 
         // Appointment Form Router
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('aptName').value;
-            const phone = document.getElementById('aptPhone').value;
-            const date = document.getElementById('aptDate').value;
-            const service = document.getElementById('aptService').value;
-            
-            const messageString = `*New Booking Request Received*\n\n*Client Name:* ${name}\n*Contact Line:* ${phone}\n*Date Window:* ${date}\n*Target Module:* ${service}`;
-            window.open(`https://wa.me/916394748563?text=${encodeURIComponent(messageString)}`, '_blank');
-        });
+        const aptForm = document.getElementById('appointmentForm');
+        if(aptForm) {
+            aptForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('aptName').value;
+                const phone = document.getElementById('aptPhone').value;
+                const date = document.getElementById('aptDate').value;
+                const service = document.getElementById('aptService').value;
+
+                const messageString = `*New Booking Request Received*\n\n*Client Name:* ${name}\n*Contact Line:* ${phone}\n*Date Window:* ${date}\n*Target Module:* ${service}`;
+                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(messageString)}`, '_blank');
+            });
+        }
 
         // Contact Box Dispatch Integration Router
-        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('formName').value;
-            const email = document.getElementById('formEmail').value;
-            const phone = document.getElementById('formPhone').value;
-            const msg = document.getElementById('formMessage').value;
-            
-            const textMessage = `*New Enquiry Received* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
-            window.open(`https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`, '_blank');
-        });
+        const waForm = document.getElementById('whatsappForm');
+        if(waForm) {
+            waForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('formName').value;
+                const email = document.getElementById('formEmail').value;
+                const phone = document.getElementById('formPhone').value;
+                const msg = document.getElementById('formMessage').value;
+
+                const textMessage = `*New Enquiry Received* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
+                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`, '_blank');
+            });
+        }
 
         // --- REVIEW SECTION LOGIC ---
         let selectedRating = 5;
@@ -982,18 +1030,18 @@
         const formContainer = document.getElementById('reviewFormContainer');
         const stars = document.querySelectorAll('#starRatingInput i');
 
-        // Accordion Toggle for Review Box
-        toggleBtn.addEventListener('click', () => {
-            if (formContainer.classList.contains('open')) {
-                formContainer.classList.remove('open');
-                toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
-            } else {
-                formContainer.classList.add('open');
-                toggleBtn.innerHTML = `<i class="fa-solid fa-xmark"></i> Close Review Form`;
-            }
-        });
+        if(toggleBtn && formContainer) {
+            toggleBtn.addEventListener('click', () => {
+                if (formContainer.classList.contains('open')) {
+                    formContainer.classList.remove('open');
+                    toggleBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
+                } else {
+                    formContainer.classList.add('open');
+                    toggleBtn.innerHTML = `<i class="fa-solid fa-xmark"></i> Close Review Form`;
+                }
+            });
+        }
 
-        // Star Rating Selection
         stars.forEach(star => {
             star.addEventListener('click', () => {
                 selectedRating = parseInt(star.getAttribute('data-rating'));
@@ -1007,16 +1055,18 @@
             });
         });
 
-        // Direct WhatsApp Review Dispatch
-        document.getElementById('directReviewForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('revName').value;
-            const message = document.getElementById('revMessage').value;
-            let starString = "⭐".repeat(selectedRating);
-            
-            const waMessage = `*New Client Review Logs*\n\n*Enterprise/Name:* ${name}\n*Rating Score:* ${starString}\n*Feedback Note:* ${message}`;
-            window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');
-        });
-    </script>
+        const dirReviewForm = document.getElementById('directReviewForm');
+        if(dirReviewForm) {
+            dirReviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('revName').value;
+                const message = document.getElementById('revMessage').value;
+                let starString = "⭐".repeat(selectedRating);
+
+                const waMessage = `*New Client Review Logs*\n\n*Enterprise/Name:* ${name}\n*Rating Score:* ${starString}\n*Feedback Note:* ${message}`;
+                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');
+            });
+        }
+</script>
 </body>
 </html>

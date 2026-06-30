@@ -270,7 +270,7 @@ window.saveContent = async function(status) {
         submitBtn.disabled = false;
     }
 }
-    
+
 window.loadPosts = async function() {
     const container = document.getElementById("postsContainer");
     const filterCat = document.getElementById("filterCategory").value;
@@ -278,20 +278,14 @@ window.loadPosts = async function() {
 
     try {
         let query = supabase.from('posts').select('*');
-        if(filterCat !== "All") { 
-            query = query.eq('category', filterCat); 
-        }
+        if(filterCat !== "All") { query = query.eq('category', filterCat); }
         
-        // FIX: `.order()` ko await se pehle sahi tareeqe se chain kiya gaya hai
-        const { data: posts, error } = await query.order('id', { ascending: false });
-        
+        // FIX: ordered by 'created_at' instead of 'id' to prevent uuid data parsing crash
+        const { data: posts, error } = await query.order('created_at', { ascending: false });
         if (error) throw error;
 
         container.innerHTML = "";
-        if(!posts || posts.length === 0) { 
-            container.innerHTML = "<p style='color:#94a3b8; padding:15px;'>Registry clear. No matching data blocks.</p>"; 
-            return; 
-        }
+        if(!posts || posts.length === 0) { container.innerHTML = "<p style='color:#94a3b8; padding:15px;'>Registry clear. No matching data blocks.</p>"; return; }
 
         posts.forEach((post) => {
             const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
@@ -317,11 +311,10 @@ window.loadPosts = async function() {
             `;
         });
     } catch(err) {
-        console.error("Supabase Error:", err);
-        container.innerHTML = "Error loading data. Please check browser console or Supabase RLS policies.";
+        console.error("Supabase Error Logs: ", err);
+        container.innerHTML = "Registry Error. Please verify Table structure or RLS configuration.";
     }
 }
-
 
 window.publishDraft = async function(id) {
     await supabase.from('posts').update({ status: 'published' }).eq('id', id);

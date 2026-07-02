@@ -14,17 +14,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
+        
+        <style>
         :root {
             --primary-color: #0b132b;    
             --secondary-color: #1c2541;  
             --gold-color: #e5c158;       
             --gold-dark: #d4af37;        
-            --text-dark: #1e293b;        
+            --text-dark: #f8fafc;        /* Text ko light kiya taaki dark theme me saaf dikhe */
             --text-light: #f8fafc;       
-            --bg-light: #f8fafc;         
-            --card-bg: #ffffff;
+            --bg-light: #0b132b;         
+            --card-bg: rgba(255, 255, 255, 0.04); /* Glassmorphic background */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -40,13 +40,13 @@
         }
 
         body {
-            background-color: var(--bg-light);
+            background: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #0b132b 100%) !important;
             color: var(--text-dark);
             line-height: 1.6;
             padding-top: 170px; 
         }
 
-        /* 11. Clear Grid Layout Framework for Sections */
+        /* Clear Grid Layout Framework for Sections */
         .section-wrapper {
             padding: 80px 5%;
             max-width: 1200px;
@@ -57,14 +57,16 @@
             text-align: center;
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--gold-color) !important; /* Title ab hamesha gold chamkega */
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(229, 193, 88, 0.2);
         }
 
         .section-subtitle {
             text-align: center;
             font-size: 16px;
-            color: var(--gold-dark);
+            color: #ffffff !important;
+            opacity: 0.9;
             font-weight: 600;
             margin-bottom: 40px;
             text-transform: uppercase;
@@ -140,7 +142,7 @@
         .popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 19, 43, 0.85);
+            background: rgba(11, 19, 43, 0.9);
             display: flex; justify-content: center; align-items: center;
             z-index: 10000; opacity: 0; pointer-events: none;
             transition: opacity 0.4s ease;
@@ -149,21 +151,23 @@
         .popup-overlay.show { opacity: 1; pointer-events: auto; }
 
         .popup-content {
-            background: white; padding: 40px; border-radius: 16px;
+            background: #1c2541; padding: 40px; border-radius: 16px;
             max-width: 500px; width: 90%; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 3px solid var(--gold-dark);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 3px solid var(--gold-dark);
             transform: scale(0.8); transition: transform 0.4s ease;
+            color: #ffffff;
         }
+        .popup-content h2 span { color: var(--gold-color); }
 
         .popup-overlay.show .popup-content { transform: scale(1); }
         .popup-close-btn {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            color: var(--gold-color); padding: 12px 30px; border: none;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
+            color: var(--primary-color); padding: 12px 30px; border: none;
             border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition);
         }
-        .popup-close-btn:hover { transform: translateY(-2px); color: white; }
+        .popup-close-btn:hover { transform: translateY(-2px); color: var(--primary-color); box-shadow: 0 5px 15px rgba(229,193,88,0.4); }
 
-        /* Hero & 10. Animated Header Typography Style */
+        /* Hero Element */
         .hero {
             background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
@@ -211,10 +215,10 @@
             50% { border-color: var(--gold-color); }
         }
 
-        /* 4. Appointment Form & CTAs */
+        /* Appointment Form & CTAs */
         .cta-btn {
             background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             padding: 15px 40px;
             border: none;
             border-radius: 50px;
@@ -232,42 +236,49 @@
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
         }
 
-        /* Cards Grid Frameworks */
+        /* Cards Grid Frameworks + Glassmorphism */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
-        .card {
-            background: var(--card-bg);
+        .card, .testimonial-card, .appointment-box, .inner-review-form, .faq-item {
+            background: rgba(255, 255, 255, 0.04) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(229, 193, 88, 0.15) !important;
             border-radius: 12px;
             padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border-top: 4px solid var(--primary-color);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
             transition: var(--transition);
+            color: #ffffff !important;
         }
 
-        .card:hover {
+        .card:hover, .testimonial-card:hover {
             transform: translateY(-5px);
-            border-top-color: var(--gold-dark);
-            box-shadow: 0 15px 35px rgba(11, 19, 43, 0.08);
+            border-color: var(--gold-color) !important;
+            background: rgba(255, 255, 255, 0.07) !important;
+            box-shadow: 0 15px 35px rgba(229, 193, 88, 0.15) !important;
         }
 
-        .card i { font-size: 40px; color: var(--gold-dark); margin-bottom: 20px; }
-        .card h3 { font-size: 19px; margin-bottom: 12px; color: var(--primary-color); }
-        .card p { font-size: 14.5px; color: #475569; }
+        .card i { font-size: 40px; color: var(--gold-color); margin-bottom: 20px; }
+        .card h3 { font-size: 19px; margin-bottom: 12px; color: var(--gold-color) !important; }
+        .card p { font-size: 14.5px; color: #cbd5e1 !important; }
 
-        /* 2. Founder Section Grid */
+        /* Founder Section Grid */
         .founder-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 40px;
             align-items: center;
-            background: white;
+            background: rgba(255, 255, 255, 0.04) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(229, 193, 88, 0.15) !important;
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
             margin-top: 30px;
         }
 
@@ -275,42 +286,37 @@
             width: 100%;
             border-radius: 12px;
             border: 3px solid var(--gold-color);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .founder-details h3 {
             font-size: 24px;
-            color: var(--primary-color);
+            color: var(--gold-color) !important;
             margin-bottom: 5px;
         }
 
         .founder-details .designation {
-            color: var(--gold-dark);
+            color: #ffffff;
+            opacity: 0.9;
             font-weight: 600;
             margin-bottom: 15px;
             font-size: 15px;
         }
+        .founder-details p {
+            color: #cbd5e1 !important;
+        }
 
-        /* 6. Testimonial Section Grid */
+        /* Testimonial Section Grid */
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-            position: relative;
-        }
-
         .testimonial-card i.quote-icon {
             position: absolute;
             top: 20px; right: 20px;
-            font-size: 26px; color: #f1f5f9;
+            font-size: 26px; color: rgba(255,255,255,0.05);
         }
 
         .stars-rating {
@@ -318,9 +324,9 @@
             margin-bottom: 15px;
         }
 
-        /* 3. Operational Review Button Widget */
+        /* Operational Review Button Widget */
         .review-widget {
-            background: var(--primary-color);
+            background: rgba(11, 19, 43, 0.6);
             color: white;
             padding: 40px;
             border-radius: 16px;
@@ -359,14 +365,6 @@
             margin-top: 25px;
         }
 
-        .inner-review-form {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid rgba(229, 193, 88, 0.2);
-            text-align: left;
-        }
-
         .star-rating-input {
             display: flex;
             gap: 10px;
@@ -384,57 +382,70 @@
             color: #f59e0b;
         }
 
-        /* 8. Post Image Box Layout */
+        /* Post Image Box Layout */
         .feed-card { 
-            background: white; 
+            background: rgba(255, 255, 255, 0.04) !important; 
+            backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(229, 193, 88, 0.15) !important;
             padding: 25px; 
             border-radius: 12px; 
-            border-left: 4px solid var(--primary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border-left: 4px solid var(--gold-color) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+            color: #ffffff;
         }
+        #feed { background-color: transparent !important; }
         .feed-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
-            background-color: #f1f5f9;
+            background-color: #1c2541;
             display: block;
         }
         .feed-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 700; border-radius: 20px; margin-bottom: 10px; }
-        .badge-general { background: #e0f2fe; color: #0369a1; }
-        .badge-gst { background: #dcfce7; color: #15803d; }
-        .badge-tax { background: #fee2e2; color: #b91c1c; }
+        .badge-general { background: #0369a1; color: #ffffff; }
+        .badge-gst { background: #15803d; color: #ffffff; }
+        .badge-tax { background: #b91c1c; color: #ffffff; }
 
         /* Pricing & FAQ Frameworks */
-        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 20px 0; }
+        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--gold-color); margin: 20px 0; }
         .price-features { list-style: none; padding: 0; margin: 20px 0 30px 0; }
-        .price-features li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14.5px; color: #475569; }
-        .price-features li i { color: var(--gold-dark); margin-right: 10px; }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14.5px; color: #cbd5e1; }
+        .price-features li i { color: var(--gold-color); margin-right: 10px; }
 
         .faq-container { max-width: 850px; margin: 0 auto; }
-        .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
-        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #475569; font-size: 14.5px; transition: max-height 0.3s ease-out; }
-        .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid #f1f5f9; }
+        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--gold-color) !important; cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #cbd5e1; font-size: 14.5px; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .faq-item.active { background: rgba(255,255,255,0.08) !important; }
 
         /* Appointment & Forms Layout */
-        .appointment-box {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-            margin-bottom: 40px;
-        }
-
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
-        .app-form input, .app-form select, .contact-form input, .contact-form textarea, .inner-review-form input, .inner-review-form textarea { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; }
-        .inner-review-form input, .inner-review-form textarea { background: rgba(255,255,255,0.9); color: var(--text-dark); border: 1px solid transparent; }
-        .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-        .contact-info-block i { font-size: 24px; color: var(--gold-dark); background: rgba(229, 193, 88, 0.1); padding: 15px; border-radius: 50%; }
+        
+        .app-form input, .app-form select, .contact-form input, .contact-form textarea, .inner-review-form input, .inner-review-form textarea { 
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 20px; 
+            border: 1px solid rgba(229, 193, 88, 0.2); 
+            border-radius: 8px; 
+            font-size: 15px; 
+            background: rgba(11, 19, 43, 0.6) !important; 
+            color: #ffffff !important;
+        }
+        .app-form input:focus, .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--gold-color) !important;
+            outline: none;
+            background: rgba(11, 19, 43, 0.8) !important;
+        }
+        ::placeholder { color: #94a3b8 !important; opacity: 1; }
 
-        /* 5. Premium Social Media Layout */
+        .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .contact-info-block i { font-size: 24px; color: var(--gold-color); background: rgba(229, 193, 88, 0.15); padding: 15px; border-radius: 50%; }
+        .contact-info-block h4 { color: var(--gold-color) !important; }
+        .contact-info-block p { color: #cbd5e1 !important; }
+
+        /* Premium Social Media Layout */
         .social-container {
             margin: 20px 0;
             display: flex;
@@ -448,7 +459,7 @@
         }
         .social-icon-btn:hover { background: var(--gold-color); color: var(--primary-color); transform: translateY(-3px); }
 
-        /* 4. Desktop & Mobile Floating Call / WhatsApp Panel Elements */
+        /* Desktop & Mobile Floating Call / WhatsApp Panel Elements */
         .floating-actions-container {
             position: fixed;
             bottom: 30px;
@@ -492,11 +503,11 @@
             .founder-grid { grid-template-columns: 1fr; text-align: center; }
             .founder-img-wrapper { max-width: 250px; margin: 0 auto; }
         }
-        /* Sabhi Headings ko ek saath Golden karne ke liye */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--gold-color) !important; /* Agar yeh kaam na kare toh var(--gold-color) ki jagah #D4AF37 likh dein */
-}
 
+        /* Global Headings Golden Fix */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--gold-color) !important;
+        }
     </style>
 </head>
 <body>

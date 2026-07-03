@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prime Accounting Solutions | Professional Accounting & GST in Prayagraj</title>
-    
+
     <meta name="description" content="Affordable corporate-grade accounting, bookkeeping, GST data preparation, Tally Prime entries, and executive MIS reporting in Prayagraj. Starting at just ₹2,500/month.">
     <meta name="keywords" content="Accounting, Bookkeeping, GST filing Prayagraj, Tally Entry, MIS Reporting, Financial Consultant Prayagraj, Tax Consultant">
     <meta name="author" content="Prime Accounting Solutions">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        
-        <style>
+
+    <style>
         :root {
-            --primary-color: #0b132b;    
-            --secondary-color: #1c2541;  
-            --gold-color: #e5c158;       
-            --gold-dark: #d4af37;        
-            --text-dark: #f8fafc;        /* Text ko light kiya taaki dark theme me saaf dikhe */
-            --text-light: #f8fafc;       
-            --bg-light: #0b132b;         
-            --card-bg: rgba(255, 255, 255, 0.04); /* Glassmorphic background */
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-bg: #030712;         /* Deep Premium Dark */
+            --secondary-bg: #0b0f19;       /* Rich Dark Layer */
+            --gold-glow: #e5c158;          /* Champagne Gold Accent */
+            --gold-dark: #b89130;          /* Deep Corporate Gold */
+            --text-main: #f8fafc;          /* Pure Crisp White */
+            --text-muted: #94a3b8;         /* Silver Slate for paragraphs */
+            --card-glass: rgba(11, 15, 25, 0.65); 
+            --border-glow: rgba(229, 193, 88, 0.15);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -38,49 +38,72 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #0b132b 100%) !important;
-            color: var(--text-dark);
-            line-height: 1.6;
-            padding-top: 170px; 
+            background: radial-gradient(circle at top right, #0d1527 0%, var(--primary-bg) 60%) !important;
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-top: 180px; 
+            overflow-x: hidden;
         }
 
-        /* Clear Grid Layout Framework for Sections */
+        /* Global Specificity Patch for Inline Text Colors */
+        p, .card p, .testimonial-card p, .founder-details p, footer p {
+            color: var(--text-muted) !important;
+            font-size: 14.5px;
+        }
+
+        strong, .testimonial-card strong {
+            color: var(--gold-glow) !important;
+            font-weight: 600;
+        }
+
+        /* Section Layouts */
         .section-wrapper {
-            padding: 80px 5%;
-            max-width: 1200px;
+            padding: 100px 6%;
+            max-width: 1280px;
             margin: 0 auto;
+        }
+
+        /* Specific section hardcoded background patch */
+        #feed {
+            background-color: transparent !important;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--gold-color) !important; /* Title ab hamesha gold chamkega */
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(229, 193, 88, 0.2);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold-glow) !important;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-transform: capitalize;
+            background: linear-gradient(135deg, #ffffff 30%, var(--gold-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-subtitle {
             text-align: center;
-            font-size: 16px;
-            color: #ffffff !important;
+            font-size: 13px;
+            color: var(--gold-dark) !important;
             opacity: 0.9;
-            font-weight: 600;
-            margin-bottom: 40px;
+            font-weight: 700;
+            margin-bottom: 55px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
-        /* Two-Line Fixed Header */
+        /* Executive Header */
         header {
-            background-color: var(--primary-color);
+            background-color: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.25);
-            border-bottom: 3px solid var(--gold-dark);
-            padding: 15px 0;
+            border-bottom: 1px solid var(--border-glow);
+            padding: 18px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         nav {
@@ -96,416 +119,396 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 14px;
             text-decoration: none;
-            color: var(--gold-color);
+            color: var(--gold-glow) !important;
             font-weight: 700;
-            font-size: 33px; 
-            letter-spacing: 0.8px;
+            font-size: 28px; 
+            letter-spacing: -0.5px;
+            transition: var(--transition-smooth);
         }
 
         .logo img {
-            height: 150px; 
+            height: 42px; 
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(229, 193, 88, 0.3));
         }
 
         .nav-links {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 35px; 
+            gap: 30px; 
             list-style: none;
             margin: 0;
             width: 100%;
-            border-top: 1px solid rgba(229, 193, 88, 0.2); 
-            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            padding-top: 15px;
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 17px; 
+            font-size: 15px; 
             font-weight: 500;
             position: relative;
             padding: 5px 0;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
         .nav-links a:hover {
-            color: var(--gold-color);
+            color: var(--gold-glow);
         }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--gold-glow);
+            transition: var(--transition-smooth);
+        }
+        .nav-links a:hover::after { width: 100%; }
 
         /* Welcome Popup */
         .popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 19, 43, 0.9);
+            background: rgba(2, 4, 10, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             display: flex; justify-content: center; align-items: center;
             z-index: 10000; opacity: 0; pointer-events: none;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
         }
 
         .popup-overlay.show { opacity: 1; pointer-events: auto; }
 
         .popup-content {
-            background: #1c2541; padding: 40px; border-radius: 16px;
-            max-width: 500px; width: 90%; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 3px solid var(--gold-dark);
-            transform: scale(0.8); transition: transform 0.4s ease;
-            color: #ffffff;
+            background: var(--secondary-bg); 
+            padding: 50px 40px; 
+            border-radius: 24px;
+            max-width: 520px; 
+            width: 90%; 
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
+            border: 1px solid var(--border-glow);
+            transform: scale(0.9); 
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .popup-content h2 span { color: var(--gold-color); }
+        
+        .popup-content h2 { font-size: 2rem; font-weight: 700; margin-bottom: 15px; }
+        .popup-content h2 span { color: var(--gold-glow); }
+        .popup-content p { margin-bottom: 30px; line-height: 1.6; }
 
         .popup-overlay.show .popup-content { transform: scale(1); }
         .popup-close-btn {
-            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
-            color: var(--primary-color); padding: 12px 30px; border: none;
-            border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition);
+            background: linear-gradient(135deg, var(--gold-glow), var(--gold-dark));
+            color: var(--primary-bg); padding: 14px 35px; border: none;
+            border-radius: 50px; font-weight: 600; cursor: pointer; 
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 20px rgba(229, 193, 88, 0.2);
         }
-        .popup-close-btn:hover { transform: translateY(-2px); color: var(--primary-color); box-shadow: 0 5px 15px rgba(229,193,88,0.4); }
+        .popup-close-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(229,193,88,0.4); }
 
-        /* Hero Element */
+        /* Modern Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(11, 19, 43, 0.95), rgba(28, 37, 65, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(180deg, rgba(3, 7, 18, 0.4) 0%, var(--primary-bg) 100%), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 65vh;
+            min-height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--text-light);
-            padding: 60px 20px;
+            padding: 100px 20px;
         }
 
         .animated-title {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--gold-color);
-            margin-bottom: 10px;
-            animation: pulseGlow 2.5s infinite alternate ease-in-out;
+            color: var(--gold-glow);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff 40%, var(--gold-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGlow 3s infinite alternate ease-in-out;
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(1); text-shadow: 0 0 10px rgba(229, 193, 88, 0.2); }
-            100% { transform: scale(1.02); text-shadow: 0 0 25px rgba(229, 193, 88, 0.6); }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.01); }
         }
 
         .hero h2 {
             font-size: 2.2rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: #ffffff;
+            margin-bottom: 25px;
+            color: var(--text-main);
         }
 
         .hero h2 span {
-            color: var(--gold-color);
-            border-right: 3px solid var(--gold-color);
+            color: var(--gold-glow);
+            border-right: 3px solid var(--gold-glow);
             padding-right: 5px;
             animation: blink 0.75s step-end infinite;
         }
 
         @keyframes blink {
             from, to { border-color: transparent }
-            50% { border-color: var(--gold-color); }
+            50% { border-color: var(--gold-glow); }
         }
 
-        /* Appointment Form & CTAs */
+        .hero p {
+            max-width: 800px;
+            margin: 0 auto 35px auto;
+            font-size: 17px !important;
+        }
+
+        /* Buttons & Call To Actions */
         .cta-btn {
-            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
-            color: var(--primary-color) !important;
-            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--gold-glow), var(--gold-dark));
+            color: var(--primary-bg) !important;
+            padding: 16px 42px;
             border: none;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            transition: var(--transition);
+            box-shadow: 0 4px 25px rgba(212, 175, 55, 0.25);
+            transition: var(--transition-smooth);
         }
 
         .cta-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.45);
         }
 
-        /* Cards Grid Frameworks + Glassmorphism */
+        /* Premium Luxury Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .card, .testimonial-card, .appointment-box, .inner-review-form, .faq-item {
-            background: rgba(255, 255, 255, 0.04) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            border: 1px solid rgba(229, 193, 88, 0.15) !important;
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
-            transition: var(--transition);
-            color: #ffffff !important;
+            background: var(--card-glass) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border: 1px solid var(--border-glow) !important;
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover, .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold-color) !important;
-            background: rgba(255, 255, 255, 0.07) !important;
-            box-shadow: 0 15px 35px rgba(229, 193, 88, 0.15) !important;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(229, 193, 88, 0.05) 0%, transparent 100%);
+            opacity: 0; transition: var(--transition-smooth);
         }
 
-        .card i { font-size: 40px; color: var(--gold-color); margin-bottom: 20px; }
-        .card h3 { font-size: 19px; margin-bottom: 12px; color: var(--gold-color) !important; }
-        .card p { font-size: 14.5px; color: #cbd5e1 !important; }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(229, 193, 88, 0.4) !important;
+            box-shadow: 0 20px 40px rgba(229, 193, 88, 0.1) !important;
+        }
+        .card:hover::before { opacity: 1; }
 
-        /* Founder Section Grid */
+        .card i { font-size: 36px; color: var(--gold-glow); margin-bottom: 24px; display: inline-block; }
+        .card h3 { font-size: 20px; font-weight: 600; margin-bottom: 14px; color: var(--text-main) !important; }
+
+        /* Premium Founder Dynamic Framework Grid */
         .founder-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 50px;
             align-items: center;
-            background: rgba(255, 255, 255, 0.04) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            border: 1px solid rgba(229, 193, 88, 0.15) !important;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
-            margin-top: 30px;
+            background: var(--card-glass) !important;
+            backdrop-filter: blur(16px) !important;
+            border: 1px solid var(--border-glow) !important;
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+            margin-top: 40px;
         }
+
+        .founder-img-wrapper {
+            position: relative;
+        }
+        .founder-img-wrapper::after {
+            content: ''; position: absolute; inset: 0;
+            border-radius: 16px; border: 1px solid var(--gold-glow);
+            transform: translate(10px, 10px); z-index: -1;
+            transition: var(--transition-smooth);
+        }
+        .founder-grid:hover .founder-img-wrapper::after { transform: translate(5px, 5px); }
 
         .founder-img-wrapper img {
             width: 100%;
-            border-radius: 12px;
-            border: 3px solid var(--gold-color);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(229, 193, 88, 0.2);
+            object-fit: cover;
         }
 
         .founder-details h3 {
-            font-size: 24px;
-            color: var(--gold-color) !important;
-            margin-bottom: 5px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-main) !important;
+            margin-bottom: 6px;
         }
 
         .founder-details .designation {
-            color: #ffffff;
-            opacity: 0.9;
+            color: var(--gold-glow) !important;
             font-weight: 600;
-            margin-bottom: 15px;
-            font-size: 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .founder-details p {
-            color: #cbd5e1 !important;
-        }
+        .founder-details p { font-size: 15.5px; margin-bottom: 15px; }
 
-        /* Testimonial Section Grid */
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .testimonial-card i.quote-icon {
-            position: absolute;
-            top: 20px; right: 20px;
-            font-size: 26px; color: rgba(255,255,255,0.05);
-        }
-
-        .stars-rating {
-            color: #f59e0b;
-            margin-bottom: 15px;
-        }
-
-        /* Operational Review Button Widget */
-        .review-widget {
-            background: rgba(11, 19, 43, 0.6);
-            color: white;
-            padding: 40px;
-            border-radius: 16px;
-            margin-top: 40px;
-            border: 2px dashed var(--gold-color);
-        }
-
-        .review-form-toggle-btn {
-            background: linear-gradient(90deg, var(--gold-dark), var(--gold-color));
-            color: var(--primary-color);
-            padding: 12px 30px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .review-form-toggle-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(229, 193, 88, 0.4);
-        }
-
-        .review-box-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-            margin-top: 0;
-        }
-
-        .review-box-container.open {
-            max-height: 600px;
-            margin-top: 25px;
-        }
-
-        .star-rating-input {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 24px;
-        }
-
-        .star-rating-input i {
-            cursor: pointer;
-            color: #475569;
-            transition: color 0.2s ease;
-        }
-
-        .star-rating-input i.active {
-            color: #f59e0b;
-        }
-
-        /* Post Image Box Layout */
+        /* Live Broadcast Update Cards Feed */
         .feed-card { 
-            background: rgba(255, 255, 255, 0.04) !important; 
-            backdrop-filter: blur(12px) !important;
-            border: 1px solid rgba(229, 193, 88, 0.15) !important;
-            padding: 25px; 
-            border-radius: 12px; 
-            border-left: 4px solid var(--gold-color) !important;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
-            color: #ffffff;
+            background: var(--card-glass) !important; 
+            backdrop-filter: blur(16px) !important;
+            border: 1px solid var(--border-glow) !important;
+            padding: 30px; 
+            border-radius: 16px; 
+            border-top: 3px solid var(--gold-glow) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
         }
-        #feed { background-color: transparent !important; }
+        .feed-card h4 { color: var(--text-main) !important; font-size: 18px; font-weight: 600; margin-top: 10px;}
+        
         .feed-image {
             width: 100%;
-            height: 180px;
+            height: 190px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            background-color: #1c2541;
-            display: block;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .feed-badge { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 700; border-radius: 20px; margin-bottom: 10px; }
-        .badge-general { background: #0369a1; color: #ffffff; }
-        .badge-gst { background: #15803d; color: #ffffff; }
-        .badge-tax { background: #b91c1c; color: #ffffff; }
+        .feed-badge { 
+            display: inline-block; padding: 4px 14px; font-size: 11px; 
+            font-weight: 700; border-radius: 30px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .badge-general { background: rgba(3, 105, 161, 0.2); color: #38bdf8; border: 1px solid rgba(3, 105, 161, 0.4); }
+        .badge-gst { background: rgba(21, 128, 61, 0.2); color: #4ade80; border: 1px solid rgba(21, 128, 61, 0.4); }
+        .badge-tax { background: rgba(185, 28, 28, 0.2); color: #f87171; border: 1px solid rgba(185, 28, 28, 0.4); }
 
-        /* Pricing & FAQ Frameworks */
-        .price-card .price { font-size: 2.5rem; font-weight: 700; color: var(--gold-color); margin: 20px 0; }
-        .price-features { list-style: none; padding: 0; margin: 20px 0 30px 0; }
-        .price-features li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14.5px; color: #cbd5e1; }
-        .price-features li i { color: var(--gold-color); margin-right: 10px; }
+        /* Pricing Segment Design Framework */
+        .price-card { position: relative; }
+        .price-card h3 { font-size: 22px; color: var(--text-main) !important; }
+        .price-card .price { font-size: 2.8rem; font-weight: 700; color: var(--gold-glow); margin: 20px 0 10px 0; font-family: 'Inter', sans-serif;}
+        .price-card .price span { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+        
+        .price-features { list-style: none; padding: 0; margin: 25px 0 35px 0; }
+        .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 14.5px; display: flex; align-items: center; gap: 10px;}
+        .price-features li i { color: var(--gold-glow); font-size: 14px; }
 
-        .faq-container { max-width: 850px; margin: 0 auto; }
-        .faq-question { padding: 20px 25px; font-weight: 600; color: var(--gold-color) !important; cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #cbd5e1; font-size: 14.5px; transition: max-height 0.3s ease-out; }
-        .faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .faq-item.active { background: rgba(255,255,255,0.08) !important; }
+        /* Premium Interactive Accordion FAQ System */
+        .faq-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;}
+        .faq-item { padding: 0; border-radius: 12px; }
+        .faq-question { padding: 22px 30px; font-weight: 600; font-size: 17px; color: var(--text-main) !important; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question span { color: var(--gold-glow); font-size: 20px; transition: var(--transition-smooth); }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 30px; font-size: 14.5px; transition: var(--transition-smooth); opacity: 0; }
+        
+        .faq-item.active { border-color: rgba(229, 193, 88, 0.3) !important; background: rgba(255,255,255,0.02) !important;}
+        .faq-item.active .faq-answer { max-height: 300px; padding: 0 30px 25px 30px; opacity: 1; border-top: 1px solid rgba(255,255,255,0.03); margin-top: 5px; }
+        .faq-item.active .faq-question span { transform: rotate(45deg); color: var(--text-main); }
 
-        /* Appointment & Forms Layout */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
+        /* Form Controls & Contact Desk Grid */
+        .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; }
         
         .app-form input, .app-form select, .contact-form input, .contact-form textarea, .inner-review-form input, .inner-review-form textarea { 
             width: 100%; 
-            padding: 14px; 
+            padding: 16px; 
             margin-bottom: 20px; 
-            border: 1px solid rgba(229, 193, 88, 0.2); 
-            border-radius: 8px; 
-            font-size: 15px; 
-            background: rgba(11, 19, 43, 0.6) !important; 
-            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 10px; 
+            font-size: 14.5px; 
+            background: rgba(3, 7, 18, 0.5) !important; 
+            color: var(--text-main) !important;
+            transition: var(--transition-smooth);
         }
-        .app-form input:focus, .contact-form input:focus, .contact-form textarea:focus {
-            border-color: var(--gold-color) !important;
+        .app-form input:focus, .app-form select:focus, .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--gold-glow) !important;
             outline: none;
-            background: rgba(11, 19, 43, 0.8) !important;
+            box-shadow: 0 0 15px rgba(229, 193, 88, 0.1);
         }
-        ::placeholder { color: #94a3b8 !important; opacity: 1; }
+        ::placeholder { color: rgba(255,255,255,0.3) !important; }
 
-        .contact-info-block { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-        .contact-info-block i { font-size: 24px; color: var(--gold-color); background: rgba(229, 193, 88, 0.15); padding: 15px; border-radius: 50%; }
-        .contact-info-block h4 { color: var(--gold-color) !important; }
-        .contact-info-block p { color: #cbd5e1 !important; }
+        .contact-info-block { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
+        .contact-info-block i { font-size: 22px; color: var(--gold-glow); background: rgba(229, 193, 88, 0.08); width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(229, 193, 88, 0.15); }
+        .contact-info-block h4 { color: var(--text-main) !important; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 
-        /* Premium Social Media Layout */
-        .social-container {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        /* Premium Operational Review Integration Widget */
+        .review-widget {
+            background: linear-gradient(135deg, rgba(11, 15, 25, 0.8), rgba(3, 7, 18, 0.9));
+            padding: 40px; border-radius: 20px; margin-top: 50px;
+            border: 1px dashed rgba(229, 193, 88, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
+        .review-widget h4 { font-size: 22px; font-weight: 700; }
+        .review-form-toggle-btn {
+            background: transparent; color: var(--gold-glow);
+            padding: 12px 28px; border: 1px solid var(--gold-glow);
+            border-radius: 50px; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);
+        }
+        .review-form-toggle-btn:hover { background: var(--gold-glow); color: var(--primary-bg); box-shadow: 0 0 20px rgba(229,193,88,0.3); }
+        .review-box-container.open { max-height: 700px; margin-top: 30px; }
+        .star-rating-input i { color: #334155; transition: var(--transition-smooth); }
+        .star-rating-input i.active { color: #f59e0b; filter: drop-shadow(0 0 5px rgba(245,158,11,0.4)); }
+
+        /* Testimonials Elements */
+        .testimonial-card i.quote-icon { font-size: 32px; color: rgba(229,193,88,0.1); position: absolute; top: 30px; right: 30px; }
+        .stars-rating { color: #fbbf24; margin-bottom: 18px; font-size: 13px; }
+
+        /* Premium Social Floating Panels */
+        .social-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
         .social-icon-btn {
-            width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1);
-            display: flex; align-items: center; justify-content: center; color: white;
-            font-size: 18px; text-decoration: none; transition: var(--transition);
+            width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.03);
+            display: flex; align-items: center; justify-content: center; color: var(--text-main);
+            font-size: 16px; text-decoration: none; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition-smooth);
         }
-        .social-icon-btn:hover { background: var(--gold-color); color: var(--primary-color); transform: translateY(-3px); }
+        .social-icon-btn:hover { background: var(--gold-glow); color: var(--primary-bg); border-color: var(--gold-glow); transform: translateY(-3px); }
 
-        /* Desktop & Mobile Floating Call / WhatsApp Panel Elements */
-        .floating-actions-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 9999;
+        .floating-actions-container { position: fixed; bottom: 35px; right: 35px; display: flex; flex-direction: column; gap: 15px; z-index: 9999; }
+        .action-float { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; text-decoration: none; box-shadow: 0 10px 25px rgba(0,0,0,0.4); transition: var(--transition-smooth); }
+        .action-float:hover { transform: scale(1.1) translateY(-2px); }
+        .float-wa { background: #128c7e; }
+        .float-call { background: #0284c7; }
+
+        /* Clean Executive Footer */
+        footer { background-color: var(--secondary-bg); color: var(--text-muted); padding: 70px 5% 30px 5%; border-top: 1px solid var(--border-glow); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 35px; list-style: none; margin: 25px 0; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14.5px; transition: var(--transition-smooth); }
+        .footer-links a:hover { color: var(--gold-glow); }
+
+        @media (max-width: 992px) {
+            .founder-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .founder-img-wrapper { max-width: 320px; margin: 0 auto; }
         }
-
-        .action-float {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: var(--transition);
-        }
-
-        .action-float:hover { transform: scale(1.1); }
-        .float-wa { background-color: #25d366; }
-        .float-call { background-color: #0284c7; }
-
-        footer { background-color: var(--primary-color); color: var(--text-light); padding: 50px 5% 20px 5%; text-align: center; border-top: 3px solid var(--gold-dark); }
-        .footer-links { display: flex; justify-content: center; gap: 40px; list-style: none; margin: 15px 0; flex-wrap: wrap; }
-        .footer-links a { color: var(--text-light); text-decoration: none; }
-        .footer-links a:hover { color: var(--gold-color); }
-
         @media (max-width: 768px) {
-            body { padding-top: 160px; }
+            body { padding-top: 150px; }
+            .animated-title { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
             .nav-links { gap: 15px; flex-wrap: wrap; }
-            .nav-links a { font-size: 14px; }
+            .nav-links a { font-size: 13.5px; }
             .logo { font-size: 22px; }
-            .logo img { height: 50px; }
-            .hero h2 { font-size: 1.6rem; }
-            .founder-grid { grid-template-columns: 1fr; text-align: center; }
-            .founder-img-wrapper { max-width: 250px; margin: 0 auto; }
         }
 
-        /* Global Headings Golden Fix */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--gold-color) !important;
-        }
+        h1, h2, h3, h4, h5, h6 { color: var(--gold-glow) !important; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -540,7 +543,7 @@
         <div class="hero-content">
             <div class="animated-title">Focus on your business, we'll manage your accounts</div>
             <h2>Expert Financial Management for <br><span id="typing-text"></span></h2>
-            <p style="margin-bottom: 25px;">Your premium outsourced corporate accounting department. Professional Bookkeeping, accurate GST Data Prep, Tally entry, and custom executive MIS reporting tailored for small businesses and startups in Prayagraj.</p>
+            <p>Your premium outsourced corporate accounting department. Professional Bookkeeping, accurate GST Data Prep, Tally entry, and custom executive MIS reporting tailored for small businesses and startups in Prayagraj.</p>
             <a href="#appointment" class="cta-btn">Schedule Free Consultation</a>
         </div>
     </section>
@@ -548,7 +551,7 @@
     <section class="section-wrapper" id="about">
         <div class="section-title">About Our Enterprise</div>
         <div class="section-subtitle">A Reliable Financial Partner for Growth</div>
-        <div style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; color: #475569; font-size: 16px;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto; color: #475569; font-size: 16px;">
             <p>We provide a reliable, highly accurate, and affordable alternative to employing a full-time accountant. By streamlining your bookkeeping routines and ensuring timely compliance, we protect your data confidentiality and let you focus entirely on growing your core business operations.</p>
         </div>
     </section>
@@ -556,7 +559,7 @@
     <section class="section-wrapper" id="services">
         <div class="section-title">Our Premium Financial Services</div>
         <div class="section-subtitle">One time services charges based on data profiles</div>
-        
+
         <div class="cards-grid">
             <div class="card">
                 <i class="fa-solid fa-book"></i>
@@ -601,7 +604,7 @@
         </div>
     </section>
 
-    <section class="section-wrapper" style="background-color: #f1f5f9;" id="feed">
+    <section class="section-wrapper" id="feed">
         <div class="section-title">Live Tax & Compliance Feed</div>
         <div class="section-subtitle">Real-time updates registry from desk</div>
         <div class="cards-grid" id="liveFeedContainer">Loading real-time updates registry...</div>
@@ -619,7 +622,7 @@
                     <li><i class="fa-solid fa-check"></i> Expenses Recording</li>
                     <li><i class="fa-solid fa-check"></i> Monthly Tracking Reports</li>
                 </ul>
-                <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Basic</a>
+                <a href="#contact" class="cta-btn" style="padding:12px 30px; font-size:14px;">Select Basic</a>
             </div>
             <div class="card price-card" style="border-top-color: var(--gold-dark);">
                 <h3>Standard Plan</h3>
@@ -630,7 +633,7 @@
                     <li><i class="fa-solid fa-check"></i> Customer & Vendor Matching</li>
                     <li><i class="fa-solid fa-check"></i> Monthly Summary Reports</li>
                 </ul>
-                <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Select Standard</a>
+                <a href="#contact" class="cta-btn" style="padding:12px 30px; font-size:14px;">Select Standard</a>
             </div>
             <div class="card price-card">
                 <h3>Premium Plan</h3>
@@ -642,12 +645,11 @@
                     <li><i class="fa-solid fa-check"></i> Executive MIS Reporting</li>
                     <li><i class="fa-solid fa-check"></i> GST Data Preparation</li>
                 </ul>
-                <a href="#contact" class="cta-btn" style="padding:10px 25px; font-size:14px;">Contact Custom</a>
+                <a href="#contact" class="cta-btn" style="padding:12px 30px; font-size:14px;">Contact Custom</a>
             </div>
         </div>
     </section>
 
-    <!-- Founder Section Moved Here -->
     <section class="section-wrapper" id="founder">
         <div class="section-title">Our Leadership</div>
         <div class="section-subtitle">The Driving Force Behind Your Success</div>
@@ -658,17 +660,16 @@
             <div class="founder-details">
                 <h3>Our Founder</h3>
                 <div class="designation">Chief Financial Consultant & Strategy Head</div>
-                <p style="color: #475569; margin-bottom: 15px; font-size: 15px;">Welcome to Prime Accounting Solutions. We fill the critical gap between complex numbers and clear business scaling strategies. Our dedicated setups make data processing, ledger tracking, and regulatory alignment stress-free.</p>
-                <p style="color: #475569; font-size: 15px;">Our management philosophy ensures you can invest 100% of your energy on operational expansions while our desk manages accounts matching, vendor records, and custom executive MIS summaries with professional accuracy.</p>
+                <p>Welcome to Prime Accounting Solutions. We fill the critical gap between complex numbers and clear business scaling strategies. Our dedicated setups make data processing, ledger tracking, and regulatory alignment stress-free.</p>
+                <p>Our management philosophy ensures you can invest 100% of your energy on operational expansions while our desk manages accounts matching, vendor records, and custom executive MIS summaries with professional accuracy.</p>
             </div>
         </div>
     </section>
 
-    <!-- Book An Appointment Section Moved Below Founder -->
     <section class="section-wrapper" id="appointment">
         <div class="section-title">Book An Appointment</div>
         <div class="section-subtitle">Secure your professional consultation window</div>
-        <div class="appointment-box max-width: 700px; margin: 0 auto;">
+        <div class="appointment-box" style="max-width: 750px; margin: 0 auto;">
             <form id="appointmentForm" class="app-form">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <input type="text" id="aptName" placeholder="Your Name / Enterprise Name" required>
@@ -689,7 +690,6 @@
         </div>
     </section>
 
-    <!-- Client Testimonials & Review Section Fixed As Requested -->
     <section class="section-wrapper" id="testimonials">
         <div class="section-title">Client Testimonials</div>
         <div class="section-subtitle">What local business owners say about our accuracy</div>
@@ -697,21 +697,21 @@
             <div class="testimonial-card">
                 <i class="fa-solid fa-quote-right quote-icon"></i>
                 <div class="stars-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="color:#475569; font-size:14.5px; margin-bottom:15px;">"Prime Accounting team streamlined our entire wholesale item listing and pending bills reconciliation. Highly reliable outsourced service in Prayagraj."</p>
-                <strong style="color:var(--primary-color);">Agrawal Traders</strong>
+                <p>"Prime Accounting team streamlined our entire wholesale item listing and pending bills reconciliation. Highly reliable outsourced service in Prayagraj."</p>
+                <strong>Agrawal Traders</strong>
             </div>
             <div class="testimonial-card">
                 <i class="fa-solid fa-quote-right quote-icon"></i>
                 <div class="stars-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="color:​#ffffff; font-size:14.5px; margin-bottom:15px;">"Their monthly MIS analytics report clarified our actual overhead expenditure leakages. Best structural accounts option for small ventures."</p>
-                <strong style="color:var(--primary-color);">Vedic Retail Solutions</strong>
+                <p>"Their monthly MIS analytics report clarified our actual overhead expenditure leakages. Best structural accounts option for small ventures."</p>
+                <strong>Vedic Retail Solutions</strong>
             </div>
         </div>
 
         <div class="review-widget">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
                 <div>
-                    <h4 style="font-size: 20px; color: var(--gold-color); margin-bottom: 5px;">Satisfied With Our Corporate Support?</h4>
+                    <h4 style="font-size: 20px; color: var(--gold-glow); margin-bottom: 5px;">Satisfied With Our Corporate Support?</h4>
                     <p style="font-size: 14.5px; color: #f8fafc; margin-bottom: 0;">Share your direct experience with us right here instantly.</p>
                 </div>
                 <button type="button" class="review-form-toggle-btn" id="toggleReviewBtn">
@@ -719,13 +719,12 @@
                 </button>
             </div>
 
-            <!-- Embedded Direct Review Form Container -->
             <div class="review-box-container" id="reviewFormContainer">
                 <form id="directReviewForm" class="inner-review-form">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                         <input type="text" id="revName" placeholder="Your Name / Business Name" required>
                         <div>
-                            <label style="display:block; font-size:13px; color:var(--gold-color); margin-bottom:5px;">Select Rating:</label>
+                            <label style="display:block; font-size:13px; color:var(--gold-glow); margin-bottom:5px;">Select Rating:</label>
                             <div class="star-rating-input" id="starRatingInput">
                                 <i class="fa-solid fa-star active" data-rating="1"></i>
                                 <i class="fa-solid fa-star active" data-rating="2"></i>
@@ -785,19 +784,19 @@
                 <div class="contact-info-block">
                     <i class="fa-solid fa-phone"></i>
                     <div>
-                        <h4 style="color:var(--primary-color);">Call/WhatsApp Communication</h4>
-                        <p style="color:#64748b;">+91 6394748563</p>
+                        <h4>Call/WhatsApp Communication</h4>
+                        <p>+91 6394748563</p>
                     </div>
                 </div>
                 <div class="contact-info-block">
                     <i class="fa-solid fa-envelope"></i>
                     <div>
-                        <h4 style="color:var(--primary-color);">Corporate Email Desk</h4>
-                        <p style="color:#64748b;">p.a.solutions@zohomail.in</p>
+                        <h4>Corporate Email Desk</h4>
+                        <p>p.a.solutions@zohomail.in</p>
                     </div>
                 </div>
-                
-                <div style="margin-top: 20px; border-radius: 12px; overflow: hidden; border: 2px solid #cbd5e1; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+
+                <div style="margin-top: 20px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.2699742461615!2d81.861226!3d25.454238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI3JzE1LjMiTiA4McKwNTEnNDAuNCJF!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" width="100%" height="210" style="border:0; display:block;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
@@ -806,9 +805,9 @@
 
     <footer>
         <div class="footer-content">
-            <h3 style="font-size:24px; font-weight:600; color:var(--gold-color); margin-bottom:5px;">Prime Accounting Solutions</h3>
-            <p style="opacity:0.7; font-size:14px;">Professional Bookkeeping, Tally & GST Management Desk</p>
-            
+            <h3 style="font-size:24px; font-weight:600; color:var(--gold-glow); margin-bottom:5px;">Prime Accounting Solutions</h3>
+            <p>Professional Bookkeeping, Tally & GST Management Desk</p>
+
             <div class="social-container">
                 <a href="#" target="_blank" class="social-icon-btn" title="Follow us on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#" target="_blank" class="social-icon-btn" title="Follow us on Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -841,10 +840,8 @@
         const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // --- NEW VISITOR COUNTER LOGIC (DIRECT BYPASS) ---
         async function incrementVisitorCount() {
             try {
-                // 1. Database se current count uthayein
                 const { data: analytics, error: fetchError } = await supabase
                     .from('site_analytics')
                     .select('visitor_count')
@@ -857,7 +854,6 @@
                     const currentCount = analytics.visitor_count || 0;
                     const newCount = currentCount + 1;
 
-                    // 2. Wapas database me direct +1 karke update kar dein
                     const { error: updateError } = await supabase
                         .from('site_analytics')
                         .update({ visitor_count: newCount })
@@ -870,11 +866,8 @@
                 console.error("Counter Error: ", err);
             }
         }
-        // Website load hote hi counter chalayein
         incrementVisitorCount();
 
-
-        // Popup initialization logic 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const popup = document.getElementById('welcomePopup');
@@ -889,7 +882,6 @@
             });
         }
 
-        // FAQ interactive framework toggle logic
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
@@ -902,7 +894,6 @@
             });
         });
 
-        // Typing automation strings
         const phrases = ["Traders & Startups", "Retailers & MSMEs", "Small Businesses"];
         let count = 0; let index = 0; let currentText = ""; let letter = "";
 
@@ -925,12 +916,10 @@
             }
         }());
 
-        // Live Feed Image Fix + Error Bypass
         async function fetchLiveFeed() {
             const feedContainer = document.getElementById("liveFeedContainer");
             if(!feedContainer) return;
             try {
-                // FIXED: Requesting specific columns to bypass the database 'posts' relation bug
                 const { data: posts, error } = await supabase
                     .from('posts')
                     .select('id, title, content, type, category, status, image, created_at')
@@ -955,8 +944,8 @@
                         <div class="feed-card">
                             ${imageTag}
                             <span class="feed-badge badge-${(post.category || 'general').toLowerCase().replace(' ', '')}">${post.category || 'General'}</span>
-                            <h4 style="color:var(--primary-color); margin-bottom:10px; font-size:17px;">${post.title}</h4>
-                            <p style="font-size:14px; color:#475569; white-space:pre-wrap;">${post.content}</p>
+                            <h4 style="margin-bottom:10px; font-size:17px;">${post.title}</h4>
+                            <p style="font-size:14px; white-space:pre-wrap;">${post.content}</p>
                         </div>
                     `;
                 });
@@ -996,8 +985,8 @@
                         <div class="testimonial-card">
                             <i class="fa-solid fa-quote-right quote-icon"></i>
                             <div class="stars-rating">${starIcons}</div>
-                            <p style="color:#475569; font-size:14.5px; margin-bottom:15px;">"${item.review}"</p>
-                            <strong style="color:var(--primary-color);">${item.client_name}</strong>
+                            <p style="font-size:14.5px; margin-bottom:15px;">"${item.review}"</p>
+                            <strong>${item.client_name}</strong>
                             ${item.company_name ? `<br><small style="color:#64748b; font-size:12px;">${item.company_name}</small>` : ''}
                         </div>
                     `;
@@ -1008,7 +997,6 @@
         }
         fetchWebTestimonials();
 
-        // Appointment Form Router
         const aptForm = document.getElementById('appointmentForm');
         if(aptForm) {
             aptForm.addEventListener('submit', function(e) {
@@ -1023,7 +1011,6 @@
             });
         }
 
-        // Contact Box Dispatch Integration Router
         const waForm = document.getElementById('whatsappForm');
         if(waForm) {
             waForm.addEventListener('submit', function(e) {
@@ -1038,7 +1025,6 @@
             });
         }
 
-        // --- REVIEW SECTION LOGIC ---
         let selectedRating = 5;
         const toggleBtn = document.getElementById('toggleReviewBtn');
         const formContainer = document.getElementById('reviewFormContainer');
@@ -1081,6 +1067,6 @@
                 window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');
             });
         }
-</script>
+    </script>
 </body>
 </html>

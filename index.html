@@ -634,6 +634,64 @@ transform:translateY(0);
 }
 
             }
+        .section-tag{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:8px 18px;
+margin-bottom:18px;
+border-radius:30px;
+background:rgba(223,183,76,.12);
+border:1px solid rgba(223,183,76,.35);
+color:#dfb74c;
+font-size:13px;
+font-weight:700;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+.section-tag i{
+font-size:14px;
+    }
+        .about-highlights{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:50px;
+}
+
+.about-card{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(223,183,76,.25);
+border-radius:18px;
+padding:30px 20px;
+text-align:center;
+transition:.35s;
+backdrop-filter:blur(12px);
+}
+
+.about-card:hover{
+transform:translateY(-8px);
+border-color:#dfb74c;
+box-shadow:0 20px 45px rgba(223,183,76,.25);
+}
+
+.about-card i{
+font-size:34px;
+color:#dfb74c;
+margin-bottom:15px;
+}
+
+.about-card h3{
+font-size:32px;
+color:#dfb74c;
+margin:10px 0;
+}
+
+.about-card p{
+color:#ddd;
+margin:0;
+        }
     </style>
 </head>
 <body>
@@ -692,17 +750,37 @@ Professional Accounting, Bookkeeping, GST Data Preparation, Tally Prime, MIS Rep
         <i class="fab fa-whatsapp"></i>
         WhatsApp Now
     </a>
-</div>
-        </div>
-    </section>
-
-    <div class="section-container-fluid" id="about-fluid">
-        <section class="section-wrapper" id="about">
-            <div class="section-title">About Our Enterprise</div>
-            <div class="section-subtitle">A Reliable Financial Partner for Growth</div>
-            <div style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 16px;">
-                <p>We provide a reliable, highly accurate, and affordable alternative to employing a full-time accountant. By streamlining your bookkeeping routines and ensuring timely compliance, we protect your data confidentiality and let you focus entirely on growing your core business operations.</p>
+</div><p>
+Prime Accounting Solutions provides professional Accounting, Bookkeeping, GST Data Preparation, Tally Prime, MIS Reporting, Bank Reconciliation and Financial Management Services. We help businesses maintain accurate financial records with complete confidentiality and timely delivery.
+</p>
             </div>
+        <div class="about-highlights">
+
+    <div class="about-card">
+        <i class="fas fa-briefcase"></i>
+        <h3>9+</h3>
+        <p>Years Experience</p>
+    </div>
+
+    <div class="about-card">
+        <i class="fas fa-users"></i>
+        <h3>100+</h3>
+        <p>Happy Clients</p>
+    </div>
+
+    <div class="about-card">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <h3>5000+</h3>
+        <p>Financial Records</p>
+    </div>
+
+    <div class="about-card">
+        <i class="fas fa-lock"></i>
+        <h3>100%</h3>
+        <p>Confidential Data</p>
+    </div>
+
+        </div>
         </section>
     </div>
 

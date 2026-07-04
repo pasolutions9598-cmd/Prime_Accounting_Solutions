@@ -1231,6 +1231,57 @@ color:#c9c9c9;
 text-transform:uppercase;
 margin-top:3px;
     }
+        /* ===== Premium Navigation Links ===== */
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:28px;
+}
+
+.nav-links a{
+position:relative;
+font-size:15px;
+font-weight:600;
+color:#fff;
+transition:.35s;
+}
+
+.nav-links a:hover{
+color:#dfb74c;
+}
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:50%;
+bottom:-8px;
+width:0;
+height:2px;
+background:linear-gradient(90deg,#fff5c0,#dfb74c,#9e751d);
+transition:.35s;
+transform:translateX(-50%);
+border-radius:10px;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+        header{
+position:sticky;
+top:0;
+z-index:9999;
+backdrop-filter:blur(18px);
+background:rgba(8,8,8,.82);
+border-bottom:1px solid rgba(223,183,76,.15);
+transition:all .35s ease;
+}
+
+header.scrolled{
+padding:8px 0;
+background:rgba(5,5,5,.95);
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
     </style>
 </head>
 <body>
@@ -1817,6 +1868,16 @@ margin-top:3px;
                 window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');
             });
         }
+    </script>
+    <script>
+window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    if (window.scrollY > 60) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+});
     </script>
 </body>
 </html>

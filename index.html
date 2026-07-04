@@ -1191,6 +1191,45 @@ box-shadow:
             .animated-title { font-size: 2rem; }
             .section-title { font-size: 2rem; }
         }
+        /* ===== Premium Logo ===== */
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo img{
+width:70px;
+height:70px;
+border-radius:50%;
+transition:.4s;
+}
+
+.logo:hover img{
+transform:rotate(-8deg) scale(1.08);
+}
+
+.logo-text{
+display:flex;
+flex-direction:column;
+}
+
+.logo-text span{
+font-size:34px;
+font-weight:700;
+background:linear-gradient(135deg,#fff,#dfb74c,#9e751d);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.logo-text small{
+font-size:13px;
+letter-spacing:2px;
+color:#c9c9c9;
+text-transform:uppercase;
+margin-top:3px;
+    }
     </style>
 </head>
 <body>
@@ -1206,9 +1245,12 @@ box-shadow:
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="Logo.png" alt="Prime Accounting Solutions Logo">
-                Prime Accounting Solutions
-            </a>
+    <img src="Logo.png" alt="Prime Accounting Solutions">
+    <div class="logo-text">
+        <span>Prime Accounting</span>
+        <small>Accounting • Tax • Compliance</small>
+    </div>
+</a>
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About Us</a></li>

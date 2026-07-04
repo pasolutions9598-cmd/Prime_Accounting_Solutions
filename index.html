@@ -266,6 +266,9 @@ background:rgba(5,5,5,.82);
 border-bottom:1px solid rgba(223,183,76,.15);
 transition:.35s;
 }
+header{
+padding:12px 0;
+        }
 
 .navbar,
 nav{
@@ -315,7 +318,8 @@ width:100%;
 .hero{
 position:relative;
 overflow:hidden;
-min-height:92vh;
+min-height: 82vh;
+padding: 80px 20px;
 display:flex;
 align-items:center;
 }
@@ -342,9 +346,11 @@ line-height:1.15;
 }
 
 .hero p{
-color:#d8d8d8;
-font-size:18px;
-max-width:700px;
+    max-width:700px;
+    margin:20px auto;
+    font-size:18px;
+    line-height:1.9;
+    color:#d8d8d8;
 }
 
 /* Hero Buttons */
@@ -438,6 +444,9 @@ margin-bottom:12px;
 color:#d5d5d5;
 line-height:1.8;
 }
+        .section-wrapper{
+    padding:70px 0;
+        }
 
 /* Statistics */
 
@@ -909,12 +918,12 @@ font-size:16px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 20px rgba(223, 183, 76, 0.2);
+            box-shadow:0 12px 35px rgba(223,183,76,.45);
             transition: var(--transition);
         }
 
         .cta-btn:hover {
-            transform: translateY(-2px);
+            transform:translateY(-4px) scale(1.03);
             box-shadow: 0 6px 25px rgba(223, 183, 76, 0.4);
         }
 

@@ -238,8 +238,28 @@
             justify-content: center;
             text-align: center;
             padding: 80px 20px;
-        }
 
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at top center, rgba(223,183,76,0.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(255,215,0,0.10), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+}
+
+.hero-content{
+    position:relative;
+    z-index:1;
+    .hero-content{
+    animation:heroFade 1s ease;
+}
+        
         .animated-title {
             font-size: 2.8rem;
             font-weight: 800;
@@ -266,24 +286,36 @@
         }
 
         /* Action Targets (Buttons) */
-        .cta-btn {
-            background: linear-gradient(135deg, var(--gold-color), var(--gold-dark));
-            color: #060a17 !important;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 20px rgba(223, 183, 76, 0.2);
-            transition: var(--transition);
-        }
+        .cta-btn{
+    position:relative;
+    overflow:hidden;
+    transition:all .35s ease;
+}
 
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(223, 183, 76, 0.4);
+.cta-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+    transition:left .6s ease;
+}
+
+.cta-btn:hover::before{
+    left:130%;
+}
+
+.cta-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(223,183,76,.35);
+}
         }
 
         /* Unified Grid Framework with Corporate Glassmorphism */
@@ -530,6 +562,67 @@
             .animated-title { font-size: 2rem; }
             .section-title { font-size: 2rem; }
         }
+        .hero-trust{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+margin:35px 0;
+}
+
+.hero-trust div{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(12px);
+border:1px solid rgba(223,183,76,.25);
+padding:12px 22px;
+border-radius:50px;
+font-size:14px;
+font-weight:600;
+color:#fff;
+transition:.4s;
+}
+
+.hero-trust div:hover{
+transform:translateY(-5px);
+border-color:#dfb74c;
+box-shadow:0 0 25px rgba(223,183,76,.35);
+}
+
+.hero-trust i{
+color:#dfb74c;
+margin-right:8px;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:35px;
+flex-wrap:wrap;
+}
+
+.whatsapp-btn{
+background:#25D366;
+color:#fff!important;
+}
+
+.whatsapp-btn:hover{
+background:#1ebe5d;
+}
+        @keyframes heroFade{
+
+0%{
+opacity:0;
+transform:translateY(40px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
+            }
     </style>
 </head>
 <body>
@@ -563,9 +656,32 @@
     <section class="hero">
         <div class="hero-content">
             <div class="animated-title">Focus on your business, we'll manage your accounts</div>
-            <h2>Expert Financial Management for <br><span id="typing-text"></span></h2>
-            <p>Your premium outsourced corporate accounting department. Professional Bookkeeping, accurate GST Data Prep, Tally entry, and custom executive MIS reporting tailored for small businesses and startups in Prayagraj.</p>
-            <a href="#appointment" class="cta-btn">Schedule Free Consultation</a>
+            <h2>
+Premium Accounting & Bookkeeping Services
+<br>
+<span id="typing-text"></span>
+</h2>
+            <p>
+Professional Accounting, Bookkeeping, GST Data Preparation, Tally Prime, MIS Reporting, Bank Reconciliation and Financial Management Services for Businesses across India. We help you save time, reduce costs and maintain accurate financial records with complete confidentiality.
+</p>
+            <div class="hero-trust">
+    <div><i class="fas fa-award"></i> 9+ Years Experience</div>
+    <div><i class="fas fa-users"></i> 100+ Happy Clients</div>
+    <div><i class="fas fa-shield-halved"></i> 100% Secure Data</div>
+    <div><i class="fas fa-check-circle"></i> 99.9% Accuracy</div>
+</div>
+
+<div class="hero-buttons">
+    <a href="#appointment" class="cta-btn">
+        <i class="fas fa-calendar-check"></i>
+        Book Free Consultation
+    </a>
+
+    <a href="https://wa.me/916394748563" class="cta-btn whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+        WhatsApp Now
+    </a>
+</div>
         </div>
     </section>
 

@@ -519,10 +519,8 @@ box-shadow:
             .animated-title { font-size: 2rem; }
             .section-title { font-size: 2rem; }
         }
-} 
 header.scrolled{
 padding:8px 0;
 background:rgba(5,5,5,.95);
 box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-    </style>

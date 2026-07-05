@@ -254,18 +254,30 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 36px;
-            background: linear-gradient(135deg, #ffffff 30%, var(--gold-primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 25px; /* Thoda size bada kiya visibility ke liye */
+    /* PREMIUM MULTI-LAYER METALLIC GOLD GRADIENT */
+    background: linear-gradient(
+        135deg, 
+        #bf953f 0%, 
+        #fcf6ba 25%, 
+        #b38728 50%, 
+        #fbf5b7 75%, 
+        #aa771c 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    /* HIGH-END 3D TEXT SHADOW AND GLOW */
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8)) 
+            drop-shadow(0px 0px 12px rgba(223, 183, 76, 0.4));
+    letter-spacing: 0.5px;
+}
 
         .logo img {
             height: 120px;
@@ -570,7 +582,28 @@
         /* Premium Footer Interface */
         footer { background-color: #020308; padding: 80px 5% 40px 5%; border-top: 1px solid var(--border-glow); }
         .footer-content { max-width: 1280px; margin: 0 auto; text-align: center; }
-        .footer-logo { font-size: 26px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #fff5c0 0%, #dfb74c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        .footer-logo {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: inline-block;
+    /* SAME PREMIUM METALLIC GOLD GRADIENT */
+    background: linear-gradient(
+        135deg, 
+        #bf953f 0%, 
+        #fcf6ba 25%, 
+        #b38728 50%, 
+        #fbf5b7 75%, 
+        #aa771c 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* MATCHING 3D GLOW EFFECTS */
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8)) 
+            drop-shadow(0px 0px 12px rgba(223, 183, 76, 0.4));
+    letter-spacing: 0.5px;
+}
+
         .social-container { display: flex; justify-content: center; gap: 16px; margin: 30px 0; }
         .social-icon-btn { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; text-decoration: none; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
         .social-icon-btn:hover { background: var(--gold-primary); color: #040712; transform: translateY(-3px); border-color: var(--gold-primary); }

@@ -1,4 +1,3 @@
-<script type="module">  
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'  
   
         const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";  
@@ -238,8 +237,7 @@ e.preventDefault();
                 const waMessage = `*New Client Review Logs*\n\n*Enterprise/Name:* ${name}\n*Rating Score:* ${starString}\n*Feedback Note:* ${message}`;  
                 window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');  
             });  
-        }  
-    </script>  <script>  
+        } 
 window.addEventListener("scroll", function () {  
     const header = document.querySelector("header");  
     if (window.scrollY > 60) {  
@@ -248,4 +246,3 @@ window.addEventListener("scroll", function () {
         header.classList.remove("scrolled");  
     }  
 });  
-</script>

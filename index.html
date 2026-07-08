@@ -1163,6 +1163,22 @@ Reliable Accounting Solutions Across Multiple Business Sectors
         const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
         const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Track Visitor
+async function trackVisitor() {
+  try {
+    await supabase
+      .from("visitors")
+      .insert([
+        {
+          visit_date: new Date().toISOString()
+        }
+      ]);
+  } catch (e) {
+    console.error("Visitor tracking failed:", e);
+  }
+}
+
+trackVisitor();
 
         // --- VISITOR COUNTER REGISTRY ROUTER ---
         async function incrementVisitorCount() {

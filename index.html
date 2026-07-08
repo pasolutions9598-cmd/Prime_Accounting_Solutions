@@ -1165,14 +1165,21 @@ Reliable Accounting Solutions Across Multiple Business Sectors
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
         // Track Visitor
 async function trackVisitor() {
+async function trackVisitor() {
   try {
-    await supabase
+    const { data, error } = await supabase
       .from("visitors")
       .insert([
         {
           visit_date: new Date().toISOString()
         }
       ]);
+
+    console.log("Visitor Insert:", data);
+
+    if (error) {
+      console.error("Supabase Error:", error);
+    }
   } catch (e) {
     console.error("Visitor tracking failed:", e);
   }

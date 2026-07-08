@@ -208,6 +208,16 @@ const { count: testimonialCount } = await supabase
   .select("*", { count: "exact", head: true });
 
 document.getElementById("totalTestimonials").innerText = testimonialCount || 0;
+        // Today's Visitors
+const today = new Date().toISOString().split("T")[0];
+
+const { count: todayVisitors } = await supabase
+  .from("visitors")
+  .select("id", { count: "exact", head: true })
+  .gte("visit_date", today + "T00:00:00")
+  .lt("visit_date", today + "T23:59:59");
+
+document.getElementById("todayVisitors").innerText = todayVisitors || 0;
     } catch (e) { console.error(e); }
 }
 

@@ -1216,16 +1216,16 @@ trackVisitor();
     try {
 
     // Click History
-const { data: clickData, error: clickError } = await supabase
+const { error: clickError } = await supabase
   .from("service_clicks")
   .insert([
     {
       service_name: serviceName
     }
-  ])
-  .select();
+  ]);
 
 if (clickError) {
+    console.error(clickError);
     return;
 }
 

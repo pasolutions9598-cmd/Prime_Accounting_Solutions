@@ -198,10 +198,15 @@ function checkAuth() {
 
 async function loadAnalytics() {
     try {
-        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
-        if(data) document.getElementById("totalVisitors").innerText = data.visitor_count;
-        const { count } = await supabase.from('posts').select('id', { count: 'exact', head: true });
-        document.getElementById("totalPostsCount").innerText = count || 0;
+        const { data } = await supabase
+  .from("site_analytics")
+  .select("visitor_count")
+  .eq("id", "main_site")
+  .maybeSingle();
+
+if (data) {
+    document.getElementById("activeUsers").innerText = data.visitor_count || 0;
+}
         // Total Testimonials
 const { count: testimonialCount } = await supabase
   .from("testimonials")

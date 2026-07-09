@@ -94,6 +94,10 @@ input[type="file"] { display: none; }
 
 </div>
         </div>
+        <div class="card">
+    <h2>📊 Service Performance Analytics</h2>
+    <div id="serviceAnalytics"></div>
+        </div>
 
         <div class="card">
             <h2>✍️ Compose Executive Broadcast</h2>
@@ -223,6 +227,31 @@ const { count: todayVisitors } = await supabase
   .lt("visit_date", today + "T23:59:59");
 
 document.getElementById("todayVisitors").innerText = todayVisitors || 0;
+        // Service Analytics
+const { data: serviceData } = await supabase
+  .from("service_clicks")
+  .select("service_name");
+
+const counts = {};
+
+serviceData?.forEach(item => {
+    counts[item.service_name] = (counts[item.service_name] || 0) + 1;
+});
+
+const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+let html = "";
+
+sorted.forEach(([name, count]) => {
+    html += `
+    <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #e2e8f0;">
+        <span>${name}</span>
+        <strong>${count}</strong>
+    </div>`;
+});
+
+document.getElementById("serviceAnalytics").innerHTML =
+    html || "<p>No service clicks yet.</p>";
     } catch (e) { console.error(e); }
 }
 

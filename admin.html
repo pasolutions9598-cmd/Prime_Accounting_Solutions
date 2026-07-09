@@ -292,9 +292,8 @@ const today = new Date().toISOString().split("T")[0];
 
 const { count: todayVisitors } = await supabase
   .from("visitors")
-  .select("id", { count: "exact", head: true })
-  .gte("visit_date", today + "T00:00:00")
-  .lt("visit_date", today + "T23:59:59");
+  .select("*", { count: "exact", head: true })
+  .like("visit_date", today + "%");
 
 document.getElementById("todayVisitors").innerText = todayVisitors || 0;
         // ================= TOTAL VISITORS =================

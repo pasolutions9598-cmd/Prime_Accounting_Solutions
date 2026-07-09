@@ -1216,7 +1216,7 @@ trackVisitor();
     try {
 
     // Click History
-    const { data: clickData, error: clickError } = await supabase
+const { data: clickData, error: clickError } = await supabase
   .from("service_clicks")
   .insert([
     {
@@ -1225,12 +1225,13 @@ trackVisitor();
   ])
   .select();
 
-console.log("Inserted:", clickData);
+alert("Insert Error: " + JSON.stringify(clickError));
+
+console.log("Inserted Data:", clickData);
+console.log("Insert Error:", clickError);
 
 if (clickError) {
-  console.error("Insert Error:", clickError);
-  alert(clickError.message);
-  return;
+    return;
 }
 
     // Analytics Counter

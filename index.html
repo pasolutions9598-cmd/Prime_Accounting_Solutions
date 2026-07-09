@@ -1225,11 +1225,6 @@ const { data: clickData, error: clickError } = await supabase
   ])
   .select();
 
-alert("Insert Error: " + JSON.stringify(clickError));
-
-console.log("Inserted Data:", clickData);
-console.log("Insert Error:", clickError);
-
 if (clickError) {
     return;
 }

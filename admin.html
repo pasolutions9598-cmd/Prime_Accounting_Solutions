@@ -296,8 +296,8 @@ const { data: todayData, error } = await supabase
   .gte("visit_date", today);
 
 if (!error) {
-    document.getElementById("todayVisitors").innerText =
-        todayData.length;
+    document.getElementById("todayVisitors").innerText = todayData.length;
+document.getElementById("todayVisitorsCard").innerText = todayData.length;
 }
         // ================= TOTAL VISITORS =================
 const { count: totalVisitors } = await supabase

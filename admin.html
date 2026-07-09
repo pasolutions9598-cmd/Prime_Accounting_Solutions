@@ -290,12 +290,15 @@ document.getElementById("totalTestimonials").innerText = testimonialCount || 0;
         // Today's Visitors
 const today = new Date().toISOString().split("T")[0];
 
-const { count: todayVisitors } = await supabase
+const { data: todayData, error } = await supabase
   .from("visitors")
-  .select("*", { count: "exact", head: true })
-  .like("visit_date", today + "%");
+  .select("id")
+  .gte("visit_date", today);
 
-document.getElementById("todayVisitors").innerText = todayVisitors || 0;
+if (!error) {
+    document.getElementById("todayVisitors").innerText =
+        todayData.length;
+}
         // ================= TOTAL VISITORS =================
 const { count: totalVisitors } = await supabase
   .from("visitors")

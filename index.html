@@ -1210,7 +1210,7 @@ async function trackVisitor() {
 }
 
 trackVisitor();
-        async function trackServiceClick(serviceName) {
+        window.trackServiceClick = async function(serviceName) {
   try {
     const { error } = await supabase
       .from("service_clicks")

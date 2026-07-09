@@ -297,6 +297,59 @@ const { count: todayVisitors } = await supabase
   .lt("visit_date", today + "T23:59:59");
 
 document.getElementById("todayVisitors").innerText = todayVisitors || 0;
+        // ================= TOTAL VISITORS =================
+const { count: totalVisitors } = await supabase
+  .from("visitors")
+  .select("*", { count: "exact", head: true });
+
+document.getElementById("totalVisitorsCard").innerText =
+    totalVisitors || 0;
+
+
+// ================= TOTAL SERVICE CLICKS =================
+const { count: totalClicks } = await supabase
+  .from("service_clicks")
+  .select("*", { count: "exact", head: true });
+
+document.getElementById("totalServiceClicks").innerText =
+    totalClicks || 0;
+
+
+// ================= MOST POPULAR SERVICE =================
+const { data: topServiceData } = await supabase
+  .from("service_analytics")
+  .select("service_name, view_count")
+  .order("view_count", { ascending: false })
+  .limit(1);
+
+if (topServiceData && topServiceData.length > 0) {
+    document.getElementById("topService").innerText =
+        topServiceData[0].service_name;
+}
+
+
+// ================= TOTAL POSTS =================
+const { count: postsCount } = await supabase
+  .from("posts")
+  .select("*", { count: "exact", head: true })
+  .eq("status", "published");
+
+document.getElementById("publishedPosts").innerText =
+    postsCount || 0;
+
+
+// ================= TOTAL TESTIMONIALS =================
+const { count: testimonialTotal } = await supabase
+  .from("testimonials")
+  .select("*", { count: "exact", head: true });
+
+document.getElementById("dashboardTestimonials").innerText =
+    testimonialTotal || 0;
+
+
+// ================= PUBLISHED REVIEWS =================
+document.getElementById("publishedReviews").innerText =
+    testimonialTotal || 0;
         // Service Analytics
 const { data: serviceData } = await supabase
   .from("service_clicks")

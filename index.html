@@ -1212,7 +1212,9 @@ async function trackVisitor() {
 trackVisitor();
         window.trackServiceClick = async function(serviceName) {
   try {
-    const { error } = await supabase
+
+    // Click History
+    await supabase
       .from("service_clicks")
       .insert([
         {
@@ -1220,13 +1222,26 @@ trackVisitor();
         }
       ]);
 
-    if (error) {
-      console.error(error);
+    // Analytics Counter
+    const { data, error } = await supabase
+      .from("service_analytics")
+      .select("view_count")
+      .eq("service_name", serviceName)
+      .single();
+
+    if (!error && data) {
+      await supabase
+        .from("service_analytics")
+        .update({
+          view_count: data.view_count + 1
+        })
+        .eq("service_name", serviceName);
     }
+
   } catch (e) {
     console.error(e);
   }
-        }
+}
 
         // --- VISITOR COUNTER REGISTRY ROUTER ---
         async function incrementVisitorCount() {

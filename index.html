@@ -1210,6 +1210,23 @@ async function trackVisitor() {
 }
 
 trackVisitor();
+        async function trackServiceClick(serviceName) {
+  try {
+    const { error } = await supabase
+      .from("service_clicks")
+      .insert([
+        {
+          service_name: serviceName
+        }
+      ]);
+
+    if (error) {
+      console.error(error);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+        }
 
         // --- VISITOR COUNTER REGISTRY ROUTER ---
         async function incrementVisitorCount() {

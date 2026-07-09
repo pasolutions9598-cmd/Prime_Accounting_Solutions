@@ -377,6 +377,66 @@ sorted.forEach(([name, count]) => {
 
 document.getElementById("serviceAnalytics").innerHTML =
     html || "<p>No service clicks yet.</p>";
+        // ================= TOP 10 SERVICES =================
+const { data: topServices } = await supabase
+  .from("service_analytics")
+  .select("service_name, view_count")
+  .order("view_count", { ascending: false })
+  .limit(10);
+
+let topServicesHTML = "";
+
+topServices?.forEach((item, index) => {
+    topServicesHTML += `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 15px;margin-bottom:8px;background:#f8fafc;border-radius:10px;">
+        <span><strong>${index + 1}.</strong> ${item.service_name}</span>
+        <strong>${item.view_count}</strong>
+    </div>`;
+});
+
+document.getElementById("topServicesList").innerHTML =
+    topServicesHTML || "<p>No data available.</p>";
+
+
+// ================= RECENT VISITORS =================
+const { data: recentVisitors } = await supabase
+  .from("visitors")
+  .select("visit_date")
+  .order("visit_date", { ascending: false })
+  .limit(10);
+
+let visitorHTML = "";
+
+recentVisitors?.forEach(item => {
+    visitorHTML += `
+    <div style="padding:10px;border-bottom:1px solid #e2e8f0;">
+        👤 ${new Date(item.visit_date).toLocaleString()}
+    </div>`;
+});
+
+document.getElementById("recentVisitorsList").innerHTML =
+    visitorHTML || "<p>No visitor data.</p>";
+
+
+// ================= RECENT SERVICE CLICKS =================
+const { data: recentClicks } = await supabase
+  .from("service_clicks")
+  .select("service_name, created_at")
+  .order("created_at", { ascending: false })
+  .limit(10);
+
+let clickHTML = "";
+
+recentClicks?.forEach(item => {
+    clickHTML += `
+    <div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #e2e8f0;">
+        <span>${item.service_name}</span>
+        <small>${new Date(item.created_at).toLocaleString()}</small>
+    </div>`;
+});
+
+document.getElementById("recentServiceClicks").innerHTML =
+    clickHTML || "<p>No service click data.</p>";
     } catch (e) { console.error(e); }
 }
 

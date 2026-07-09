@@ -83,11 +83,6 @@ input[type="file"] { display: none; }
     </div>
 
     <div class="stat-card">
-    <div class="stat-title">📄 Most Viewed Page</div>
-    <div class="stat-number" id="mostViewedPage">-</div>
-</div>
-
-    <div class="stat-card">
         <div class="stat-title">⭐ Total Testimonials</div>
         <div class="stat-number" id="totalTestimonials">0</div>
     </div>
@@ -135,6 +130,81 @@ input[type="file"] { display: none; }
             <button class="publish-btn" onclick="window.saveContent('published')" id="submitBtn">Deploy Live Broadcast</button>
             <button class="draft-btn" onclick="window.saveContent('draft')">Store to Drafts</button>
         </div>
+
+        <!-- ===================== ANALYTICS DASHBOARD ===================== -->
+<div class="card">
+    <h2>📊 Business Analytics Dashboard</h2>
+
+    <div class="analytics-grid">
+
+        <div class="stat-card visitors">
+            <div class="stat-title">👥 Total Visitors</div>
+            <div class="stat-number" id="totalVisitorsCard">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">📅 Today's Visitors</div>
+            <div class="stat-number" id="todayVisitorsCard">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">🖱 Total Service Clicks</div>
+            <div class="stat-number" id="totalServiceClicks">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">🔥 Most Popular Service</div>
+            <div class="stat-number" id="topService">-</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">⭐ Published Reviews</div>
+            <div class="stat-number" id="publishedReviews">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">💬 Total Testimonials</div>
+            <div class="stat-number" id="dashboardTestimonials">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">📰 Published Posts</div>
+            <div class="stat-number" id="publishedPosts">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">📈 Active Services</div>
+            <div class="stat-number" id="activeServices">12</div>
+        </div>
+
+    </div>
+
+    <hr style="margin:35px 0;border:none;border-top:1px solid #e2e8f0;">
+
+    <h3 style="margin-bottom:20px;font-family:'Outfit';color:#002d72;">
+        🔥 Top 10 Most Viewed Services
+    </h3>
+
+    <div id="topServicesList"></div>
+
+    <hr style="margin:35px 0;border:none;border-top:1px solid #e2e8f0;">
+
+    <h3 style="margin-bottom:20px;font-family:'Outfit';color:#002d72;">
+        🕒 Recent Visitor Activity
+    </h3>
+
+    <div id="recentVisitorsList"></div>
+
+    <hr style="margin:35px 0;border:none;border-top:1px solid #e2e8f0;">
+
+    <h3 style="margin-bottom:20px;font-family:'Outfit';color:#002d72;">
+        🖱 Recent Service Clicks
+    </h3>
+
+    <div id="recentServiceClicks"></div>
+
+</div>
+<!-- =================== END ANALYTICS DASHBOARD =================== -->
 
         <div class="card">
             <h2>🗄️ Stream Management Registry</h2>

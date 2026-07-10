@@ -395,13 +395,47 @@ input[type="file"] { display: none; }
         📋 Latest Contact Enquiries
     </h3>
 
-    <div id="contactLeadsContainer">
+    <div style="overflow-x:auto;">
 
-        <p style="color:#64748b;">
-            No enquiries received yet.
-        </p>
+<table style="width:100%;border-collapse:collapse;">
 
-    </div>
+<thead>
+
+<tr style="background:#071630;color:#dfb74c;">
+
+<th style="padding:14px;">Name</th>
+
+<th style="padding:14px;">Company</th>
+
+<th style="padding:14px;">Phone</th>
+
+<th style="padding:14px;">Status</th>
+
+<th style="padding:14px;">Date</th>
+
+<th style="padding:14px;">Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="contactLeadsContainer">
+
+<tr>
+
+<td colspan="6" style="padding:25px;text-align:center;color:#64748b;">
+
+Loading Leads...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
 
 </div>
     

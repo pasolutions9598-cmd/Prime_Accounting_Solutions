@@ -421,8 +421,8 @@ document.getElementById("recentVisitorsList").innerHTML =
 // ================= RECENT SERVICE CLICKS =================
 const { data: recentClicks } = await supabase
   .from("service_clicks")
-  .select("service_name, created_at")
-  .order("created_at", { ascending: false })
+  .select("service_name, clicked_at")
+  .order("clicked_at", { ascending: false })
   .limit(10);
 
 let clickHTML = "";
@@ -431,9 +431,12 @@ recentClicks?.forEach(item => {
     clickHTML += `
     <div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #e2e8f0;">
         <span>${item.service_name}</span>
-        <small>${new Date(item.created_at).toLocaleString()}</small>
+        <small>${new Date(item.clicked_at).toLocaleString()}</small>
     </div>`;
 });
+
+document.getElementById("recentServiceClicks").innerHTML =
+    clickHTML || "<p>No service click data.</p>";
 
 document.getElementById("recentServiceClicks").innerHTML =
     clickHTML || "<p>No service click data.</p>";

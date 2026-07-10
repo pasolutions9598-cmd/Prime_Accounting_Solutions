@@ -644,6 +644,14 @@ const ADMIN_PASSWORD = "aqibsolutions@9598";
     }
 
     }
+    if(localStorage.getItem("prime_admin_logged") === "yes"){
+
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("adminPanel").style.display="block";
+
+    loadDashboardCards();
+
+    }
 
 function updateDateTime(){
 

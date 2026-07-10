@@ -381,6 +381,14 @@ color:#ffffff;
     <canvas id="visitorChart" height="100"></canvas>
 
 </div>
+
+<div class="card">
+    <h2>🆕 Recent Leads</h2>
+
+    <div id="recentLeadsList">
+        Loading recent leads...
+    </div>
+</div>
     
 <div class="container">
     <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto;">
@@ -1017,6 +1025,39 @@ if (ctx) {
     });
 
 }
+
+        let recentHTML = "";
+
+leads?.slice(0, 5).forEach(lead => {
+
+    recentHTML += `
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:12px 0;
+        border-bottom:1px solid #e2e8f0;">
+
+        <div>
+            <strong>${lead.name}</strong><br>
+            <small>${lead.company || "-"}</small>
+        </div>
+
+        <div style="text-align:right;">
+            <span style="
+                background:#dcfce7;
+                padding:4px 10px;
+                border-radius:20px;
+                font-size:12px;">
+                ${lead.status}
+            </span>
+        </div>
+
+    </div>`;
+});
+
+document.getElementById("recentLeadsList").innerHTML =
+    recentHTML || "<p>No recent leads.</p>";
     } catch (e) { console.error(e); }
 }
 

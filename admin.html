@@ -430,6 +430,61 @@ Loading Leads...
 </td>
 
 </tr>
+    <!-- ================= LEAD DETAILS MODAL ================= -->
+
+<div id="leadModal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.65);
+            z-index:99999;
+            justify-content:center;
+            align-items:center;
+            padding:20px;">
+
+    <div id="leadModalBox"
+         style="background:#ffffff;
+                width:100%;
+                max-width:650px;
+                border-radius:20px;
+                overflow:hidden;
+                box-shadow:0 25px 60px rgba(0,0,0,.30);">
+
+        <div style="background:#071630;
+                    color:#dfb74c;
+                    padding:18px 24px;
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;">
+
+            <h2 style="margin:0;font-family:'Outfit',sans-serif;">
+                📋 Lead Details
+            </h2>
+
+            <button
+                onclick="document.getElementById('leadModal').style.display='none'"
+                style="background:none;
+                       border:none;
+                       color:white;
+                       font-size:28px;
+                       cursor:pointer;">
+                ×
+            </button>
+
+        </div>
+
+        <div id="leadModalContent"
+             style="padding:25px;">
+
+            Loading...
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= END MODAL ================= -->
 
 </tbody>
 
@@ -829,9 +884,63 @@ window.editPost = async function(id, encTitle, encContent) {
         window.loadPosts();
     }
 }
-window.viewLead = function(id){
+window.viewLead = async function(id) {
 
-    alert("Lead ID : " + id);
+    const { data, error } = await supabase
+        .from("leads")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error || !data) {
+        alert("Lead not found.");
+        return;
+    }
+
+    document.getElementById("leadModalContent").innerHTML = `
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+
+            <div>
+                <strong>👤 Client Name</strong><br>
+                ${data.name || "-"}
+            </div>
+
+            <div>
+                <strong>🏢 Company</strong><br>
+                ${data.company || "-"}
+            </div>
+
+            <div>
+                <strong>📧 Email</strong><br>
+                ${data.email || "-"}
+            </div>
+
+            <div>
+                <strong>📞 Phone</strong><br>
+                ${data.phone || "-"}
+            </div>
+
+            <div style="grid-column:1/3;">
+                <strong>💬 Message</strong><br><br>
+                ${data.message || "-"}
+            </div>
+
+            <div>
+                <strong>🟢 Status</strong><br>
+                ${data.status}
+            </div>
+
+            <div>
+                <strong>📅 Date</strong><br>
+                ${new Date(data.created_at).toLocaleString()}
+            </div>
+
+        </div>
+
+    `;
+
+    document.getElementById("leadModal").style.display = "flex";
 
 }
 checkAuth();

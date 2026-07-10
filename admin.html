@@ -47,11 +47,150 @@ input[type="file"] { display: none; }
 .delete-btn { background: #fee2e2; color: #ef4444; }
 .delete-btn:hover { background: #ef4444; color: white; }
 .force-live-btn { background: #dcfce7; color: #15803d; }
-</style>
+/* ================= PREMIUM HEADER ================= */
+
+.premium-header{
+    background:linear-gradient(135deg,#071630 0%,#0b1f45 60%,#002d72 100%);
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 35px;
+    box-shadow:0 8px 30px rgba(0,0,0,.18);
+    border-bottom:3px solid #d4af37;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.header-logo{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+}
+
+.brand-info h1{
+    margin:0;
+    font-family:'Outfit',sans-serif;
+    font-size:28px;
+    font-weight:700;
+    color:#ffffff;
+}
+
+.brand-info p{
+    margin-top:5px;
+    color:#d4af37;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.status-box{
+    background:rgba(255,255,255,.08);
+    padding:10px 18px;
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    backdrop-filter:blur(12px);
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:0 0 12px #22c55e;
+}
+
+.admin-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:rgba(255,255,255,.08);
+    padding:10px 16px;
+    border-radius:16px;
+    backdrop-filter:blur(12px);
+}
+
+.admin-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#d4af37;
+    color:#071630;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.admin-box strong{
+    display:block;
+}
+
+.admin-box small{
+    color:#dbeafe;
+}
+</style>    
 </head>
 <body>
 
-<div class="header">Prime Accounting Solutions — Dashboard</div>
+<header class="premium-header">
+
+    <div class="header-left">
+
+        <img src="images/pas-gold-Logo.png"
+             alt="Prime Accounting Solutions"
+             class="header-Logo">
+
+        <div class="brand-info">
+
+            <h1>Prime Accounting Solutions</h1>
+
+            <p>Premium Admin Control Center</p>
+
+        </div>
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="status-box">
+            <span class="status-dot"></span>
+            System Online
+        </div>
+
+        <div class="admin-box">
+
+            <div class="admin-avatar">
+                👤
+            </div>
+
+            <div>
+
+                <strong>Administrator</strong>
+
+                <small>Secure Session</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
 
 <div class="container">
     <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto;">

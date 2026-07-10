@@ -189,6 +189,79 @@ font-size:28px;
 display:block;
 margin-bottom:8px;
 }
+
+    .quick-actions{
+max-width:1100px;
+margin:20px auto;
+padding:0 20px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.quick-actions button{
+flex:1;
+min-width:180px;
+background:linear-gradient(135deg,#071630,#002d72);
+color:#dfb74c;
+padding:15px;
+border:none;
+border-radius:14px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.quick-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(0,45,114,.25);
+}
+
+    .notification-bar{
+
+max-width:1100px;
+
+margin:18px auto;
+
+padding:14px 20px;
+
+background:linear-gradient(135deg,#071630,#002d72);
+
+border-radius:16px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+color:#fff;
+
+}
+
+.notification-icon{
+
+font-size:28px;
+
+color:#dfb74c;
+
+}
+
+.notification-text{
+
+flex:1;
+
+font-weight:600;
+
+font-size:15px;
+
+}
+
+.notification-text marquee{
+
+color:#ffffff;
+
+}
 </style>    
 </head>
 <body>
@@ -263,6 +336,44 @@ margin-bottom:8px;
 
     </div>
 
+<div class="quick-actions">
+
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        📝 New Post
+    </button>
+
+    <button onclick="document.getElementById('filterCategory').scrollIntoView({behavior:'smooth'})">
+        📰 Manage Posts
+    </button>
+
+    <button onclick="document.getElementById('contactLeadsContainer').scrollIntoView({behavior:'smooth'})">
+        📋 View Leads
+    </button>
+
+    <button onclick="location.reload()">
+        🔄 Refresh Dashboard
+    </button>
+
+</div>
+
+    <div class="notification-bar">
+
+    <div class="notification-icon">🔔</div>
+
+    <div class="notification-text">
+
+        <marquee id="liveNotification"
+                 behavior="scroll"
+                 direction="left">
+
+            Loading latest business notifications...
+
+        </marquee>
+
+    </div>
+
+    </div>
+    
 <div class="container">
     <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto;">
         <h2>Admin Access</h2>
@@ -1154,6 +1265,25 @@ document.getElementById("greetingText").innerText =
 updateDateTime();
 
 setInterval(updateDateTime,1000);
+
+    function updateNotification(){
+
+const visitors =
+document.getElementById("totalVisitorsCard")?.innerText || 0;
+
+const leads =
+document.getElementById("totalLeads")?.innerText || 0;
+
+const posts =
+document.getElementById("publishedPosts")?.innerText || 0;
+
+document.getElementById("liveNotification").innerText =
+
+`📊 Visitors : ${visitors} | 📋 Leads : ${leads} | 📰 Published Posts : ${posts} | 🟢 Prime Accounting Solutions Admin Dashboard Running Successfully`;
+
+}
+
+setInterval(updateNotification,3000);
 checkAuth();
 </script>
 </body>

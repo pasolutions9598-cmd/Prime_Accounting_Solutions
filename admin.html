@@ -235,7 +235,8 @@ body{
 
 #dashboardContent{
     padding:35px;
-    }
+}
+
     .menu-item{
 
 display:block;
@@ -266,7 +267,7 @@ padding-left:24px;
 
 color:#dfb74c;
 
-    }
+}
     .header-left h2{
     font-family:'Outfit',sans-serif;
     color:#071630;
@@ -330,7 +331,7 @@ color:#dfb74c;
 
 .admin-profile small{
     color:#64748b;
-    }
+}
     .dashboard-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -374,8 +375,7 @@ color:#dfb74c;
 .card-info p{
     color:#64748b;
     margin-top:6px;
-    }
-
+}
 </style>
 
 </head>
@@ -456,7 +456,6 @@ color:#dfb74c;
 </div>
 
 </div>
-
     <!-- Sidebar -->
 
     <aside id="sidebar">
@@ -515,7 +514,7 @@ Premium Admin Panel
         <!-- Header -->
 
         <header id="topHeader">
-            <div class="header-left">
+<div class="header-left">
 
     <div>
         <h2 id="greetingText">Welcome, Administrator 👋</h2>
@@ -551,13 +550,12 @@ Premium Admin Panel
     </div>
 
 </div>
-
         </header>
 
         <!-- Dashboard -->
 
         <section id="dashboardContent">
-            <div class="dashboard-grid">
+<div class="dashboard-grid">
 
     <div class="dashboard-card">
         <div class="card-icon">👥</div>
@@ -610,7 +608,6 @@ Premium Admin Panel
 </div>
 
 <div id="dashboardWidgets"></div>
-
         </section>
 
     </main>
@@ -621,9 +618,11 @@ Premium Admin Panel
 
 
 <script type="module">
+
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
-    window.loginAdmin = function(){
+
+window.loginAdmin = function(){
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
@@ -643,7 +642,7 @@ const ADMIN_PASSWORD = "aqibsolutions@9598";
 
     }
 
-    }
+}
     if(localStorage.getItem("prime_admin_logged") === "yes"){
 
     document.getElementById("loginPage").style.display="none";
@@ -651,31 +650,9 @@ const ADMIN_PASSWORD = "aqibsolutions@9598";
 
     loadDashboardCards();
 
-    }
-
-function updateDateTime(){
-
-    const now = new Date();
-
-    document.getElementById("liveDateTime").innerText =
-        now.toLocaleString();
-
-    let greeting = "Good Evening";
-
-    if(now.getHours() < 12){
-        greeting = "Good Morning";
-    }else if(now.getHours() < 17){
-        greeting = "Good Afternoon";
-    }
-
-    document.getElementById("greetingText").innerText =
-        `${greeting}, Administrator 👋`;
-}
-
-updateDateTime();
-
-setInterval(updateDateTime,1000);
-    async function loadDashboardCards(){
+                             }
+    
+async function loadDashboardCards(){
 
     // ===== Visitors =====
     const { count: visitors } = await supabase
@@ -741,7 +718,32 @@ setInterval(updateDateTime,1000);
 
     }
 
+}
+    
+    function updateDateTime(){
+
+    const now = new Date();
+
+    document.getElementById("liveDateTime").innerText =
+        now.toLocaleString();
+
+    let greeting = "Good Evening";
+
+    if(now.getHours() < 12){
+        greeting = "Good Morning";
+    }else if(now.getHours() < 17){
+        greeting = "Good Afternoon";
     }
+
+    document.getElementById("greetingText").innerText =
+        `${greeting}, Administrator 👋`;
+}
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);
+
+/* Phase 3 JavaScript */
 
 </script>
 

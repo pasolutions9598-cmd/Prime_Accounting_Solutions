@@ -1004,6 +1004,8 @@ Reliable Accounting Solutions Across Multiple Business Sectors
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                             <input type="text" id="aptName" placeholder="Your Name / Enterprise Name" required>
                             <input type="text" id="aptPhone" placeholder="Mobile Number" required>
+                            <label>Company Name</label>
+                            <input type="text"  id="aptCompany"  placeholder="Enter Company Name">
                         </div>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                             <input type="date" id="aptDate" required>
@@ -1415,6 +1417,7 @@ if (aptForm) {
 
         const name = document.getElementById('aptName').value;
         const phone = document.getElementById('aptPhone').value;
+        const company = document.getElementById('aptCompany').value;
         const date = document.getElementById('aptDate').value;
         const service = document.getElementById('aptService').value;
 
@@ -1427,6 +1430,7 @@ if (aptForm) {
                     name: name,
                     email: "",
                     phone: phone,
+                    company: company,
                     company: "Free Consultation",
                     message: `Appointment Date: ${date}\nService: ${service}`,
                     status: "New"

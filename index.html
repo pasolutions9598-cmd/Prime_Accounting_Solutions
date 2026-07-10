@@ -1420,18 +1420,57 @@ if (clickError) {
 
         // Standard Contact Communications Engine
         const waForm = document.getElementById('whatsappForm');
-        if(waForm) {
-            waForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('formName').value;
-                const email = document.getElementById('formEmail').value;
-                const phone = document.getElementById('formPhone').value;
-                const msg = document.getElementById('formMessage').value;
 
-                const textMessage = `*New Enquiry Received* \n\n*Name/Enterprise:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Message:* ${msg}`;
-                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`, '_blank');
-            });
-        }
+if (waForm) {
+
+    waForm.addEventListener('submit', async function(e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById('formName').value;
+        const email = document.getElementById('formEmail').value;
+        const phone = document.getElementById('formPhone').value;
+        const msg = document.getElementById('formMessage').value;
+
+        // ================= SAVE LEAD TO SUPABASE =================
+
+        await supabase
+            .from("leads")
+            .insert([
+                {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    company: "",
+                    message: msg,
+                    status: "New"
+                }
+            ]);
+
+        // ================= WHATSAPP =================
+
+        const textMessage =
+`*New Enquiry Received*
+
+*Name:* ${name}
+*Email:* ${email}
+*Phone:* ${phone}
+
+*Message:*
+${msg}`;
+
+        window.open(
+            `https://wa.me/916394748563?text=${encodeURIComponent(textMessage)}`,
+            "_blank"
+        );
+
+        // ================= RESET FORM =================
+
+        waForm.reset();
+
+    });
+
+}
 
         // Review Widget User Interactivity Logic Array
         let selectedRating = 5;

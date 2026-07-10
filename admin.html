@@ -435,27 +435,7 @@ color:#dfb74c;
 
 <div id="adminPanel" style="display:none;">
 
-<div class="layout">
 
-    <aside id="sidebar">
-
-    </aside>
-
-    <main id="mainContent">
-
-        <header id="topHeader">
-
-        </header>
-
-        <section id="dashboardContent">
-
-        </section>
-
-    </main>
-
-</div>
-
-</div>
     <!-- Sidebar -->
 
     <aside id="sidebar">
@@ -501,7 +481,7 @@ Premium Admin Panel
 
 <a class="menu-item">⚙ Settings</a>
 
-<a class="menu-item">🚪 Logout</a>
+<a class="menu-item" onclick="logoutAdmin()">🚪 Logout</a>
 
 </nav>
 
@@ -618,6 +598,12 @@ Premium Admin Panel
 
 
 <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
+const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
@@ -635,6 +621,7 @@ window.loginAdmin = function(){
         document.getElementById("adminPanel").style.display="block";
 
         loadDashboardCards();
+        updateDateTime();
 
     }else{
 
@@ -743,7 +730,13 @@ updateDateTime();
 
 setInterval(updateDateTime,1000);
 
-/* Phase 3 JavaScript */
+window.logoutAdmin = function () {
+
+    localStorage.removeItem("prime_admin_logged");
+
+    location.reload();
+
+};
 
 </script>
 

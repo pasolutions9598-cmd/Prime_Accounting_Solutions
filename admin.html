@@ -623,6 +623,27 @@ Premium Admin Panel
 <script type="module">
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
 const ADMIN_PASSWORD = "aqibsolutions@9598";
+    window.loginAdmin = function(){
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD){
+
+        localStorage.setItem("prime_admin_logged","yes");
+
+        document.getElementById("loginPage").style.display="none";
+        document.getElementById("adminPanel").style.display="block";
+
+        loadDashboardCards();
+
+    }else{
+
+        alert("Invalid Email or Password");
+
+    }
+
+    }
 
 function updateDateTime(){
 

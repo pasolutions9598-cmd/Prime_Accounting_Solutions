@@ -640,6 +640,18 @@ window.loginAdmin = function(){
                              }
     
 async function loadDashboardCards(){
+    // ===== Today's Visitors =====
+const today = new Date().toISOString().split("T")[0];
+
+const { count: todayVisitors } = await supabase
+.from("visitors")
+.select("*",{count:"exact",head:true})
+.gte("visit_date",today);
+
+if(document.getElementById("todayVisitorsCard")){
+    document.getElementById("todayVisitorsCard").innerText =
+    todayVisitors || 0;
+}
 
     // ===== Visitors =====
     const { count: visitors } = await supabase
@@ -705,6 +717,48 @@ async function loadDashboardCards(){
 
     }
 
+}// ===== New Leads =====
+const { count:newLeads } = await supabase
+.from("leads")
+.select("*",{count:"exact",head:true})
+.eq("status","New");
+
+if(document.getElementById("newLeads")){
+document.getElementById("newLeads").innerText =
+newLeads || 0;
+}
+
+    // ===== Contacted Leads =====
+const { count:contacted } = await supabase
+.from("leads")
+.select("*",{count:"exact",head:true})
+.eq("status","Contacted");
+
+if(document.getElementById("contactedLeads")){
+document.getElementById("contactedLeads").innerText =
+contacted || 0;
+}
+
+    // ===== Converted Leads =====
+const { count:converted } = await supabase
+.from("leads")
+.select("*",{count:"exact",head:true})
+.eq("status","Converted");
+
+if(document.getElementById("convertedLeads")){
+document.getElementById("convertedLeads").innerText =
+converted || 0;
+}
+
+// ===== Closed Leads =====
+const { count:closed } = await supabase
+.from("leads")
+.select("*",{count:"exact",head:true})
+.eq("status","Closed");
+
+if(document.getElementById("closedLeads")){
+document.getElementById("closedLeads").innerText =
+closed || 0;
 }
     
     function updateDateTime(){
@@ -726,9 +780,160 @@ async function loadDashboardCards(){
         `${greeting}, Administrator 👋`;
 }
 
+    // ===== LOAD LEADS =====
+
+async function loadLeads(){
+
+const { data: leads, error } = await supabase
+.from("leads")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error){
+console.error(error);
+return;
+}
+
+const tbody =
+document.getElementById("contactLeadsContainer");
+
+if(!tbody) return;
+
+if(!leads || leads.length===0){
+
+tbody.innerHTML=`
+<tr>
+<td colspan="6" style="text-align:center;padding:20px;">
+No Leads Found
+</td>
+</tr>`;
+
+return;
+
+}
+
+let html="";
+
+leads.forEach(item=>{
+
+html+=`
+<tr>
+
+<td>${item.name}</td>
+
+<td>${item.company||"-"}</td>
+
+<td>${item.phone}</td>
+
+<td>${item.status}</td>
+
+<td>${new Date(item.created_at).toLocaleDateString()}</td>
+
+<td>
+<button onclick="viewLead('${item.id}')">
+View
+</button>
+</td>
+
+</tr>
+`;
+
+});
+
+tbody.innerHTML=html;
+
+}
+
 updateDateTime();
 
 setInterval(updateDateTime,1000);
+    // ================= ADMIN LOGIN =================
+
+function checkAuth() {
+
+    const logged =
+        localStorage.getItem("prime_admin_logged");
+
+    if (logged !== "true") {
+
+        document.body.innerHTML = `
+        <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#081b44;
+        color:white;
+        font-family:Arial;">
+
+            <div style="
+            background:white;
+            color:#111827;
+            padding:30px;
+            border-radius:14px;
+            width:320px;
+            box-shadow:0 10px 30px rgba(0,0,0,.25);">
+
+                <h2 style="margin-bottom:20px;text-align:center;">
+                Admin Login
+                </h2>
+
+                <input
+                id="adminPassword"
+                type="password"
+                placeholder="Enter Password"
+                style="
+                width:100%;
+                padding:12px;
+                border:1px solid #ccc;
+                border-radius:8px;
+                margin-bottom:15px;">
+
+                <button
+                onclick="loginAdmin()"
+                style="
+                width:100%;
+                padding:12px;
+                background:#002d72;
+                color:white;
+                border:none;
+                border-radius:8px;
+                cursor:pointer;">
+
+                Login
+
+                </button>
+
+            </div>
+
+        </div>`;
+    }
+
+}
+
+window.loginAdmin = function () {
+
+    const pass =
+        document.getElementById("adminPassword").value;
+
+    if (pass === "PAS@2026") {
+
+        localStorage.setItem(
+            "prime_admin_logged",
+            "true"
+        );
+
+        location.reload();
+
+    } else {
+
+        alert("Wrong Password");
+
+    }
+
+};
+
+checkAuth();
 
 window.logoutAdmin = function () {
 

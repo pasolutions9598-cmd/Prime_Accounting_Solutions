@@ -1405,19 +1405,53 @@ if (clickError) {
 
         // Appointment Execution Transmission Router
         const aptForm = document.getElementById('appointmentForm');
-        if(aptForm) {
-            aptForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('aptName').value;
-                const phone = document.getElementById('aptPhone').value;
-                const date = document.getElementById('aptDate').value;
-                const service = document.getElementById('aptService').value;
 
-                const messageString = `*New Booking Request Received*\n\n*Client Name:* ${name}\n*Contact Line:* ${phone}\n*Date Window:* ${date}\n*Target Module:* ${service}`;
-                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(messageString)}`, '_blank');
-            });
-        }
+if (aptForm) {
 
+    aptForm.addEventListener('submit', async function(e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById('aptName').value;
+        const phone = document.getElementById('aptPhone').value;
+        const date = document.getElementById('aptDate').value;
+        const service = document.getElementById('aptService').value;
+
+        // ================= SAVE TO SUPABASE =================
+
+        await supabase
+            .from("leads")
+            .insert([
+                {
+                    name: name,
+                    email: "",
+                    phone: phone,
+                    company: "Free Consultation",
+                    message: `Appointment Date: ${date}\nService: ${service}`,
+                    status: "New"
+                }
+            ]);
+
+        // ================= WHATSAPP =================
+
+        const messageString =
+`*New Booking Request Received*
+
+*Client Name:* ${name}
+*Contact:* ${phone}
+*Appointment Date:* ${date}
+*Service:* ${service}`;
+
+        window.open(
+            `https://wa.me/916394748563?text=${encodeURIComponent(messageString)}`,
+            "_blank"
+        );
+
+        aptForm.reset();
+
+    });
+
+}
         // Standard Contact Communications Engine
         const waForm = document.getElementById('whatsappForm');
 

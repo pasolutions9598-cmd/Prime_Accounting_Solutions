@@ -1465,6 +1465,7 @@ if (waForm) {
         const name = document.getElementById('formName').value;
         const email = document.getElementById('formEmail').value;
         const phone = document.getElementById('formPhone').value;
+        const company = document.getElementById('formCompany').value;
         const msg = document.getElementById('formMessage').value;
 
         // ================= SAVE LEAD TO SUPABASE =================
@@ -1476,7 +1477,7 @@ if (waForm) {
                     name: name,
                     email: email,
                     phone: phone,
-                    company: "",
+                    company: company,
                     message: msg,
                     status: "New"
                 }

@@ -587,6 +587,38 @@ Premium Admin Panel
 
 </div>
 
+            <div class="dashboard-card">
+    <div class="card-icon">🆕</div>
+    <div class="card-info">
+        <h3 id="newLeads">0</h3>
+        <p>New Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">📞</div>
+    <div class="card-info">
+        <h3 id="contactedLeads">0</h3>
+        <p>Contacted Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">✅</div>
+    <div class="card-info">
+        <h3 id="convertedLeads">0</h3>
+        <p>Converted Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">🔒</div>
+    <div class="card-info">
+        <h3 id="closedLeads">0</h3>
+        <p>Closed Leads</p>
+    </div>
+</div>
+
 <div id="dashboardWidgets"></div>
         </section>
 
@@ -601,7 +633,7 @@ Premium Admin Panel
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
-const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY";
+const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -716,8 +748,7 @@ if(document.getElementById("todayVisitorsCard")){
         document.getElementById("topService").innerText="-";
 
     }
-
-}// ===== New Leads =====
+// ===== New Leads =====
 const { count:newLeads } = await supabase
 .from("leads")
 .select("*",{count:"exact",head:true})
@@ -759,6 +790,8 @@ const { count:closed } = await supabase
 if(document.getElementById("closedLeads")){
 document.getElementById("closedLeads").innerText =
 closed || 0;
+}
+    
 }
     
     function updateDateTime(){
@@ -910,28 +943,6 @@ function checkAuth() {
     }
 
 }
-
-window.loginAdmin = function () {
-
-    const pass =
-        document.getElementById("adminPassword").value;
-
-    if (pass === "PAS@2026") {
-
-        localStorage.setItem(
-            "prime_admin_logged",
-            "true"
-        );
-
-        location.reload();
-
-    } else {
-
-        alert("Wrong Password");
-
-    }
-
-};
 
 checkAuth();
 

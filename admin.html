@@ -658,6 +658,70 @@ document.getElementById("recentServiceClicks").innerHTML =
 
 document.getElementById("recentServiceClicks").innerHTML =
     clickHTML || "<p>No service click data.</p>";
+        // ================= LOAD LEADS =================
+
+const { data: leads } = await supabase
+  .from("leads")
+  .select("*")
+  .order("created_at", { ascending: false });
+
+document.getElementById("totalLeads").innerText = leads?.length || 0;
+
+document.getElementById("newLeads").innerText =
+    leads?.filter(x => x.status === "New").length || 0;
+
+document.getElementById("contactedLeads").innerText =
+    leads?.filter(x => x.status === "Contacted").length || 0;
+
+document.getElementById("closedLeads").innerText =
+    leads?.filter(x => x.status === "Closed").length || 0;
+
+let leadHTML = "";
+
+leads?.forEach(item => {
+
+leadHTML += `
+<tr>
+
+<td style="padding:12px;">${item.name}</td>
+
+<td style="padding:12px;">${item.company || "-"}</td>
+
+<td style="padding:12px;">${item.phone}</td>
+
+<td style="padding:12px;">
+<span style="
+background:#dcfce7;
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;">
+${item.status}
+</span>
+</td>
+
+<td style="padding:12px;">
+${new Date(item.created_at).toLocaleDateString()}
+</td>
+
+<td style="padding:12px;">
+
+<button onclick="window.viewLead('${item.id}')">
+View
+</button>
+
+</td>
+
+</tr>`;
+});
+
+document.getElementById("contactLeadsContainer").innerHTML =
+leadHTML || `
+<tr>
+<td colspan="6" style="padding:20px;text-align:center;">
+No Leads Found
+</td>
+</tr>`;
     } catch (e) { console.error(e); }
 }
 

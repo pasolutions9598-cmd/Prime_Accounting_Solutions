@@ -549,6 +549,7 @@ color:#ffffff;
                 <option value="All">All Categories</option>
                 <option value="General">General</option>
                 <option value="GST">GST Updates</option>
+                <option value="TDS">TDS Updates</option>
                 <option value="Income Tax">Income Tax</option>
                 <option value="Audit">Audit & Assurance</option>
                 <option value="Accounting">Accounting Solutions</option>
@@ -556,138 +557,6 @@ color:#ffffff;
             <div id="postsContainer"></div>
         </div>
     </div>
-</div>
-
-<div class="card">
-
-    <h2>📩 Contact Leads Management</h2>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:25px;">
-
-        <div class="stat-card">
-            <div class="stat-title">📨 Total Leads</div>
-            <div class="stat-number" id="totalLeads">0</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-title">🟢 New Leads</div>
-            <div class="stat-number" id="newLeads">0</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-title">✅ Contacted</div>
-            <div class="stat-number" id="contactedLeads">0</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-title">✔ Closed</div>
-            <div class="stat-number" id="closedLeads">0</div>
-        </div>
-
-    </div>
-
-    <h3 style="margin-bottom:20px;font-family:'Outfit';color:#002d72;">
-        📋 Latest Contact Enquiries
-    </h3>
-
-    <div style="overflow-x:auto;">
-
-<table style="width:100%;border-collapse:collapse;">
-
-<thead>
-
-<tr style="background:#071630;color:#dfb74c;">
-
-<th style="padding:14px;">Name</th>
-
-<th style="padding:14px;">Company</th>
-
-<th style="padding:14px;">Phone</th>
-
-<th style="padding:14px;">Status</th>
-
-<th style="padding:14px;">Date</th>
-
-<th style="padding:14px;">Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="contactLeadsContainer">
-
-<tr>
-
-<td colspan="6" style="padding:25px;text-align:center;color:#64748b;">
-
-Loading Leads...
-
-</td>
-
-</tr>
-    <!-- ================= LEAD DETAILS MODAL ================= -->
-
-<div id="leadModal"
-     style="display:none;
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,.65);
-            z-index:99999;
-            justify-content:center;
-            align-items:center;
-            padding:20px;">
-
-    <div id="leadModalBox"
-         style="background:#ffffff;
-                width:100%;
-                max-width:650px;
-                border-radius:20px;
-                overflow:hidden;
-                box-shadow:0 25px 60px rgba(0,0,0,.30);">
-
-        <div style="background:#071630;
-                    color:#dfb74c;
-                    padding:18px 24px;
-                    display:flex;
-                    justify-content:space-between;
-                    align-items:center;">
-
-            <h2 style="margin:0;font-family:'Outfit',sans-serif;">
-                📋 Lead Details
-            </h2>
-
-            <button
-                onclick="document.getElementById('leadModal').style.display='none'"
-                style="background:none;
-                       border:none;
-                       color:white;
-                       font-size:28px;
-                       cursor:pointer;">
-                ×
-            </button>
-
-        </div>
-
-        <div id="leadModalContent"
-             style="padding:25px;">
-
-            Loading...
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ================= END MODAL ================= -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-</tbody>
-
-</table>
-
-</div>
-
 </div>
     
 <script type="module">

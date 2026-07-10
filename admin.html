@@ -935,7 +935,73 @@ window.viewLead = async function(id) {
                 <strong>📅 Date</strong><br>
                 ${new Date(data.created_at).toLocaleString()}
             </div>
+<div style="grid-column:1/3;margin-top:25px;display:flex;gap:12px;flex-wrap:wrap;">
 
+    <a href="https://wa.me/91${data.phone}"
+       target="_blank"
+       style="
+       text-decoration:none;
+       background:#25D366;
+       color:white;
+       padding:12px 18px;
+       border-radius:10px;
+       font-weight:600;">
+       💬 WhatsApp
+    </a>
+
+    <a href="tel:${data.phone}"
+       style="
+       text-decoration:none;
+       background:#002d72;
+       color:white;
+       padding:12px 18px;
+       border-radius:10px;
+       font-weight:600;">
+       📞 Call
+    </a>
+
+</div>
+<div style="grid-column:1/3;margin-top:20px;">
+
+<label style="font-weight:600;">Lead Status</label>
+
+<select id="leadStatus"
+style="
+width:100%;
+padding:12px;
+margin-top:8px;
+border-radius:10px;
+border:1px solid #d1d5db;">
+
+<option ${data.status=="New"?"selected":""}>New</option>
+
+<option ${data.status=="Contacted"?"selected":""}>Contacted</option>
+
+<option ${data.status=="Converted"?"selected":""}>Converted</option>
+
+<option ${data.status=="Closed"?"selected":""}>Closed</option>
+
+</select>
+
+</div>
+
+<div style="grid-column:1/3;margin-top:20px;display:flex;gap:12px;">
+
+<button
+onclick="window.updateLeadStatus('${data.id}')"
+style="
+background:#009245;
+color:#fff;
+padding:12px 18px;
+border:none;
+border-radius:10px;
+cursor:pointer;">
+
+💾 Save Status
+
+</button>
+
+</div>
         </div>
 
     `;
@@ -943,6 +1009,25 @@ window.viewLead = async function(id) {
     document.getElementById("leadModal").style.display = "flex";
 
 }
+    window.updateLeadStatus = async function(id){
+
+const status =
+document.getElementById("leadStatus").value;
+
+await supabase
+.from("leads")
+.update({
+status:status
+})
+.eq("id",id);
+
+alert("Lead status updated successfully.");
+
+document.getElementById("leadModal").style.display="none";
+
+loadAnalytics();
+
+    }
 checkAuth();
 </script>
 </body>

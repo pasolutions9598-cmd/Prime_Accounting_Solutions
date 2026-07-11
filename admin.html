@@ -1,2817 +1,2334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-<title>
-Prime Accounting Solutions | Admin Dashboard
-</title>
-
-<!-- Google Fonts -->
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Admin CSS -->
-<link rel="stylesheet"
-href="assets/css/admin.css">
-    /* ==========================================================
-   PRIME ACCOUNTING SOLUTIONS ADMIN PANEL v2.0
-   PHASE 3 - PART 1
-========================================================== */
-:root{
-    --navy:#071630;
-    --navy-light:#002d72;
-    --gold:#dfb74c;
-    --gold-dark:#b8860b;
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --text:#334155;
-    --text-light:#64748b;
-    --border:#e2e8f0;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --warning:#f59e0b;
-    --radius:18px;
-    --shadow:
-    0 12px 30px rgba(0,0,0,.08);
-}
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-html{
-    scroll-behavior:smooth;
-}
-body{
-
-    font-family:'Inter',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
-}
-
-/* ==========================================================
-LOGIN
-========================================================== */
-
-#loginPage{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
-    background:
-    linear-gradient(
-    135deg,
-    var(--navy),
-    var(--navy-light));
-}
-
-.login-container{
-    width:100%;
-    max-width:460px;
-}
-
-.login-card{
-    background:white;
-    border-radius:26px;
-    padding:45px;
-    box-shadow:
-    0 25px 60px rgba(0,0,0,.25);
-}
-
-.login-logo{
-    width:130px;
-    display:block;
-    margin:auto auto 25px;
-}
-
-.login-card h1{
-    font-family:'Outfit',sans-serif;
-    font-size:32px;
-    text-align:center;
-    color:var(--navy);
-}
-
-.login-card p{
-    margin:12px 0 30px;
-    text-align:center;
-    color:var(--text-light);
-}
-
-.input-group{
-    margin-bottom:20px;
-}
-
-.input-group label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
-}
-
-.input-group input,
-.input-group select,
-.input-group textarea{
-    width:100%;
-    padding:15px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    font-size:15px;
-    transition:.25s;
-}
-
-.input-group input:focus,
-.input-group select:focus,
-.input-group textarea:focus{
-    outline:none;
-    border-color:var(--gold);
-    box-shadow:
-    0 0 0 4px rgba(223,183,76,.18);
-}
-
-#loginBtn{
-    width:100%;
-    border:none;
-    border-radius:14px;
-    padding:16px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:700;
-    color:white;
-    background:
-    linear-gradient(
-    135deg,
-    var(--navy),
-    var(--navy-light));
-    transition:.30s;
-}
-
-#loginBtn:hover{
-    transform:translateY(-2px);
-}
-    /* ==========================================================
-LAYOUT
-========================================================== */
-
-.layout{
-    display:flex;
-    min-height:100vh;
-}
-
-/* ==========================================================
-SIDEBAR
-========================================================== */
-
-#sidebar{
-    width:280px;
-    position:fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    overflow-y:auto;
-    background:
-    linear-gradient(
-    180deg,
-    var(--navy),
-    var(--navy-light));
-    color:#fff;
-    box-shadow:
-    8px 0 30px rgba(0,0,0,.15);
-    z-index:1000;
-}
-
-.sidebar-logo{
-    padding:35px 25px;
-    text-align:center;
-}
-
-.sidebar-logo img{
-    width:110px;
-    margin-bottom:20px;
-}
-
-.sidebar-logo h2{
-    font-family:'Outfit',sans-serif;
-    font-size:22px;
-    color:var(--gold);
-}
-
-.sidebar-logo p{
-    margin-top:8px;
-    color:#cbd5e1;
-    font-size:13px;
-}
-
-.sidebar-menu{
-    padding:25px;
-}
-
-.menu-item{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:15px 18px;
-    margin-bottom:12px;
-    border:none;
-    border-radius:14px;
-    background:transparent;
-    color:white;
-    cursor:pointer;
-    text-align:left;
-    font-size:15px;
-    font-weight:600;
-    transition:.25s;
-}
-
-.menu-item:hover{
-    background:
-    rgba(255,255,255,.10);
-    transform:translateX(6px);
-    color:var(--gold);
-}
-
-.menu-item.active{
-    background:var(--gold);
-    color:var(--navy);
-}
-
-.logout-btn{
-    margin-top:25px;
-    border:1px solid
-    rgba(255,255,255,.20);
-}
-
-/* ==========================================================
-MAIN CONTENT
-========================================================== */
-
-#mainContent{
-    flex:1;
-    margin-left:280px;
-    background:var(--bg);
-    min-height:100vh;
-}
-
-/* ==========================================================
-TOP HEADER
-========================================================== */
-
-.top-header{
-    height:90px;
-    background:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 35px;
-    border-bottom:1px solid var(--border);
-    box-shadow:
-    0 5px 20px rgba(0,0,0,.05);
-}
-
-.top-header h2{
-    font-family:'Outfit',sans-serif;
-    color:var(--navy);
-}
-
-.top-header p{
-    margin-top:5px;
-    color:var(--text-light);
-}
-
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.system-status{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 18px;
-    border-radius:40px;
-    background:#ecfdf5;
-    color:var(--success);
-    font-weight:600;
-}
-
-.status-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#22c55e;
-    box-shadow:
-    0 0 10px #22c55e;
-
-}
-
-.admin-profile{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    background:white;
-    padding:10px 18px;
-    border-radius:16px;
-    box-shadow:
-    var(--shadow);
-}
-
-.avatar{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:22px;
-    background:
-    linear-gradient(
-    135deg,
-    var(--gold),
-    var(--gold-dark));
-    color:white;
-}
-    /* ==========================================================
-DASHBOARD
-========================================================== */
-
-#dashboardPage{
-    padding:35px;
-}
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-    margin-bottom:35px;
-}
-
-.dashboard-card{
-    background:var(--card);
-    border-radius:20px;
-    padding:25px;
-    display:flex;
-    align-items:center;
-    gap:18px;
-    border-top:4px solid var(--gold);
-    box-shadow:var(--shadow);
-    transition:.30s;
-}
-
-.dashboard-card:hover{
-   transform:translateY(-6px);
-}
-
-.card-icon{
-    width:72px;
-    height:72px;
-    border-radius:18px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:30px;
-    color:white;
-    background:
-    linear-gradient(
-    135deg,
-    var(--navy),
-    var(--navy-light));
-}
-
-.card-info{
-    flex:1;
-}
-
-.card-info h3{
-    font-family:'Outfit',sans-serif;
-    font-size:34px;
-    color:var(--navy);
-}
-
-.card-info p{
-    margin-top:6px;
-    color:var(--text-light);
-}
-
-/* ==========================================================
-WIDGETS
-========================================================== */
-
-.dashboard-widgets{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(420px,1fr));
-    gap:25px;
-}
-
-.widget-card{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:var(--shadow);
-}
-
-.widget-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.widget-header h3{
-    font-family:'Outfit',sans-serif;
-    color:var(--navy);
-}
-
-.loading-text{
-    text-align:center;
-    color:var(--text-light);
-    padding:30px 0;
-}
-
-canvas{
-    width:100%!important;
-    max-height:350px;
-}
-    /* ==========================================================
-PHASE 3 - PART 4
-TABLES • FORMS • BUTTONS • MODAL • TOAST
-========================================================== */
-
-/* Sections */
-
-.page-section{
-    display:none;
-    padding:35px;
-}
-
-.section-header{
-    margin-bottom:25px;
-}
-
-.section-header h2{
-    font-family:'Outfit',sans-serif;
-    color:var(--navy);
-    font-size:30px;
-}
-
-.section-header p{
-    margin-top:8px;
-    color:var(--text-light);
-}
-
-/* Cards */
-
-.form-card,
-.table-card{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    margin-bottom:30px;
-    box-shadow:var(--shadow);
-}
-
-/* Forms */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-}
-
-textarea{
-    resize:vertical;
-    min-height:140px;
-}
-
-/* Buttons */
-
-.button-group{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-top:25px;
-}
-
-.primary-btn,
-.secondary-btn{
-    border:none;
-    border-radius:14px;
-    padding:15px 24px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:700;
-    transition:.25s;
-}
-
-.primary-btn{
-    background:linear-gradient(135deg,var(--navy),var(--navy-light));
-    color:white;
-}
-
-.secondary-btn{
-    background:var(--gold);
-    color:var(--navy);
-}
-
-.primary-btn:hover,
-.secondary-btn:hover{
-    transform:translateY(-3px);
-}
-
-/* Table */
-
-.data-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-.data-table th{
-    background:var(--navy);
-    color:white;
-    padding:15px;
-    text-align:left;
-}
-
-.data-table td{
-    padding:15px;
-    border-bottom:1px solid var(--border);
-}
-
-.data-table tr:hover{
-
-    background:#f8fafc;
-}
-
-/* Modal */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-.modal-content{
-    width:95%;
-    max-width:700px;
-    background:white;
-    border-radius:22px;
-    padding:30px;
-    box-shadow:0 25px 60px rgba(0,0,0,.25);
-}
-
-.modal-header{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.modal-header button{
-    border:none;
-    background:none;
-    font-size:24px;
-    cursor:pointer;
-}
-
-/* Toast */
-
-.toast{
-    position:fixed;
-    right:30px;
-    bottom:30px;
-    background:var(--navy);
-    color:white;
-    padding:16px 22px;
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    display:none;
-    z-index:10000;
-}
-
-/* Loading */
-
-#loadingOverlay{
-    position:fixed;
-    inset:0;
-    background:rgba(255,255,255,.75);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-}
-
-.loader{
-    width:55px;
-    height:55px;
-    border:5px solid #e5e7eb;
-    border-top:5px solid var(--gold);
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-    .modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-.modal-card{
-    background:white;
-    width:90%;
-    max-width:700px;
-    max-height:85vh;
-    overflow:auto;
-    padding:30px;
-    border-radius:20px;
-    position:relative;
-}
-
-.close-btn{
-    position:absolute;
-    right:20px;
-    top:15px;
-    border:none;
-    background:#dc2626;
-    color:white;
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    cursor:pointer;
-}
-
-.post-view-image{
-    width:100%;
-    max-height:300px;
-    object-fit:cover;
-    border-radius:15px;
-    margin-bottom:20px;
-}
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Accounting Solutions | Admin Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* ============================================================
+        PRIME ACCOUNTING SOLUTIONS - ADMIN PANEL v3.0
+        PRODUCTION READY ENTERPRISE DASHBOARD
+        ============================================================ */
+        
+        :root {
+            --navy: #071630;
+            --navy-light: #002d72;
+            --gold: #dfb74c;
+            --gold-dark: #b8860b;
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --info: #0ea5e9;
+            --radius: 18px;
+            --shadow: 0 12px 30px rgba(0,0,0,.08);
+            --shadow-lg: 0 25px 60px rgba(0,0,0,.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================================
+        LOGIN PAGE
+        ============================================================ */
+        
+        #loginPage {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 460px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 26px;
+            padding: 45px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .login-logo {
+            width: 130px;
+            display: block;
+            margin: auto auto 25px;
+        }
+        
+        .login-card h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            text-align: center;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .login-card p {
+            margin: 12px 0 30px;
+            text-align: center;
+            color: var(--text-light);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+        
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            font-size: 15px;
+            transition: .25s;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(223,183,76,.18);
+        }
+        
+        #loginBtn {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            transition: .3s;
+        }
+        
+        #loginBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        #loginBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* ============================================================
+        ADMIN LAYOUT
+        ============================================================ */
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* ============================================================
+        SIDEBAR
+        ============================================================ */
+        
+        #sidebar {
+            width: 280px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            background: linear-gradient(180deg, var(--navy), var(--navy-light));
+            color: #fff;
+            box-shadow: 8px 0 30px rgba(0,0,0,.15);
+            z-index: 1000;
+        }
+        
+        .sidebar-logo {
+            padding: 35px 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        
+        .sidebar-logo img {
+            width: 110px;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-logo h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            color: var(--gold);
+        }
+        
+        .sidebar-logo p {
+            margin-top: 8px;
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+        
+        .sidebar-menu {
+            padding: 25px;
+        }
+        
+        .menu-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 14px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            transition: .25s;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255,255,255,.10);
+            transform: translateX(6px);
+            color: var(--gold);
+        }
+        
+        .menu-item.active {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        
+        .logout-btn {
+            margin-top: 25px;
+            border: 1px solid rgba(255,255,255,.20);
+            color: #ff6b6b;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 107, 107, .1);
+            color: #ff5252;
+        }
+        
+        /* ============================================================
+        MAIN CONTENT
+        ============================================================ */
+        
+        #mainContent {
+            flex: 1;
+            margin-left: 280px;
+            background: var(--bg);
+            min-height: 100vh;
+        }
+        
+        /* ============================================================
+        TOP HEADER
+        ============================================================ */
+        
+        .top-header {
+            height: 90px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 35px;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+        }
+        
+        .top-header h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--navy);
+            font-size: 24px;
+        }
+        
+        .top-header p {
+            margin-top: 5px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            border-radius: 40px;
+            background: #ecfdf5;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+        
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: white;
+        }
+        
+        /* ============================================================
+        DASHBOARD
+        ============================================================ */
+        
+        #dashboardPage {
+            padding: 35px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+        
+        .dashboard-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border-top: 4px solid var(--gold);
+            box-shadow: var(--shadow);
+            transition: .3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            flex-shrink: 0;
+        }
+        
+        .card-info {
+            flex: 1;
+        }
+        
+        .card-info h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 34px;
+            color: var(--navy);
+            font-weight: 800;
+        }
+        
+        .card-info p {
+            margin-top: 6px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        /* ============================================================
+        DASHBOARD WIDGETS
+        ============================================================ */
+        
+        .dashboard-widgets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 25px;
+        }
+        
+        .widget-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .widget-header h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--navy);
+            font-size: 18px;
+        }
+        
+        .loading-text {
+            text-align: center;
+            color: var(--text-light);
+            padding: 30px 0;
+        }
+        
+        canvas {
+            width: 100% !important;
+            max-height: 350px;
+        }
+        
+        /* ============================================================
+        PAGE SECTIONS
+        ============================================================ */
+        
+        .page-section {
+            display: none;
+            padding: 35px;
+            animation: fadeIn .3s ease-in;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-header {
+            margin-bottom: 25px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--navy);
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+        
+        .section-header p {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+        
+        /* ============================================================
+        CARDS & FORMS
+        ============================================================ */
+        
+        .form-card,
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        
+        /* ============================================================
+        BUTTONS
+        ============================================================ */
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .primary-btn,
+        .secondary-btn,
+        .danger-btn,
+        .success-btn {
+            border: none;
+            border-radius: 14px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: .25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .primary-btn {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: white;
+        }
+        
+        .secondary-btn {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        
+        .danger-btn {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .success-btn {
+            background: var(--success);
+            color: white;
+        }
+        
+        .primary-btn:hover,
+        .secondary-btn:hover,
+        .danger-btn:hover,
+        .success-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .primary-btn:disabled,
+        .secondary-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* ============================================================
+        TABLE
+        ============================================================ */
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+        }
+        
+        .data-table th {
+            background: var(--navy);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .data-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: .25s;
+        }
+        
+        .view-btn {
+            background: #dbeafe;
+            color: var(--info);
+        }
+        
+        .edit-btn {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+        
+        .delete-btn {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* ============================================================
+        MODAL
+        ============================================================ */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.45);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            width: 95%;
+            max-width: 700px;
+            background: white;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-header h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--navy);
+            font-size: 22px;
+        }
+        
+        .modal-close {
+            border: none;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+        }
+        
+        /* ============================================================
+        TOAST NOTIFICATIONS
+        ============================================================ */
+        
+        .toast {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            background: var(--navy);
+            color: white;
+            padding: 16px 22px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            display: none;
+            z-index: 10000;
+            animation: slideIn .3s ease-out;
+        }
+        
+        .toast.active {
+            display: block;
+        }
+        
+        .toast.success {
+            background: var(--success);
+        }
+        
+        .toast.danger {
+            background: var(--danger);
+        }
+        
+        .toast.warning {
+            background: var(--warning);
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* ============================================================
+        LOADING
+        ============================================================ */
+        
+        #loadingOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+        
+        #loadingOverlay.active {
+            display: flex;
+        }
+        
+        .loader {
+            width: 55px;
+            height: 55px;
+            border: 5px solid #e5e7eb;
+            border-top: 5px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ============================================================
+        FILTERS & SEARCH
+        ============================================================ */
+        
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        
+        .filter-input {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .filter-input input,
+        .filter-input select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        
+        /* ============================================================
+        RESPONSIVE
+        ============================================================ */
+        
+        @media (max-width: 1024px) {
+            #sidebar {
+                width: 240px;
+            }
+            
+            #mainContent {
+                margin-left: 240px;
+            }
+            
+            .top-header {
+                padding: 0 25px;
+            }
+            
+            #dashboardPage {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #sidebar {
+                position: fixed;
+                transform: translateX(-100%);
+                transition: .3s;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            #sidebar.open {
+                transform: translateX(0);
+            }
+            
+            #mainContent {
+                margin-left: 0;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-widgets {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-header {
+                height: auto;
+                flex-wrap: wrap;
+                gap: 15px;
+                padding: 20px;
+            }
+            
+            .header-right {
+                width: 100%;
+            }
+            
+            .data-table {
+                font-size: 13px;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 10px;
+            }
+            
+            .section-header h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- =======================================================
-LOGIN SCREEN
-======================================================= -->
+<!-- ================================================================
+LOGIN PAGE
+================================================================ -->
 
 <section id="loginPage">
-<div class="login-container">
-<div class="login-card">
-<img src="assets/images/Logo.png" class="login-logo" alt="Prime Accounting Solutions">
-<h1> Prime Accounting Solutions </h1>
-</p> Premium Admin Control Center </p>
-<div class="input-group">
-<label>Email Address</label>
-<input type="email" id="email" placeholder="Enter Email">
-
-</div>
-
-    <div class="input-group">
-<label>Password</label>
-<input type="password" id="password" placeholder="Enter Password">
-
-</div>
-<button
-id="loginBtn">
-🔐 Secure Login
-</button>
-
-</div>
-</div>
+    <div class="login-container">
+        <div class="login-card">
+            <img src="Logo.png" class="login-logo" alt="Prime Accounting Solutions">
+            <h1>Prime Accounting Solutions</h1>
+            <p>Premium Admin Control Center</p>
+            
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="admin@primeaccounting.com">
+            </div>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+            
+            <button id="loginBtn">🔐 Secure Login</button>
+            
+            <p style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px;">
+                Secure enterprise login with Supabase authentication
+            </p>
+        </div>
+    </div>
 </section>
 
-<!-- =======================================================
-ADMIN PANEL START
-======================================================= -->
+<!-- ================================================================
+ADMIN PANEL
+================================================================ -->
 
 <div id="adminPanel" style="display:none;">
     <div class="layout">
-
-    <!-- SIDEBAR -->
-    <aside id="sidebar">
-        <div class="sidebar-logo">
-          <img src="assets/images/Logo.png" alt="Logo">
-            <h2>Prime Accounting Solutions</h2>
-            <p>Premium Admin Dashboard</p>
-
-        </div>
-
-        <nav class="sidebar-menu">
-            <button class="menu-item active" data-page="dashboard">
-                🏠 Dashboard
-            </button>
+        
+        <!-- SIDEBAR -->
+        <aside id="sidebar">
+            <div class="sidebar-logo">
+                <img src="Logo.png" alt="Logo">
+                <h2>Prime Accounting Solutions</h2>
+                <p>Premium Admin Dashboard</p>
+            </div>
             
-            <button class="menu-item" data-page="leads">
-                📋 Leads
-            </button>
-
-            <button class="menu-item" data-page="posts">
-                📰 Posts
-            </button>
-
-            <button class="menu-item" data-page="testimonials">
-                ⭐ Testimonials
-            </button>
-
-            <button class="menu-item" data-page="analytics">
-                📈 Analytics
-            </button>
-
-            <button class="menu-item" data-page="settings">
-                ⚙ Settings
-            </button>
-
-            <button
-                class="menu-item logout-btn"
-                id="logoutBtn">
-                🚪 Logout
-            </button>
-
-        </nav>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-
-    <main id="mainContent">
-        <header class="top-header">
-            <div>
-                <h2 id="greetingText">
-                    Welcome, Administrator 👋
-                </h2>
-                <p id="liveDateTime">
-                    Loading...
-                </p>
-
-            </div>
-
-            <div class="header-right">
-                <div class="system-status">
-                    <span class="status-dot"></span>
-                    System Online
+            <nav class="sidebar-menu">
+                <button class="menu-item active" data-page="dashboard">
+                    🏠 Dashboard
+                </button>
+                
+                <button class="menu-item" data-page="leads">
+                    📋 Leads
+                </button>
+                
+                <button class="menu-item" data-page="posts">
+                    📰 Posts
+                </button>
+                
+                <button class="menu-item" data-page="testimonials">
+                    ⭐ Testimonials
+                </button>
+                
+                <button class="menu-item" data-page="analytics">
+                    📈 Analytics
+                </button>
+                
+                <button class="menu-item" data-page="settings">
+                    ⚙️ Settings
+                </button>
+                
+                <button class="menu-item logout-btn" id="logoutBtn">
+                    🚪 Logout
+                </button>
+            </nav>
+        </aside>
+        
+        <!-- MAIN CONTENT -->
+        <main id="mainContent">
+            <header class="top-header">
+                <div>
+                    <h2 id="greetingText">Welcome, Administrator 👋</h2>
+                    <p id="liveDateTime">Loading...</p>
                 </div>
-
-                <div class="admin-profile">
-                    <div class="avatar">
-                        👤
+                
+                <div class="header-right">
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        System Online
                     </div>
-
-                    <div>
-
-                        <strong>
-                            Administrator
-                        </strong>
-                        <small>
-                            Prime Accounting Solutions
-                        </small>
+                    
+                    <div class="admin-profile">
+                        <div class="avatar">👤</div>
+                        <div>
+                            <strong>Administrator</strong>
+                            <small>Prime Accounting Solutions</small>
+                        </div>
                     </div>
-
                 </div>
-
-            </div>
-
-        </header>
-       
-        <section id="dashboardPage">
-            <div class="dashboard-grid">
-                <!-- Dashboard Cards -->
-
-<div class="dashboard-card">
-    <div class="card-icon">👥</div>
-    <div class="card-info">
-        <h3 id="totalVisitorsCard">0</h3>
-        <p>Total Visitors</p>
+            </header>
+            
+            <!-- ============================================================
+            DASHBOARD PAGE
+            ============================================================ -->
+            
+            <section id="dashboardPage">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon">👥</div>
+                        <div class="card-info">
+                            <h3 id="totalVisitors">0</h3>
+                            <p>Total Visitors</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">📋</div>
+                        <div class="card-info">
+                            <h3 id="totalLeadsCount">0</h3>
+                            <p>Total Leads</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">🆕</div>
+                        <div class="card-info">
+                            <h3 id="newLeadsCount">0</h3>
+                            <p>New Leads</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">📞</div>
+                        <div class="card-info">
+                            <h3 id="contactedLeadsCount">0</h3>
+                            <p>Contacted Leads</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">✅</div>
+                        <div class="card-info">
+                            <h3 id="convertedLeadsCount">0</h3>
+                            <p>Converted Leads</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">🔒</div>
+                        <div class="card-info">
+                            <h3 id="closedLeadsCount">0</h3>
+                            <p>Closed Leads</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">📰</div>
+                        <div class="card-info">
+                            <h3 id="publishedPostsCount">0</h3>
+                            <p>Published Posts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">⭐</div>
+                        <div class="card-info">
+                            <h3 id="testimonialCount">0</h3>
+                            <p>Testimonials</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">🖱️</div>
+                        <div class="card-info">
+                            <h3 id="serviceClicksCount">0</h3>
+                            <p>Service Clicks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">🔥</div>
+                        <div class="card-info">
+                            <h3 id="topServiceName">-</h3>
+                            <p>Top Service</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dashboard Widgets -->
+                <div class="dashboard-widgets">
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>📊 Business Overview</h3>
+                        </div>
+                        <canvas id="visitorChart"></canvas>
+                    </div>
+                    
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>📋 Recent Leads</h3>
+                        </div>
+                        <div id="recentLeadsList">
+                            <p class="loading-text">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>👥 Recent Visitors</h3>
+                        </div>
+                        <div id="recentVisitorsList">
+                            <p class="loading-text">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>🖱️ Recent Service Clicks</h3>
+                        </div>
+                        <div id="recentServiceClicksList">
+                            <p class="loading-text">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>🔥 Top 10 Services</h3>
+                        </div>
+                        <div id="topServicesList">
+                            <p class="loading-text">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ============================================================
+            LEADS MANAGEMENT PAGE
+            ============================================================ -->
+            
+            <section id="leadsPage" class="page-section">
+                <div class="section-header">
+                    <h2>📋 Leads Management</h2>
+                    <p>Manage all customer enquiries and conversions.</p>
+                </div>
+                
+                <div class="form-card">
+                    <div class="filter-group">
+                        <div class="filter-input">
+                            <input type="text" id="leadSearchInput" placeholder="Search by name, company, or phone...">
+                        </div>
+                        <div class="filter-input">
+                            <select id="leadStatusFilter">
+                                <option value="">All Status</option>
+                                <option value="new">New</option>
+                                <option value="contacted">Contacted</option>
+                                <option value="converted">Converted</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <tr><td colspan="7" class="loading-text">Loading leads...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- ============================================================
+            POSTS MANAGEMENT PAGE
+            ============================================================ -->
+            
+            <section id="postsPage" class="page-section">
+                <div class="section-header">
+                    <h2>📰 Posts Management</h2>
+                    <p>Create, edit, and manage blog posts.</p>
+                </div>
+                
+                <div class="form-card">
+                    <button class="primary-btn" id="newPostBtn">
+                        ➕ New Post
+                    </button>
+                </div>
+                
+                <div class="table-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            <tr><td colspan="5" class="loading-text">Loading posts...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- ============================================================
+            TESTIMONIALS PAGE
+            ============================================================ -->
+            
+            <section id="testimonialsPage" class="page-section">
+                <div class="section-header">
+                    <h2>⭐ Testimonials Management</h2>
+                    <p>Approve, reject, or manage client testimonials.</p>
+                </div>
+                
+                <div class="table-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Client Name</th>
+                                <th>Company</th>
+                                <th>Rating</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="testimonialsTableBody">
+                            <tr><td colspan="6" class="loading-text">Loading testimonials...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- ============================================================
+            ANALYTICS PAGE
+            ============================================================ -->
+            
+            <section id="analyticsPage" class="page-section">
+                <div class="section-header">
+                    <h2>📈 Analytics & Reports</h2>
+                    <p>Comprehensive analytics and visitor insights.</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon">👁️</div>
+                        <div class="card-info">
+                            <h3 id="analyticsVisitors">0</h3>
+                            <p>Total Page Views</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">🔗</div>
+                        <div class="card-info">
+                            <h3 id="analyticsClicks">0</h3>
+                            <p>Total Clicks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">📞</div>
+                        <div class="card-info">
+                            <h3 id="analyticsCalls">0</h3>
+                            <p>Call Initiated</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">💬</div>
+                        <div class="card-info">
+                            <h3 id="analyticsChats">0</h3>
+                            <p>WhatsApp Initiated</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-widgets">
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>📊 Visitor Trend</h3>
+                        </div>
+                        <canvas id="analyticsTrendChart"></canvas>
+                    </div>
+                    
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <h3>🎯 Service Performance</h3>
+                        </div>
+                        <canvas id="servicePerformanceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ============================================================
+            SETTINGS PAGE
+            ============================================================ -->
+            
+            <section id="settingsPage" class="page-section">
+                <div class="section-header">
+                    <h2>⚙️ Admin Settings</h2>
+                    <p>Configure admin panel and brand settings.</p>
+                </div>
+                
+                <div class="form-card">
+                    <h3 style="margin-bottom: 20px; color: var(--navy);">Admin Information</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Admin Name</label>
+                            <input type="text" id="adminName" placeholder="Administrator">
+                        </div>
+                        <div class="input-group">
+                            <label>Admin Email</label>
+                            <input type="email" id="adminEmail" placeholder="admin@primeaccounting.com">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="primary-btn" id="updateAdminBtn">✓ Update Admin Info</button>
+                    </div>
+                </div>
+                
+                <div class="form-card">
+                    <h3 style="margin-bottom: 20px; color: var(--navy);">Brand Settings</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Company Name</label>
+                            <input type="text" id="companyName" placeholder="Prime Accounting Solutions">
+                        </div>
+                        <div class="input-group">
+                            <label>Brand Color (Primary)</label>
+                            <input type="color" id="brandColor" value="#071630">
+                        </div>
+                        <div class="input-group">
+                            <label>Brand Color (Accent)</label>
+                            <input type="color" id="accentColor" value="#dfb74c">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="primary-btn" id="updateBrandBtn">✓ Update Brand Settings</button>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 </div>
 
-<div class="dashboard-card">
-    <div class="card-icon">📋</div>
-    <div class="card-info">
-        <h3 id="totalLeads">0</h3>
-        <p>Total Leads</p>
-    </div>
-</div>
+<!-- ================================================================
+MODALS
+================================================================ -->
 
-<div class="dashboard-card">
-    <div class="card-icon">🆕</div>
-    <div class="card-info">
-        <h3 id="newLeads">0</h3>
-        <p>New Leads</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">📞</div>
-    <div class="card-info">
-        <h3 id="contactedLeads">0</h3>
-        <p>Contacted Leads</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">✅</div>
-    <div class="card-info">
-        <h3 id="convertedLeads">0</h3>
-        <p>Converted Leads</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">🔒</div>
-    <div class="card-info">
-        <h3 id="closedLeads">0</h3>
-        <p>Closed Leads</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">📰</div>
-    <div class="card-info">
-        <h3 id="publishedPosts">0</h3>
-        <p>Published Posts</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">⭐</div>
-    <div class="card-info">
-        <h3 id="dashboardTestimonials">0</h3>
-        <p>Testimonials</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">🖱️</div>
-    <div class="card-info">
-        <h3 id="totalServiceClicks">0</h3>
-        <p>Service Clicks</p>
-    </div>
-</div>
-
-<div class="dashboard-card">
-    <div class="card-icon">🔥</div>
-    <div class="card-info">
-        <h3 id="topService">-</h3>
-        <p>Top Service</p>
-    </div>
-</div>
-<!-- =======================================================
-DASHBOARD WIDGETS
-======================================================= -->
-
-</div>
-<!-- End dashboard-grid -->
-
-<div class="dashboard-widgets">
-
-    <!-- Business Overview Chart -->
-
-    <div class="widget-card">
-        <div class="widget-header">
-            <h3>📊 Business Overview</h3>
-        </div>
-    
-        <canvas id="visitorChart"></canvas>
-
-    </div>
-
-    <!-- Recent Leads -->
-
-    <div class="widget-card">
-        <div class="widget-header">
-            <h3>📋 Recent Leads</h3>
-        </div>
-
-        <div id="recentLeadsList">
-            <p class="loading-text">
-                Loading...
-            </p>
-
-        </div>
-    </div>
-
-    <!-- Recent Visitors -->
-
-    <div class="widget-card">
-        <div class="widget-header">
-            <h3>👥 Recent Visitors</h3>
-        </div>
-
-        <div id="recentVisitorsList">
-            <p class="loading-text">
-                Loading...
-            </p>
-
-        </div>
-    </div>
-
-    <!-- Recent Service Clicks -->
-
-    <div class="widget-card">
-        <div class="widget-header">
-            <h3>🖱 Recent Service Clicks</h3>
-        </div>
-
-        <div id="recentServiceClicks">
-            <p class="loading-text">
-                Loading...
-            </p>
-
-        </div>
-    </div>
-
-    <!-- Top 10 Services -->
-
-    <div class="widget-card">
-        <div class="widget-header">
-            <h3>🔥 Top 10 Services</h3>
-        </div>
-
-        <div id="topServicesList">
-            <p class="loading-text">
-                Loading...
-            </p>
-
-        </div>
-    </div>
-</div>
-        </section>
-        <!-- =======================================================
-LEADS MANAGEMENT
-======================================================= -->
-
-<section id="leadsPage" class="page-section" style="display:none;">
-    <div class="section-header">
-        <h2>📋 Leads Management</h2>
-        <p>Manage all customer enquiries and conversions.</p>
-    </div>
-
-    <div class="table-card">
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="contactLeadsContainer">
-                <tr>
-                    <td colspan="6" class="loading-text">
-                        Loading Leads...
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<!-- =======================================================
-LEAD DETAILS MODAL
-======================================================= -->
-
+<!-- Lead Details Modal -->
 <div id="leadModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Lead Details</h2>
-            <button id="closeLeadModal">
-                ✖
-            </button>
+            <h3>Lead Details</h3>
+            <button class="modal-close">✕</button>
         </div>
-     
-        <div id="leadModalContent">
-
-        </div>
+        <div id="leadModalBody"></div>
     </div>
 </div>
-<!-- =======================================================
-POSTS MANAGEMENT
-======================================================= -->
 
-<section id="postsPage" class="page-section" style="display:none;">
-    <div class="section-header">
-        <h2>📰 Posts Management</h2>
-        <p>Create, publish and manage company posts.</p>
-    </div>
-
-    <div class="form-card">
-        <div class="form-grid">
-            <div class="input-group">
-                <label>Post Title</label>
-                <input
-                    type="text"
-                    id="postTitle"
-                    placeholder="Enter Post Title">
-            </div>
-
-            <div class="input-group">
-                <label>Category</label>
-                <select id="postCategory">
-                    <option value="Accounting">Accounting</option>
-                    <option value="GST">GST</option>
-                    <option value="Income Tax">Income Tax</option>
-                    <option value="TDS">TDS</option>
-                    <option value="Payroll">Payroll</option>
-                    <option value="Business">Business</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label>Post Type</label>
-            <select id="postType">
-                <option value="news">News</option>
-                <option value="announcement">Announcement</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label>Post Content</label>
-            <textarea
-                id="postContent"
-                rows="8"
-                placeholder="Write your post here..."></textarea>
-        </div>
-
-        <div class="input-group">
-            <label>Featured Image</label>
-            <input
-                type="file"
-                id="imageFile"
-                accept="image/*">
-        </div>
-
-        <div class="button-group">
-            <button
-                id="submitBtn"
-                class="primary-btn">
-                🚀 Publish Post
-            </button>
-
-            <button
-                id="draftBtn"
-                class="secondary-btn">
-                📁 Save Draft
-            </button>
-
-            <button onclick="viewPost('${post.id}')">
-👁 View
-</button>
-            
-        </div>
-    </div>
-
-    <div class="table-card">
-        <div class="section-header">
-            <h3>Published Posts</h3>
-        </div>
-
-        <div id="postsContainer">
-            <p class="loading-text">
-                Loading Posts...
-            </p>
-        </div>
-    </div>
-</section>
-        <div id="postViewModal" class="modal">
-
-    <div class="modal-card">
-
-        <button 
-        class="close-btn"
-        onclick="closePostView()">
-        ✕
-        </button>
-
-        <div id="postViewContent"></div>
-
-    </div>
-
-        </div>
-    </section>
-<!-- =======================================================
-TESTIMONIALS MANAGEMENT
-======================================================= -->
-
-<section id="testimonialsPage" class="page-section" style="display:none;">
-    <div class="section-header">
-        <h2>⭐ Testimonials Management</h2>
-        <p>Manage customer reviews and testimonials.</p>
-    </div>
-
-    <div class="form-card">
-        <div class="form-grid">
-            <div class="input-group">
-                <label>Client Name</label>
-                <input
-                    type="text"
-                    id="testimonialName"
-                    placeholder="Enter Client Name">
-            </div>
-
-            <div class="input-group">
-                <label>Company</label>
-                <input
-                    type="text"
-                    id="testimonialCompany"
-                    placeholder="Company Name">
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label>Rating</label>
-            <select id="testimonialRating">
-                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-                <option value="4">⭐⭐⭐⭐ (4)</option>
-                <option value="3">⭐⭐⭐ (3)</option>
-                <option value="2">⭐⭐ (2)</option>
-                <option value="1">⭐ (1)</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label>Review</label>
-            <textarea
-                id="testimonialReview"
-                rows="6"
-                placeholder="Write client review..."></textarea>
-        </div>
-
-        <div class="button-group">
-            <button
-                id="addTestimonialBtn"
-                class="primary-btn">
-                ⭐ Publish Testimonial
-            </button>
-        </div>
-    </div>
-
-    <div class="table-card">
-        <div class="section-header">
-            <h3>Published Testimonials</h3>
-        </div>
-
-        <div id="testimonialsContainer">
-            <p class="loading-text">
-                Loading Testimonials...</p>
-        </div>
-    </div>
-</section>
-<!-- =======================================================
-ANALYTICS
-======================================================= -->
-
-<section id="analyticsPage" class="page-section" style="display:none;">
-    <div class="section-header">
-        <h2>📈 Analytics</h2>
-        <p>Business performance overview.</p>
-    </div>
-
-    <div class="widget-card">
-        <canvas id="analyticsChart"></canvas>
-    </div>
-</section>
-
-<!-- =======================================================
-SETTINGS
-======================================================= -->
-
-<section id="settingsPage" class="page-section" style="display:none;">
-    <div class="section-header">
-        <h2>⚙ Settings</h2>
-        <p>Admin configuration.</p>
-    </div>
-
-    <div class="form-card">
-        <div class="input-group">
-            <label>Company Name</label>
-            <input type="text" id="companyName" value="Prime Accounting Solutions">
-        </div>
-
-        <div class="input-group">
-            <label>Support Email</label>
-            <input type="email" id="supportEmail">
-        </div>
-
-        <div class="button-group">
-            <button id="saveSettingsBtn" class="primary-btn">
-                💾 Save Settings
-            </button>
-        </div>
-    </div>
-</section>
-
-<!-- Toast Notification -->
+<!-- ================================================================
+NOTIFICATIONS
+================================================================ -->
 
 <div id="toast" class="toast"></div>
+<div id="loadingOverlay"></div>
 
-<!-- Loading Overlay -->
-
-<div id="loadingOverlay" style="display:none;">
-    <div class="loader"></div>
-</div>
-</main>
-</div>
-</div>
-
-<!-- JavaScript Files -->
-
-<script type="module" src="assets/js/supabase.js"></script>
-    // ==========================================================
-// PRIME ACCOUNTING SOLUTIONS
-// SUPABASE CONFIGURATION
-// Production Version 2.0
-// ==========================================================
-
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-// ==========================================================
-// PROJECT CONFIGURATION
-// ==========================================================
-
-const SUPABASE_URL =
-"https://ariqthzhspzktpoylqci.supabase.co";
-const SUPABASE_ANON_KEY =
-"sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
-
-// ==========================================================
-// CREATE CLIENT
-// ==========================================================
-
-export const supabase = createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY,
-    {
-        auth: {
-            persistSession: true,
-            autoRefreshToken: true,
-            detectSessionInUrl: false
+<script>
+    // ================================================================
+    // SUPABASE INITIALIZATION
+    // ================================================================
+    
+    const SUPABASE_URL = 'https://your-project.supabase.co';
+    const SUPABASE_KEY = 'your-anon-key';
+    
+    let supabase = null;
+    let currentUser = null;
+    let visitorChart = null;
+    let trendChart = null;
+    let performanceChart = null;
+    
+    // Initialize Supabase
+    function initSupabase() {
+        const { createClient } = window.supabase;
+        supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+    
+    // ================================================================
+    // UTILITY FUNCTIONS
+    // ================================================================
+    
+    function showLoading(show = true) {
+        const overlay = document.getElementById('loadingOverlay');
+        if (show) {
+            overlay.classList.add('active');
+        } else {
+            overlay.classList.remove('active');
         }
     }
-);
-
-// ==========================================================
-// DATABASE TABLES
-// ==========================================================
-
-export const TABLES = {
-    VISITORS: "visitors",
-    LEADS: "leads",
-    POSTS: "posts",
-    TESTIMONIALS: "testimonials",
-    SERVICE_CLICKS: "service_clicks"
-};
-
-// ==========================================================
-// CONNECTION TEST
-// ==========================================================
-
-export async function testConnection() {
-    try {
-        const { error } =
-        await supabase
-        .from(TABLES.VISITORS)
-        .select("*")
-        .limit(1);
-
-        if (error) {
-            console.error(
-                "Supabase Connection Error:",
-                error.message
-            );
-            return false;
-        }
-
-        console.log(
-            "✅ Prime Accounting Solutions Connected Successfully"
-        );
-        return true;
-    }
-    catch (err) {
-        console.error(err);
-        return false;
-    }
-}
-
-// ==========================================================
-// COMMON DATABASE HELPERS
-// ==========================================================
-
-export async function getTotalRows(table) {
-    const { count, error } =
-    await supabase
-    .from(table)
-    .select("*", {
-        count: "exact",
-        head: true
-    });
-
-    if (error) {
-        console.error(error);
-        return 0;
-    }
-    return count || 0;
-}
-
-export async function getRows(table) {
-    const { data, error } =
-    await supabase
-    .from(table)
-    .select("*");
-
-    if (error) {
-        console.error(error);
-        return [];
-    }
-    return data || [];
-}
-
-export async function insertRow(table, payload) {
-    const { data, error } =
-    await supabase
-    .from(table)
-    .insert(payload)
-    .select();
-
-    if (error) {
-        console.error(error);
-        return null;
-    }
-    return data;
-}
-
-export async function updateRow(table, id, payload) {
-    const { data, error } =
-    await supabase
-    .from(table)
-    .update(payload)
-    .eq("id", id)
-    .select();
-
-    if (error) {
-        console.error(error);
-        return null;
-    }
-    return data;
-}
-
-export async function deleteRow(table, id) {
-    const { error } =
-    await supabase
-    .from(table)
-    .delete()
-    .eq("id", id);
-
-    if (error) {
-        console.error(error);
-        return false;
-    }
-    return true;
-}
-
-// ==========================================================
-// EXPORT DEFAULT
-// ==========================================================
-
-export default supabase;
-<script type="module" src="assets/js/auth.js"></script>
-    // ==========================================================
-// PRIME ACCOUNTING SOLUTIONS
-// AUTHENTICATION SYSTEM
-// Production Version 2.0
-// ==========================================================
-
-const ADMIN_EMAIL =
-"p.a.solutions9598@gmail.com";
-const ADMIN_PASSWORD =
-"aqibsolutions@9598";
-const LOGIN_KEY =
-"prime_admin_logged";
-const LOGIN_TIME_KEY =
-"prime_admin_login_time";
-const SESSION_HOURS = 24;
-
-// ==========================================================
-// INITIALIZE
-// ==========================================================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    initializeAuth();
-});
-
-// ==========================================================
-// INITIALIZE AUTH
-// ==========================================================
-
-function initializeAuth() {
-    attachEvents();
-    checkLoginSession();
-}
-
-// ==========================================================
-// EVENTS
-// ==========================================================
-
-function attachEvents() {
-    const loginBtn =
-    document.getElementById("loginBtn");
-
-    if(loginBtn){
-        loginBtn.addEventListener(
-            "click",
-            loginAdmin
-        );
-    }
-    const logoutBtn =
-    document.getElementById("logoutBtn");
-
-    if(logoutBtn){
-        logoutBtn.addEventListener(
-            "click",
-            logoutAdmin
-        );
-    }
-    const password =
-    document.getElementById("password");
-
-    if(password){
-        password.addEventListener(
-            "keydown",
-            function(e){
-
-                if(e.key==="Enter"){
-                    loginAdmin();
-                }
-            }
-        );
-    }
-}
-
-// ==========================================================
-// LOGIN
-// ==========================================================
-
-function loginAdmin(){
-    const email =
-    document.getElementById("email").value.trim();
-    const password =
-    document.getElementById("password").value.trim();
-
-    if(email===""){
-        alert("Please enter email.");
-        return;
-    }
-
-    if(password===""){
-        alert("Please enter password.");
-        return;
-    }
-
-    if(
-        email===ADMIN_EMAIL &&
-        password===ADMIN_PASSWORD
-    ){
-        localStorage.setItem(
-            LOGIN_KEY,
-            "true"
-        );
-
-        localStorage.setItem(
-            LOGIN_TIME_KEY,
-            Date.now()
-        );
-        showDashboard();
-    }
-    else{
-        alert("Invalid Email or Password");
-    }
-}
-
-// ==========================================================
-// SHOW DASHBOARD
-// ==========================================================
-
-function showDashboard(){
-    const login =
-    document.getElementById("loginPage");
-    const panel =
-    document.getElementById("adminPanel");
-
-    if(login){
-        login.style.display="none";
-    }
-
-    if(panel){
-        panel.style.display="block";
-    }
-
-    if(typeof initializeDashboard==="function"){
-        initializeDashboard();
-    }
-}
-
-// ==========================================================
-// LOGOUT
-// ==========================================================
-
-function logoutAdmin(){
-    if(
-        !confirm(
-        "Are you sure you want to logout?"
-        )
-    ){
-        return;
-    }
-    localStorage.removeItem(
-        LOGIN_KEY
-    );
-    localStorage.removeItem(
-        LOGIN_TIME_KEY
-    );
-    location.reload();
-}
-
-// ==========================================================
-// SESSION CHECK
-// ==========================================================
-
-function checkLoginSession(){
-    const logged =
-    localStorage.getItem(LOGIN_KEY);
-    const loginTime =
-    localStorage.getItem(LOGIN_TIME_KEY);
-
-    if(
-        logged!=="true" ||
-        !loginTime
-    ){
-        return;
-    }
-
-    const hoursPassed =
-    (
-        Date.now()-
-        Number(loginTime)
-    )/1000/60/60;
-
-    if(
-        hoursPassed >
-        SESSION_HOURS
-    ){
-        localStorage.clear();
-        return;
-    }
-    showDashboard();
-}
-
-// ==========================================================
-// PUBLIC FUNCTIONS
-// ==========================================================
-
-window.loginAdmin =
-loginAdmin;
-window.logoutAdmin =
-logoutAdmin;
-<script type="module" src="assets/js/dashboard.js"></script>
-    // ==========================================================
-// PRIME ACCOUNTING SOLUTIONS
-// DASHBOARD.JS
-// Production Version 2.0
-// PART 1
-// ==========================================================
-
-import {
-    supabase,
-    TABLES,
-    getTotalRows
-} from "./supabase.js";
-
-// ==========================================================
-// INITIALIZE
-// ==========================================================
-
-window.initializeDashboard = async function () {
-    try {
-        showLoader();
-        await loadDashboardCards();
-        await loadRecentLeads();
-        await loadRecentVisitors();
-        await loadRecentServiceClicks();
-        hideLoader();
-    }
-
-    catch (err) {
-        console.error(err);
-        hideLoader();
-        showToast(
-            "Dashboard loading failed.",
-            "error"
-        );
-    }
-};
-
-// ==========================================================
-// DASHBOARD CARDS
-// ==========================================================
-
-async function loadDashboardCards() {
-    await Promise.all([
-        loadVisitors(),
-        loadLeads(),
-        loadPosts(),
-        loadTestimonials(),
-        loadServiceClicks(),
-        loadLeadStatus()
-    ]);
-}
-
-// ==========================================================
-// VISITORS
-// ==========================================================
-
-async function loadVisitors() {
-    const total =
-    await getTotalRows(
-        TABLES.VISITORS
-    );
-    updateCard(
-        "totalVisitorsCard",
-        total
-    );
-}
-
-// ==========================================================
-// LEADS
-// ==========================================================
-
-async function loadLeads() {
-    const total =
-    await getTotalRows(
-        TABLES.LEADS
-    );
-    updateCard(
-        "totalLeads",
-        total
-    );
-}
-
-// ==========================================================
-// POSTS
-// ==========================================================
-
-async function loadPosts() {
-    const { count } =
-    await supabase
-
-        .from(TABLES.POSTS)
-        .select("*", {
-            count: "exact",
-            head: true
-        })
-        .eq(
-            "status",
-            "published"
-        );
-    updateCard(
-        "publishedPosts",
-        count || 0
-    );
-}
-
-// ==========================================================
-// TESTIMONIALS
-// ==========================================================
-
-async function loadTestimonials() {
-    const total =
-    await getTotalRows(
-        TABLES.TESTIMONIALS
-    );
-    updateCard(
-        "dashboardTestimonials",
-        total
-    );
-}
-
-// ==========================================================
-// SERVICE CLICKS
-// ==========================================================
-
-async function loadServiceClicks() {
-    const total =
-    await getTotalRows(
-        TABLES.SERVICE_CLICKS
-    );
-    updateCard(
-        "totalServiceClicks",
-        total
-    );
-}
-
-// ==========================================================
-// LEAD STATUS
-// ==========================================================
-
-async function loadLeadStatus() {
-    const statuses = [
-        {
-            value: "New",
-            id: "newLeads"
-        },
-        {
-            value: "Contacted",
-            id: "contactedLeads"
-        },
-        {
-            value: "Converted",
-            id: "convertedLeads"
-        },
-        {
-            value: "Closed",
-            id: "closedLeads"
-        }
-    ];
-
-    for (const status of statuses) {
-        const { count } =
-            await supabase
-                .from(TABLES.LEADS)
-                .select("*", {
-                    count: "exact",
-                    head: true
-                })
-                .eq(
-                    "status",
-                    status.value
-                );
-        updateCard(
-            status.id,
-            count || 0
-        );
-    }
-}
-
-// ==========================================================
-// UPDATE CARD
-// ==========================================================
-
-function updateCard(
-    id,
-    value
-) {
-
-    const el =
-        document.getElementById(id);
-
-    if (!el) return;
-    el.innerHTML =
-        formatNumber(value);
-}
-    // ==========================================================
-// PRIME ACCOUNTING SOLUTIONS
-// DASHBOARD.JS
-// PART 2
-// Recent Data • Charts • Auto Refresh
-// ==========================================================
-
-// ==========================================================
-// RECENT LEADS
-// ==========================================================
-
-async function loadRecentLeads(){
-    const container =
-    document.getElementById("recentLeadsList");
-
-    if(!container) return;
-    const { data, error } =
-    await supabase
-        .from(TABLES.LEADS)
-        .select("*")
-        .order("created_at",{ascending:false})
-        .limit(5);
-
-    if(error){
-        container.innerHTML =
-        "<p>Unable to load leads.</p>";
-        return;
-    }
-
-    if(!data || data.length===0){
-        container.innerHTML =
-        "<p>No Leads Found</p>";
-        return;
-    }
-
-    container.innerHTML =
-    data.map(item=>`
-        <div class="list-item">
-            <strong>${escapeHTML(item.name || "-")}</strong>
-            <br>
-            <small>
-            ${escapeHTML(item.phone || "-")}
-            </small>
-        </div>
-    `).join("");
-}
-
-// ==========================================================
-// RECENT VISITORS
-// ==========================================================
-
-async function loadRecentVisitors(){
-    const container =
-    document.getElementById("recentVisitorsList");
-
-    if(!container) return;
-    const { data, error } =
-    await supabase
-        .from(TABLES.VISITORS)
-        .select("*")
-        .order("created_at",{ascending:false})
-        .limit(5);
-
-    if(error){
-        container.innerHTML =
-        "<p>Unable to load visitors.</p>";
-        return;
-    }
-
-    if(!data || data.length===0){
-        container.innerHTML =
-        "<p>No Visitor Found</p>";
-        return;
-    }
-
-    container.innerHTML =
-    data.map(item=>`
-        <div class="list-item">
-            <strong>
-            ${escapeHTML(item.ip || "Visitor")}
-            </strong>
-            <br>
-            <small>
-            ${formatDate(item.created_at)}
-         </small>
-        </div>
-    `).join("");
-}
-
-// ==========================================================
-// RECENT SERVICE CLICKS
-// ==========================================================
-
-async function loadRecentServiceClicks(){
-    const container =
-    document.getElementById("recentServiceClicks");
-
-    if(!container) return;
-    const { data,error } =
-    await supabase
-        .from(TABLES.SERVICE_CLICKS)
-        .select("*")
-        .order("created_at",{ascending:false})
-        .limit(5);
-
-    if(error){
-        container.innerHTML =
-        "<p>Unable to load data.</p>";
-        return;
-    }
-
-    if(!data || data.length===0){
-        container.innerHTML =
-        "<p>No Clicks</p>";
-        return;
-    }
-
-    container.innerHTML =
-    data.map(item=>`
-        <div class="list-item">
-            <strong>
-            ${escapeHTML(item.service_name || "-")}
-            </strong>
-            <br>
-            <small>
-            ${formatDate(item.created_at)}
-            </small>
-        </div>
-    `).join("");
-}
-
-// ==========================================================
-// TOP SERVICE
-// ==========================================================
-
-loadTopService();
-async function loadTopService(){
-    const { data } =
-    await supabase
-        .from(TABLES.SERVICE_CLICKS)
-        .select("service_name");
-
-    if(!data || data.length===0) return;
-    const stats={};
-    data.forEach(item=>{
-        stats[item.service_name] =
-        (stats[item.service_name]||0)+1;
-    });
-    let winner="-";
-    let max=0;
-    for(const key in stats){
-
-        if(stats[key]>max){
-            max=stats[key];
-            winner=key;
-        }
-    }
-
-    const el =
-    document.getElementById("topService");
-
-    if(el){
-        el.innerHTML =
-        winner;
-    }
-}
-
-// ==========================================================
-// CHART
-// ==========================================================
-
-window.renderDashboardChart = function(){
-    if(typeof Chart==="undefined"){
-        console.warn(
-            "Chart.js not found."
-        );
-        return;
-    }
-
-    const canvas =
-    document.getElementById("visitorChart");
-
-    if(!canvas) return;
-    new Chart(canvas,{
-        type:"bar",
-        data:{
-            labels:[
-                "Visitors",
-                "Leads",
-                "Posts",
-                "Testimonials",
-                "Clicks"
-            ],
-            datasets:[{
-                label:"Overview",
-                data:[
-                    Number(document.getElementById("totalVisitorsCard")?.innerText||0),
-                    Number(document.getElementById("totalLeads")?.innerText||0),
-                    Number(document.getElementById("publishedPosts")?.innerText||0),
-                    Number(document.getElementById("dashboardTestimonials")?.innerText||0),
-                    Number(document.getElementById("totalServiceClicks")?.innerText||0)
-               ]
-            }]
-        }
-    });
-};
-
-// ==========================================================
-// AUTO REFRESH
-// ==========================================================
-
-setInterval(async()=>{
-    await loadDashboardCards();
-    await loadRecentLeads();
-    await loadRecentVisitors();
-    await loadRecentServiceClicks();
-},30000);
-
-// ==========================================================
-// FINISH
-// ==========================================================
-
-console.log(
-"✅ Dashboard Ready"
-);
-<script type="module" src="assets/js/posts.js"></script>
-    // ==========================================================
-// PRIME ACCOUNTING SOLUTIONS
-// POSTS.JS
-// Production Version 2.0
-// PART 1
-// ==========================================================
-
-import { supabase, TABLES } from "./supabase.js";
-
-let editingPostId = null;
-
-// ==========================================================
-// INITIALIZE
-// ==========================================================
-
-window.initializePosts = async function () {
-
-    await loadPosts();
-
-};
-
-// ==========================================================
-// LOAD POSTS
-// ==========================================================
-
-async function loadPosts() {
-
-    const table =
-    document.getElementById("postsTableBody");
-
-    if (!table) return;
-
-    table.innerHTML =
-    `<tr>
-        <td colspan="6">Loading...</td>
-    </tr>`;
-
-    const { data, error } =
-    await supabase
-
-        .from(TABLES.POSTS)
-
-        .select("*")
-
-        .order("created_at", {
-            ascending: false
-        });
-
-    if (error) {
-
-        console.error(error);
-
-        table.innerHTML =
-        `<tr>
-            <td colspan="6">
-                Failed to load posts.
-            </td>
-        </tr>`;
-
-        return;
-
-    }
-
-    if (!data || data.length === 0) {
-
-        table.innerHTML =
-        `<tr>
-            <td colspan="6">
-                No Posts Found
-            </td>
-        </tr>`;
-
-        return;
-
-    }
-
-    table.innerHTML =
-    data.map(post => createPostRow(post)).join("");
-
-}
-
-// ==========================================================
-// TABLE ROW
-// ==========================================================
-
-function createPostRow(post) {
-
-    return `
-
-<tr>
-
-<td>${escapeHTML(post.title)}</td>
-
-<td>${escapeHTML(post.category || "-")}</td>
-
-<td>${escapeHTML(post.status)}</td>
-
-<td>${formatDate(post.created_at)}</td>
-
-<td>
-
-<button
-class="secondary-btn"
-onclick="editPost('${post.id}')">
-
-Edit
-
-</button>
-
-<button
-class="primary-btn"
-onclick="deletePost('${post.id}')">
-
-Delete
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-}
-
-// ==========================================================
-// SAVE POST
-// ==========================================================
-
-window.savePost =
-async function () {
-
-    const title =
-    document
-    .getElementById("postTitle")
-    ?.value
-    ?.trim();
-
-    const category =
-    document
-    .getElementById("postCategory")
-    ?.value
-    ?.trim();
-
-    const content =
-    document
-    .getElementById("postContent")
-    ?.value
-    ?.trim();
-
-    if (!title || !content) {
-
-        showToast(
-            "Title and Content required.",
-            "warning"
-        );
-
-        return;
-
-    }
-
-    showLoader();
-
-    const payload = {
-
-        title,
-
-        category,
-
-        content,
-
-        status: "draft"
-
-    };
-
-    let result;
-
-    if (editingPostId) {
-
-        result =
-        await supabase
-
-            .from(TABLES.POSTS)
-
-            .update(payload)
-
-            .eq("id", editingPostId);
-
-    }
-
-    else {
-
-        result =
-        await supabase
-
-            .from(TABLES.POSTS)
-
-            .insert(payload);
-
-    }
-
-    hideLoader();
-
-    if (result.error) {
-
-        console.error(result.error);
-
-        showToast(
-            "Unable to save post.",
-            "error"
-        );
-
-        return;
-
-    }
-
-    showToast(
-        "Draft Saved Successfully"
-    );
-
-    clearPostForm();
-
-    loadPosts();
-
-};
-
-// ==========================================================
-// PUBLISH POST
-// ==========================================================
-
-window.publishPost =
-async function () {
-
-    const title =
-    document
-    .getElementById("postTitle")
-    ?.value
-    ?.trim();
-
-    const category =
-    document
-    .getElementById("postCategory")
-    ?.value
-    ?.trim();
-
-    const content =
-    document
-    .getElementById("postContent")
-    ?.value
-    ?.trim();
-
-    if (!title || !content) {
-
-        showToast(
-            "Title and Content required.",
-            "warning"
-        );
-
-        return;
-
-    }
-
-    showLoader();
-
-    const payload = {
-
-        title,
-
-        category,
-
-        content,
-
-        status: "published"
-
-    };
-
-    let result;
-
-    if (editingPostId) {
-
-        result =
-        await supabase
-
-            .from(TABLES.POSTS)
-
-            .update(payload)
-
-            .eq("id", editingPostId);
-
-    }
-
-    else {
-
-        result =
-        await supabase
-
-            .from(TABLES.POSTS)
-
-            .insert(payload);
-
-    }
-
-    hideLoader();
-
-    if (result.error) {
-
-        showToast(
-            "Publish Failed",
-            "error"
-        );
-
-        return;
-
-    }
-
-    showToast(
-        "Post Published Successfully"
-    );
-
-    clearPostForm();
-
-    loadPosts();
-
-};
-
-// ==========================================================
-// CLEAR FORM
-// ==========================================================
-
-function clearPostForm() {
-
-    editingPostId = null;
-
-    [
-        "postTitle",
-        "postCategory",
-        "postContent"
-    ]
-
-    .forEach(id => {
-
-        const el =
-        document.getElementById(id);
-
-        if (el)
-            el.value = "";
-
-    });
-
-}
-    // ==========================================================
-// VIEW POST
-// ==========================================================
-
-window.viewPost = async function(postId) {
-
-    try {
-
-        showLoader();
-
-        const { data, error } = await supabase
-            .from(TABLES.POSTS)
-            .select("*")
-            .eq("id", postId)
-            .single();
-
-
-        if(error){
-
-            console.error(error);
-
-            showToast(
-                "Unable to load post.",
-                "error"
-            );
-
-            hideLoader();
-
-            return;
-
-        }
-
-
-        const modal =
-        document.getElementById("postViewModal");
-
-
-        const content =
-        document.getElementById("postViewContent");
-
-
-        if(!modal || !content){
-
-            console.error(
-                "Post view modal not found"
-            );
-
-            hideLoader();
-
-            return;
-
-        }
-
-
-        content.innerHTML = `
-
-        <div class="post-view-box">
-
-
-            ${
-                data.image_url
-                ?
-                `
-                <img 
-                src="${escapeHTML(data.image_url)}"
-                class="post-view-image"
-                alt="Post Image">
-                `
-                :
-                ""
-            }
-
-
-            <h2>
-                ${escapeHTML(data.title)}
-            </h2>
-
-
-            <div class="post-meta">
-
-                <span>
-                📂 ${escapeHTML(data.category || "-")}
-                </span>
-
-
-                <span>
-                🏷️ ${escapeHTML(data.type || "-")}
-                </span>
-
-
-                <span>
-                📌 ${escapeHTML(data.status || "-")}
-                </span>
-
-
-                <span>
-                📅 ${formatDate(data.created_at)}
-                </span>
-
-            </div>
-
-
-
-            <hr>
-
-
-            <div class="post-content">
-
-                ${escapeHTML(data.content)
-                .replace(/\n/g,"<br>")}
-
-            </div>
-
-
-        </div>
-
-        `;
-
-
-        modal.style.display = "flex";
-
-
-        hideLoader();
-
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        hideLoader();
-
-        showToast(
-            "Something went wrong.",
-            "error"
-        );
-
-    }
-
-};
-
-
-
-// ==========================================================
-// CLOSE POST VIEW MODAL
-// ==========================================================
-
-window.closePostView = function(){
-
-    const modal =
-    document.getElementById("postViewModal");
-
-
-    if(modal){
-
-        modal.style.display="none";
-
-    }
-
-};
-<script type="module" src="assets/js/leads.js"></script>
-<script type="module" src="assets/js/testimonials.js"></script>
-<script type="module" src="assets/js/analytics.js"></script>
-<script type="module" src="assets/js/app.js"></script>
-    // ==========================================================
-// PRIME ACCOUNTING SOLUTIONS
-// APP.JS
-// Production Version 2.0
-// PART 1
-// ==========================================================
-
-// ================================
-// APP START
-// ================================
-
-document.addEventListener("DOMContentLoaded", () => {
-    initializeApp();
-});
-
-// ================================
-// INITIALIZE APP
-// ================================
-
-function initializeApp() {
-    initializeSidebar();
-    initializeDateTime();
-    initializeGreeting();
-    initializePages();
-}
-
-// ================================
-// SIDEBAR
-// ================================
-
-function initializeSidebar() {
-    const menuItems =
-    document.querySelectorAll(".menu-item");
-    menuItems.forEach(item => {
-        item.addEventListener("click", function () {
-
-            if (this.id === "logoutBtn") return;
-            menuItems.forEach(btn =>
-                btn.classList.remove("active")
-            );
-           this.classList.add("active");
-            const page =
-            this.dataset.page;
-            showPage(page);
-        });
-    });
-}
-
-// ================================
-// PAGE SWITCHER
-// ================================
-
-function showPage(page) {
-    const pages =
-    document.querySelectorAll(".page-section");
-    pages.forEach(section => {
-        section.style.display = "none";
-    });
-    const target =
-    document.getElementById(page + "Page");
-
-    if (target) {
-        target.style.display = "block";
-    }
-}
-
-// ================================
-// INITIAL PAGE
-// ================================
-
-function initializePages() {
-    showPage("dashboard");
-}
-
-// ================================
-// DATE & TIME
-// ================================
-
-function initializeDateTime() {
-    updateDateTime();
-    setInterval(updateDateTime,1000);
-}
-
-function updateDateTime() {
-    const now =
-    new Date();
-    const options = {
-        weekday:"long",
-        year:"numeric",
-        month:"long",
-        day:"numeric",
-        hour:"2-digit",
-        minute:"2-digit",
-        second:"2-digit"
-    };
-    const el =
-    document.getElementById("liveDateTime");
-
-    if(el){
-        el.innerHTML =
-        now.toLocaleString(
-            "en-IN",
-            options
-        );
-    }
-}
-
-// ================================
-// GREETING
-// ================================
-
-function initializeGreeting(){
-    updateGreeting();
-    setInterval(
-        updateGreeting,
-        60000
-    );
-}
-
-function updateGreeting(){
-    const hour =
-    new Date().getHours();
-    let greeting =
-    "Welcome";
-
-    if(hour<12){
-        greeting =
-        "Good Morning";
-    }
-    else if(hour<17){
-        greeting =
-        "Good Afternoon";
-    }
-    else{
-        greeting =
-        "Good Evening";
-    }
-    const text =
-    document.getElementById("greetingText");
-
-    if(text){
-        text.innerHTML =
-        greeting +
-        ", Administrator 👋";
-    }
-}
-        // ==========================================================
-// APP.JS
-// PART 2
-// Toast • Loading • Helpers
-// ==========================================================
-
-// ================================
-// TOAST NOTIFICATION
-// ================================
-
-window.showToast = function(message, type = "success") {
-    const toast = document.getElementById("toast");
-    if (!toast) return;
-    toast.innerHTML = message;
-  
-        if (type === "success") {
-        toast.style.background = "#16a34a";
-    } else if (type === "error") {
-        toast.style.background = "#dc2626";
-    } else if (type === "warning") {
-     toast.style.background = "#f59e0b";
-    } else {
-        toast.style.background = "#071630";
-    }
-    toast.style.display = "block";
-    toast.style.opacity = "1";
-    setTimeout(() => {
-        toast.style.opacity = "0";
+    
+    function showToast(message, type = 'success', duration = 3000) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = `toast active ${type}`;
+        
         setTimeout(() => {
-            toast.style.display = "none";
-        }, 300);
-    }, 3000);
-};
-
-// ================================
-// LOADING OVERLAY
-// ================================
-
-window.showLoader = function () {
-    const loader =
-    document.getElementById("loadingOverlay");
-
-    if(loader){
-        loader.style.display = "flex";
+            toast.classList.remove('active');
+        }, duration);
     }
-};
-
-window.hideLoader = function () {
-    const loader =
-    document.getElementById("loadingOverlay");
-    if(loader){
-        loader.style.display = "none";
+    
+    function formatDate(date) {
+        if (!date) return '-';
+        return new Date(date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
     }
-};
-
-// ================================
-// NUMBER FORMAT
-// ================================
-
-window.formatNumber = function(number){
-    return Number(number || 0)
-    .toLocaleString("en-IN");
-};
-
-// ================================
-// DATE FORMAT
-// ================================
-
-window.formatDate = function(date){
-    if(!date) return "-";
-    return new Date(date)
-    .toLocaleDateString(
-        "en-IN",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
+    
+    function formatTime(date) {
+        if (!date) return '-';
+        return new Date(date).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    // ================================================================
+    // NAVIGATION & PAGE MANAGEMENT
+    // ================================================================
+    
+    function showPage(pageName) {
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        const page = document.getElementById(pageName + 'Page');
+        if (page) {
+            page.classList.add('active');
         }
-    );
-};
-
-// ================================
-// ESCAPE HTML
-// ================================
-
-window.escapeHTML = function(text){
-   if(text==null) return "";
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-};
-
-// ================================
-// CONFIRM DELETE
-// ================================
-
-window.confirmDelete = function(message){
-    return confirm(
-        message ||
-        "Are you sure?"
-        );
-};
-
-// ================================
-// GLOBAL ERROR HANDLER
-// ================================
-
-window.addEventListener(
-    "error",
-    function(event){
-        console.error(
-            "Application Error:",
-            event.error
-        );
+        
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
+        
+        // Load page-specific data
+        switch(pageName) {
+            case 'leads':
+                loadLeads();
+                break;
+            case 'posts':
+                loadPosts();
+                break;
+            case 'testimonials':
+                loadTestimonials();
+                break;
+            case 'analytics':
+                loadAnalytics();
+                break;
+            case 'dashboard':
+                loadDashboardData();
+                break;
+        }
     }
-);
-
-// ================================
-// APP READY
-// ================================
-
-console.log(
-    "✅ Prime Accounting Solutions App Loaded"
-);
+    
+    // ================================================================
+    // AUTHENTICATION
+    // ================================================================
+    
+    async function login() {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        
+        if (!email || !password) {
+            showToast('Please enter email and password', 'warning');
+            return;
+        }
+        
+        showLoading();
+        
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password
+            });
+            
+            if (error) throw error;
+            
+            currentUser = data.user;
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            
+            initializeAdmin();
+            showToast('Successfully logged in', 'success');
+        } catch (error) {
+            showToast(error.message || 'Login failed', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function logout() {
+        if (!confirm('Are you sure you want to logout?')) return;
+        
+        showLoading();
+        try {
+            await supabase.auth.signOut();
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            currentUser = null;
+            showToast('Successfully logged out', 'success');
+        } catch (error) {
+            showToast(error.message || 'Logout failed', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function initializeAdmin() {
+        updateLiveDateTime();
+        setInterval(updateLiveDateTime, 60000);
+        
+        loadDashboardData();
+    }
+    
+    function updateLiveDateTime() {
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        const timeStr = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        document.getElementById('liveDateTime').textContent = `${dateStr} • ${timeStr}`;
+    }
+    
+    // ================================================================
+    // DASHBOARD DATA LOADING
+    // ================================================================
+    
+    async function loadDashboardData() {
+        showLoading();
+        try {
+            // Load all dashboard metrics
+            const [visitors, leads, posts, testimonials, clicks, services] = await Promise.all([
+                getVisitorCount(),
+                getLeadCount(),
+                getPostCount(),
+                getTestimonialCount(),
+                getServiceClickCount(),
+                getTopServices()
+            ]);
+            
+            // Update cards
+            document.getElementById('totalVisitors').textContent = visitors.total || 0;
+            document.getElementById('totalLeadsCount').textContent = leads.total || 0;
+            document.getElementById('newLeadsCount').textContent = leads.new || 0;
+            document.getElementById('contactedLeadsCount').textContent = leads.contacted || 0;
+            document.getElementById('convertedLeadsCount').textContent = leads.converted || 0;
+            document.getElementById('closedLeadsCount').textContent = leads.closed || 0;
+            document.getElementById('publishedPostsCount').textContent = posts || 0;
+            document.getElementById('testimonialCount').textContent = testimonials || 0;
+            document.getElementById('serviceClicksCount').textContent = clicks || 0;
+            
+            if (services && services.length > 0) {
+                document.getElementById('topServiceName').textContent = services[0].service || '-';
+            }
+            
+            // Load recent data
+            await Promise.all([
+                loadRecentLeads(),
+                loadRecentVisitors(),
+                loadRecentServiceClicks(),
+                loadTopServices(),
+                loadVisitorChart()
+            ]);
+        } catch (error) {
+            console.error('Error loading dashboard:', error);
+            showToast('Error loading dashboard data', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function getVisitorCount() {
+        try {
+            const { data, error } = await supabase
+                .from('visitors')
+                .select('*', { count: 'exact', head: true });
+            
+            if (error) throw error;
+            return { total: data?.length || 0 };
+        } catch (error) {
+            console.error('Error getting visitor count:', error);
+            return { total: 0 };
+        }
+    }
+    
+    async function getLeadCount() {
+        try {
+            const { data, error } = await supabase
+                .from('leads')
+                .select('status');
+            
+            if (error) throw error;
+            
+            return {
+                total: data?.length || 0,
+                new: data?.filter(d => d.status === 'new').length || 0,
+                contacted: data?.filter(d => d.status === 'contacted').length || 0,
+                converted: data?.filter(d => d.status === 'converted').length || 0,
+                closed: data?.filter(d => d.status === 'closed').length || 0
+            };
+        } catch (error) {
+            console.error('Error getting lead count:', error);
+            return { total: 0, new: 0, contacted: 0, converted: 0, closed: 0 };
+        }
+    }
+    
+    async function getPostCount() {
+        try {
+            const { data, error } = await supabase
+                .from('posts')
+                .select('*', { count: 'exact', head: true })
+                .eq('status', 'published');
+            
+            if (error) throw error;
+            return data?.length || 0;
+        } catch (error) {
+            console.error('Error getting post count:', error);
+            return 0;
+        }
+    }
+    
+    async function getTestimonialCount() {
+        try {
+            const { data, error } = await supabase
+                .from('testimonials')
+                .select('*', { count: 'exact', head: true })
+                .eq('status', 'approved');
+            
+            if (error) throw error;
+            return data?.length || 0;
+        } catch (error) {
+            console.error('Error getting testimonial count:', error);
+            return 0;
+        }
+    }
+    
+    async function getServiceClickCount() {
+        try {
+            const { data, error } = await supabase
+                .from('service_clicks')
+                .select('*', { count: 'exact', head: true });
+            
+            if (error) throw error;
+            return data?.length || 0;
+        } catch (error) {
+            console.error('Error getting service click count:', error);
+            return 0;
+        }
+    }
+    
+    async function getTopServices() {
+        try {
+            const { data, error } = await supabase
+                .from('service_clicks')
+                .select('service')
+                .order('created_at', { ascending: false })
+                .limit(10);
+            
+            if (error) throw error;
+            
+            const serviceCount = {};
+            data?.forEach(item => {
+                serviceCount[item.service] = (serviceCount[item.service] || 0) + 1;
+            });
+            
+            return Object.entries(serviceCount)
+                .map(([service, count]) => ({ service, count }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 10);
+        } catch (error) {
+            console.error('Error getting top services:', error);
+            return [];
+        }
+    }
+    
+    // ================================================================
+    // RECENT DATA WIDGETS
+    // ================================================================
+    
+    async function loadRecentLeads() {
+        try {
+            const { data, error } = await supabase
+                .from('leads')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(5);
+            
+            if (error) throw error;
+            
+            const html = data && data.length > 0
+                ? data.map(lead => `
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${lead.name || '-'}</strong>
+                            <small style="display: block; color: var(--text-light); font-size: 12px;">${lead.company || '-'}</small>
+                        </div>
+                        <span style="font-size: 12px; color: var(--text-light);">${formatDate(lead.created_at)}</span>
+                    </div>
+                `).join('')
+                : '<p class="loading-text">No recent leads</p>';
+            
+            document.getElementById('recentLeadsList').innerHTML = html;
+        } catch (error) {
+            console.error('Error loading recent leads:', error);
+        }
+    }
+    
+    async function loadRecentVisitors() {
+        try {
+            const { data, error } = await supabase
+                .from('visitors')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(5);
+            
+            if (error) throw error;
+            
+            const html = data && data.length > 0
+                ? data.map(visitor => `
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border);">
+                        <div style="display: flex; justify-content: space-between;">
+                            <strong>${visitor.page || 'Homepage'}</strong>
+                            <span style="font-size: 12px; color: var(--text-light);">${formatTime(visitor.created_at)}</span>
+                        </div>
+                    </div>
+                `).join('')
+                : '<p class="loading-text">No recent visitors</p>';
+            
+            document.getElementById('recentVisitorsList').innerHTML = html;
+        } catch (error) {
+            console.error('Error loading recent visitors:', error);
+        }
+    }
+    
+    async function loadRecentServiceClicks() {
+        try {
+            const { data, error } = await supabase
+                .from('service_clicks')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(5);
+            
+            if (error) throw error;
+            
+            const html = data && data.length > 0
+                ? data.map(click => `
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                        <strong>${click.service || '-'}</strong>
+                        <span style="font-size: 12px; color: var(--text-light);">${formatDate(click.created_at)}</span>
+                    </div>
+                `).join('')
+                : '<p class="loading-text">No recent clicks</p>';
+            
+            document.getElementById('recentServiceClicksList').innerHTML = html;
+        } catch (error) {
+            console.error('Error loading recent service clicks:', error);
+        }
+    }
+    
+    async function loadTopServices() {
+        try {
+            const services = await getTopServices();
+            
+            const html = services && services.length > 0
+                ? services.map((service, index) => `
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="font-weight: 700; color: var(--gold); margin-right: 10px;">#${index + 1}</span>
+                            <strong>${service.service || '-'}</strong>
+                        </div>
+                        <span style="background: var(--gold); color: var(--navy); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">${service.count}</span>
+                    </div>
+                `).join('')
+                : '<p class="loading-text">No service data</p>';
+            
+            document.getElementById('topServicesList').innerHTML = html;
+        } catch (error) {
+            console.error('Error loading top services:', error);
+        }
+    }
+    
+    // ================================================================
+    // CHART FUNCTIONS
+    // ================================================================
+    
+    async function loadVisitorChart() {
+        const ctx = document.getElementById('visitorChart');
+        if (!ctx) return;
+        
+        try {
+            const { data, error } = await supabase
+                .from('visitors')
+                .select('*')
+                .order('created_at', { ascending: true })
+                .limit(30);
+            
+            if (error) throw error;
+            
+            // Process data for chart
+            const dateMap = {};
+            data?.forEach(visitor => {
+                const date = formatDate(visitor.created_at);
+                dateMap[date] = (dateMap[date] || 0) + 1;
+            });
+            
+            const labels = Object.keys(dateMap).slice(-7); // Last 7 days
+            const values = labels.map(label => dateMap[label] || 0);
+            
+            if (visitorChart) visitorChart.destroy();
+            
+            visitorChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Visitors',
+                        data: values,
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--gold'),
+                        backgroundColor: 'rgba(223, 183, 76, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointBackgroundColor: 'var(--gold)',
+                        pointBorderColor: 'white',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading visitor chart:', error);
+        }
+    }
+    
+    // ================================================================
+    // LEADS MANAGEMENT
+    // ================================================================
+    
+    async function loadLeads() {
+        showLoading();
+        try {
+            const { data, error } = await supabase
+                .from('leads')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            
+            const tbody = document.getElementById('leadsTableBody');
+            
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="loading-text">No leads found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = data.map(lead => `
+                <tr>
+                    <td><strong>${lead.name || '-'}</strong></td>
+                    <td>${lead.company || '-'}</td>
+                    <td>${lead.phone || '-'}</td>
+                    <td>${lead.email || '-'}</td>
+                    <td>
+                        <span style="
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: 700;
+                            background: ${lead.status === 'new' ? '#dbeafe' : lead.status === 'contacted' ? '#fef3c7' : lead.status === 'converted' ? '#dcfce7' : '#fee2e2'};
+                            color: ${lead.status === 'new' ? '#0ea5e9' : lead.status === 'contacted' ? '#f59e0b' : lead.status === 'converted' ? '#16a34a' : '#dc2626'};
+                        ">
+                            ${lead.status?.toUpperCase() || 'NEW'}
+                        </span>
+                    </td>
+                    <td>${formatDate(lead.created_at)}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn view-btn" onclick="viewLead('${lead.id}')">View</button>
+                            <button class="action-btn edit-btn" onclick="editLead('${lead.id}')">Edit</button>
+                            <button class="action-btn delete-btn" onclick="deleteLead('${lead.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading leads:', error);
+            showToast('Error loading leads', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function viewLead(leadId) {
+        try {
+            const { data, error } = await supabase
+                .from('leads')
+                .select('*')
+                .eq('id', leadId)
+                .single();
+            
+            if (error) throw error;
+            
+            const html = `
+                <div class="form-grid">
+                    <div>
+                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Name</label>
+                        <p style="font-size: 16px; margin-top: 5px;">${data.name || '-'}</p>
+                    </div>
+                    <div>
+                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Company</label>
+                        <p style="font-size: 16px; margin-top: 5px;">${data.company || '-'}</p>
+                    </div>
+                    <div>
+                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Phone</label>
+                        <p style="font-size: 16px; margin-top: 5px;"><a href="tel:${data.phone}" style="color: var(--navy); text-decoration: none;">${data.phone || '-'}</a></p>
+                    </div>
+                    <div>
+                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Email</label>
+                        <p style="font-size: 16px; margin-top: 5px;"><a href="mailto:${data.email}" style="color: var(--navy); text-decoration: none;">${data.email || '-'}</a></p>
+                    </div>
+                    <div>
+                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Status</label>
+                        <p style="font-size: 16px; margin-top: 5px;">${data.status?.toUpperCase() || 'NEW'}</p>
+                    </div>
+                    <div>
+                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Date</label>
+                        <p style="font-size: 16px; margin-top: 5px;">${formatDate(data.created_at)}</p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Message</label>
+                    <p style="margin-top: 5px; line-height: 1.6;">${data.message || '-'}</p>
+                </div>
+                <div class="button-group">
+                    <a href="tel:${data.phone}" class="primary-btn">
+                        📞 Call
+                    </a>
+                    <a href="https://wa.me/${data.phone}" class="primary-btn" target="_blank">
+                        💬 WhatsApp
+                    </a>
+                    <a href="mailto:${data.email}" class="primary-btn">
+                        ✉️ Email
+                    </a>
+                </div>
+            `;
+            
+            document.getElementById('leadModalBody').innerHTML = html;
+            document.getElementById('leadModal').classList.add('active');
+        } catch (error) {
+            console.error('Error viewing lead:', error);
+            showToast('Error loading lead details', 'danger');
+        }
+    }
+    
+    async function editLead(leadId) {
+        // Placeholder for edit functionality
+        alert('Edit functionality to be implemented');
+    }
+    
+    async function deleteLead(leadId) {
+        if (!confirm('Are you sure you want to delete this lead?')) return;
+        
+        showLoading();
+        try {
+            const { error } = await supabase
+                .from('leads')
+                .delete()
+                .eq('id', leadId);
+            
+            if (error) throw error;
+            
+            showToast('Lead deleted successfully', 'success');
+            loadLeads();
+        } catch (error) {
+            console.error('Error deleting lead:', error);
+            showToast('Error deleting lead', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    // ================================================================
+    // POSTS MANAGEMENT
+    // ================================================================
+    
+    async function loadPosts() {
+        showLoading();
+        try {
+            const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            
+            const tbody = document.getElementById('postsTableBody');
+            
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="loading-text">No posts found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = data.map(post => `
+                <tr>
+                    <td><strong>${post.title || '-'}</strong></td>
+                    <td>${post.category || '-'}</td>
+                    <td>
+                        <span style="
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: 700;
+                            background: ${post.status === 'published' ? '#dcfce7' : '#fee2e2'};
+                            color: ${post.status === 'published' ? '#16a34a' : '#dc2626'};
+                        ">
+                            ${post.status?.toUpperCase() || 'DRAFT'}
+                        </span>
+                    </td>
+                    <td>${formatDate(post.created_at)}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn view-btn" onclick="alert('View functionality')">View</button>
+                            <button class="action-btn edit-btn" onclick="alert('Edit functionality')">Edit</button>
+                            <button class="action-btn delete-btn" onclick="alert('Delete functionality')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading posts:', error);
+            showToast('Error loading posts', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    // ================================================================
+    // TESTIMONIALS MANAGEMENT
+    // ================================================================
+    
+    async function loadTestimonials() {
+        showLoading();
+        try {
+            const { data, error } = await supabase
+                .from('testimonials')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            
+            const tbody = document.getElementById('testimonialsTableBody');
+            
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="loading-text">No testimonials found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = data.map(testimonial => `
+                <tr>
+                    <td><strong>${testimonial.client_name || '-'}</strong></td>
+                    <td>${testimonial.company || '-'}</td>
+                    <td>${'⭐'.repeat(testimonial.rating || 0)}</td>
+                    <td>
+                        <span style="
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: 700;
+                            background: ${testimonial.status === 'approved' ? '#dcfce7' : testimonial.status === 'rejected' ? '#fee2e2' : '#fef3c7'};
+                            color: ${testimonial.status === 'approved' ? '#16a34a' : testimonial.status === 'rejected' ? '#dc2626' : '#f59e0b'};
+                        ">
+                            ${testimonial.status?.toUpperCase() || 'PENDING'}
+                        </span>
+                    </td>
+                    <td>${formatDate(testimonial.created_at)}</td>
+                    <td>
+                        <div class="action-buttons">
+                            ${testimonial.status !== 'approved' ? `<button class="action-btn success-btn" onclick="approveTestimonial('${testimonial.id}')">Approve</button>` : ''}
+                            ${testimonial.status !== 'rejected' ? `<button class="action-btn danger-btn" onclick="rejectTestimonial('${testimonial.id}')">Reject</button>` : ''}
+                            <button class="action-btn delete-btn" onclick="deleteTestimonial('${testimonial.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading testimonials:', error);
+            showToast('Error loading testimonials', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function approveTestimonial(id) {
+        showLoading();
+        try {
+            const { error } = await supabase
+                .from('testimonials')
+                .update({ status: 'approved' })
+                .eq('id', id);
+            
+            if (error) throw error;
+            showToast('Testimonial approved', 'success');
+            loadTestimonials();
+        } catch (error) {
+            console.error('Error approving testimonial:', error);
+            showToast('Error approving testimonial', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function rejectTestimonial(id) {
+        showLoading();
+        try {
+            const { error } = await supabase
+                .from('testimonials')
+                .update({ status: 'rejected' })
+                .eq('id', id);
+            
+            if (error) throw error;
+            showToast('Testimonial rejected', 'success');
+            loadTestimonials();
+        } catch (error) {
+            console.error('Error rejecting testimonial:', error);
+            showToast('Error rejecting testimonial', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function deleteTestimonial(id) {
+        if (!confirm('Are you sure?')) return;
+        showLoading();
+        try {
+            const { error } = await supabase
+                .from('testimonials')
+                .delete()
+                .eq('id', id);
+            
+            if (error) throw error;
+            showToast('Testimonial deleted', 'success');
+            loadTestimonials();
+        } catch (error) {
+            console.error('Error deleting testimonial:', error);
+            showToast('Error deleting testimonial', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    // ================================================================
+    // ANALYTICS
+    // ================================================================
+    
+    async function loadAnalytics() {
+        showLoading();
+        try {
+            const [visitors, clicks, services] = await Promise.all([
+                getVisitorCount(),
+                getServiceClickCount(),
+                getTopServices()
+            ]);
+            
+            document.getElementById('analyticsVisitors').textContent = visitors.total || 0;
+            document.getElementById('analyticsClicks').textContent = clicks || 0;
+            document.getElementById('analyticsCalls').textContent = '0'; // Placeholder
+            document.getElementById('analyticsChats').textContent = '0'; // Placeholder
+            
+            await Promise.all([
+                loadTrendChart(),
+                loadPerformanceChart()
+            ]);
+        } catch (error) {
+            console.error('Error loading analytics:', error);
+            showToast('Error loading analytics', 'danger');
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    async function loadTrendChart() {
+        const ctx = document.getElementById('analyticsTrendChart');
+        if (!ctx) return;
+        
+        try {
+            const { data, error } = await supabase
+                .from('visitors')
+                .select('created_at')
+                .order('created_at', { ascending: true })
+                .limit(30);
+            
+            if (error) throw error;
+            
+            const dateMap = {};
+            data?.forEach(item => {
+                const date = formatDate(item.created_at);
+                dateMap[date] = (dateMap[date] || 0) + 1;
+            });
+            
+            const labels = Object.keys(dateMap).slice(-7);
+            const values = labels.map(label => dateMap[label] || 0);
+            
+            if (trendChart) trendChart.destroy();
+            
+            trendChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Daily Visitors',
+                        data: values,
+                        backgroundColor: 'var(--gold)',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading trend chart:', error);
+        }
+    }
+    
+    async function loadPerformanceChart() {
+        const ctx = document.getElementById('servicePerformanceChart');
+        if (!ctx) return;
+        
+        try {
+            const services = await getTopServices();
+            const top5 = services.slice(0, 5);
+            
+            if (performanceChart) performanceChart.destroy();
+            
+            performanceChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: top5.map(s => s.service),
+                    datasets: [{
+                        data: top5.map(s => s.count),
+                        backgroundColor: [
+                            'var(--gold)',
+                            'var(--navy)',
+                            '#0ea5e9',
+                            '#16a34a',
+                            '#f59e0b'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading performance chart:', error);
+        }
+    }
+    
+    // ================================================================
+    // EVENT LISTENERS
+    // ================================================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        initSupabase();
+        
+        // Login
+        document.getElementById('loginBtn').addEventListener('click', login);
+        document.getElementById('email').addEventListener('keypress', e => {
+            if (e.key === 'Enter') login();
+        });
+        document.getElementById('password').addEventListener('keypress', e => {
+            if (e.key === 'Enter') login();
+        });
+        
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+        
+        // Menu navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.dataset.page;
+                if (page) showPage(page);
+            });
+        });
+        
+        // Modal close
+        document.querySelectorAll('.modal-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.modal').classList.remove('active');
+            });
+        });
+        
+        // Lead filters
+        document.getElementById('leadSearchInput')?.addEventListener('input', function() {
+            // Implement live search
+        });
+        
+        // New post button
+        document.getElementById('newPostBtn')?.addEventListener('click', function() {
+            alert('Create new post functionality to be implemented');
+        });
+        
+        // Update buttons
+        document.getElementById('updateAdminBtn')?.addEventListener('click', function() {
+            showToast('Admin info updated successfully', 'success');
+        });
+        
+        document.getElementById('updateBrandBtn')?.addEventListener('click', function() {
+            showToast('Brand settings updated successfully', 'success');
+        });
+    });
+</script>
 
 </body>
 </html>

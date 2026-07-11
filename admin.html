@@ -1260,29 +1260,6 @@ NOTIFICATIONS
     // AUTHENTICATION
     // ================================================================
     
-    function login() {
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        
-        if (!email || !password) {
-            showToast('Please enter email and password', 'warning');
-            return;
-        }
-        
-        if (demoAccounts[email] !== password) {
-            showToast('Invalid email or password', 'danger');
-            return;
-        }
-        
-        currentUser = { email, name: email.split('@')[0] };
-        
-        document.getElementById('loginPage').style.display = 'none';
-        document.getElementById('adminPanel').style.display = 'block';
-        document.getElementById('adminDisplayName').textContent = currentUser.name;
-        
-        initializeAdmin();
-        showToast('Successfully logged in!', 'success');
-    }
     
     function logout() {
         if (!confirm('Are you sure you want to logout?')) return;

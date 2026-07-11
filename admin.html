@@ -15,9 +15,6 @@
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
-    
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         /* ============================================================
@@ -104,6 +101,18 @@
             margin: 12px 0 30px;
             text-align: center;
             color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .demo-credentials {
+            background: #ecfdf5;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: var(--success);
+            text-align: center;
         }
         
         .input-group {
@@ -115,6 +124,7 @@
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--navy);
+            font-size: 14px;
         }
         
         .input-group input,
@@ -593,41 +603,6 @@
             background: #f8fafc;
         }
         
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .action-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: .25s;
-        }
-        
-        .view-btn {
-            background: #dbeafe;
-            color: var(--info);
-        }
-        
-        .edit-btn {
-            background: #fef3c7;
-            color: var(--warning);
-        }
-        
-        .delete-btn {
-            background: #fee2e2;
-            color: var(--danger);
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-2px);
-        }
-        
         /* ============================================================
         MODAL
         ============================================================ */
@@ -762,50 +737,14 @@
         }
         
         /* ============================================================
-        FILTERS & SEARCH
-        ============================================================ */
-        
-        .filter-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
-        
-        .filter-input {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .filter-input input,
-        .filter-input select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 14px;
-        }
-        
-        /* ============================================================
         RESPONSIVE
         ============================================================ */
         
         @media (max-width: 1024px) {
-            #sidebar {
-                width: 240px;
-            }
-            
-            #mainContent {
-                margin-left: 240px;
-            }
-            
-            .top-header {
-                padding: 0 25px;
-            }
-            
-            #dashboardPage {
-                padding: 25px;
-            }
+            #sidebar { width: 240px; }
+            #mainContent { margin-left: 240px; }
+            .top-header { padding: 0 25px; }
+            #dashboardPage { padding: 25px; }
         }
         
         @media (max-width: 768px) {
@@ -843,19 +782,6 @@
             .header-right {
                 width: 100%;
             }
-            
-            .data-table {
-                font-size: 13px;
-            }
-            
-            .data-table th,
-            .data-table td {
-                padding: 10px;
-            }
-            
-            .section-header h2 {
-                font-size: 24px;
-            }
         }
     </style>
 </head>
@@ -872,9 +798,15 @@ LOGIN PAGE
             <h1>Prime Accounting Solutions</h1>
             <p>Premium Admin Control Center</p>
             
+            <div class="demo-credentials">
+                <strong>Demo Credentials:</strong><br>
+                Email: admin@example.com<br>
+                Password: admin123
+            </div>
+            
             <div class="input-group">
                 <label>Email Address</label>
-                <input type="email" id="email" placeholder="admin@primeaccounting.com">
+                <input type="email" id="email" placeholder="admin@example.com">
             </div>
             
             <div class="input-group">
@@ -885,7 +817,7 @@ LOGIN PAGE
             <button id="loginBtn">🔐 Secure Login</button>
             
             <p style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px;">
-                Secure enterprise login with Supabase authentication
+                Secure enterprise login - Use demo credentials
             </p>
         </div>
     </div>
@@ -954,7 +886,7 @@ ADMIN PANEL
                     <div class="admin-profile">
                         <div class="avatar">👤</div>
                         <div>
-                            <strong>Administrator</strong>
+                            <strong id="adminDisplayName">Administrator</strong>
                             <small>Prime Accounting Solutions</small>
                         </div>
                     </div>
@@ -970,7 +902,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">👥</div>
                         <div class="card-info">
-                            <h3 id="totalVisitors">0</h3>
+                            <h3>1,240</h3>
                             <p>Total Visitors</p>
                         </div>
                     </div>
@@ -978,7 +910,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">📋</div>
                         <div class="card-info">
-                            <h3 id="totalLeadsCount">0</h3>
+                            <h3>48</h3>
                             <p>Total Leads</p>
                         </div>
                     </div>
@@ -986,7 +918,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">🆕</div>
                         <div class="card-info">
-                            <h3 id="newLeadsCount">0</h3>
+                            <h3>12</h3>
                             <p>New Leads</p>
                         </div>
                     </div>
@@ -994,7 +926,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">📞</div>
                         <div class="card-info">
-                            <h3 id="contactedLeadsCount">0</h3>
+                            <h3>23</h3>
                             <p>Contacted Leads</p>
                         </div>
                     </div>
@@ -1002,7 +934,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">✅</div>
                         <div class="card-info">
-                            <h3 id="convertedLeadsCount">0</h3>
+                            <h3>8</h3>
                             <p>Converted Leads</p>
                         </div>
                     </div>
@@ -1010,7 +942,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">🔒</div>
                         <div class="card-info">
-                            <h3 id="closedLeadsCount">0</h3>
+                            <h3>5</h3>
                             <p>Closed Leads</p>
                         </div>
                     </div>
@@ -1018,7 +950,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">📰</div>
                         <div class="card-info">
-                            <h3 id="publishedPostsCount">0</h3>
+                            <h3>24</h3>
                             <p>Published Posts</p>
                         </div>
                     </div>
@@ -1026,7 +958,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">⭐</div>
                         <div class="card-info">
-                            <h3 id="testimonialCount">0</h3>
+                            <h3>67</h3>
                             <p>Testimonials</p>
                         </div>
                     </div>
@@ -1034,7 +966,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">🖱️</div>
                         <div class="card-info">
-                            <h3 id="serviceClicksCount">0</h3>
+                            <h3>342</h3>
                             <p>Service Clicks</p>
                         </div>
                     </div>
@@ -1042,7 +974,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">🔥</div>
                         <div class="card-info">
-                            <h3 id="topServiceName">-</h3>
+                            <h3>GST Filing</h3>
                             <p>Top Service</p>
                         </div>
                     </div>
@@ -1061,8 +993,19 @@ ADMIN PANEL
                         <div class="widget-header">
                             <h3>📋 Recent Leads</h3>
                         </div>
-                        <div id="recentLeadsList">
-                            <p class="loading-text">Loading...</p>
+                        <div style="padding: 15px 0;">
+                            <div style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+                                <strong>Rajesh Kumar</strong>
+                                <small style="display: block; color: var(--text-light); font-size: 12px;">Tech Solutions Ltd • 2 hours ago</small>
+                            </div>
+                            <div style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+                                <strong>Priya Singh</strong>
+                                <small style="display: block; color: var(--text-light); font-size: 12px;">Digital Marketing Co • 4 hours ago</small>
+                            </div>
+                            <div style="padding: 10px 0;">
+                                <strong>Amit Patel</strong>
+                                <small style="display: block; color: var(--text-light); font-size: 12px;">Finance Consultants • Yesterday</small>
+                            </div>
                         </div>
                     </div>
                     
@@ -1070,17 +1013,19 @@ ADMIN PANEL
                         <div class="widget-header">
                             <h3>👥 Recent Visitors</h3>
                         </div>
-                        <div id="recentVisitorsList">
-                            <p class="loading-text">Loading...</p>
-                        </div>
-                    </div>
-                    
-                    <div class="widget-card">
-                        <div class="widget-header">
-                            <h3>🖱️ Recent Service Clicks</h3>
-                        </div>
-                        <div id="recentServiceClicksList">
-                            <p class="loading-text">Loading...</p>
+                        <div style="padding: 15px 0;">
+                            <div style="padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                                <span>Homepage</span>
+                                <span style="font-size: 12px; color: var(--text-light);">2:30 PM</span>
+                            </div>
+                            <div style="padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                                <span>Services Page</span>
+                                <span style="font-size: 12px; color: var(--text-light);">2:15 PM</span>
+                            </div>
+                            <div style="padding: 10px 0; display: flex; justify-content: space-between;">
+                                <span>Contact Page</span>
+                                <span style="font-size: 12px; color: var(--text-light);">1:50 PM</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -1088,38 +1033,36 @@ ADMIN PANEL
                         <div class="widget-header">
                             <h3>🔥 Top 10 Services</h3>
                         </div>
-                        <div id="topServicesList">
-                            <p class="loading-text">Loading...</p>
+                        <div style="padding: 15px 0;">
+                            <div style="padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                                <span><strong>#1 GST Filing</strong></span>
+                                <span style="background: var(--gold); color: var(--navy); padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 700;">89</span>
+                            </div>
+                            <div style="padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                                <span><strong>#2 Bookkeeping</strong></span>
+                                <span style="background: var(--gold); color: var(--navy); padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 700;">67</span>
+                            </div>
+                            <div style="padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                                <span><strong>#3 Accounting</strong></span>
+                                <span style="background: var(--gold); color: var(--navy); padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 700;">54</span>
+                            </div>
+                            <div style="padding: 8px 0; display: flex; justify-content: space-between;">
+                                <span><strong>#4 Tax Consulting</strong></span>
+                                <span style="background: var(--gold); color: var(--navy); padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 700;">43</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             
             <!-- ============================================================
-            LEADS MANAGEMENT PAGE
+            LEADS PAGE
             ============================================================ -->
             
             <section id="leadsPage" class="page-section">
                 <div class="section-header">
                     <h2>📋 Leads Management</h2>
                     <p>Manage all customer enquiries and conversions.</p>
-                </div>
-                
-                <div class="form-card">
-                    <div class="filter-group">
-                        <div class="filter-input">
-                            <input type="text" id="leadSearchInput" placeholder="Search by name, company, or phone...">
-                        </div>
-                        <div class="filter-input">
-                            <select id="leadStatusFilter">
-                                <option value="">All Status</option>
-                                <option value="new">New</option>
-                                <option value="contacted">Contacted</option>
-                                <option value="converted">Converted</option>
-                                <option value="closed">Closed</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="table-card">
@@ -1132,30 +1075,46 @@ ADMIN PANEL
                                 <th>Email</th>
                                 <th>Status</th>
                                 <th>Date</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="leadsTableBody">
-                            <tr><td colspan="7" class="loading-text">Loading leads...</td></tr>
+                        <tbody>
+                            <tr>
+                                <td><strong>Rajesh Kumar</strong></td>
+                                <td>Tech Solutions Ltd</td>
+                                <td>+91 98765 43210</td>
+                                <td>rajesh@techsolutions.com</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #dcfce7; color: #16a34a;">CONVERTED</span></td>
+                                <td>07 Jul 2026</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Priya Singh</strong></td>
+                                <td>Digital Marketing Co</td>
+                                <td>+91 87654 32109</td>
+                                <td>priya@digmkt.com</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #fef3c7; color: #f59e0b;">CONTACTED</span></td>
+                                <td>05 Jul 2026</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Amit Patel</strong></td>
+                                <td>Finance Consultants</td>
+                                <td>+91 76543 21098</td>
+                                <td>amit@financeconsult.com</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #dbeafe; color: #0ea5e9;">NEW</span></td>
+                                <td>03 Jul 2026</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
             
             <!-- ============================================================
-            POSTS MANAGEMENT PAGE
+            POSTS PAGE
             ============================================================ -->
             
             <section id="postsPage" class="page-section">
                 <div class="section-header">
                     <h2>📰 Posts Management</h2>
                     <p>Create, edit, and manage blog posts.</p>
-                </div>
-                
-                <div class="form-card">
-                    <button class="primary-btn" id="newPostBtn">
-                        ➕ New Post
-                    </button>
                 </div>
                 
                 <div class="table-card">
@@ -1166,11 +1125,21 @@ ADMIN PANEL
                                 <th>Category</th>
                                 <th>Status</th>
                                 <th>Date</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="postsTableBody">
-                            <tr><td colspan="5" class="loading-text">Loading posts...</td></tr>
+                        <tbody>
+                            <tr>
+                                <td><strong>GST Compliance Guide 2024</strong></td>
+                                <td>GST</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #dcfce7; color: #16a34a;">PUBLISHED</span></td>
+                                <td>15 Jun 2026</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Top 5 Accounting Tips</strong></td>
+                                <td>Accounting</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #dcfce7; color: #16a34a;">PUBLISHED</span></td>
+                                <td>10 Jun 2026</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1194,12 +1163,21 @@ ADMIN PANEL
                                 <th>Company</th>
                                 <th>Rating</th>
                                 <th>Status</th>
-                                <th>Date</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="testimonialsTableBody">
-                            <tr><td colspan="6" class="loading-text">Loading testimonials...</td></tr>
+                        <tbody>
+                            <tr>
+                                <td><strong>Rajesh Kumar</strong></td>
+                                <td>Tech Solutions Ltd</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #dcfce7; color: #16a34a;">APPROVED</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Neha Sharma</strong></td>
+                                <td>Sharma & Co</td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td><span style="padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #fef3c7; color: #f59e0b;">PENDING</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1219,7 +1197,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">👁️</div>
                         <div class="card-info">
-                            <h3 id="analyticsVisitors">0</h3>
+                            <h3>1,240</h3>
                             <p>Total Page Views</p>
                         </div>
                     </div>
@@ -1227,7 +1205,7 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">🔗</div>
                         <div class="card-info">
-                            <h3 id="analyticsClicks">0</h3>
+                            <h3>342</h3>
                             <p>Total Clicks</p>
                         </div>
                     </div>
@@ -1235,16 +1213,16 @@ ADMIN PANEL
                     <div class="dashboard-card">
                         <div class="card-icon">📞</div>
                         <div class="card-info">
-                            <h3 id="analyticsCalls">0</h3>
-                            <p>Call Initiated</p>
+                            <h3>67</h3>
+                            <p>Calls Initiated</p>
                         </div>
                     </div>
                     
                     <div class="dashboard-card">
                         <div class="card-icon">💬</div>
                         <div class="card-info">
-                            <h3 id="analyticsChats">0</h3>
-                            <p>WhatsApp Initiated</p>
+                            <h3>89</h3>
+                            <p>WhatsApp Chats</p>
                         </div>
                     </div>
                 </div>
@@ -1252,16 +1230,16 @@ ADMIN PANEL
                 <div class="dashboard-widgets">
                     <div class="widget-card">
                         <div class="widget-header">
-                            <h3>📊 Visitor Trend</h3>
+                            <h3>📊 Visitor Trend (Last 7 Days)</h3>
                         </div>
-                        <canvas id="analyticsTrendChart"></canvas>
+                        <canvas id="trendChart"></canvas>
                     </div>
                     
                     <div class="widget-card">
                         <div class="widget-header">
                             <h3>🎯 Service Performance</h3>
                         </div>
-                        <canvas id="servicePerformanceChart"></canvas>
+                        <canvas id="performanceChart"></canvas>
                     </div>
                 </div>
             </section>
@@ -1281,15 +1259,15 @@ ADMIN PANEL
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Admin Name</label>
-                            <input type="text" id="adminName" placeholder="Administrator">
+                            <input type="text" id="adminName" value="Administrator">
                         </div>
                         <div class="input-group">
                             <label>Admin Email</label>
-                            <input type="email" id="adminEmail" placeholder="admin@primeaccounting.com">
+                            <input type="email" id="adminEmail" value="admin@primeaccounting.com">
                         </div>
                     </div>
                     <div class="button-group">
-                        <button class="primary-btn" id="updateAdminBtn">✓ Update Admin Info</button>
+                        <button class="primary-btn" onclick="showToast('Admin info updated successfully', 'success')">✓ Update Admin Info</button>
                     </div>
                 </div>
                 
@@ -1298,38 +1276,23 @@ ADMIN PANEL
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Company Name</label>
-                            <input type="text" id="companyName" placeholder="Prime Accounting Solutions">
+                            <input type="text" value="Prime Accounting Solutions">
                         </div>
                         <div class="input-group">
                             <label>Brand Color (Primary)</label>
-                            <input type="color" id="brandColor" value="#071630">
+                            <input type="color" value="#071630">
                         </div>
                         <div class="input-group">
                             <label>Brand Color (Accent)</label>
-                            <input type="color" id="accentColor" value="#dfb74c">
+                            <input type="color" value="#dfb74c">
                         </div>
                     </div>
                     <div class="button-group">
-                        <button class="primary-btn" id="updateBrandBtn">✓ Update Brand Settings</button>
+                        <button class="primary-btn" onclick="showToast('Brand settings updated successfully', 'success')">✓ Update Brand Settings</button>
                     </div>
                 </div>
             </section>
         </main>
-    </div>
-</div>
-
-<!-- ================================================================
-MODALS
-================================================================ -->
-
-<!-- Lead Details Modal -->
-<div id="leadModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Lead Details</h3>
-            <button class="modal-close">✕</button>
-        </div>
-        <div id="leadModalBody"></div>
     </div>
 </div>
 
@@ -1342,36 +1305,23 @@ NOTIFICATIONS
 
 <script>
     // ================================================================
-    // SUPABASE INITIALIZATION
+    // DEMO LOGIN SYSTEM
     // ================================================================
     
-    const SUPABASE_URL = 'https://your-project.supabase.co';
-    const SUPABASE_KEY = 'your-anon-key';
-    
-    let supabase = null;
     let currentUser = null;
     let visitorChart = null;
     let trendChart = null;
     let performanceChart = null;
     
-    // Initialize Supabase
-    function initSupabase() {
-        const { createClient } = window.supabase;
-        supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-    }
+    // Demo credentials
+    const demoAccounts = {
+        'admin@example.com': 'admin123',
+        'demo@primeaccounting.com': 'demo123'
+    };
     
     // ================================================================
     // UTILITY FUNCTIONS
     // ================================================================
-    
-    function showLoading(show = true) {
-        const overlay = document.getElementById('loadingOverlay');
-        if (show) {
-            overlay.classList.add('active');
-        } else {
-            overlay.classList.remove('active');
-        }
-    }
     
     function showToast(message, type = 'success', duration = 3000) {
         const toast = document.getElementById('toast');
@@ -1381,125 +1331,6 @@ NOTIFICATIONS
         setTimeout(() => {
             toast.classList.remove('active');
         }, duration);
-    }
-    
-    function formatDate(date) {
-        if (!date) return '-';
-        return new Date(date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
-    }
-    
-    function formatTime(date) {
-        if (!date) return '-';
-        return new Date(date).toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    }
-    
-    // ================================================================
-    // NAVIGATION & PAGE MANAGEMENT
-    // ================================================================
-    
-    function showPage(pageName) {
-        document.querySelectorAll('.page-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        const page = document.getElementById(pageName + 'Page');
-        if (page) {
-            page.classList.add('active');
-        }
-        
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        
-        document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
-        
-        // Load page-specific data
-        switch(pageName) {
-            case 'leads':
-                loadLeads();
-                break;
-            case 'posts':
-                loadPosts();
-                break;
-            case 'testimonials':
-                loadTestimonials();
-                break;
-            case 'analytics':
-                loadAnalytics();
-                break;
-            case 'dashboard':
-                loadDashboardData();
-                break;
-        }
-    }
-    
-    // ================================================================
-    // AUTHENTICATION
-    // ================================================================
-    
-    async function login() {
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        
-        if (!email || !password) {
-            showToast('Please enter email and password', 'warning');
-            return;
-        }
-        
-        showLoading();
-        
-        try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password
-            });
-            
-            if (error) throw error;
-            
-            currentUser = data.user;
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'block';
-            
-            initializeAdmin();
-            showToast('Successfully logged in', 'success');
-        } catch (error) {
-            showToast(error.message || 'Login failed', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    async function logout() {
-        if (!confirm('Are you sure you want to logout?')) return;
-        
-        showLoading();
-        try {
-            await supabase.auth.signOut();
-            document.getElementById('loginPage').style.display = 'flex';
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-            currentUser = null;
-            showToast('Successfully logged out', 'success');
-        } catch (error) {
-            showToast(error.message || 'Logout failed', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    async function initializeAdmin() {
-        updateLiveDateTime();
-        setInterval(updateLiveDateTime, 60000);
-        
-        loadDashboardData();
     }
     
     function updateLiveDateTime() {
@@ -1519,760 +1350,196 @@ NOTIFICATIONS
     }
     
     // ================================================================
-    // DASHBOARD DATA LOADING
+    // AUTHENTICATION
     // ================================================================
     
-    async function loadDashboardData() {
-        showLoading();
-        try {
-            // Load all dashboard metrics
-            const [visitors, leads, posts, testimonials, clicks, services] = await Promise.all([
-                getVisitorCount(),
-                getLeadCount(),
-                getPostCount(),
-                getTestimonialCount(),
-                getServiceClickCount(),
-                getTopServices()
-            ]);
-            
-            // Update cards
-            document.getElementById('totalVisitors').textContent = visitors.total || 0;
-            document.getElementById('totalLeadsCount').textContent = leads.total || 0;
-            document.getElementById('newLeadsCount').textContent = leads.new || 0;
-            document.getElementById('contactedLeadsCount').textContent = leads.contacted || 0;
-            document.getElementById('convertedLeadsCount').textContent = leads.converted || 0;
-            document.getElementById('closedLeadsCount').textContent = leads.closed || 0;
-            document.getElementById('publishedPostsCount').textContent = posts || 0;
-            document.getElementById('testimonialCount').textContent = testimonials || 0;
-            document.getElementById('serviceClicksCount').textContent = clicks || 0;
-            
-            if (services && services.length > 0) {
-                document.getElementById('topServiceName').textContent = services[0].service || '-';
-            }
-            
-            // Load recent data
-            await Promise.all([
-                loadRecentLeads(),
-                loadRecentVisitors(),
-                loadRecentServiceClicks(),
-                loadTopServices(),
-                loadVisitorChart()
-            ]);
-        } catch (error) {
-            console.error('Error loading dashboard:', error);
-            showToast('Error loading dashboard data', 'danger');
-        } finally {
-            showLoading(false);
+    function login() {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        
+        if (!email || !password) {
+            showToast('Please enter email and password', 'warning');
+            return;
         }
+        
+        // Check credentials
+        if (demoAccounts[email] !== password) {
+            showToast('Invalid email or password', 'danger');
+            return;
+        }
+        
+        // Login successful
+        currentUser = { email, name: email.split('@')[0] };
+        
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        document.getElementById('adminDisplayName').textContent = currentUser.name;
+        
+        initializeAdmin();
+        showToast('Successfully logged in!', 'success');
     }
     
-    async function getVisitorCount() {
-        try {
-            const { data, error } = await supabase
-                .from('visitors')
-                .select('*', { count: 'exact', head: true });
-            
-            if (error) throw error;
-            return { total: data?.length || 0 };
-        } catch (error) {
-            console.error('Error getting visitor count:', error);
-            return { total: 0 };
-        }
+    function logout() {
+        if (!confirm('Are you sure you want to logout?')) return;
+        
+        currentUser = null;
+        document.getElementById('loginPage').style.display = 'flex';
+        document.getElementById('adminPanel').style.display = 'none';
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+        
+        showToast('Successfully logged out', 'success');
     }
     
-    async function getLeadCount() {
-        try {
-            const { data, error } = await supabase
-                .from('leads')
-                .select('status');
-            
-            if (error) throw error;
-            
-            return {
-                total: data?.length || 0,
-                new: data?.filter(d => d.status === 'new').length || 0,
-                contacted: data?.filter(d => d.status === 'contacted').length || 0,
-                converted: data?.filter(d => d.status === 'converted').length || 0,
-                closed: data?.filter(d => d.status === 'closed').length || 0
-            };
-        } catch (error) {
-            console.error('Error getting lead count:', error);
-            return { total: 0, new: 0, contacted: 0, converted: 0, closed: 0 };
-        }
+    function initializeAdmin() {
+        updateLiveDateTime();
+        setInterval(updateLiveDateTime, 60000);
+        
+        // Initialize charts after a small delay
+        setTimeout(() => {
+            loadCharts();
+        }, 100);
     }
     
-    async function getPostCount() {
-        try {
-            const { data, error } = await supabase
-                .from('posts')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'published');
-            
-            if (error) throw error;
-            return data?.length || 0;
-        } catch (error) {
-            console.error('Error getting post count:', error);
-            return 0;
-        }
-    }
+    // ================================================================
+    // NAVIGATION
+    // ================================================================
     
-    async function getTestimonialCount() {
-        try {
-            const { data, error } = await supabase
-                .from('testimonials')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'approved');
-            
-            if (error) throw error;
-            return data?.length || 0;
-        } catch (error) {
-            console.error('Error getting testimonial count:', error);
-            return 0;
+    function showPage(pageName) {
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        const page = document.getElementById(pageName + 'Page');
+        if (page) {
+            page.classList.add('active');
         }
-    }
-    
-    async function getServiceClickCount() {
-        try {
-            const { data, error } = await supabase
-                .from('service_clicks')
-                .select('*', { count: 'exact', head: true });
-            
-            if (error) throw error;
-            return data?.length || 0;
-        } catch (error) {
-            console.error('Error getting service click count:', error);
-            return 0;
-        }
-    }
-    
-    async function getTopServices() {
-        try {
-            const { data, error } = await supabase
-                .from('service_clicks')
-                .select('service')
-                .order('created_at', { ascending: false })
-                .limit(10);
-            
-            if (error) throw error;
-            
-            const serviceCount = {};
-            data?.forEach(item => {
-                serviceCount[item.service] = (serviceCount[item.service] || 0) + 1;
-            });
-            
-            return Object.entries(serviceCount)
-                .map(([service, count]) => ({ service, count }))
-                .sort((a, b) => b.count - a.count)
-                .slice(0, 10);
-        } catch (error) {
-            console.error('Error getting top services:', error);
-            return [];
+        
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
+        
+        // Load charts when analytics is opened
+        if (pageName === 'analytics') {
+            setTimeout(() => {
+                loadAnalyticsCharts();
+            }, 100);
         }
     }
     
     // ================================================================
-    // RECENT DATA WIDGETS
+    // CHARTS
     // ================================================================
     
-    async function loadRecentLeads() {
-        try {
-            const { data, error } = await supabase
-                .from('leads')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(5);
-            
-            if (error) throw error;
-            
-            const html = data && data.length > 0
-                ? data.map(lead => `
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>${lead.name || '-'}</strong>
-                            <small style="display: block; color: var(--text-light); font-size: 12px;">${lead.company || '-'}</small>
-                        </div>
-                        <span style="font-size: 12px; color: var(--text-light);">${formatDate(lead.created_at)}</span>
-                    </div>
-                `).join('')
-                : '<p class="loading-text">No recent leads</p>';
-            
-            document.getElementById('recentLeadsList').innerHTML = html;
-        } catch (error) {
-            console.error('Error loading recent leads:', error);
-        }
-    }
-    
-    async function loadRecentVisitors() {
-        try {
-            const { data, error } = await supabase
-                .from('visitors')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(5);
-            
-            if (error) throw error;
-            
-            const html = data && data.length > 0
-                ? data.map(visitor => `
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border);">
-                        <div style="display: flex; justify-content: space-between;">
-                            <strong>${visitor.page || 'Homepage'}</strong>
-                            <span style="font-size: 12px; color: var(--text-light);">${formatTime(visitor.created_at)}</span>
-                        </div>
-                    </div>
-                `).join('')
-                : '<p class="loading-text">No recent visitors</p>';
-            
-            document.getElementById('recentVisitorsList').innerHTML = html;
-        } catch (error) {
-            console.error('Error loading recent visitors:', error);
-        }
-    }
-    
-    async function loadRecentServiceClicks() {
-        try {
-            const { data, error } = await supabase
-                .from('service_clicks')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(5);
-            
-            if (error) throw error;
-            
-            const html = data && data.length > 0
-                ? data.map(click => `
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
-                        <strong>${click.service || '-'}</strong>
-                        <span style="font-size: 12px; color: var(--text-light);">${formatDate(click.created_at)}</span>
-                    </div>
-                `).join('')
-                : '<p class="loading-text">No recent clicks</p>';
-            
-            document.getElementById('recentServiceClicksList').innerHTML = html;
-        } catch (error) {
-            console.error('Error loading recent service clicks:', error);
-        }
-    }
-    
-    async function loadTopServices() {
-        try {
-            const services = await getTopServices();
-            
-            const html = services && services.length > 0
-                ? services.map((service, index) => `
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <span style="font-weight: 700; color: var(--gold); margin-right: 10px;">#${index + 1}</span>
-                            <strong>${service.service || '-'}</strong>
-                        </div>
-                        <span style="background: var(--gold); color: var(--navy); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">${service.count}</span>
-                    </div>
-                `).join('')
-                : '<p class="loading-text">No service data</p>';
-            
-            document.getElementById('topServicesList').innerHTML = html;
-        } catch (error) {
-            console.error('Error loading top services:', error);
-        }
-    }
-    
-    // ================================================================
-    // CHART FUNCTIONS
-    // ================================================================
-    
-    async function loadVisitorChart() {
+    function loadCharts() {
         const ctx = document.getElementById('visitorChart');
         if (!ctx) return;
         
-        try {
-            const { data, error } = await supabase
-                .from('visitors')
-                .select('*')
-                .order('created_at', { ascending: true })
-                .limit(30);
-            
-            if (error) throw error;
-            
-            // Process data for chart
-            const dateMap = {};
-            data?.forEach(visitor => {
-                const date = formatDate(visitor.created_at);
-                dateMap[date] = (dateMap[date] || 0) + 1;
-            });
-            
-            const labels = Object.keys(dateMap).slice(-7); // Last 7 days
-            const values = labels.map(label => dateMap[label] || 0);
-            
-            if (visitorChart) visitorChart.destroy();
-            
-            visitorChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: 'Visitors',
-                        data: values,
-                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--gold'),
-                        backgroundColor: 'rgba(223, 183, 76, 0.1)',
-                        tension: 0.4,
-                        fill: true,
-                        pointRadius: 6,
-                        pointBackgroundColor: 'var(--gold)',
-                        pointBorderColor: 'white',
-                        pointBorderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        } catch (error) {
-            console.error('Error loading visitor chart:', error);
-        }
-    }
-    
-    // ================================================================
-    // LEADS MANAGEMENT
-    // ================================================================
-    
-    async function loadLeads() {
-        showLoading();
-        try {
-            const { data, error } = await supabase
-                .from('leads')
-                .select('*')
-                .order('created_at', { ascending: false });
-            
-            if (error) throw error;
-            
-            const tbody = document.getElementById('leadsTableBody');
-            
-            if (!data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="loading-text">No leads found</td></tr>';
-                return;
-            }
-            
-            tbody.innerHTML = data.map(lead => `
-                <tr>
-                    <td><strong>${lead.name || '-'}</strong></td>
-                    <td>${lead.company || '-'}</td>
-                    <td>${lead.phone || '-'}</td>
-                    <td>${lead.email || '-'}</td>
-                    <td>
-                        <span style="
-                            padding: 4px 10px;
-                            border-radius: 20px;
-                            font-size: 12px;
-                            font-weight: 700;
-                            background: ${lead.status === 'new' ? '#dbeafe' : lead.status === 'contacted' ? '#fef3c7' : lead.status === 'converted' ? '#dcfce7' : '#fee2e2'};
-                            color: ${lead.status === 'new' ? '#0ea5e9' : lead.status === 'contacted' ? '#f59e0b' : lead.status === 'converted' ? '#16a34a' : '#dc2626'};
-                        ">
-                            ${lead.status?.toUpperCase() || 'NEW'}
-                        </span>
-                    </td>
-                    <td>${formatDate(lead.created_at)}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn view-btn" onclick="viewLead('${lead.id}')">View</button>
-                            <button class="action-btn edit-btn" onclick="editLead('${lead.id}')">Edit</button>
-                            <button class="action-btn delete-btn" onclick="deleteLead('${lead.id}')">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading leads:', error);
-            showToast('Error loading leads', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    async function viewLead(leadId) {
-        try {
-            const { data, error } = await supabase
-                .from('leads')
-                .select('*')
-                .eq('id', leadId)
-                .single();
-            
-            if (error) throw error;
-            
-            const html = `
-                <div class="form-grid">
-                    <div>
-                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Name</label>
-                        <p style="font-size: 16px; margin-top: 5px;">${data.name || '-'}</p>
-                    </div>
-                    <div>
-                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Company</label>
-                        <p style="font-size: 16px; margin-top: 5px;">${data.company || '-'}</p>
-                    </div>
-                    <div>
-                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Phone</label>
-                        <p style="font-size: 16px; margin-top: 5px;"><a href="tel:${data.phone}" style="color: var(--navy); text-decoration: none;">${data.phone || '-'}</a></p>
-                    </div>
-                    <div>
-                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Email</label>
-                        <p style="font-size: 16px; margin-top: 5px;"><a href="mailto:${data.email}" style="color: var(--navy); text-decoration: none;">${data.email || '-'}</a></p>
-                    </div>
-                    <div>
-                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Status</label>
-                        <p style="font-size: 16px; margin-top: 5px;">${data.status?.toUpperCase() || 'NEW'}</p>
-                    </div>
-                    <div>
-                        <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Date</label>
-                        <p style="font-size: 16px; margin-top: 5px;">${formatDate(data.created_at)}</p>
-                    </div>
-                </div>
-                <div style="margin-top: 20px;">
-                    <label style="font-weight: 700; color: var(--text-light); font-size: 12px; text-transform: uppercase;">Message</label>
-                    <p style="margin-top: 5px; line-height: 1.6;">${data.message || '-'}</p>
-                </div>
-                <div class="button-group">
-                    <a href="tel:${data.phone}" class="primary-btn">
-                        📞 Call
-                    </a>
-                    <a href="https://wa.me/${data.phone}" class="primary-btn" target="_blank">
-                        💬 WhatsApp
-                    </a>
-                    <a href="mailto:${data.email}" class="primary-btn">
-                        ✉️ Email
-                    </a>
-                </div>
-            `;
-            
-            document.getElementById('leadModalBody').innerHTML = html;
-            document.getElementById('leadModal').classList.add('active');
-        } catch (error) {
-            console.error('Error viewing lead:', error);
-            showToast('Error loading lead details', 'danger');
-        }
-    }
-    
-    async function editLead(leadId) {
-        // Placeholder for edit functionality
-        alert('Edit functionality to be implemented');
-    }
-    
-    async function deleteLead(leadId) {
-        if (!confirm('Are you sure you want to delete this lead?')) return;
+        const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const data = [120, 190, 150, 200, 250, 180, 140];
         
-        showLoading();
-        try {
-            const { error } = await supabase
-                .from('leads')
-                .delete()
-                .eq('id', leadId);
-            
-            if (error) throw error;
-            
-            showToast('Lead deleted successfully', 'success');
-            loadLeads();
-        } catch (error) {
-            console.error('Error deleting lead:', error);
-            showToast('Error deleting lead', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    // ================================================================
-    // POSTS MANAGEMENT
-    // ================================================================
-    
-    async function loadPosts() {
-        showLoading();
-        try {
-            const { data, error } = await supabase
-                .from('posts')
-                .select('*')
-                .order('created_at', { ascending: false });
-            
-            if (error) throw error;
-            
-            const tbody = document.getElementById('postsTableBody');
-            
-            if (!data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="loading-text">No posts found</td></tr>';
-                return;
+        if (visitorChart) visitorChart.destroy();
+        
+        visitorChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Visitors',
+                    data,
+                    borderColor: '#dfb74c',
+                    backgroundColor: 'rgba(223, 183, 76, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#dfb74c',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
-            
-            tbody.innerHTML = data.map(post => `
-                <tr>
-                    <td><strong>${post.title || '-'}</strong></td>
-                    <td>${post.category || '-'}</td>
-                    <td>
-                        <span style="
-                            padding: 4px 10px;
-                            border-radius: 20px;
-                            font-size: 12px;
-                            font-weight: 700;
-                            background: ${post.status === 'published' ? '#dcfce7' : '#fee2e2'};
-                            color: ${post.status === 'published' ? '#16a34a' : '#dc2626'};
-                        ">
-                            ${post.status?.toUpperCase() || 'DRAFT'}
-                        </span>
-                    </td>
-                    <td>${formatDate(post.created_at)}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn view-btn" onclick="alert('View functionality')">View</button>
-                            <button class="action-btn edit-btn" onclick="alert('Edit functionality')">Edit</button>
-                            <button class="action-btn delete-btn" onclick="alert('Delete functionality')">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading posts:', error);
-            showToast('Error loading posts', 'danger');
-        } finally {
-            showLoading(false);
-        }
+        });
     }
     
-    // ================================================================
-    // TESTIMONIALS MANAGEMENT
-    // ================================================================
-    
-    async function loadTestimonials() {
-        showLoading();
-        try {
-            const { data, error } = await supabase
-                .from('testimonials')
-                .select('*')
-                .order('created_at', { ascending: false });
-            
-            if (error) throw error;
-            
-            const tbody = document.getElementById('testimonialsTableBody');
-            
-            if (!data || data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="loading-text">No testimonials found</td></tr>';
-                return;
-            }
-            
-            tbody.innerHTML = data.map(testimonial => `
-                <tr>
-                    <td><strong>${testimonial.client_name || '-'}</strong></td>
-                    <td>${testimonial.company || '-'}</td>
-                    <td>${'⭐'.repeat(testimonial.rating || 0)}</td>
-                    <td>
-                        <span style="
-                            padding: 4px 10px;
-                            border-radius: 20px;
-                            font-size: 12px;
-                            font-weight: 700;
-                            background: ${testimonial.status === 'approved' ? '#dcfce7' : testimonial.status === 'rejected' ? '#fee2e2' : '#fef3c7'};
-                            color: ${testimonial.status === 'approved' ? '#16a34a' : testimonial.status === 'rejected' ? '#dc2626' : '#f59e0b'};
-                        ">
-                            ${testimonial.status?.toUpperCase() || 'PENDING'}
-                        </span>
-                    </td>
-                    <td>${formatDate(testimonial.created_at)}</td>
-                    <td>
-                        <div class="action-buttons">
-                            ${testimonial.status !== 'approved' ? `<button class="action-btn success-btn" onclick="approveTestimonial('${testimonial.id}')">Approve</button>` : ''}
-                            ${testimonial.status !== 'rejected' ? `<button class="action-btn danger-btn" onclick="rejectTestimonial('${testimonial.id}')">Reject</button>` : ''}
-                            <button class="action-btn delete-btn" onclick="deleteTestimonial('${testimonial.id}')">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading testimonials:', error);
-            showToast('Error loading testimonials', 'danger');
-        } finally {
-            showLoading(false);
-        }
+    function loadAnalyticsCharts() {
+        loadTrendChart();
+        loadPerformanceChart();
     }
     
-    async function approveTestimonial(id) {
-        showLoading();
-        try {
-            const { error } = await supabase
-                .from('testimonials')
-                .update({ status: 'approved' })
-                .eq('id', id);
-            
-            if (error) throw error;
-            showToast('Testimonial approved', 'success');
-            loadTestimonials();
-        } catch (error) {
-            console.error('Error approving testimonial:', error);
-            showToast('Error approving testimonial', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    async function rejectTestimonial(id) {
-        showLoading();
-        try {
-            const { error } = await supabase
-                .from('testimonials')
-                .update({ status: 'rejected' })
-                .eq('id', id);
-            
-            if (error) throw error;
-            showToast('Testimonial rejected', 'success');
-            loadTestimonials();
-        } catch (error) {
-            console.error('Error rejecting testimonial:', error);
-            showToast('Error rejecting testimonial', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    async function deleteTestimonial(id) {
-        if (!confirm('Are you sure?')) return;
-        showLoading();
-        try {
-            const { error } = await supabase
-                .from('testimonials')
-                .delete()
-                .eq('id', id);
-            
-            if (error) throw error;
-            showToast('Testimonial deleted', 'success');
-            loadTestimonials();
-        } catch (error) {
-            console.error('Error deleting testimonial:', error);
-            showToast('Error deleting testimonial', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    // ================================================================
-    // ANALYTICS
-    // ================================================================
-    
-    async function loadAnalytics() {
-        showLoading();
-        try {
-            const [visitors, clicks, services] = await Promise.all([
-                getVisitorCount(),
-                getServiceClickCount(),
-                getTopServices()
-            ]);
-            
-            document.getElementById('analyticsVisitors').textContent = visitors.total || 0;
-            document.getElementById('analyticsClicks').textContent = clicks || 0;
-            document.getElementById('analyticsCalls').textContent = '0'; // Placeholder
-            document.getElementById('analyticsChats').textContent = '0'; // Placeholder
-            
-            await Promise.all([
-                loadTrendChart(),
-                loadPerformanceChart()
-            ]);
-        } catch (error) {
-            console.error('Error loading analytics:', error);
-            showToast('Error loading analytics', 'danger');
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    async function loadTrendChart() {
-        const ctx = document.getElementById('analyticsTrendChart');
+    function loadTrendChart() {
+        const ctx = document.getElementById('trendChart');
         if (!ctx) return;
         
-        try {
-            const { data, error } = await supabase
-                .from('visitors')
-                .select('created_at')
-                .order('created_at', { ascending: true })
-                .limit(30);
-            
-            if (error) throw error;
-            
-            const dateMap = {};
-            data?.forEach(item => {
-                const date = formatDate(item.created_at);
-                dateMap[date] = (dateMap[date] || 0) + 1;
-            });
-            
-            const labels = Object.keys(dateMap).slice(-7);
-            const values = labels.map(label => dateMap[label] || 0);
-            
-            if (trendChart) trendChart.destroy();
-            
-            trendChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: 'Daily Visitors',
-                        data: values,
-                        backgroundColor: 'var(--gold)',
-                        borderRadius: 8
-                    }]
+        const labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+        const data = [180, 210, 165, 245, 200, 230, 190];
+        
+        if (trendChart) trendChart.destroy();
+        
+        trendChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Daily Visitors',
+                    data,
+                    backgroundColor: '#dfb74c',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false }
                 },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
+                scales: {
+                    y: { beginAtZero: true }
                 }
-            });
-        } catch (error) {
-            console.error('Error loading trend chart:', error);
-        }
+            }
+        });
     }
     
-    async function loadPerformanceChart() {
-        const ctx = document.getElementById('servicePerformanceChart');
+    function loadPerformanceChart() {
+        const ctx = document.getElementById('performanceChart');
         if (!ctx) return;
         
-        try {
-            const services = await getTopServices();
-            const top5 = services.slice(0, 5);
-            
-            if (performanceChart) performanceChart.destroy();
-            
-            performanceChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: top5.map(s => s.service),
-                    datasets: [{
-                        data: top5.map(s => s.count),
-                        backgroundColor: [
-                            'var(--gold)',
-                            'var(--navy)',
-                            '#0ea5e9',
-                            '#16a34a',
-                            '#f59e0b'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
+        if (performanceChart) performanceChart.destroy();
+        
+        performanceChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['GST Filing', 'Bookkeeping', 'Accounting', 'Tax Consulting'],
+                datasets: [{
+                    data: [89, 67, 54, 43],
+                    backgroundColor: [
+                        '#dfb74c',
+                        '#071630',
+                        '#0ea5e9',
+                        '#16a34a'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
                     }
                 }
-            });
-        } catch (error) {
-            console.error('Error loading performance chart:', error);
-        }
+            }
+        });
     }
     
     // ================================================================
@@ -2280,53 +1547,31 @@ NOTIFICATIONS
     // ================================================================
     
     document.addEventListener('DOMContentLoaded', function() {
-        initSupabase();
-        
-        // Login
+        // Login button
         document.getElementById('loginBtn').addEventListener('click', login);
+        
+        // Enter key for email and password
         document.getElementById('email').addEventListener('keypress', e => {
             if (e.key === 'Enter') login();
         });
+        
         document.getElementById('password').addEventListener('keypress', e => {
             if (e.key === 'Enter') login();
         });
         
-        // Logout
+        // Logout button
         document.getElementById('logoutBtn').addEventListener('click', logout);
         
         // Menu navigation
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function() {
                 const page = this.dataset.page;
-                if (page) showPage(page);
+                if (page && page !== 'logout') showPage(page);
             });
         });
         
-        // Modal close
-        document.querySelectorAll('.modal-close').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.closest('.modal').classList.remove('active');
-            });
-        });
-        
-        // Lead filters
-        document.getElementById('leadSearchInput')?.addEventListener('input', function() {
-            // Implement live search
-        });
-        
-        // New post button
-        document.getElementById('newPostBtn')?.addEventListener('click', function() {
-            alert('Create new post functionality to be implemented');
-        });
-        
-        // Update buttons
-        document.getElementById('updateAdminBtn')?.addEventListener('click', function() {
-            showToast('Admin info updated successfully', 'success');
-        });
-        
-        document.getElementById('updateBrandBtn')?.addEventListener('click', function() {
-            showToast('Brand settings updated successfully', 'success');
-        });
+        // Focus email field on load
+        document.getElementById('email').focus();
     });
 </script>
 

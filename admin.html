@@ -811,7 +811,8 @@ LOGIN PAGE
                 <input type="password" id="password" placeholder="••••••••">
             </div>
             
-            <button id="loginBtn">🔐 Secure Login</button>
+            <button id="loginBtn" class="login-btn">🔐 Secure Login</button>
+
             
             <p style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px;">
                 Secure enterprise login
@@ -1737,48 +1738,58 @@ NOTIFICATIONS
         
         document.getElementById('email').focus();
     });
+
+<script>
+    // 1. Credentials
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
-const ADMIN_PASSWORD = "aqibsolutions@9598";
+    const ADMIN_PASSWORD = "aqibsolutions@9598";
 
-// 1. Login Function
-window.loginAdmin = function() {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+    // 2. Auth Check (Page load hote hi check karega)
+    function checkAuth() {
+        const isLoggedIn = localStorage.getItem("prime_admin_logged");
+        const loginPage = document.getElementById("loginPage");
+        const adminPanel = document.getElementById("adminPanel");
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        localStorage.setItem("prime_admin_logged", "true");
-        window.location.reload(); // Refresh to load the dashboard
-    } else {
-        alert("Security Error: Invalid Credentials");
+        if (isLoggedIn === "true") {
+            loginPage.style.display = "none";
+            adminPanel.style.display = "block";
+            // Dashboard data load karne ke liye call yahan karein
+            if (typeof loadDashboardCards === 'function') {
+                loadDashboardCards();
+            }
+        } else {
+            loginPage.style.display = "flex";
+            adminPanel.style.display = "none";
+        }
     }
-}
 
-// 2. Logout Function
-window.logoutAdmin = function() {
-    localStorage.removeItem("prime_admin_logged");
-    window.location.reload();
-}
+    // 3. Login Function
+    function performLogin() {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-// 3. Auth Check (Load hote hi check karega)
-function checkAuth() {
-    const isLoggedIn = localStorage.getItem("prime_admin_logged");
-    const loginPage = document.getElementById("loginPage");
-    const adminPanel = document.getElementById("adminPanel");
-
-    if (isLoggedIn === "true") {
-        loginPage.style.display = "none";
-        adminPanel.style.display = "block";
-        // Yahan aapke dashboard loading functions call honge
-        // e.g., loadAnalytics();
-    } else {
-        loginPage.style.display = "flex";
-        adminPanel.style.display = "none";
+        if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+            localStorage.setItem("prime_admin_logged", "true");
+            window.location.reload(); // Refresh to load dashboard
+        } else {
+            alert("Security Error: Invalid Credentials");
+        }
     }
-}
 
-// Run check on load
-checkAuth();
+    // 4. Event Listener (Login Button ke liye)
+    document.getElementById("loginBtn").addEventListener("click", performLogin);
 
+    // 5. Run Auth Check
+    checkAuth();
+
+    // 6. Logout Function (Agar chahiye ho toh)
+    window.logoutAdmin = function() {
+        localStorage.removeItem("prime_admin_logged");
+        window.location.reload();
+    }
+</script>
+
+    
 </script>
 
 </body>

@@ -1736,18 +1736,14 @@ NOTIFICATIONS
         document.getElementById('email').focus();
     });
 
+    // Admin Credentials
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
     const ADMIN_PASSWORD = "aqibsolutions@9598";
 
-    // Debugging ke liye alert
-    function performLogin() {
-        console.log("Button clicked!"); // F12 dabane par Console mein ye dikhna chahiye
-        
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+    // Login function
+    window.performLogin = function() {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
 
         if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
             localStorage.setItem("prime_admin_logged", "true");
@@ -1757,7 +1753,7 @@ NOTIFICATIONS
         }
     }
 
-    // Page load hote hi check karein
+    // Check Auth
     function checkAuth() {
         const isLoggedIn = localStorage.getItem("prime_admin_logged");
         const loginPage = document.getElementById("loginPage");
@@ -1772,8 +1768,12 @@ NOTIFICATIONS
         }
     }
 
-    checkAuth();
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        checkAuth();
+    });
 </script>
+
 
 </body>
 </html>

@@ -1691,7 +1691,6 @@ NOTIFICATIONS
         if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
             localStorage.setItem("prime_admin_logged", "true");
             checkAuth();
-initializeAdmin();
         } else {
             alert("Security Error: Invalid Credentials");
         }

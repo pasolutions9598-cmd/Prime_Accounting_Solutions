@@ -289,6 +289,30 @@ window.saveContent = async function(status) {
     } catch (error) { alert(error.message); submitBtn.disabled = false; submitBtn.innerText = "Deploy Live Broadcast"; }
 }
 
+// LOAD LEADS
+    async function loadLeads() {
+        const { data } = await supabase.from("leads").select("*");
+        document.getElementById("totalLeads").innerText = data?.length || 0;
+        let html = "";
+        data?.forEach(l => {
+            html += `<tr><td>${l.name}</td><td>${l.phone}</td><td>${l.status}</td><td><button onclick="viewLead('${l.id}')">View</button> <button onclick="deleteLead('${l.id}')">Del</button></td></tr>`;
+        });
+        document.getElementById("contactLeadsContainer").innerHTML = html;
+    }
+
+    window.viewLead = async (id) => {
+        const { data } = await supabase.from("leads").select("*").eq("id", id).single();
+        document.getElementById("leadModalContent").innerHTML = `<p>Name: ${data.name}</p><p>Msg: ${data.message}</p>`;
+        document.getElementById("leadModal").style.display = "flex";
+    };
+
+    window.deleteLead = async (id) => {
+        if(confirm("Delete lead?")) {
+            await supabase.from("leads").delete().eq("id", id);
+            loadLeads();
+        }
+    };
+    
 window.loadPosts = async function() {
     const container = document.getElementById("postsContainer");
     const filterCat = document.getElementById("filterCategory").value;

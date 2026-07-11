@@ -1,88 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
-
 <title>
 Prime Accounting Solutions | Admin Dashboard
 </title>
 
 <!-- Google Fonts -->
-
 <link rel="preconnect"
 href="https://fonts.googleapis.com">
-
 <link rel="preconnect"
 href="https://fonts.gstatic.com"
 crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
 rel="stylesheet">
 
 <!-- Chart.js -->
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Admin CSS -->
-
 <link rel="stylesheet"
 href="assets/css/admin.css">
     /* ==========================================================
    PRIME ACCOUNTING SOLUTIONS ADMIN PANEL v2.0
    PHASE 3 - PART 1
 ========================================================== */
-
 :root{
-
     --navy:#071630;
     --navy-light:#002d72;
-
     --gold:#dfb74c;
     --gold-dark:#b8860b;
-
     --bg:#f5f7fb;
     --card:#ffffff;
-
     --text:#334155;
     --text-light:#64748b;
-
     --border:#e2e8f0;
-
     --success:#16a34a;
     --danger:#dc2626;
     --warning:#f59e0b;
-
     --radius:18px;
-
     --shadow:
     0 12px 30px rgba(0,0,0,.08);
-
 }
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-
 html{
     scroll-behavior:smooth;
 }
-
 body{
 
     font-family:'Inter',sans-serif;
-
     background:var(--bg);
-
     color:var(--text);
-
     overflow-x:hidden;
-
 }
 
 /* ==========================================================
@@ -90,167 +65,107 @@ LOGIN
 ========================================================== */
 
 #loginPage{
-
     min-height:100vh;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:30px;
-
     background:
     linear-gradient(
     135deg,
     var(--navy),
     var(--navy-light));
-
 }
 
 .login-container{
-
     width:100%;
     max-width:460px;
-
 }
 
 .login-card{
-
     background:white;
-
     border-radius:26px;
-
     padding:45px;
-
     box-shadow:
     0 25px 60px rgba(0,0,0,.25);
-
 }
 
 .login-logo{
-
     width:130px;
-
     display:block;
-
     margin:auto auto 25px;
-
 }
 
 .login-card h1{
-
     font-family:'Outfit',sans-serif;
-
     font-size:32px;
-
     text-align:center;
-
     color:var(--navy);
-
 }
 
 .login-card p{
-
     margin:12px 0 30px;
-
     text-align:center;
-
     color:var(--text-light);
-
 }
 
 .input-group{
-
     margin-bottom:20px;
-
 }
 
 .input-group label{
-
     display:block;
-
     margin-bottom:8px;
-
     font-weight:600;
-
 }
 
 .input-group input,
 .input-group select,
 .input-group textarea{
-
     width:100%;
-
     padding:15px;
-
     border:1px solid var(--border);
-
     border-radius:14px;
-
     font-size:15px;
-
     transition:.25s;
-
 }
 
 .input-group input:focus,
 .input-group select:focus,
 .input-group textarea:focus{
-
     outline:none;
-
     border-color:var(--gold);
-
     box-shadow:
     0 0 0 4px rgba(223,183,76,.18);
-
 }
 
 #loginBtn{
-
     width:100%;
-
     border:none;
-
     border-radius:14px;
-
     padding:16px;
-
     cursor:pointer;
-
     font-size:16px;
-
     font-weight:700;
-
     color:white;
-
     background:
     linear-gradient(
     135deg,
     var(--navy),
     var(--navy-light));
-
     transition:.30s;
-
 }
 
 #loginBtn:hover{
-
     transform:translateY(-2px);
-
 }
     /* ==========================================================
 LAYOUT
 ========================================================== */
 
 .layout{
-
     display:flex;
-
     min-height:100vh;
-
 }
 
 /* ==========================================================
@@ -258,134 +173,83 @@ SIDEBAR
 ========================================================== */
 
 #sidebar{
-
     width:280px;
-
     position:fixed;
-
     top:0;
     left:0;
     bottom:0;
-
     overflow-y:auto;
-
     background:
     linear-gradient(
     180deg,
     var(--navy),
     var(--navy-light));
-
     color:#fff;
-
     box-shadow:
     8px 0 30px rgba(0,0,0,.15);
-
     z-index:1000;
-
 }
 
 .sidebar-logo{
-
     padding:35px 25px;
-
     text-align:center;
-
 }
 
 .sidebar-logo img{
-
     width:110px;
-
     margin-bottom:20px;
-
 }
 
 .sidebar-logo h2{
-
     font-family:'Outfit',sans-serif;
-
     font-size:22px;
-
     color:var(--gold);
-
 }
 
 .sidebar-logo p{
-
     margin-top:8px;
-
     color:#cbd5e1;
-
     font-size:13px;
-
 }
 
 .sidebar-menu{
-
     padding:25px;
-
 }
 
 .menu-item{
-
     width:100%;
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     padding:15px 18px;
-
     margin-bottom:12px;
-
     border:none;
-
     border-radius:14px;
-
     background:transparent;
-
     color:white;
-
     cursor:pointer;
-
     text-align:left;
-
     font-size:15px;
-
     font-weight:600;
-
     transition:.25s;
-
 }
 
 .menu-item:hover{
-
     background:
     rgba(255,255,255,.10);
-
     transform:translateX(6px);
-
     color:var(--gold);
-
 }
 
 .menu-item.active{
-
     background:var(--gold);
-
     color:var(--navy);
-
 }
 
 .logout-btn{
-
     margin-top:25px;
-
     border:1px solid
     rgba(255,255,255,.20);
-
 }
 
 /* ==========================================================
@@ -393,15 +257,10 @@ MAIN CONTENT
 ========================================================== */
 
 #mainContent{
-
     flex:1;
-
     margin-left:280px;
-
     background:var(--bg);
-
     min-height:100vh;
-
 }
 
 /* ==========================================================
@@ -409,230 +268,141 @@ TOP HEADER
 ========================================================== */
 
 .top-header{
-
     height:90px;
-
     background:white;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:0 35px;
-
     border-bottom:1px solid var(--border);
-
     box-shadow:
     0 5px 20px rgba(0,0,0,.05);
-
 }
 
 .top-header h2{
-
     font-family:'Outfit',sans-serif;
-
     color:var(--navy);
-
 }
 
 .top-header p{
-
     margin-top:5px;
-
     color:var(--text-light);
-
 }
 
 .header-right{
-
     display:flex;
-
     align-items:center;
-
     gap:20px;
-
 }
 
 .system-status{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     padding:10px 18px;
-
     border-radius:40px;
-
     background:#ecfdf5;
-
     color:var(--success);
-
     font-weight:600;
-
 }
 
 .status-dot{
-
     width:10px;
-
     height:10px;
-
     border-radius:50%;
-
     background:#22c55e;
-
     box-shadow:
     0 0 10px #22c55e;
 
 }
 
 .admin-profile{
-
     display:flex;
-
     align-items:center;
-
     gap:14px;
-
     background:white;
-
     padding:10px 18px;
-
     border-radius:16px;
-
     box-shadow:
     var(--shadow);
-
 }
 
 .avatar{
-
     width:48px;
-
     height:48px;
-
     border-radius:50%;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     font-size:22px;
-
     background:
     linear-gradient(
     135deg,
     var(--gold),
     var(--gold-dark));
-
     color:white;
-
 }
     /* ==========================================================
 DASHBOARD
 ========================================================== */
 
 #dashboardPage{
-
     padding:35px;
-
 }
 
 .dashboard-grid{
-
     display:grid;
-
     grid-template-columns:
     repeat(auto-fit,minmax(260px,1fr));
-
     gap:25px;
-
     margin-bottom:35px;
-
 }
 
 .dashboard-card{
-
     background:var(--card);
-
     border-radius:20px;
-
     padding:25px;
-
     display:flex;
-
     align-items:center;
-
     gap:18px;
-
     border-top:4px solid var(--gold);
-
     box-shadow:var(--shadow);
-
     transition:.30s;
-
 }
 
 .dashboard-card:hover{
-
-    transform:translateY(-6px);
-
+   transform:translateY(-6px);
 }
 
 .card-icon{
-
     width:72px;
-
     height:72px;
-
     border-radius:18px;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     font-size:30px;
-
     color:white;
-
     background:
     linear-gradient(
     135deg,
     var(--navy),
     var(--navy-light));
-
 }
 
 .card-info{
-
     flex:1;
-
 }
 
 .card-info h3{
-
     font-family:'Outfit',sans-serif;
-
     font-size:34px;
-
     color:var(--navy);
-
 }
 
 .card-info p{
-
     margin-top:6px;
-
     color:var(--text-light);
-
 }
 
 /* ==========================================================
@@ -640,64 +410,40 @@ WIDGETS
 ========================================================== */
 
 .dashboard-widgets{
-
     display:grid;
-
     grid-template-columns:
     repeat(auto-fit,minmax(420px,1fr));
-
     gap:25px;
-
 }
 
 .widget-card{
-
     background:white;
-
     border-radius:20px;
-
     padding:25px;
-
     box-shadow:var(--shadow);
-
 }
 
 .widget-header{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:20px;
-
 }
 
 .widget-header h3{
-
     font-family:'Outfit',sans-serif;
-
     color:var(--navy);
-
 }
 
 .loading-text{
-
     text-align:center;
-
     color:var(--text-light);
-
     padding:30px 0;
-
 }
 
 canvas{
-
     width:100%!important;
-
     max-height:350px;
-
 }
     /* ==========================================================
 PHASE 3 - PART 4
@@ -707,300 +453,187 @@ TABLES • FORMS • BUTTONS • MODAL • TOAST
 /* Sections */
 
 .page-section{
-
     display:none;
-
     padding:35px;
-
 }
 
 .section-header{
-
     margin-bottom:25px;
-
 }
 
 .section-header h2{
-
     font-family:'Outfit',sans-serif;
-
     color:var(--navy);
-
     font-size:30px;
-
 }
 
 .section-header p{
-
     margin-top:8px;
-
     color:var(--text-light);
-
 }
 
 /* Cards */
 
 .form-card,
 .table-card{
-
     background:white;
-
     border-radius:20px;
-
     padding:25px;
-
     margin-bottom:30px;
-
     box-shadow:var(--shadow);
-
 }
 
 /* Forms */
 
 .form-grid{
-
     display:grid;
-
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
     gap:20px;
-
 }
 
 textarea{
-
     resize:vertical;
-
     min-height:140px;
-
 }
 
 /* Buttons */
 
 .button-group{
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:15px;
-
     margin-top:25px;
-
 }
 
 .primary-btn,
 .secondary-btn{
-
     border:none;
-
     border-radius:14px;
-
     padding:15px 24px;
-
     cursor:pointer;
-
     font-size:15px;
-
     font-weight:700;
-
     transition:.25s;
-
 }
 
 .primary-btn{
-
     background:linear-gradient(135deg,var(--navy),var(--navy-light));
-
     color:white;
-
 }
 
 .secondary-btn{
-
     background:var(--gold);
-
     color:var(--navy);
-
 }
 
 .primary-btn:hover,
 .secondary-btn:hover{
-
     transform:translateY(-3px);
-
 }
 
 /* Table */
 
 .data-table{
-
     width:100%;
-
     border-collapse:collapse;
-
 }
 
 .data-table th{
-
     background:var(--navy);
-
     color:white;
-
     padding:15px;
-
     text-align:left;
-
 }
 
 .data-table td{
-
     padding:15px;
-
     border-bottom:1px solid var(--border);
-
 }
 
 .data-table tr:hover{
 
     background:#f8fafc;
-
 }
 
 /* Modal */
 
 .modal{
-
     display:none;
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.45);
-
     justify-content:center;
-
     align-items:center;
-
     z-index:9999;
-
 }
 
 .modal-content{
-
     width:95%;
-
     max-width:700px;
-
     background:white;
-
     border-radius:22px;
-
     padding:30px;
-
     box-shadow:0 25px 60px rgba(0,0,0,.25);
-
 }
 
 .modal-header{
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:20px;
-
 }
 
 .modal-header button{
-
     border:none;
-
     background:none;
-
     font-size:24px;
-
     cursor:pointer;
-
 }
 
 /* Toast */
 
 .toast{
-
     position:fixed;
-
     right:30px;
-
     bottom:30px;
-
     background:var(--navy);
-
     color:white;
-
     padding:16px 22px;
-
     border-radius:14px;
-
     box-shadow:var(--shadow);
-
     display:none;
-
     z-index:10000;
-
 }
 
 /* Loading */
 
 #loadingOverlay{
-
     position:fixed;
-
     inset:0;
-
     background:rgba(255,255,255,.75);
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     z-index:99999;
-
 }
 
 .loader{
-
     width:55px;
-
     height:55px;
-
     border:5px solid #e5e7eb;
-
     border-top:5px solid var(--gold);
-
     border-radius:50%;
-
     animation:spin 1s linear infinite;
-
 }
 
 @keyframes spin{
-
     to{
-
         transform:rotate(360deg);
-
     }
-
 }
 
 </head>
-
 <body>
 
 <!-- =======================================================
@@ -1008,90 +641,52 @@ LOGIN SCREEN
 ======================================================= -->
 
 <section id="loginPage">
-
 <div class="login-container">
-
 <div class="login-card">
-
-<img
-src="assets/images/Logo.png"
-class="login-logo"
-alt="Prime Accounting Solutions">
-
-<h1>
-
-Prime Accounting Solutions
-
-</h1>
-
-<p>
-
-Premium Admin Control Center
-
-</p>
-
+<img src="assets/images/Logo.png" class="login-logo" alt="Prime Accounting Solutions">
+<h1> Prime Accounting Solutions </h1>
+</p> Premium Admin Control Center </p>
 <div class="input-group">
-
 <label>Email Address</label>
-
-<input
-type="email"
-id="email"
-placeholder="Enter Email">
+<input type="email" id="email" placeholder="Enter Email">
 
 </div>
 
-<div class="input-group">
-
+    <div class="input-group">
 <label>Password</label>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password">
+<input type="password" id="password" placeholder="Enter Password">
 
 </div>
-
 <button
 id="loginBtn">
-
 🔐 Secure Login
-
 </button>
 
 </div>
-
 </div>
-
 </section>
 
 <!-- =======================================================
 ADMIN PANEL START
 ======================================================= -->
 
-<div id="adminPanel"
-style="display:none;">
+<div id="adminPanel" style="display:none;">
     <div class="layout">
 
     <!-- SIDEBAR -->
     <aside id="sidebar">
-
         <div class="sidebar-logo">
-
-            <img src="assets/images/Logo.png" alt="Logo">
-
+          <img src="assets/images/Logo.png" alt="Logo">
             <h2>Prime Accounting Solutions</h2>
-
             <p>Premium Admin Dashboard</p>
 
         </div>
 
         <nav class="sidebar-menu">
-
             <button class="menu-item active" data-page="dashboard">
                 🏠 Dashboard
             </button>
-
+            
             <button class="menu-item" data-page="leads">
                 📋 Leads
             </button>
@@ -1115,69 +710,45 @@ style="display:none;">
             <button
                 class="menu-item logout-btn"
                 id="logoutBtn">
-
                 🚪 Logout
-
             </button>
 
         </nav>
-
     </aside>
 
     <!-- MAIN CONTENT -->
 
     <main id="mainContent">
-
         <header class="top-header">
-
             <div>
-
                 <h2 id="greetingText">
-
                     Welcome, Administrator 👋
-
                 </h2>
-
                 <p id="liveDateTime">
-
                     Loading...
-
                 </p>
 
             </div>
 
             <div class="header-right">
-
                 <div class="system-status">
-
                     <span class="status-dot"></span>
-
                     System Online
-
                 </div>
 
                 <div class="admin-profile">
-
                     <div class="avatar">
-
                         👤
-
                     </div>
 
                     <div>
 
                         <strong>
-
                             Administrator
-
                         </strong>
-
                         <small>
-
                             Prime Accounting Solutions
-
                         </small>
-
                     </div>
 
                 </div>
@@ -1185,9 +756,8 @@ style="display:none;">
             </div>
 
         </header>
-
+       
         <section id="dashboardPage">
-
             <div class="dashboard-grid">
                 <!-- Dashboard Cards -->
 
@@ -1282,11 +852,10 @@ DASHBOARD WIDGETS
     <!-- Business Overview Chart -->
 
     <div class="widget-card">
-
         <div class="widget-header">
             <h3>📊 Business Overview</h3>
         </div>
-
+    
         <canvas id="visitorChart"></canvas>
 
     </div>
@@ -1294,129 +863,95 @@ DASHBOARD WIDGETS
     <!-- Recent Leads -->
 
     <div class="widget-card">
-
         <div class="widget-header">
             <h3>📋 Recent Leads</h3>
         </div>
 
         <div id="recentLeadsList">
-
             <p class="loading-text">
                 Loading...
             </p>
 
         </div>
-
     </div>
 
     <!-- Recent Visitors -->
 
     <div class="widget-card">
-
         <div class="widget-header">
             <h3>👥 Recent Visitors</h3>
         </div>
 
         <div id="recentVisitorsList">
-
             <p class="loading-text">
                 Loading...
             </p>
 
         </div>
-
     </div>
 
     <!-- Recent Service Clicks -->
 
     <div class="widget-card">
-
         <div class="widget-header">
             <h3>🖱 Recent Service Clicks</h3>
         </div>
 
         <div id="recentServiceClicks">
-
             <p class="loading-text">
                 Loading...
             </p>
 
         </div>
-
     </div>
 
     <!-- Top 10 Services -->
 
     <div class="widget-card">
-
         <div class="widget-header">
             <h3>🔥 Top 10 Services</h3>
         </div>
 
         <div id="topServicesList">
-
             <p class="loading-text">
                 Loading...
             </p>
 
         </div>
-
     </div>
-
 </div>
-
         </section>
         <!-- =======================================================
 LEADS MANAGEMENT
 ======================================================= -->
 
 <section id="leadsPage" class="page-section" style="display:none;">
-
     <div class="section-header">
-
         <h2>📋 Leads Management</h2>
-
         <p>Manage all customer enquiries and conversions.</p>
-
     </div>
 
     <div class="table-card">
-
         <table class="data-table">
-
             <thead>
-
                 <tr>
-
                     <th>Name</th>
                     <th>Company</th>
                     <th>Phone</th>
                     <th>Status</th>
                     <th>Date</th>
                     <th>Action</th>
-
                 </tr>
-
             </thead>
-
             <tbody id="contactLeadsContainer">
-
                 <tr>
-
                     <td colspan="6" class="loading-text">
-
                         Loading Leads...
-
                     </td>
-
                 </tr>
-
             </tbody>
-
         </table>
-
     </div>
-
 </section>
 
 <!-- =======================================================
@@ -1424,272 +959,178 @@ LEAD DETAILS MODAL
 ======================================================= -->
 
 <div id="leadModal" class="modal">
-
     <div class="modal-content">
-
         <div class="modal-header">
-
             <h2>Lead Details</h2>
-
             <button id="closeLeadModal">
-
                 ✖
-
             </button>
-
         </div>
-
+     
         <div id="leadModalContent">
 
         </div>
-
     </div>
-
 </div>
 <!-- =======================================================
 POSTS MANAGEMENT
 ======================================================= -->
 
 <section id="postsPage" class="page-section" style="display:none;">
-
     <div class="section-header">
-
         <h2>📰 Posts Management</h2>
-
         <p>Create, publish and manage company posts.</p>
-
     </div>
 
     <div class="form-card">
-
         <div class="form-grid">
-
             <div class="input-group">
-
                 <label>Post Title</label>
-
                 <input
                     type="text"
                     id="postTitle"
                     placeholder="Enter Post Title">
-
             </div>
 
             <div class="input-group">
-
                 <label>Category</label>
-
                 <select id="postCategory">
-
                     <option value="Accounting">Accounting</option>
-
                     <option value="GST">GST</option>
-
                     <option value="Income Tax">Income Tax</option>
-
                     <option value="TDS">TDS</option>
-
                     <option value="Payroll">Payroll</option>
-
                     <option value="Business">Business</option>
-
                     <option value="Other">Other</option>
-
                 </select>
-
             </div>
-
         </div>
 
         <div class="input-group">
-
             <label>Post Type</label>
-
             <select id="postType">
-
                 <option value="news">News</option>
-
                 <option value="announcement">Announcement</option>
-
             </select>
-
         </div>
 
         <div class="input-group">
-
             <label>Post Content</label>
-
             <textarea
                 id="postContent"
                 rows="8"
                 placeholder="Write your post here..."></textarea>
-
         </div>
 
         <div class="input-group">
-
             <label>Featured Image</label>
-
             <input
                 type="file"
                 id="imageFile"
                 accept="image/*">
-
         </div>
 
         <div class="button-group">
-
             <button
                 id="submitBtn"
                 class="primary-btn">
-
                 🚀 Publish Post
-
             </button>
 
             <button
                 id="draftBtn"
                 class="secondary-btn">
-
                 📁 Save Draft
-
             </button>
 
         </div>
-
     </div>
 
     <div class="table-card">
-
         <div class="section-header">
-
             <h3>Published Posts</h3>
-
         </div>
 
         <div id="postsContainer">
-
             <p class="loading-text">
-
                 Loading Posts...
-
             </p>
-
         </div>
-
     </div>
-
 </section>
 <!-- =======================================================
 TESTIMONIALS MANAGEMENT
 ======================================================= -->
 
 <section id="testimonialsPage" class="page-section" style="display:none;">
-
     <div class="section-header">
-
         <h2>⭐ Testimonials Management</h2>
-
         <p>Manage customer reviews and testimonials.</p>
-
     </div>
 
     <div class="form-card">
-
         <div class="form-grid">
-
             <div class="input-group">
-
                 <label>Client Name</label>
-
                 <input
                     type="text"
                     id="testimonialName"
                     placeholder="Enter Client Name">
-
             </div>
 
             <div class="input-group">
-
                 <label>Company</label>
-
                 <input
                     type="text"
                     id="testimonialCompany"
                     placeholder="Company Name">
-
             </div>
-
         </div>
 
         <div class="input-group">
-
             <label>Rating</label>
-
             <select id="testimonialRating">
-
                 <option value="5">⭐⭐⭐⭐⭐ (5)</option>
                 <option value="4">⭐⭐⭐⭐ (4)</option>
                 <option value="3">⭐⭐⭐ (3)</option>
                 <option value="2">⭐⭐ (2)</option>
                 <option value="1">⭐ (1)</option>
-
             </select>
-
         </div>
 
         <div class="input-group">
-
             <label>Review</label>
-
             <textarea
                 id="testimonialReview"
                 rows="6"
                 placeholder="Write client review..."></textarea>
-
         </div>
 
         <div class="button-group">
-
             <button
                 id="addTestimonialBtn"
                 class="primary-btn">
-
                 ⭐ Publish Testimonial
-
             </button>
-
         </div>
-
     </div>
 
     <div class="table-card">
-
         <div class="section-header">
-
             <h3>Published Testimonials</h3>
-
         </div>
 
         <div id="testimonialsContainer">
-
             <p class="loading-text">
-
-                Loading Testimonials...
-
-            </p>
-
+                Loading Testimonials...</p>
         </div>
-
     </div>
-
 </section>
 <!-- =======================================================
 ANALYTICS
 ======================================================= -->
 
 <section id="analyticsPage" class="page-section" style="display:none;">
-
     <div class="section-header">
         <h2>📈 Analytics</h2>
         <p>Business performance overview.</p>
@@ -1698,7 +1139,6 @@ ANALYTICS
     <div class="widget-card">
         <canvas id="analyticsChart"></canvas>
     </div>
-
 </section>
 
 <!-- =======================================================
@@ -1706,14 +1146,12 @@ SETTINGS
 ======================================================= -->
 
 <section id="settingsPage" class="page-section" style="display:none;">
-
     <div class="section-header">
         <h2>⚙ Settings</h2>
         <p>Admin configuration.</p>
     </div>
 
     <div class="form-card">
-
         <div class="input-group">
             <label>Company Name</label>
             <input type="text" id="companyName" value="Prime Accounting Solutions">
@@ -1729,9 +1167,7 @@ SETTINGS
                 💾 Save Settings
             </button>
         </div>
-
     </div>
-
 </section>
 
 <!-- Toast Notification -->
@@ -1743,11 +1179,8 @@ SETTINGS
 <div id="loadingOverlay" style="display:none;">
     <div class="loader"></div>
 </div>
-
 </main>
-
 </div>
-
 </div>
 
 <!-- JavaScript Files -->
@@ -1767,7 +1200,6 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const SUPABASE_URL =
 "https://ariqthzhspzktpoylqci.supabase.co";
-
 const SUPABASE_ANON_KEY =
 "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
 
@@ -1792,17 +1224,11 @@ export const supabase = createClient(
 // ==========================================================
 
 export const TABLES = {
-
     VISITORS: "visitors",
-
     LEADS: "leads",
-
     POSTS: "posts",
-
     TESTIMONIALS: "testimonials",
-
     SERVICE_CLICKS: "service_clicks"
-
 };
 
 // ==========================================================
@@ -1810,9 +1236,7 @@ export const TABLES = {
 // ==========================================================
 
 export async function testConnection() {
-
     try {
-
         const { error } =
         await supabase
         .from(TABLES.VISITORS)
@@ -1820,32 +1244,22 @@ export async function testConnection() {
         .limit(1);
 
         if (error) {
-
             console.error(
                 "Supabase Connection Error:",
                 error.message
             );
-
             return false;
-
         }
 
         console.log(
             "✅ Prime Accounting Solutions Connected Successfully"
         );
-
         return true;
-
     }
-
     catch (err) {
-
         console.error(err);
-
         return false;
-
     }
-
 }
 
 // ==========================================================
@@ -1853,7 +1267,6 @@ export async function testConnection() {
 // ==========================================================
 
 export async function getTotalRows(table) {
-
     const { count, error } =
     await supabase
     .from(table)
@@ -1863,38 +1276,26 @@ export async function getTotalRows(table) {
     });
 
     if (error) {
-
         console.error(error);
-
         return 0;
-
     }
-
     return count || 0;
-
 }
 
 export async function getRows(table) {
-
     const { data, error } =
     await supabase
     .from(table)
     .select("*");
 
     if (error) {
-
         console.error(error);
-
         return [];
-
     }
-
     return data || [];
-
 }
 
 export async function insertRow(table, payload) {
-
     const { data, error } =
     await supabase
     .from(table)
@@ -1902,19 +1303,13 @@ export async function insertRow(table, payload) {
     .select();
 
     if (error) {
-
         console.error(error);
-
         return null;
-
     }
-
     return data;
-
 }
 
 export async function updateRow(table, id, payload) {
-
     const { data, error } =
     await supabase
     .from(table)
@@ -1923,19 +1318,13 @@ export async function updateRow(table, id, payload) {
     .select();
 
     if (error) {
-
         console.error(error);
-
         return null;
-
     }
-
     return data;
-
 }
 
 export async function deleteRow(table, id) {
-
     const { error } =
     await supabase
     .from(table)
@@ -1943,15 +1332,10 @@ export async function deleteRow(table, id) {
     .eq("id", id);
 
     if (error) {
-
         console.error(error);
-
         return false;
-
     }
-
     return true;
-
 }
 
 // ==========================================================
@@ -1968,16 +1352,12 @@ export default supabase;
 
 const ADMIN_EMAIL =
 "p.a.solutions9598@gmail.com";
-
 const ADMIN_PASSWORD =
 "aqibsolutions@9598";
-
 const LOGIN_KEY =
 "prime_admin_logged";
-
 const LOGIN_TIME_KEY =
 "prime_admin_login_time";
-
 const SESSION_HOURS = 24;
 
 // ==========================================================
@@ -1987,7 +1367,6 @@ const SESSION_HOURS = 24;
 document.addEventListener("DOMContentLoaded", () => {
 
     initializeAuth();
-
 });
 
 // ==========================================================
@@ -1995,11 +1374,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================================
 
 function initializeAuth() {
-
     attachEvents();
-
     checkLoginSession();
-
 }
 
 // ==========================================================
@@ -2007,51 +1383,38 @@ function initializeAuth() {
 // ==========================================================
 
 function attachEvents() {
-
     const loginBtn =
     document.getElementById("loginBtn");
 
     if(loginBtn){
-
         loginBtn.addEventListener(
             "click",
             loginAdmin
         );
-
     }
-
     const logoutBtn =
     document.getElementById("logoutBtn");
 
     if(logoutBtn){
-
         logoutBtn.addEventListener(
             "click",
             logoutAdmin
         );
-
     }
-
     const password =
     document.getElementById("password");
 
     if(password){
-
         password.addEventListener(
             "keydown",
             function(e){
 
                 if(e.key==="Enter"){
-
                     loginAdmin();
-
                 }
-
             }
         );
-
     }
-
 }
 
 // ==========================================================
@@ -2059,34 +1422,25 @@ function attachEvents() {
 // ==========================================================
 
 function loginAdmin(){
-
     const email =
     document.getElementById("email").value.trim();
-
     const password =
     document.getElementById("password").value.trim();
 
     if(email===""){
-
         alert("Please enter email.");
-
         return;
-
     }
 
     if(password===""){
-
         alert("Please enter password.");
-
         return;
-
     }
 
     if(
         email===ADMIN_EMAIL &&
         password===ADMIN_PASSWORD
     ){
-
         localStorage.setItem(
             LOGIN_KEY,
             "true"
@@ -2096,17 +1450,11 @@ function loginAdmin(){
             LOGIN_TIME_KEY,
             Date.now()
         );
-
         showDashboard();
-
     }
-
     else{
-
         alert("Invalid Email or Password");
-
     }
-
 }
 
 // ==========================================================
@@ -2114,31 +1462,22 @@ function loginAdmin(){
 // ==========================================================
 
 function showDashboard(){
-
     const login =
     document.getElementById("loginPage");
-
     const panel =
     document.getElementById("adminPanel");
 
     if(login){
-
         login.style.display="none";
-
     }
 
     if(panel){
-
         panel.style.display="block";
-
     }
 
     if(typeof initializeDashboard==="function"){
-
         initializeDashboard();
-
     }
-
 }
 
 // ==========================================================
@@ -2146,27 +1485,20 @@ function showDashboard(){
 // ==========================================================
 
 function logoutAdmin(){
-
     if(
         !confirm(
         "Are you sure you want to logout?"
         )
     ){
-
         return;
-
     }
-
     localStorage.removeItem(
         LOGIN_KEY
     );
-
     localStorage.removeItem(
         LOGIN_TIME_KEY
     );
-
     location.reload();
-
 }
 
 // ==========================================================
@@ -2174,10 +1506,8 @@ function logoutAdmin(){
 // ==========================================================
 
 function checkLoginSession(){
-
     const logged =
     localStorage.getItem(LOGIN_KEY);
-
     const loginTime =
     localStorage.getItem(LOGIN_TIME_KEY);
 
@@ -2185,9 +1515,7 @@ function checkLoginSession(){
         logged!=="true" ||
         !loginTime
     ){
-
         return;
-
     }
 
     const hoursPassed =
@@ -2200,15 +1528,10 @@ function checkLoginSession(){
         hoursPassed >
         SESSION_HOURS
     ){
-
         localStorage.clear();
-
         return;
-
     }
-
     showDashboard();
-
 }
 
 // ==========================================================
@@ -2217,7 +1540,6 @@ function checkLoginSession(){
 
 window.loginAdmin =
 loginAdmin;
-
 window.logoutAdmin =
 logoutAdmin;
 <script type="module" src="assets/js/dashboard.js"></script>
@@ -2239,36 +1561,23 @@ import {
 // ==========================================================
 
 window.initializeDashboard = async function () {
-
     try {
-
         showLoader();
-
         await loadDashboardCards();
-
         await loadRecentLeads();
-
         await loadRecentVisitors();
-
         await loadRecentServiceClicks();
-
         hideLoader();
-
     }
 
     catch (err) {
-
         console.error(err);
-
         hideLoader();
-
         showToast(
             "Dashboard loading failed.",
             "error"
         );
-
     }
-
 };
 
 // ==========================================================
@@ -2276,23 +1585,14 @@ window.initializeDashboard = async function () {
 // ==========================================================
 
 async function loadDashboardCards() {
-
     await Promise.all([
-
         loadVisitors(),
-
         loadLeads(),
-
         loadPosts(),
-
         loadTestimonials(),
-
         loadServiceClicks(),
-
         loadLeadStatus()
-
     ]);
-
 }
 
 // ==========================================================
@@ -2300,17 +1600,14 @@ async function loadDashboardCards() {
 // ==========================================================
 
 async function loadVisitors() {
-
     const total =
     await getTotalRows(
         TABLES.VISITORS
     );
-
     updateCard(
         "totalVisitorsCard",
         total
     );
-
 }
 
 // ==========================================================
@@ -2318,17 +1615,14 @@ async function loadVisitors() {
 // ==========================================================
 
 async function loadLeads() {
-
     const total =
     await getTotalRows(
         TABLES.LEADS
     );
-
     updateCard(
         "totalLeads",
         total
     );
-
 }
 
 // ==========================================================
@@ -2336,30 +1630,22 @@ async function loadLeads() {
 // ==========================================================
 
 async function loadPosts() {
-
     const { count } =
     await supabase
 
         .from(TABLES.POSTS)
-
         .select("*", {
-
             count: "exact",
-
             head: true
-
         })
-
         .eq(
             "status",
             "published"
         );
-
     updateCard(
         "publishedPosts",
         count || 0
     );
-
 }
 
 // ==========================================================
@@ -2367,17 +1653,14 @@ async function loadPosts() {
 // ==========================================================
 
 async function loadTestimonials() {
-
     const total =
     await getTotalRows(
         TABLES.TESTIMONIALS
     );
-
     updateCard(
         "dashboardTestimonials",
         total
     );
-
 }
 
 // ==========================================================
@@ -2385,17 +1668,14 @@ async function loadTestimonials() {
 // ==========================================================
 
 async function loadServiceClicks() {
-
     const total =
     await getTotalRows(
         TABLES.SERVICE_CLICKS
     );
-
     updateCard(
         "totalServiceClicks",
         total
     );
-
 }
 
 // ==========================================================
@@ -2403,62 +1683,42 @@ async function loadServiceClicks() {
 // ==========================================================
 
 async function loadLeadStatus() {
-
     const statuses = [
-
         {
             value: "New",
             id: "newLeads"
         },
-
         {
             value: "Contacted",
             id: "contactedLeads"
         },
-
         {
             value: "Converted",
             id: "convertedLeads"
         },
-
         {
             value: "Closed",
             id: "closedLeads"
         }
-
     ];
 
     for (const status of statuses) {
-
         const { count } =
-
             await supabase
-
                 .from(TABLES.LEADS)
-
                 .select("*", {
-
                     count: "exact",
-
                     head: true
-
                 })
-
                 .eq(
                     "status",
                     status.value
                 );
-
         updateCard(
-
             status.id,
-
             count || 0
-
         );
-
     }
-
 }
 
 // ==========================================================
@@ -2466,23 +1726,16 @@ async function loadLeadStatus() {
 // ==========================================================
 
 function updateCard(
-
     id,
-
     value
-
 ) {
 
     const el =
-
         document.getElementById(id);
 
     if (!el) return;
-
     el.innerHTML =
-
         formatNumber(value);
-
 }
     // ==========================================================
 // PRIME ACCOUNTING SOLUTIONS
@@ -2496,12 +1749,10 @@ function updateCard(
 // ==========================================================
 
 async function loadRecentLeads(){
-
     const container =
     document.getElementById("recentLeadsList");
 
     if(!container) return;
-
     const { data, error } =
     await supabase
         .from(TABLES.LEADS)
@@ -2510,42 +1761,27 @@ async function loadRecentLeads(){
         .limit(5);
 
     if(error){
-
         container.innerHTML =
         "<p>Unable to load leads.</p>";
-
         return;
-
     }
 
     if(!data || data.length===0){
-
         container.innerHTML =
         "<p>No Leads Found</p>";
-
         return;
-
     }
 
     container.innerHTML =
     data.map(item=>`
-
         <div class="list-item">
-
             <strong>${escapeHTML(item.name || "-")}</strong>
-
             <br>
-
             <small>
-
             ${escapeHTML(item.phone || "-")}
-
             </small>
-
         </div>
-
     `).join("");
-
 }
 
 // ==========================================================

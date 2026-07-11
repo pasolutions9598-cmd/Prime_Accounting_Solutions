@@ -1678,28 +1678,7 @@ NOTIFICATIONS
     
     // ================================================================
     // EVENT LISTENERS
-    // ================================================================
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('loginBtn').addEventListener('click', login);
-        
-        document.getElementById('email').addEventListener('keypress', e => {
-            if (e.key === 'Enter') login();
-        });
-        
-        document.getElementById('password').addEventListener('keypress', e => {
-            if (e.key === 'Enter') login();
-        });
-        
-        document.getElementById('logoutBtn').addEventListener('click', logout);
-        
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const page = this.dataset.page;
-                if (page && page !== 'logout') showPage(page);
-            });
-        });
-        
+    // ================================================================   
         document.getElementById('email').focus();
     });
 
@@ -1714,7 +1693,8 @@ NOTIFICATIONS
 
         if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
             localStorage.setItem("prime_admin_logged", "true");
-            window.location.reload(); 
+            checkAuth();
+initializeAdmin();
         } else {
             alert("Security Error: Invalid Credentials");
         }
@@ -1723,7 +1703,7 @@ NOTIFICATIONS
     // 2. Logout Logic
     window.logoutAdmin = function() {
         localStorage.removeItem("prime_admin_logged");
-        window.location.reload();
+        checkAuth();
     }
 
     // 3. Auth Check Logic

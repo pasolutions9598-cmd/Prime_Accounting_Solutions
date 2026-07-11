@@ -632,6 +632,47 @@ textarea{
         transform:rotate(360deg);
     }
 }
+    .modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-card{
+    background:white;
+    width:90%;
+    max-width:700px;
+    max-height:85vh;
+    overflow:auto;
+    padding:30px;
+    border-radius:20px;
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    right:20px;
+    top:15px;
+    border:none;
+    background:#dc2626;
+    color:white;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.post-view-image{
+    width:100%;
+    max-height:300px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:20px;
+}
 
 </head>
 <body>
@@ -1043,6 +1084,10 @@ POSTS MANAGEMENT
                 📁 Save Draft
             </button>
 
+            <button onclick="viewPost('${post.id}')">
+👁 View
+</button>
+            
         </div>
     </div>
 
@@ -1058,6 +1103,22 @@ POSTS MANAGEMENT
         </div>
     </div>
 </section>
+        <div id="postViewModal" class="modal">
+
+    <div class="modal-card">
+
+        <button 
+        class="close-btn"
+        onclick="closePostView()">
+        ✕
+        </button>
+
+        <div id="postViewContent"></div>
+
+    </div>
+
+        </div>
+    </section>
 <!-- =======================================================
 TESTIMONIALS MANAGEMENT
 ======================================================= -->
@@ -1963,6 +2024,517 @@ console.log(
 "✅ Dashboard Ready"
 );
 <script type="module" src="assets/js/posts.js"></script>
+    // ==========================================================
+// PRIME ACCOUNTING SOLUTIONS
+// POSTS.JS
+// Production Version 2.0
+// PART 1
+// ==========================================================
+
+import { supabase, TABLES } from "./supabase.js";
+
+let editingPostId = null;
+
+// ==========================================================
+// INITIALIZE
+// ==========================================================
+
+window.initializePosts = async function () {
+
+    await loadPosts();
+
+};
+
+// ==========================================================
+// LOAD POSTS
+// ==========================================================
+
+async function loadPosts() {
+
+    const table =
+    document.getElementById("postsTableBody");
+
+    if (!table) return;
+
+    table.innerHTML =
+    `<tr>
+        <td colspan="6">Loading...</td>
+    </tr>`;
+
+    const { data, error } =
+    await supabase
+
+        .from(TABLES.POSTS)
+
+        .select("*")
+
+        .order("created_at", {
+            ascending: false
+        });
+
+    if (error) {
+
+        console.error(error);
+
+        table.innerHTML =
+        `<tr>
+            <td colspan="6">
+                Failed to load posts.
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    if (!data || data.length === 0) {
+
+        table.innerHTML =
+        `<tr>
+            <td colspan="6">
+                No Posts Found
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    table.innerHTML =
+    data.map(post => createPostRow(post)).join("");
+
+}
+
+// ==========================================================
+// TABLE ROW
+// ==========================================================
+
+function createPostRow(post) {
+
+    return `
+
+<tr>
+
+<td>${escapeHTML(post.title)}</td>
+
+<td>${escapeHTML(post.category || "-")}</td>
+
+<td>${escapeHTML(post.status)}</td>
+
+<td>${formatDate(post.created_at)}</td>
+
+<td>
+
+<button
+class="secondary-btn"
+onclick="editPost('${post.id}')">
+
+Edit
+
+</button>
+
+<button
+class="primary-btn"
+onclick="deletePost('${post.id}')">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+// ==========================================================
+// SAVE POST
+// ==========================================================
+
+window.savePost =
+async function () {
+
+    const title =
+    document
+    .getElementById("postTitle")
+    ?.value
+    ?.trim();
+
+    const category =
+    document
+    .getElementById("postCategory")
+    ?.value
+    ?.trim();
+
+    const content =
+    document
+    .getElementById("postContent")
+    ?.value
+    ?.trim();
+
+    if (!title || !content) {
+
+        showToast(
+            "Title and Content required.",
+            "warning"
+        );
+
+        return;
+
+    }
+
+    showLoader();
+
+    const payload = {
+
+        title,
+
+        category,
+
+        content,
+
+        status: "draft"
+
+    };
+
+    let result;
+
+    if (editingPostId) {
+
+        result =
+        await supabase
+
+            .from(TABLES.POSTS)
+
+            .update(payload)
+
+            .eq("id", editingPostId);
+
+    }
+
+    else {
+
+        result =
+        await supabase
+
+            .from(TABLES.POSTS)
+
+            .insert(payload);
+
+    }
+
+    hideLoader();
+
+    if (result.error) {
+
+        console.error(result.error);
+
+        showToast(
+            "Unable to save post.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    showToast(
+        "Draft Saved Successfully"
+    );
+
+    clearPostForm();
+
+    loadPosts();
+
+};
+
+// ==========================================================
+// PUBLISH POST
+// ==========================================================
+
+window.publishPost =
+async function () {
+
+    const title =
+    document
+    .getElementById("postTitle")
+    ?.value
+    ?.trim();
+
+    const category =
+    document
+    .getElementById("postCategory")
+    ?.value
+    ?.trim();
+
+    const content =
+    document
+    .getElementById("postContent")
+    ?.value
+    ?.trim();
+
+    if (!title || !content) {
+
+        showToast(
+            "Title and Content required.",
+            "warning"
+        );
+
+        return;
+
+    }
+
+    showLoader();
+
+    const payload = {
+
+        title,
+
+        category,
+
+        content,
+
+        status: "published"
+
+    };
+
+    let result;
+
+    if (editingPostId) {
+
+        result =
+        await supabase
+
+            .from(TABLES.POSTS)
+
+            .update(payload)
+
+            .eq("id", editingPostId);
+
+    }
+
+    else {
+
+        result =
+        await supabase
+
+            .from(TABLES.POSTS)
+
+            .insert(payload);
+
+    }
+
+    hideLoader();
+
+    if (result.error) {
+
+        showToast(
+            "Publish Failed",
+            "error"
+        );
+
+        return;
+
+    }
+
+    showToast(
+        "Post Published Successfully"
+    );
+
+    clearPostForm();
+
+    loadPosts();
+
+};
+
+// ==========================================================
+// CLEAR FORM
+// ==========================================================
+
+function clearPostForm() {
+
+    editingPostId = null;
+
+    [
+        "postTitle",
+        "postCategory",
+        "postContent"
+    ]
+
+    .forEach(id => {
+
+        const el =
+        document.getElementById(id);
+
+        if (el)
+            el.value = "";
+
+    });
+
+}
+    // ==========================================================
+// VIEW POST
+// ==========================================================
+
+window.viewPost = async function(postId) {
+
+    try {
+
+        showLoader();
+
+        const { data, error } = await supabase
+            .from(TABLES.POSTS)
+            .select("*")
+            .eq("id", postId)
+            .single();
+
+
+        if(error){
+
+            console.error(error);
+
+            showToast(
+                "Unable to load post.",
+                "error"
+            );
+
+            hideLoader();
+
+            return;
+
+        }
+
+
+        const modal =
+        document.getElementById("postViewModal");
+
+
+        const content =
+        document.getElementById("postViewContent");
+
+
+        if(!modal || !content){
+
+            console.error(
+                "Post view modal not found"
+            );
+
+            hideLoader();
+
+            return;
+
+        }
+
+
+        content.innerHTML = `
+
+        <div class="post-view-box">
+
+
+            ${
+                data.image_url
+                ?
+                `
+                <img 
+                src="${escapeHTML(data.image_url)}"
+                class="post-view-image"
+                alt="Post Image">
+                `
+                :
+                ""
+            }
+
+
+            <h2>
+                ${escapeHTML(data.title)}
+            </h2>
+
+
+            <div class="post-meta">
+
+                <span>
+                📂 ${escapeHTML(data.category || "-")}
+                </span>
+
+
+                <span>
+                🏷️ ${escapeHTML(data.type || "-")}
+                </span>
+
+
+                <span>
+                📌 ${escapeHTML(data.status || "-")}
+                </span>
+
+
+                <span>
+                📅 ${formatDate(data.created_at)}
+                </span>
+
+            </div>
+
+
+
+            <hr>
+
+
+            <div class="post-content">
+
+                ${escapeHTML(data.content)
+                .replace(/\n/g,"<br>")}
+
+            </div>
+
+
+        </div>
+
+        `;
+
+
+        modal.style.display = "flex";
+
+
+        hideLoader();
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        hideLoader();
+
+        showToast(
+            "Something went wrong.",
+            "error"
+        );
+
+    }
+
+};
+
+
+
+// ==========================================================
+// CLOSE POST VIEW MODAL
+// ==========================================================
+
+window.closePostView = function(){
+
+    const modal =
+    document.getElementById("postViewModal");
+
+
+    if(modal){
+
+        modal.style.display="none";
+
+    }
+
+};
 <script type="module" src="assets/js/leads.js"></script>
 <script type="module" src="assets/js/testimonials.js"></script>
 <script type="module" src="assets/js/analytics.js"></script>

@@ -811,6 +811,9 @@ LOGIN PAGE
                 <input type="password" id="password" placeholder="••••••••">
             </div>
 
+            <button id="loginBtn" class="login-btn">🔐 Login</button>
+
+
             <p style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px;">
                 Secure enterprise login
             </p>
@@ -1714,10 +1717,12 @@ NOTIFICATIONS
     });
 
     // Admin Credentials
+    <script>
+    // Config
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
     const ADMIN_PASSWORD = "aqibsolutions@9598";
 
-    // Login function
+    // 1. Login Logic
     window.performLogin = function() {
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
@@ -1730,7 +1735,13 @@ NOTIFICATIONS
         }
     }
 
-    // Check Auth
+    // 2. Logout Logic
+    window.logoutAdmin = function() {
+        localStorage.removeItem("prime_admin_logged");
+        window.location.reload();
+    }
+
+    // 3. Auth Check Logic
     function checkAuth() {
         const isLoggedIn = localStorage.getItem("prime_admin_logged");
         const loginPage = document.getElementById("loginPage");
@@ -1745,9 +1756,21 @@ NOTIFICATIONS
         }
     }
 
-    // Initialize
+    // 4. Initialize (Events ko connect karna)
     document.addEventListener('DOMContentLoaded', function() {
         checkAuth();
+
+        // Login Button Click Listener
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', performLogin);
+        }
+
+        // Logout Button Click Listener
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', logoutAdmin);
+        }
     });
 </script>
 

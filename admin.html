@@ -811,7 +811,7 @@ LOGIN PAGE
                 <input type="password" id="password" placeholder="••••••••">
             </div>
 
-            <button id="loginBtn" onclick="performLogin()">🔐 Login</button>
+            <button id="loginBtn" onclick="performLogin()">🔐 Secure Login</button>
 
             <p style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px;">
                 Secure enterprise login
@@ -825,7 +825,7 @@ ADMIN PANEL
 ================================================================ -->
 
 <div id="adminPanel" style="display:none;">
-    <div
+    <div class="layout">
         
         <!-- SIDEBAR -->
         <aside id="sidebar">
@@ -1678,8 +1678,6 @@ NOTIFICATIONS
     // ================================================================
     // EVENT LISTENERS
     // ================================================================   
-        document.getElementById('email').focus();
-    });
 
     // Admin Credentials
     const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";

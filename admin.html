@@ -1,394 +1,3205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prime Accounting Solutions - Premium Admin Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root { --primary: #002d72; --secondary: #009245; --dark: #0f172a; --light: #f8fafc; --text: #334155; --card-bg: #ffffff; }
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
-body { background: var(--light); color: var(--text); padding-bottom: 60px; }
-.header { background: linear-gradient(135deg, #071630 0%, #1e293b 100%); padding: 25px 20px; text-align: center; color: white; font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-.container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-.card { background: var(--card-bg); border-radius: 20px; padding: 35px; box-shadow: 0 10px 30px rgba(15,23,42,0.02); border: 1px solid #e2e8f0; margin-bottom: 30px; transition: 0.3s; }
-.card h2 { font-family: 'Outfit', sans-serif; color: var(--primary); font-size: 24px; margin-bottom: 25px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
-.stat-card { background: var(--card-bg); padding: 25px 30px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; border-top: 5px solid var(--primary); text-align: left; }
-.stat-card.visitors { border-top-color: var(--secondary); }
-.stat-title { color: #64748b; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-.stat-number { font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--dark); }
-.row { display: flex; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
-.row > div { flex: 1; min-width: 200px; }
-label { font-size: 14px; font-weight: 600; color: #475569; display: block; margin-top: 15px; }
-input[type="text"], input[type="email"], input[type="password"], textarea, select { width: 100%; padding: 14px; margin: 8px 0 15px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; background: #fff; color: var(--dark); }
-input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(0,45,114,0.06); }
-textarea { min-height: 150px; resize: vertical; }
-button { padding: 12px 20px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-right: 5px; }
-button:hover { transform: translateY(-1px); }
-.login-btn { background: var(--primary); color: white; width: 100%; margin-top: 15px; padding: 16px; font-size: 15px; }
-.publish-btn { background: var(--secondary); color: white; }
-.draft-btn { background: #64748b; color: white; }
-.logout-btn { background: #ef4444; color: white; float: right; padding: 10px 20px; font-size: 14px; }
-.custom-file-btn { display: block; background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; color: #475569; margin: 8px 0 15px; }
-input[type="file"] { display: none; }
-#adminPanel { display: none; }
-#loginBox { display: block; }
-.post-card { background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; }
-.post-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; color: var(--dark); margin: 10px 0; }
-.post-card img { width: 100%; border-radius: 12px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
-.post-meta-info { font-size: 13px; color: #64748b; margin-top: 15px; background: #f8fafc; padding: 10px 15px; border-radius: 8px; display: inline-block; }
-.badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 30px; text-transform: uppercase; margin-right: 5px; }
-.badge-news { background: #e0f2fe; color: #0369a1; }
-.badge-announcement { background: #fef3c7; color: #d97706; }
-.badge-draft { background: #cbd5e1; color: #334155; }
-.edit-btn { background: #facc15; color: #0f172a; }
-.delete-btn { background: #fee2e2; color: #ef4444; }
-.delete-btn:hover { background: #ef4444; color: white; }
-.force-live-btn { background: #dcfce7; color: #15803d; }
-.premium-header{ background:linear-gradient(135deg,#071630 0%,#0b1f45 60%,#002d72 100%); color:#fff; display:flex; justify-content:space-between; align-items:center; padding:25px 35px; box-shadow:0 8px 30px rgba(0,0,0,.18); border-bottom:3px solid #d4af37; flex-wrap:wrap; gap:20px; }
-.header-left{ display:flex; align-items:center; gap:15px; }
-.header-logo{ width:120px; height:120px; object-fit:contain; display:block; flex-shrink:0; }
-.brand-info h1{ background: linear-gradient(135deg,#fff6c7,#dfb74c,#9e751d,#fff0a5); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-family:'Outfit',sans-serif; font-weight:700; }
-.brand-info p{ margin-top:5px; color:#d4af37; font-size:14px; letter-spacing:1px; }
-.header-right{ display:flex; align-items:center; gap:20px; }
-.status-box{ background:rgba(255,255,255,.08); padding:10px 18px; border-radius:50px; display:flex; align-items:center; gap:10px; backdrop-filter:blur(12px); }
-.status-dot{ width:10px; height:10px; border-radius:50%; background:#22c55e; box-shadow:0 0 12px #22c55e; }
-.admin-box{ display:flex; align-items:center; gap:12px; background:rgba(255,255,255,.08); padding:10px 16px; border-radius:16px; backdrop-filter:blur(12px); }
-.admin-avatar{ width:48px; height:48px; border-radius:50%; background:#d4af37; color:#071630; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; }
-.admin-box strong{ display:block; }
-.admin-box small{ color:#dbeafe; }
-.dashboard-topbar{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; margin:25px auto; max-width:1100px; padding:0 20px; }
-.welcome-box h2{ margin:0; font-family:'Outfit',sans-serif; color:#071630; font-size:28px; }
-.welcome-box p{ margin-top:8px; color:#64748b; }
-.quick-status{ display:flex; gap:15px; }
-.quick-card{ background:#fff; padding:15px 20px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.05); text-align:center; min-width:120px; }
-.quick-card span{ font-size:28px; display:block; margin-bottom:8px; }
-.quick-actions{ max-width:1100px; margin:20px auto; padding:0 20px; display:flex; gap:15px; flex-wrap:wrap; }
-.quick-actions button{ flex:1; min-width:180px; background:linear-gradient(135deg,#071630,#002d72); color:#dfb74c; padding:15px; border:none; border-radius:14px; font-weight:700; cursor:pointer; transition:.3s; }
-.quick-actions button:hover{ transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,45,114,.25); }
-.notification-bar{ max-width:1100px; margin:18px auto; padding:14px 20px; background:linear-gradient(135deg,#071630,#002d72); border-radius:16px; display:flex; align-items:center; gap:15px; color:#fff; }
-.notification-icon{ font-size:28px; color:#dfb74c; }
-.notification-text{ flex:1; font-weight:600; font-size:15px; }
-.notification-text marquee{ color:#ffffff; }
-</style>    
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Prime Accounting Solutions | Admin Dashboard
+</title>
+
+<!-- Google Fonts -->
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Admin CSS -->
+
+<link rel="stylesheet"
+href="assets/css/admin.css">
+    /* ==========================================================
+   PRIME ACCOUNTING SOLUTIONS ADMIN PANEL v2.0
+   PHASE 3 - PART 1
+========================================================== */
+
+:root{
+
+    --navy:#071630;
+    --navy-light:#002d72;
+
+    --gold:#dfb74c;
+    --gold-dark:#b8860b;
+
+    --bg:#f5f7fb;
+    --card:#ffffff;
+
+    --text:#334155;
+    --text-light:#64748b;
+
+    --border:#e2e8f0;
+
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#f59e0b;
+
+    --radius:18px;
+
+    --shadow:
+    0 12px 30px rgba(0,0,0,.08);
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    overflow-x:hidden;
+
+}
+
+/* ==========================================================
+LOGIN
+========================================================== */
+
+#loginPage{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--navy),
+    var(--navy-light));
+
+}
+
+.login-container{
+
+    width:100%;
+    max-width:460px;
+
+}
+
+.login-card{
+
+    background:white;
+
+    border-radius:26px;
+
+    padding:45px;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.25);
+
+}
+
+.login-logo{
+
+    width:130px;
+
+    display:block;
+
+    margin:auto auto 25px;
+
+}
+
+.login-card h1{
+
+    font-family:'Outfit',sans-serif;
+
+    font-size:32px;
+
+    text-align:center;
+
+    color:var(--navy);
+
+}
+
+.login-card p{
+
+    margin:12px 0 30px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+}
+
+.input-group{
+
+    margin-bottom:20px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+
+    outline:none;
+
+    border-color:var(--gold);
+
+    box-shadow:
+    0 0 0 4px rgba(223,183,76,.18);
+
+}
+
+#loginBtn{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:16px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:white;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--navy),
+    var(--navy-light));
+
+    transition:.30s;
+
+}
+
+#loginBtn:hover{
+
+    transform:translateY(-2px);
+
+}
+    /* ==========================================================
+LAYOUT
+========================================================== */
+
+.layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* ==========================================================
+SIDEBAR
+========================================================== */
+
+#sidebar{
+
+    width:280px;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    bottom:0;
+
+    overflow-y:auto;
+
+    background:
+    linear-gradient(
+    180deg,
+    var(--navy),
+    var(--navy-light));
+
+    color:#fff;
+
+    box-shadow:
+    8px 0 30px rgba(0,0,0,.15);
+
+    z-index:1000;
+
+}
+
+.sidebar-logo{
+
+    padding:35px 25px;
+
+    text-align:center;
+
+}
+
+.sidebar-logo img{
+
+    width:110px;
+
+    margin-bottom:20px;
+
+}
+
+.sidebar-logo h2{
+
+    font-family:'Outfit',sans-serif;
+
+    font-size:22px;
+
+    color:var(--gold);
+
+}
+
+.sidebar-logo p{
+
+    margin-top:8px;
+
+    color:#cbd5e1;
+
+    font-size:13px;
+
+}
+
+.sidebar-menu{
+
+    padding:25px;
+
+}
+
+.menu-item{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 18px;
+
+    margin-bottom:12px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.menu-item:hover{
+
+    background:
+    rgba(255,255,255,.10);
+
+    transform:translateX(6px);
+
+    color:var(--gold);
+
+}
+
+.menu-item.active{
+
+    background:var(--gold);
+
+    color:var(--navy);
+
+}
+
+.logout-btn{
+
+    margin-top:25px;
+
+    border:1px solid
+    rgba(255,255,255,.20);
+
+}
+
+/* ==========================================================
+MAIN CONTENT
+========================================================== */
+
+#mainContent{
+
+    flex:1;
+
+    margin-left:280px;
+
+    background:var(--bg);
+
+    min-height:100vh;
+
+}
+
+/* ==========================================================
+TOP HEADER
+========================================================== */
+
+.top-header{
+
+    height:90px;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 35px;
+
+    border-bottom:1px solid var(--border);
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.05);
+
+}
+
+.top-header h2{
+
+    font-family:'Outfit',sans-serif;
+
+    color:var(--navy);
+
+}
+
+.top-header p{
+
+    margin-top:5px;
+
+    color:var(--text-light);
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.system-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 18px;
+
+    border-radius:40px;
+
+    background:#ecfdf5;
+
+    color:var(--success);
+
+    font-weight:600;
+
+}
+
+.status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+    0 0 10px #22c55e;
+
+}
+
+.admin-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    background:white;
+
+    padding:10px 18px;
+
+    border-radius:16px;
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.avatar{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--gold),
+    var(--gold-dark));
+
+    color:white;
+
+}
+    /* ==========================================================
+DASHBOARD
+========================================================== */
+
+#dashboardPage{
+
+    padding:35px;
+
+}
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+.dashboard-card{
+
+    background:var(--card);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    border-top:4px solid var(--gold);
+
+    box-shadow:var(--shadow);
+
+    transition:.30s;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card-icon{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    color:white;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--navy),
+    var(--navy-light));
+
+}
+
+.card-info{
+
+    flex:1;
+
+}
+
+.card-info h3{
+
+    font-family:'Outfit',sans-serif;
+
+    font-size:34px;
+
+    color:var(--navy);
+
+}
+
+.card-info p{
+
+    margin-top:6px;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================================
+WIDGETS
+========================================================== */
+
+.dashboard-widgets{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(420px,1fr));
+
+    gap:25px;
+
+}
+
+.widget-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.widget-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.widget-header h3{
+
+    font-family:'Outfit',sans-serif;
+
+    color:var(--navy);
+
+}
+
+.loading-text{
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    padding:30px 0;
+
+}
+
+canvas{
+
+    width:100%!important;
+
+    max-height:350px;
+
+}
+    /* ==========================================================
+PHASE 3 - PART 4
+TABLES • FORMS • BUTTONS • MODAL • TOAST
+========================================================== */
+
+/* Sections */
+
+.page-section{
+
+    display:none;
+
+    padding:35px;
+
+}
+
+.section-header{
+
+    margin-bottom:25px;
+
+}
+
+.section-header h2{
+
+    font-family:'Outfit',sans-serif;
+
+    color:var(--navy);
+
+    font-size:30px;
+
+}
+
+.section-header p{
+
+    margin-top:8px;
+
+    color:var(--text-light);
+
+}
+
+/* Cards */
+
+.form-card,
+.table-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* Forms */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:140px;
+
+}
+
+/* Buttons */
+
+.button-group{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+.primary-btn,
+.secondary-btn{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:15px 24px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.primary-btn{
+
+    background:linear-gradient(135deg,var(--navy),var(--navy-light));
+
+    color:white;
+
+}
+
+.secondary-btn{
+
+    background:var(--gold);
+
+    color:var(--navy);
+
+}
+
+.primary-btn:hover,
+.secondary-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* Table */
+
+.data-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.data-table th{
+
+    background:var(--navy);
+
+    color:white;
+
+    padding:15px;
+
+    text-align:left;
+
+}
+
+.data-table td{
+
+    padding:15px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.data-table tr:hover{
+
+    background:#f8fafc;
+
+}
+
+/* Modal */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-content{
+
+    width:95%;
+
+    max-width:700px;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.modal-header button{
+
+    border:none;
+
+    background:none;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+/* Toast */
+
+.toast{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    background:var(--navy);
+
+    color:white;
+
+    padding:16px 22px;
+
+    border-radius:14px;
+
+    box-shadow:var(--shadow);
+
+    display:none;
+
+    z-index:10000;
+
+}
+
+/* Loading */
+
+#loadingOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(255,255,255,.75);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+.loader{
+
+    width:55px;
+
+    height:55px;
+
+    border:5px solid #e5e7eb;
+
+    border-top:5px solid var(--gold);
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
 </head>
+
 <body>
 
-<header class="premium-header">
-    <div class="header-left">
-        <img src="Logo.png" alt="Prime Accounting Solutions" class="header-logo">
-        <div class="brand-info">
-            <h1>Prime Accounting Solutions</h1>
-            <p>Premium Admin Control Center</p>
+<!-- =======================================================
+LOGIN SCREEN
+======================================================= -->
+
+<section id="loginPage">
+
+<div class="login-container">
+
+<div class="login-card">
+
+<img
+src="assets/images/Logo.png"
+class="login-logo"
+alt="Prime Accounting Solutions">
+
+<h1>
+
+Prime Accounting Solutions
+
+</h1>
+
+<p>
+
+Premium Admin Control Center
+
+</p>
+
+<div class="input-group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email">
+
+</div>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+</div>
+
+<button
+id="loginBtn">
+
+🔐 Secure Login
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+ADMIN PANEL START
+======================================================= -->
+
+<div id="adminPanel"
+style="display:none;">
+    <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+
+        <div class="sidebar-logo">
+
+            <img src="assets/images/Logo.png" alt="Logo">
+
+            <h2>Prime Accounting Solutions</h2>
+
+            <p>Premium Admin Dashboard</p>
+
         </div>
-    </div>
-    <div class="header-right">
-        <div class="status-box">
-            <span class="status-dot"></span>
-            System Online
-        </div>
-        <div class="admin-box">
-            <div class="admin-avatar">👤</div>
+
+        <nav class="sidebar-menu">
+
+            <button class="menu-item active" data-page="dashboard">
+                🏠 Dashboard
+            </button>
+
+            <button class="menu-item" data-page="leads">
+                📋 Leads
+            </button>
+
+            <button class="menu-item" data-page="posts">
+                📰 Posts
+            </button>
+
+            <button class="menu-item" data-page="testimonials">
+                ⭐ Testimonials
+            </button>
+
+            <button class="menu-item" data-page="analytics">
+                📈 Analytics
+            </button>
+
+            <button class="menu-item" data-page="settings">
+                ⚙ Settings
+            </button>
+
+            <button
+                class="menu-item logout-btn"
+                id="logoutBtn">
+
+                🚪 Logout
+
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main id="mainContent">
+
+        <header class="top-header">
+
             <div>
-                <strong>Administrator</strong>
-                <small>Secure Session</small>
+
+                <h2 id="greetingText">
+
+                    Welcome, Administrator 👋
+
+                </h2>
+
+                <p id="liveDateTime">
+
+                    Loading...
+
+                </p>
+
             </div>
-        </div>
-    </div>
-</header>
 
-<div class="dashboard-topbar">
-    <div class="welcome-box">
-        <h2 id="greetingText">Welcome, Administrator 👋</h2>
-        <p id="liveDateTime">Loading...</p>
-    </div>
-    <div class="quick-status">
-        <div class="quick-card"><span>🌐</span><strong>System</strong><small style="color:#22c55e;">Online</small></div>
-        <div class="quick-card"><span>🛡️</span><strong>Security</strong><small style="color:#22c55e;">Protected</small></div>
-    </div>
-</div>
+            <div class="header-right">
 
-<div class="quick-actions">
-    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">📝 New Post</button>
-    <button onclick="document.getElementById('filterCategory').scrollIntoView({behavior:'smooth'})">📰 Manage Posts</button>
-    <button onclick="document.getElementById('contactLeadsContainer').scrollIntoView({behavior:'smooth'})">📋 View Leads</button>
-    <button onclick="location.reload()">🔄 Refresh Dashboard</button>
-</div>
+                <div class="system-status">
 
-<div class="notification-bar">
-    <div class="notification-icon">🔔</div>
-    <div class="notification-text">
-        <marquee id="liveNotification" behavior="scroll" direction="left">Loading latest business notifications...</marquee>
-    </div>
-</div>
+                    <span class="status-dot"></span>
 
-<div class="container">
-    <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto;">
-        <h2>Admin Access</h2>
-        <form id="loginForm" onsubmit="event.preventDefault(); window.loginAdmin();">
-            <input type="email" id="email" placeholder="Email Address" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" class="login-btn">Sign In</button>
-        </form>
-    </div>
+                    System Online
 
-    <div id="adminPanel">
-        <div class="analytics-grid">
-            <div class="stat-card visitors"><div class="stat-title">👥 Total Visitors</div><div class="stat-number" id="totalVisitorsCard">0</div></div>
-            <div class="stat-card"><div class="stat-title">📅 Today's Visitors</div><div class="stat-number" id="todayVisitorsCard">0</div></div>
-            <div class="stat-card"><div class="stat-title">🖱 Total Service Clicks</div><div class="stat-number" id="totalServiceClicks">0</div></div>
-            <div class="stat-card"><div class="stat-title">🔥 Most Popular Service</div><div class="stat-number" id="topService">-</div></div>
-            <div class="stat-card"><div class="stat-title">⭐ Published Reviews</div><div class="stat-number" id="publishedReviews">0</div></div>
-            <div class="stat-card"><div class="stat-title">💬 Total Testimonials</div><div class="stat-number" id="dashboardTestimonials">0</div></div>
-            <div class="stat-card"><div class="stat-title">📰 Published Posts</div><div class="stat-number" id="publishedPosts">0</div></div>
-            <div class="stat-card"><div class="stat-title">📈 Active Services</div><div class="stat-number" id="activeServices">12</div></div>
-        </div>
-
-        <div class="card">
-            <h2>✍️ Compose Executive Broadcast</h2>
-            <div class="row">
-                <div>
-                    <label>Distribution Type</label>
-                    <select id="postType">
-                        <option value="news">Regular Tax Update</option>
-                        <option value="announcement">🚨 Critical Announcement</option>
-                    </select>
                 </div>
-                <div>
-                    <label>Stream Category</label>
-                    <select id="postCategory">
-                        <option value="General">General</option>
-                        <option value="GST">GST Updates</option>
-                        <option value="Income Tax">Income Tax</option>
-                        <option value="Audit">Audit & Assurance</option>
-                        <option value="Accounting">Accounting Solutions</option>
-                    </select>
+
+                <div class="admin-profile">
+
+                    <div class="avatar">
+
+                        👤
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+
+                            Administrator
+
+                        </strong>
+
+                        <small>
+
+                            Prime Accounting Solutions
+
+                        </small>
+
+                    </div>
+
                 </div>
+
             </div>
-            <label>Broadcast Title</label>
-            <input type="text" id="postTitle" placeholder="Enter headline statement...">
-            <label>Featured Infographic Media</label>
-            <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Upload Attachment</label>
-            <input type="file" id="imageFile" accept="image/*">
-            <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:contain; border-radius:12px; margin-bottom:20px; background:#f8fafc; border:1px solid #e2e8f0;">
-            <label>Content Description / Brief</label>
-            <textarea id="postContent" placeholder="Write comprehensive update specifications here..."></textarea>
-            <button class="publish-btn" onclick="window.saveContent('published')" id="submitBtn">Deploy Live Broadcast</button>
-            <button class="draft-btn" onclick="window.saveContent('draft')">Store to Drafts</button>
+
+        </header>
+
+        <section id="dashboardPage">
+
+            <div class="dashboard-grid">
+                <!-- Dashboard Cards -->
+
+<div class="dashboard-card">
+    <div class="card-icon">👥</div>
+    <div class="card-info">
+        <h3 id="totalVisitorsCard">0</h3>
+        <p>Total Visitors</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">📋</div>
+    <div class="card-info">
+        <h3 id="totalLeads">0</h3>
+        <p>Total Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">🆕</div>
+    <div class="card-info">
+        <h3 id="newLeads">0</h3>
+        <p>New Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">📞</div>
+    <div class="card-info">
+        <h3 id="contactedLeads">0</h3>
+        <p>Contacted Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">✅</div>
+    <div class="card-info">
+        <h3 id="convertedLeads">0</h3>
+        <p>Converted Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">🔒</div>
+    <div class="card-info">
+        <h3 id="closedLeads">0</h3>
+        <p>Closed Leads</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">📰</div>
+    <div class="card-info">
+        <h3 id="publishedPosts">0</h3>
+        <p>Published Posts</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">⭐</div>
+    <div class="card-info">
+        <h3 id="dashboardTestimonials">0</h3>
+        <p>Testimonials</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">🖱️</div>
+    <div class="card-info">
+        <h3 id="totalServiceClicks">0</h3>
+        <p>Service Clicks</p>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="card-icon">🔥</div>
+    <div class="card-info">
+        <h3 id="topService">-</h3>
+        <p>Top Service</p>
+    </div>
+</div>
+<!-- =======================================================
+DASHBOARD WIDGETS
+======================================================= -->
+
+</div>
+<!-- End dashboard-grid -->
+
+<div class="dashboard-widgets">
+
+    <!-- Business Overview Chart -->
+
+    <div class="widget-card">
+
+        <div class="widget-header">
+            <h3>📊 Business Overview</h3>
         </div>
 
-        <div class="card">
-            <h2>🗄️ Stream Management Registry</h2>
-            <select id="filterCategory" onchange="window.loadPosts()" style="width:auto; margin-bottom: 20px;">
-                <option value="All">All Categories</option>
-                <option value="General">General</option>
-                <option value="GST">GST Updates</option>
-                <option value="TDS">TDS Updates</option>
-                <option value="Income Tax">Income Tax</option>
-                <option value="Audit">Audit & Assurance</option>
-                <option value="Accounting">Accounting Solutions</option>
+        <canvas id="visitorChart"></canvas>
+
+    </div>
+
+    <!-- Recent Leads -->
+
+    <div class="widget-card">
+
+        <div class="widget-header">
+            <h3>📋 Recent Leads</h3>
+        </div>
+
+        <div id="recentLeadsList">
+
+            <p class="loading-text">
+                Loading...
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Visitors -->
+
+    <div class="widget-card">
+
+        <div class="widget-header">
+            <h3>👥 Recent Visitors</h3>
+        </div>
+
+        <div id="recentVisitorsList">
+
+            <p class="loading-text">
+                Loading...
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Service Clicks -->
+
+    <div class="widget-card">
+
+        <div class="widget-header">
+            <h3>🖱 Recent Service Clicks</h3>
+        </div>
+
+        <div id="recentServiceClicks">
+
+            <p class="loading-text">
+                Loading...
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Top 10 Services -->
+
+    <div class="widget-card">
+
+        <div class="widget-header">
+            <h3>🔥 Top 10 Services</h3>
+        </div>
+
+        <div id="topServicesList">
+
+            <p class="loading-text">
+                Loading...
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+        </section>
+        <!-- =======================================================
+LEADS MANAGEMENT
+======================================================= -->
+
+<section id="leadsPage" class="page-section" style="display:none;">
+
+    <div class="section-header">
+
+        <h2>📋 Leads Management</h2>
+
+        <p>Manage all customer enquiries and conversions.</p>
+
+    </div>
+
+    <div class="table-card">
+
+        <table class="data-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="contactLeadsContainer">
+
+                <tr>
+
+                    <td colspan="6" class="loading-text">
+
+                        Loading Leads...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+LEAD DETAILS MODAL
+======================================================= -->
+
+<div id="leadModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Lead Details</h2>
+
+            <button id="closeLeadModal">
+
+                ✖
+
+            </button>
+
+        </div>
+
+        <div id="leadModalContent">
+
+        </div>
+
+    </div>
+
+</div>
+<!-- =======================================================
+POSTS MANAGEMENT
+======================================================= -->
+
+<section id="postsPage" class="page-section" style="display:none;">
+
+    <div class="section-header">
+
+        <h2>📰 Posts Management</h2>
+
+        <p>Create, publish and manage company posts.</p>
+
+    </div>
+
+    <div class="form-card">
+
+        <div class="form-grid">
+
+            <div class="input-group">
+
+                <label>Post Title</label>
+
+                <input
+                    type="text"
+                    id="postTitle"
+                    placeholder="Enter Post Title">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Category</label>
+
+                <select id="postCategory">
+
+                    <option value="Accounting">Accounting</option>
+
+                    <option value="GST">GST</option>
+
+                    <option value="Income Tax">Income Tax</option>
+
+                    <option value="TDS">TDS</option>
+
+                    <option value="Payroll">Payroll</option>
+
+                    <option value="Business">Business</option>
+
+                    <option value="Other">Other</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Post Type</label>
+
+            <select id="postType">
+
+                <option value="news">News</option>
+
+                <option value="announcement">Announcement</option>
+
             </select>
-            <div id="postsContainer"></div>
+
         </div>
+
+        <div class="input-group">
+
+            <label>Post Content</label>
+
+            <textarea
+                id="postContent"
+                rows="8"
+                placeholder="Write your post here..."></textarea>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Featured Image</label>
+
+            <input
+                type="file"
+                id="imageFile"
+                accept="image/*">
+
+        </div>
+
+        <div class="button-group">
+
+            <button
+                id="submitBtn"
+                class="primary-btn">
+
+                🚀 Publish Post
+
+            </button>
+
+            <button
+                id="draftBtn"
+                class="secondary-btn">
+
+                📁 Save Draft
+
+            </button>
+
+        </div>
+
     </div>
+
+    <div class="table-card">
+
+        <div class="section-header">
+
+            <h3>Published Posts</h3>
+
+        </div>
+
+        <div id="postsContainer">
+
+            <p class="loading-text">
+
+                Loading Posts...
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =======================================================
+TESTIMONIALS MANAGEMENT
+======================================================= -->
+
+<section id="testimonialsPage" class="page-section" style="display:none;">
+
+    <div class="section-header">
+
+        <h2>⭐ Testimonials Management</h2>
+
+        <p>Manage customer reviews and testimonials.</p>
+
+    </div>
+
+    <div class="form-card">
+
+        <div class="form-grid">
+
+            <div class="input-group">
+
+                <label>Client Name</label>
+
+                <input
+                    type="text"
+                    id="testimonialName"
+                    placeholder="Enter Client Name">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Company</label>
+
+                <input
+                    type="text"
+                    id="testimonialCompany"
+                    placeholder="Company Name">
+
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Rating</label>
+
+            <select id="testimonialRating">
+
+                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                <option value="4">⭐⭐⭐⭐ (4)</option>
+                <option value="3">⭐⭐⭐ (3)</option>
+                <option value="2">⭐⭐ (2)</option>
+                <option value="1">⭐ (1)</option>
+
+            </select>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Review</label>
+
+            <textarea
+                id="testimonialReview"
+                rows="6"
+                placeholder="Write client review..."></textarea>
+
+        </div>
+
+        <div class="button-group">
+
+            <button
+                id="addTestimonialBtn"
+                class="primary-btn">
+
+                ⭐ Publish Testimonial
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="section-header">
+
+            <h3>Published Testimonials</h3>
+
+        </div>
+
+        <div id="testimonialsContainer">
+
+            <p class="loading-text">
+
+                Loading Testimonials...
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =======================================================
+ANALYTICS
+======================================================= -->
+
+<section id="analyticsPage" class="page-section" style="display:none;">
+
+    <div class="section-header">
+        <h2>📈 Analytics</h2>
+        <p>Business performance overview.</p>
+    </div>
+
+    <div class="widget-card">
+        <canvas id="analyticsChart"></canvas>
+    </div>
+
+</section>
+
+<!-- =======================================================
+SETTINGS
+======================================================= -->
+
+<section id="settingsPage" class="page-section" style="display:none;">
+
+    <div class="section-header">
+        <h2>⚙ Settings</h2>
+        <p>Admin configuration.</p>
+    </div>
+
+    <div class="form-card">
+
+        <div class="input-group">
+            <label>Company Name</label>
+            <input type="text" id="companyName" value="Prime Accounting Solutions">
+        </div>
+
+        <div class="input-group">
+            <label>Support Email</label>
+            <input type="email" id="supportEmail">
+        </div>
+
+        <div class="button-group">
+            <button id="saveSettingsBtn" class="primary-btn">
+                💾 Save Settings
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Toast Notification -->
+
+<div id="toast" class="toast"></div>
+
+<!-- Loading Overlay -->
+
+<div id="loadingOverlay" style="display:none;">
+    <div class="loader"></div>
 </div>
 
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+</main>
 
-const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
-const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+</div>
 
-const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
-const ADMIN_PASSWORD = "aqibsolutions@9598";
+</div>
 
-// Upload Preview
-document.getElementById("imageFile").addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if(!file) return;
-    document.getElementById("uploadBtnLabel").innerText = "✅ Attached: " + file.name;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-        const img = document.getElementById("previewImage");
-        img.src = ev.target.result;
-        img.style.display = "block";
-    };
-    reader.readAsDataURL(file);
+<!-- JavaScript Files -->
+
+<script type="module" src="assets/js/supabase.js"></script>
+    // ==========================================================
+// PRIME ACCOUNTING SOLUTIONS
+// SUPABASE CONFIGURATION
+// Production Version 2.0
+// ==========================================================
+
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+// ==========================================================
+// PROJECT CONFIGURATION
+// ==========================================================
+
+const SUPABASE_URL =
+"https://ariqthzhspzktpoylqci.supabase.co";
+
+const SUPABASE_ANON_KEY =
+"sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
+
+// ==========================================================
+// CREATE CLIENT
+// ==========================================================
+
+export const supabase = createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: false
+        }
+    }
+);
+
+// ==========================================================
+// DATABASE TABLES
+// ==========================================================
+
+export const TABLES = {
+
+    VISITORS: "visitors",
+
+    LEADS: "leads",
+
+    POSTS: "posts",
+
+    TESTIMONIALS: "testimonials",
+
+    SERVICE_CLICKS: "service_clicks"
+
+};
+
+// ==========================================================
+// CONNECTION TEST
+// ==========================================================
+
+export async function testConnection() {
+
+    try {
+
+        const { error } =
+        await supabase
+        .from(TABLES.VISITORS)
+        .select("*")
+        .limit(1);
+
+        if (error) {
+
+            console.error(
+                "Supabase Connection Error:",
+                error.message
+            );
+
+            return false;
+
+        }
+
+        console.log(
+            "✅ Prime Accounting Solutions Connected Successfully"
+        );
+
+        return true;
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        return false;
+
+    }
+
+}
+
+// ==========================================================
+// COMMON DATABASE HELPERS
+// ==========================================================
+
+export async function getTotalRows(table) {
+
+    const { count, error } =
+    await supabase
+    .from(table)
+    .select("*", {
+        count: "exact",
+        head: true
+    });
+
+    if (error) {
+
+        console.error(error);
+
+        return 0;
+
+    }
+
+    return count || 0;
+
+}
+
+export async function getRows(table) {
+
+    const { data, error } =
+    await supabase
+    .from(table)
+    .select("*");
+
+    if (error) {
+
+        console.error(error);
+
+        return [];
+
+    }
+
+    return data || [];
+
+}
+
+export async function insertRow(table, payload) {
+
+    const { data, error } =
+    await supabase
+    .from(table)
+    .insert(payload)
+    .select();
+
+    if (error) {
+
+        console.error(error);
+
+        return null;
+
+    }
+
+    return data;
+
+}
+
+export async function updateRow(table, id, payload) {
+
+    const { data, error } =
+    await supabase
+    .from(table)
+    .update(payload)
+    .eq("id", id)
+    .select();
+
+    if (error) {
+
+        console.error(error);
+
+        return null;
+
+    }
+
+    return data;
+
+}
+
+export async function deleteRow(table, id) {
+
+    const { error } =
+    await supabase
+    .from(table)
+    .delete()
+    .eq("id", id);
+
+    if (error) {
+
+        console.error(error);
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+// ==========================================================
+// EXPORT DEFAULT
+// ==========================================================
+
+export default supabase;
+<script type="module" src="assets/js/auth.js"></script>
+    // ==========================================================
+// PRIME ACCOUNTING SOLUTIONS
+// AUTHENTICATION SYSTEM
+// Production Version 2.0
+// ==========================================================
+
+const ADMIN_EMAIL =
+"p.a.solutions9598@gmail.com";
+
+const ADMIN_PASSWORD =
+"aqibsolutions@9598";
+
+const LOGIN_KEY =
+"prime_admin_logged";
+
+const LOGIN_TIME_KEY =
+"prime_admin_login_time";
+
+const SESSION_HOURS = 24;
+
+// ==========================================================
+// INITIALIZE
+// ==========================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    initializeAuth();
+
 });
 
-window.loginAdmin = function() {
-    if(document.getElementById("email").value.trim() === ADMIN_EMAIL && document.getElementById("password").value.trim() === ADMIN_PASSWORD) {
-        localStorage.setItem("prime_admin_logged", "yes");
-        checkAuth();
-    } else {
-        alert("Security Override: Invalid Credentials.");
+// ==========================================================
+// INITIALIZE AUTH
+// ==========================================================
+
+function initializeAuth() {
+
+    attachEvents();
+
+    checkLoginSession();
+
+}
+
+// ==========================================================
+// EVENTS
+// ==========================================================
+
+function attachEvents() {
+
+    const loginBtn =
+    document.getElementById("loginBtn");
+
+    if(loginBtn){
+
+        loginBtn.addEventListener(
+            "click",
+            loginAdmin
+        );
+
     }
-}
 
-window.logoutAdmin = function() {
-    localStorage.removeItem("prime_admin_logged");
-    checkAuth();
-}
+    const logoutBtn =
+    document.getElementById("logoutBtn");
 
-function checkAuth() {
-    if(localStorage.getItem("prime_admin_logged") === "yes") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        loadAnalytics();
-        window.loadPosts();
-    } else {
-        document.getElementById("loginBox").style.display = "block";
-        document.getElementById("adminPanel").style.display = "none";
+    if(logoutBtn){
+
+        logoutBtn.addEventListener(
+            "click",
+            logoutAdmin
+        );
+
     }
+
+    const password =
+    document.getElementById("password");
+
+    if(password){
+
+        password.addEventListener(
+            "keydown",
+            function(e){
+
+                if(e.key==="Enter"){
+
+                    loginAdmin();
+
+                }
+
+            }
+        );
+
+    }
+
 }
 
-async function loadAnalytics() {
-    try {
-        // Analytics Logic
-        const { count: totalVisitors } = await supabase.from("visitors").select("*", { count: "exact", head: true });
-        document.getElementById("totalVisitorsCard").innerText = totalVisitors || 0;
+// ==========================================================
+// LOGIN
+// ==========================================================
 
-        const { count: postsCount } = await supabase.from("posts").select("*", { count: "exact", head: true }).eq("status", "published");
-        document.getElementById("publishedPosts").innerText = postsCount || 0;
+function loginAdmin(){
 
-        const { count: testimonialTotal } = await supabase.from("testimonials").select("*", { count: "exact", head: true });
-        document.getElementById("dashboardTestimonials").innerText = testimonialTotal || 0;
-        document.getElementById("publishedReviews").innerText = testimonialTotal || 0;
+    const email =
+    document.getElementById("email").value.trim();
 
-        const { count: totalClicks } = await supabase.from("service_clicks").select("*", { count: "exact", head: true });
-        document.getElementById("totalServiceClicks").innerText = totalClicks || 0;
+    const password =
+    document.getElementById("password").value.trim();
 
-    } catch (e) { console.error(e); }
+    if(email===""){
+
+        alert("Please enter email.");
+
+        return;
+
+    }
+
+    if(password===""){
+
+        alert("Please enter password.");
+
+        return;
+
+    }
+
+    if(
+        email===ADMIN_EMAIL &&
+        password===ADMIN_PASSWORD
+    ){
+
+        localStorage.setItem(
+            LOGIN_KEY,
+            "true"
+        );
+
+        localStorage.setItem(
+            LOGIN_TIME_KEY,
+            Date.now()
+        );
+
+        showDashboard();
+
+    }
+
+    else{
+
+        alert("Invalid Email or Password");
+
+    }
+
 }
 
-window.saveContent = async function(status) {
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const type = document.getElementById("postType").value;
-    const category = document.getElementById("postCategory").value;
-    const file = document.getElementById("imageFile").files[0];
-    const submitBtn = document.getElementById("submitBtn");
+// ==========================================================
+// SHOW DASHBOARD
+// ==========================================================
 
-    if(!title || !content) { alert("Error: Core parameters missing."); return; }
-    submitBtn.innerText = "⏳ Synchronizing Server...";
-    submitBtn.disabled = true;
-    let imageUrl = "";
+function showDashboard(){
+
+    const login =
+    document.getElementById("loginPage");
+
+    const panel =
+    document.getElementById("adminPanel");
+
+    if(login){
+
+        login.style.display="none";
+
+    }
+
+    if(panel){
+
+        panel.style.display="block";
+
+    }
+
+    if(typeof initializeDashboard==="function"){
+
+        initializeDashboard();
+
+    }
+
+}
+
+// ==========================================================
+// LOGOUT
+// ==========================================================
+
+function logoutAdmin(){
+
+    if(
+        !confirm(
+        "Are you sure you want to logout?"
+        )
+    ){
+
+        return;
+
+    }
+
+    localStorage.removeItem(
+        LOGIN_KEY
+    );
+
+    localStorage.removeItem(
+        LOGIN_TIME_KEY
+    );
+
+    location.reload();
+
+}
+
+// ==========================================================
+// SESSION CHECK
+// ==========================================================
+
+function checkLoginSession(){
+
+    const logged =
+    localStorage.getItem(LOGIN_KEY);
+
+    const loginTime =
+    localStorage.getItem(LOGIN_TIME_KEY);
+
+    if(
+        logged!=="true" ||
+        !loginTime
+    ){
+
+        return;
+
+    }
+
+    const hoursPassed =
+    (
+        Date.now()-
+        Number(loginTime)
+    )/1000/60/60;
+
+    if(
+        hoursPassed >
+        SESSION_HOURS
+    ){
+
+        localStorage.clear();
+
+        return;
+
+    }
+
+    showDashboard();
+
+}
+
+// ==========================================================
+// PUBLIC FUNCTIONS
+// ==========================================================
+
+window.loginAdmin =
+loginAdmin;
+
+window.logoutAdmin =
+logoutAdmin;
+<script type="module" src="assets/js/dashboard.js"></script>
+    // ==========================================================
+// PRIME ACCOUNTING SOLUTIONS
+// DASHBOARD.JS
+// Production Version 2.0
+// PART 1
+// ==========================================================
+
+import {
+    supabase,
+    TABLES,
+    getTotalRows
+} from "./supabase.js";
+
+// ==========================================================
+// INITIALIZE
+// ==========================================================
+
+window.initializeDashboard = async function () {
 
     try {
-        if(file) {
-            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${file.name.split('.').pop()}`;
-            await supabase.storage.from('post-images').upload(fileName, file);
-            imageUrl = supabase.storage.from('post-images').getPublicUrl(fileName).data.publicUrl;
+
+        showLoader();
+
+        await loadDashboardCards();
+
+        await loadRecentLeads();
+
+        await loadRecentVisitors();
+
+        await loadRecentServiceClicks();
+
+        hideLoader();
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        hideLoader();
+
+        showToast(
+            "Dashboard loading failed.",
+            "error"
+        );
+
+    }
+
+};
+
+// ==========================================================
+// DASHBOARD CARDS
+// ==========================================================
+
+async function loadDashboardCards() {
+
+    await Promise.all([
+
+        loadVisitors(),
+
+        loadLeads(),
+
+        loadPosts(),
+
+        loadTestimonials(),
+
+        loadServiceClicks(),
+
+        loadLeadStatus()
+
+    ]);
+
+}
+
+// ==========================================================
+// VISITORS
+// ==========================================================
+
+async function loadVisitors() {
+
+    const total =
+    await getTotalRows(
+        TABLES.VISITORS
+    );
+
+    updateCard(
+        "totalVisitorsCard",
+        total
+    );
+
+}
+
+// ==========================================================
+// LEADS
+// ==========================================================
+
+async function loadLeads() {
+
+    const total =
+    await getTotalRows(
+        TABLES.LEADS
+    );
+
+    updateCard(
+        "totalLeads",
+        total
+    );
+
+}
+
+// ==========================================================
+// POSTS
+// ==========================================================
+
+async function loadPosts() {
+
+    const { count } =
+    await supabase
+
+        .from(TABLES.POSTS)
+
+        .select("*", {
+
+            count: "exact",
+
+            head: true
+
+        })
+
+        .eq(
+            "status",
+            "published"
+        );
+
+    updateCard(
+        "publishedPosts",
+        count || 0
+    );
+
+}
+
+// ==========================================================
+// TESTIMONIALS
+// ==========================================================
+
+async function loadTestimonials() {
+
+    const total =
+    await getTotalRows(
+        TABLES.TESTIMONIALS
+    );
+
+    updateCard(
+        "dashboardTestimonials",
+        total
+    );
+
+}
+
+// ==========================================================
+// SERVICE CLICKS
+// ==========================================================
+
+async function loadServiceClicks() {
+
+    const total =
+    await getTotalRows(
+        TABLES.SERVICE_CLICKS
+    );
+
+    updateCard(
+        "totalServiceClicks",
+        total
+    );
+
+}
+
+// ==========================================================
+// LEAD STATUS
+// ==========================================================
+
+async function loadLeadStatus() {
+
+    const statuses = [
+
+        {
+            value: "New",
+            id: "newLeads"
+        },
+
+        {
+            value: "Contacted",
+            id: "contactedLeads"
+        },
+
+        {
+            value: "Converted",
+            id: "convertedLeads"
+        },
+
+        {
+            value: "Closed",
+            id: "closedLeads"
         }
-        await supabase.from('posts').insert([{ title, content, type, category, status, image: imageUrl }]);
-        alert(status === 'published' ? "Broadcast Synchronized Live! 🚀" : "Saved to Repository Drafts! 📁");
-        location.reload();
-    } catch (error) { alert(error.message); submitBtn.disabled = false; submitBtn.innerText = "Deploy Live Broadcast"; }
-}
 
-// LOAD LEADS
-    async function loadLeads() {
-        const { data } = await supabase.from("leads").select("*");
-        document.getElementById("totalLeads").innerText = data?.length || 0;
-        let html = "";
-        data?.forEach(l => {
-            html += `<tr><td>${l.name}</td><td>${l.phone}</td><td>${l.status}</td><td><button onclick="viewLead('${l.id}')">View</button> <button onclick="deleteLead('${l.id}')">Del</button></td></tr>`;
-        });
-        document.getElementById("contactLeadsContainer").innerHTML = html;
+    ];
+
+    for (const status of statuses) {
+
+        const { count } =
+
+            await supabase
+
+                .from(TABLES.LEADS)
+
+                .select("*", {
+
+                    count: "exact",
+
+                    head: true
+
+                })
+
+                .eq(
+                    "status",
+                    status.value
+                );
+
+        updateCard(
+
+            status.id,
+
+            count || 0
+
+        );
+
     }
 
-    window.viewLead = async (id) => {
-        const { data } = await supabase.from("leads").select("*").eq("id", id).single();
-        document.getElementById("leadModalContent").innerHTML = `<p>Name: ${data.name}</p><p>Msg: ${data.message}</p>`;
-        document.getElementById("leadModal").style.display = "flex";
+}
+
+// ==========================================================
+// UPDATE CARD
+// ==========================================================
+
+function updateCard(
+
+    id,
+
+    value
+
+) {
+
+    const el =
+
+        document.getElementById(id);
+
+    if (!el) return;
+
+    el.innerHTML =
+
+        formatNumber(value);
+
+}
+    // ==========================================================
+// PRIME ACCOUNTING SOLUTIONS
+// DASHBOARD.JS
+// PART 2
+// Recent Data • Charts • Auto Refresh
+// ==========================================================
+
+// ==========================================================
+// RECENT LEADS
+// ==========================================================
+
+async function loadRecentLeads(){
+
+    const container =
+    document.getElementById("recentLeadsList");
+
+    if(!container) return;
+
+    const { data, error } =
+    await supabase
+        .from(TABLES.LEADS)
+        .select("*")
+        .order("created_at",{ascending:false})
+        .limit(5);
+
+    if(error){
+
+        container.innerHTML =
+        "<p>Unable to load leads.</p>";
+
+        return;
+
+    }
+
+    if(!data || data.length===0){
+
+        container.innerHTML =
+        "<p>No Leads Found</p>";
+
+        return;
+
+    }
+
+    container.innerHTML =
+    data.map(item=>`
+
+        <div class="list-item">
+
+            <strong>${escapeHTML(item.name || "-")}</strong>
+
+            <br>
+
+            <small>
+
+            ${escapeHTML(item.phone || "-")}
+
+            </small>
+
+        </div>
+
+    `).join("");
+
+}
+
+// ==========================================================
+// RECENT VISITORS
+// ==========================================================
+
+async function loadRecentVisitors(){
+
+    const container =
+    document.getElementById("recentVisitorsList");
+
+    if(!container) return;
+
+    const { data, error } =
+    await supabase
+        .from(TABLES.VISITORS)
+        .select("*")
+        .order("created_at",{ascending:false})
+        .limit(5);
+
+    if(error){
+
+        container.innerHTML =
+        "<p>Unable to load visitors.</p>";
+
+        return;
+
+    }
+
+    if(!data || data.length===0){
+
+        container.innerHTML =
+        "<p>No Visitor Found</p>";
+
+        return;
+
+    }
+
+    container.innerHTML =
+    data.map(item=>`
+
+        <div class="list-item">
+
+            <strong>
+
+            ${escapeHTML(item.ip || "Visitor")}
+
+            </strong>
+
+            <br>
+
+            <small>
+
+            ${formatDate(item.created_at)}
+
+            </small>
+
+        </div>
+
+    `).join("");
+
+}
+
+// ==========================================================
+// RECENT SERVICE CLICKS
+// ==========================================================
+
+async function loadRecentServiceClicks(){
+
+    const container =
+    document.getElementById("recentServiceClicks");
+
+    if(!container) return;
+
+    const { data,error } =
+    await supabase
+        .from(TABLES.SERVICE_CLICKS)
+        .select("*")
+        .order("created_at",{ascending:false})
+        .limit(5);
+
+    if(error){
+
+        container.innerHTML =
+        "<p>Unable to load data.</p>";
+
+        return;
+
+    }
+
+    if(!data || data.length===0){
+
+        container.innerHTML =
+        "<p>No Clicks</p>";
+
+        return;
+
+    }
+
+    container.innerHTML =
+    data.map(item=>`
+
+        <div class="list-item">
+
+            <strong>
+
+            ${escapeHTML(item.service_name || "-")}
+
+            </strong>
+
+            <br>
+
+            <small>
+
+            ${formatDate(item.created_at)}
+
+            </small>
+
+        </div>
+
+    `).join("");
+
+}
+
+// ==========================================================
+// TOP SERVICE
+// ==========================================================
+
+loadTopService();
+
+async function loadTopService(){
+
+    const { data } =
+    await supabase
+        .from(TABLES.SERVICE_CLICKS)
+        .select("service_name");
+
+    if(!data || data.length===0) return;
+
+    const stats={};
+
+    data.forEach(item=>{
+
+        stats[item.service_name] =
+        (stats[item.service_name]||0)+1;
+
+    });
+
+    let winner="-";
+
+    let max=0;
+
+    for(const key in stats){
+
+        if(stats[key]>max){
+
+            max=stats[key];
+
+            winner=key;
+
+        }
+
+    }
+
+    const el =
+    document.getElementById("topService");
+
+    if(el){
+
+        el.innerHTML =
+        winner;
+
+    }
+
+}
+
+// ==========================================================
+// CHART
+// ==========================================================
+
+window.renderDashboardChart = function(){
+
+    if(typeof Chart==="undefined"){
+
+        console.warn(
+            "Chart.js not found."
+        );
+
+        return;
+
+    }
+
+    const canvas =
+    document.getElementById("visitorChart");
+
+    if(!canvas) return;
+
+    new Chart(canvas,{
+
+        type:"bar",
+
+        data:{
+
+            labels:[
+                "Visitors",
+                "Leads",
+                "Posts",
+                "Testimonials",
+                "Clicks"
+            ],
+
+            datasets:[{
+
+                label:"Overview",
+
+                data:[
+
+                    Number(document.getElementById("totalVisitorsCard")?.innerText||0),
+
+                    Number(document.getElementById("totalLeads")?.innerText||0),
+
+                    Number(document.getElementById("publishedPosts")?.innerText||0),
+
+                    Number(document.getElementById("dashboardTestimonials")?.innerText||0),
+
+                    Number(document.getElementById("totalServiceClicks")?.innerText||0)
+
+                ]
+
+            }]
+
+        }
+
+    });
+
+};
+
+// ==========================================================
+// AUTO REFRESH
+// ==========================================================
+
+setInterval(async()=>{
+
+    await loadDashboardCards();
+
+    await loadRecentLeads();
+
+    await loadRecentVisitors();
+
+    await loadRecentServiceClicks();
+
+},30000);
+
+// ==========================================================
+// FINISH
+// ==========================================================
+
+console.log(
+"✅ Dashboard Ready"
+);
+<script type="module" src="assets/js/posts.js"></script>
+<script type="module" src="assets/js/leads.js"></script>
+<script type="module" src="assets/js/testimonials.js"></script>
+<script type="module" src="assets/js/analytics.js"></script>
+<script type="module" src="assets/js/app.js"></script>
+    // ==========================================================
+// PRIME ACCOUNTING SOLUTIONS
+// APP.JS
+// Production Version 2.0
+// PART 1
+// ==========================================================
+
+// ================================
+// APP START
+// ================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    initializeApp();
+
+});
+
+// ================================
+// INITIALIZE APP
+// ================================
+
+function initializeApp() {
+
+    initializeSidebar();
+
+    initializeDateTime();
+
+    initializeGreeting();
+
+    initializePages();
+
+}
+
+// ================================
+// SIDEBAR
+// ================================
+
+function initializeSidebar() {
+
+    const menuItems =
+    document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(item => {
+
+        item.addEventListener("click", function () {
+
+            if (this.id === "logoutBtn") return;
+
+            menuItems.forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+            this.classList.add("active");
+
+            const page =
+            this.dataset.page;
+
+            showPage(page);
+
+        });
+
+    });
+
+}
+
+// ================================
+// PAGE SWITCHER
+// ================================
+
+function showPage(page) {
+
+    const pages =
+    document.querySelectorAll(".page-section");
+
+    pages.forEach(section => {
+
+        section.style.display = "none";
+
+    });
+
+    const target =
+    document.getElementById(page + "Page");
+
+    if (target) {
+
+        target.style.display = "block";
+
+    }
+
+}
+
+// ================================
+// INITIAL PAGE
+// ================================
+
+function initializePages() {
+
+    showPage("dashboard");
+
+}
+
+// ================================
+// DATE & TIME
+// ================================
+
+function initializeDateTime() {
+
+    updateDateTime();
+
+    setInterval(updateDateTime,1000);
+
+}
+
+function updateDateTime() {
+
+    const now =
+    new Date();
+
+    const options = {
+
+        weekday:"long",
+
+        year:"numeric",
+
+        month:"long",
+
+        day:"numeric",
+
+        hour:"2-digit",
+
+        minute:"2-digit",
+
+        second:"2-digit"
+
     };
 
-    window.deleteLead = async (id) => {
-        if(confirm("Delete lead?")) {
-            await supabase.from("leads").delete().eq("id", id);
-            loadLeads();
+    const el =
+    document.getElementById("liveDateTime");
+
+    if(el){
+
+        el.innerHTML =
+        now.toLocaleString(
+            "en-IN",
+            options
+        );
+
+    }
+
+}
+
+// ================================
+// GREETING
+// ================================
+
+function initializeGreeting(){
+
+    updateGreeting();
+
+    setInterval(
+        updateGreeting,
+        60000
+    );
+
+}
+
+function updateGreeting(){
+
+    const hour =
+    new Date().getHours();
+
+    let greeting =
+    "Welcome";
+
+    if(hour<12){
+
+        greeting =
+        "Good Morning";
+
+    }
+
+    else if(hour<17){
+
+        greeting =
+        "Good Afternoon";
+
+    }
+
+    else{
+
+        greeting =
+        "Good Evening";
+
+    }
+
+    const text =
+    document.getElementById("greetingText");
+
+    if(text){
+
+        text.innerHTML =
+        greeting +
+        ", Administrator 👋";
+
+    }
+
+}
+        // ==========================================================
+// APP.JS
+// PART 2
+// Toast • Loading • Helpers
+// ==========================================================
+
+// ================================
+// TOAST NOTIFICATION
+// ================================
+
+window.showToast = function(message, type = "success") {
+
+    const toast = document.getElementById("toast");
+
+    if (!toast) return;
+
+    toast.innerHTML = message;
+
+    if (type === "success") {
+
+        toast.style.background = "#16a34a";
+
+    } else if (type === "error") {
+
+        toast.style.background = "#dc2626";
+
+    } else if (type === "warning") {
+
+        toast.style.background = "#f59e0b";
+
+    } else {
+
+        toast.style.background = "#071630";
+
+    }
+
+    toast.style.display = "block";
+
+    toast.style.opacity = "1";
+
+    setTimeout(() => {
+
+        toast.style.opacity = "0";
+
+        setTimeout(() => {
+
+            toast.style.display = "none";
+
+        }, 300);
+
+    }, 3000);
+
+};
+
+// ================================
+// LOADING OVERLAY
+// ================================
+
+window.showLoader = function () {
+
+    const loader =
+    document.getElementById("loadingOverlay");
+
+    if(loader){
+
+        loader.style.display = "flex";
+
+    }
+
+};
+
+window.hideLoader = function () {
+
+    const loader =
+    document.getElementById("loadingOverlay");
+
+    if(loader){
+
+        loader.style.display = "none";
+
+    }
+
+};
+
+// ================================
+// NUMBER FORMAT
+// ================================
+
+window.formatNumber = function(number){
+
+    return Number(number || 0)
+    .toLocaleString("en-IN");
+
+};
+
+// ================================
+// DATE FORMAT
+// ================================
+
+window.formatDate = function(date){
+
+    if(!date) return "-";
+
+    return new Date(date)
+    .toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
         }
-    };
-    
-window.loadPosts = async function() {
-    const container = document.getElementById("postsContainer");
-    const filterCat = document.getElementById("filterCategory").value;
-    container.innerHTML = "Querying Database Registry...";
-    try {
-        let query = supabase.from('posts').select('id, title, content, type, category, status, image, created_at');
-        if(filterCat !== "All") { query = query.eq('category', filterCat); }
-        const { data: posts, error } = await query.order('created_at', { ascending: false });
-        if (error) throw error;
+    );
 
-        container.innerHTML = "";
-        if(!posts || posts.length === 0) { container.innerHTML = "<p>No posts found.</p>"; return; }
-        posts.forEach((post) => {
-            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
-            const isAnnounce = post.type === 'announcement';
-            const isDraft = post.status === 'draft';
-            
-            const safeTitle = encodeURIComponent(post.title || "");
-            const safeContent = encodeURIComponent(post.content || "");
+};
 
-            container.innerHTML += `
-                <div class="post-card" style="${isAnnounce ? 'border-left:5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.75; border-left:5px solid #64748b;' : ''}">
-                    <div>
-                        ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
-                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 LOGGED BLOCK'}</span>
-                        <span class="badge" style="background:#e2f0d9; color:#385723;">🏷️ ${post.category}</span>
-                    </div>
-                    <h3>${post.title || ""}</h3>
-                    ${post.image ? `<img src="${post.image}">` : ""}
-                    <p style="white-space: pre-wrap; margin-top:10px; color:#475569; font-size:14px;">${post.content || ""}</p>
-                    <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
-                    <div style="margin-top:20px;">
-                        <button class="edit-btn" onclick="window.editPost('${post.id}', '${safeTitle}', '${safeContent}')">✏️ Modify</button>
-                        ${isDraft ? `<button class="force-live-btn" onclick="window.publishDraft('${post.id}')">🚀 Force Live</button>` : ''}
-                        <button class="delete-btn" onclick="window.deletePost('${post.id}')">🗑️ Purge</button>
-                    </div>
-                </div>`;
-        });
-    } catch(err) { container.innerHTML = "Error loading data."; console.error(err); }
-}
+// ================================
+// ESCAPE HTML
+// ================================
 
-window.deletePost = async function(id) {
-    if (!confirm("Confirm hard purge of this data block?")) return;
-    const { error } = await supabase.from('posts').delete().eq('id', id);
-    if(error) alert(error.message);
-    window.loadPosts();
-}
+window.escapeHTML = function(text){
 
-window.publishDraft = async function(id) {
-    const { error } = await supabase.from('posts').update({ status: 'published' }).eq('id', id);
-    if(error) alert(error.message);
-    window.loadPosts();
-}
+    if(text==null) return "";
 
-window.editPost = async function(id, encTitle, encContent) {
-    const currentTitle = decodeURIComponent(encTitle);
-    const currentContent = decodeURIComponent(encContent);
-    const newTitle = prompt("Modify Specification Headline:", currentTitle);
-    if (newTitle === null) return;
-    const newContent = prompt("Modify Brief Data Description:", currentContent);
-    if (newContent === null) return;
-    if(!newTitle.trim() || !newContent.trim()) { alert("Parameters cannot be left empty."); return; }
-    const { error } = await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
-    if(error) alert("Update Failed: " + error.message);
-    else { alert("Post updated successfully!"); window.loadPosts(); }
-}
+    return String(text)
 
-// Global Init
-checkAuth();
-function updateDateTime(){
-    const now = new Date();
-    document.getElementById("liveDateTime").innerText = now.toLocaleString();
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
+        .replace(/&/g,"&amp;")
 
-</script>
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+};
+
+// ================================
+// CONFIRM DELETE
+// ================================
+
+window.confirmDelete = function(message){
+
+    return confirm(
+
+        message ||
+
+        "Are you sure?"
+
+    );
+
+};
+
+// ================================
+// GLOBAL ERROR HANDLER
+// ================================
+
+window.addEventListener(
+
+    "error",
+
+    function(event){
+
+        console.error(
+
+            "Application Error:",
+
+            event.error
+
+        );
+
+    }
+
+);
+
+// ================================
+// APP READY
+// ================================
+
+console.log(
+    "✅ Prime Accounting Solutions App Loaded"
+);
+
 </body>
 </html>

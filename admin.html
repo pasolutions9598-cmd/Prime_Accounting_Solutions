@@ -1737,6 +1737,48 @@ NOTIFICATIONS
         
         document.getElementById('email').focus();
     });
+    const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
+const ADMIN_PASSWORD = "aqibsolutions@9598";
+
+// 1. Login Function
+window.loginAdmin = function() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        localStorage.setItem("prime_admin_logged", "true");
+        window.location.reload(); // Refresh to load the dashboard
+    } else {
+        alert("Security Error: Invalid Credentials");
+    }
+}
+
+// 2. Logout Function
+window.logoutAdmin = function() {
+    localStorage.removeItem("prime_admin_logged");
+    window.location.reload();
+}
+
+// 3. Auth Check (Load hote hi check karega)
+function checkAuth() {
+    const isLoggedIn = localStorage.getItem("prime_admin_logged");
+    const loginPage = document.getElementById("loginPage");
+    const adminPanel = document.getElementById("adminPanel");
+
+    if (isLoggedIn === "true") {
+        loginPage.style.display = "none";
+        adminPanel.style.display = "block";
+        // Yahan aapke dashboard loading functions call honge
+        // e.g., loadAnalytics();
+    } else {
+        loginPage.style.display = "flex";
+        adminPanel.style.display = "none";
+    }
+}
+
+// Run check on load
+checkAuth();
+
 </script>
 
 </body>

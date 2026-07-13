@@ -357,8 +357,7 @@ const Notifications = {
         }, 4000);
     }
 };
-import { supabase } from './supabase.js';
-import { Notifications } from './notifications.js';
+
 
 const Storage = {
     uploadImage: async (file, bucket = 'post-images') => {
@@ -382,15 +381,6 @@ const Storage = {
     }
 };
             //app.js//
-        import { Utils } from './utils.js';
-import { Auth } from './auth.js';
-import { Dashboard } from './dashboard.js';
-import { Leads } from './leads.js';
-import { Posts } from './posts.js';
-import { GST } from './gst.js';
-import { Testimonials } from './testimonials.js';
-import { Analytics } from './analytics.js';
-import { Settings } from './settings.js';
 
 window.App = { Utils }; // Export utility functions to the global layout frame scope safely
 
@@ -467,8 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
         
 // js/auth.js
-import { Notifications } from './notifications.js';
-import { Utils } from './utils.js';
 
 const Auth = {
     init: (onSuccess, onLogout) => {
@@ -582,10 +570,6 @@ const passwordInput = document.getElementById('login-password');
     }
 };
 
-
-    import { supabase } from './supabase.js';
-import { Utils } from './utils.js';
-
 const Dashboard = {
     load: async () => {
         try {
@@ -643,10 +627,6 @@ const Dashboard = {
         }
     }
 };
-import { supabase } from './supabase.js';
-import { Utils } from './utils.js';
-import { Notifications } from './notifications.js';
-import { Storage } from './storage.js';
 
 const Posts = {
     load: async () => {
@@ -856,9 +836,6 @@ const Posts = {
         }
     }
 };
-        import { supabase } from './supabase.js';
-import { Utils } from './utils.js';
-import { Notifications } from './notifications.js';
 
 const Leads = {
     load: async () => {
@@ -1061,9 +1038,6 @@ const Leads = {
         }
     }
 };
-        import { supabase } from './supabase.js';
-import { Utils } from './utils.js';
-import { Notifications } from './notifications.js';
 
  const Testimonials = {
     load: async () => {
@@ -1115,10 +1089,7 @@ import { Notifications } from './notifications.js';
         }
     }
 };
-        import { supabase } from './supabase.js';
-import { Utils } from './utils.js';
-import { Notifications } from './notifications.js';
-
+        
  const GST = {
     load: async () => {
         Utils.showLoader();
@@ -1156,9 +1127,7 @@ import { Notifications } from './notifications.js';
         }
     }
 };
-        import { supabase } from './supabase.js';
-import { Utils } from './utils.js';
-
+        
  const Analytics = {
     load: async () => {
         Utils.showLoader();
@@ -1192,9 +1161,6 @@ import { Utils } from './utils.js';
         }
     }
 };
-import { supabase } from './supabase.js';
-import { Notifications } from './notifications.js';
-import { Utils } from './utils.js';
 
  const Settings = {
     load: async () => {

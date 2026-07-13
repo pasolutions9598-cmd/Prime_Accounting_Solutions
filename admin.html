@@ -304,9 +304,9 @@
 export const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
 export const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        export const Utils = {
+        const Utils = {
     showLoader: () => document.getElementById('global-loader').classList.add('active'),
     hideLoader: () => document.getElementById('global-loader').classList.remove('active'),
     
@@ -342,7 +342,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
         update();
     }
 };
-export const Notifications = {
+const Notifications = {
     show: (message, type = 'info') => {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
@@ -360,7 +360,7 @@ export const Notifications = {
 import { supabase } from './supabase.js';
 import { Notifications } from './notifications.js';
 
-export const Storage = {
+const Storage = {
     uploadImage: async (file, bucket = 'post-images') => {
         try {
             const fileExt = file.name.split('.').pop();
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
 import { Notifications } from './notifications.js';
 import { Utils } from './utils.js';
 
-export const Auth = {
+const Auth = {
     init: (onSuccess, onLogout) => {
         const form = document.getElementById('system-login-form');
         const logoutAction = document.getElementById('action-logout');
@@ -586,7 +586,7 @@ const passwordInput = document.getElementById('login-password');
     import { supabase } from './supabase.js';
 import { Utils } from './utils.js';
 
-export const Dashboard = {
+const Dashboard = {
     load: async () => {
         try {
             const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
@@ -648,7 +648,7 @@ import { Utils } from './utils.js';
 import { Notifications } from './notifications.js';
 import { Storage } from './storage.js';
 
-export const Posts = {
+const Posts = {
     load: async () => {
         Utils.showLoader();
         const wrapper = document.getElementById('posts-table-wrapper');
@@ -860,7 +860,7 @@ export const Posts = {
 import { Utils } from './utils.js';
 import { Notifications } from './notifications.js';
 
-export const Leads = {
+const Leads = {
     load: async () => {
         Utils.showLoader();
         const wrapper = document.getElementById('leads-table-wrapper');
@@ -1065,7 +1065,7 @@ export const Leads = {
 import { Utils } from './utils.js';
 import { Notifications } from './notifications.js';
 
-export const Testimonials = {
+ const Testimonials = {
     load: async () => {
         Utils.showLoader();
         const wrapper = document.getElementById('testimonials-table-wrapper');
@@ -1119,7 +1119,7 @@ export const Testimonials = {
 import { Utils } from './utils.js';
 import { Notifications } from './notifications.js';
 
-export const GST = {
+ const GST = {
     load: async () => {
         Utils.showLoader();
         const wrapper = document.getElementById('gst-table-wrapper');
@@ -1159,7 +1159,7 @@ export const GST = {
         import { supabase } from './supabase.js';
 import { Utils } from './utils.js';
 
-export const Analytics = {
+ const Analytics = {
     load: async () => {
         Utils.showLoader();
         try {
@@ -1196,7 +1196,7 @@ import { supabase } from './supabase.js';
 import { Notifications } from './notifications.js';
 import { Utils } from './utils.js';
 
-export const Settings = {
+ const Settings = {
     load: async () => {
         Utils.showLoader();
         try {

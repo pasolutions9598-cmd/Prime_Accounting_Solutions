@@ -423,47 +423,123 @@ export const Auth = {
                     }
                 } else {
                     Utils.hideLoader();
-                    Notifications.show("Access Denied: Operational authorization failure.", "error");
+// js/auth.js
+import { Notifications } from './notifications.js';
+import { Utils } from './utils.js';
+
+export const Auth = {
+    init: (onSuccess, onLogout) => {
+        const form = document.getElementById('system-login-form');
+        const logoutAction = document.getElementById('action-logout');
+
+        // Form submission event routing handler hook
+        if (form) {
+            // Remove any potential default inline handlers that cause page refresh loops
+            form.onsubmit = null; 
+            
+            form.addEventListener('submit', async (e) => {
+                // CRITICAL: Stop the browser from instantly reloading the page on submit
+                e.preventDefault();
+                e.stopPropagation();
+                
+                Utils.showLoader();
+                
+                const emailInput = document.getElementById('login-email');
+                const passwordInput = document.getElementById('login-password');
+
+                if (!emailInput || !passwordInput) {
+                    Utils.hideLoader();
+                    Notifications.show("Critical UI Error: Form input targets missing from DOM.", "error");
+                    return;
+                }
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                // Exact Master System Verification Credentials Matrix
+                const MASTER_EMAIL = "p.a.solutions9598@gmail.com";
+                const MASTER_PASSWORD = "aqibsolutions@9598";
+
+                if (email === MASTER_EMAIL && password === MASTER_PASSWORD) {
+                    // Force session status token entry inside localized safe state memory storage
+                    localStorage.setItem("prime_auth_session", "authenticated_secure_token");
+                    
+                    // Explicit DOM Style Layer Display Overrides to bypass CSS transition traps
+                    const loginScreen = document.getElementById('login-screen');
+                    const appShell = document.getElementById('app-shell');
+
+                    if (loginScreen) {
+                        loginScreen.style.display = 'none';
+                        loginScreen.classList.add('hidden');
+                    }
+                    if (appShell) {
+                        appShell.classList.add('active');
+                        appShell.style.display = 'flex';
+                        appShell.style.opacity = '1';
+                        appShell.style.pointerEvents = 'all';
+                    }
+
+                    Notifications.show("Administrative Access Granted. Initializing Workspace.", "success");
+                    Utils.hideLoader();
+                    
+                    if (typeof onSuccess === 'function') {
+                        onSuccess(); // Triggers app.js layout dashboard renderer routines
+                    }
+                } else {
+                    Utils.hideLoader();
+                    Notifications.show("Access Denied: Invalid authentication signature.", "error");
                 }
             });
         }
 
+        // Logout Event Interface routing controller
         if (logoutAction) {
             logoutAction.addEventListener('click', (e) => {
                 e.preventDefault();
                 localStorage.removeItem("prime_auth_session");
                 
-                // Portal display rollback components arrays logic
-                document.getElementById('app-shell').classList.remove('active');
-                document.getElementById('app-shell').style.opacity = '0';
-                document.getElementById('app-shell').style.pointerEvents = 'none';
+                const loginScreen = document.getElementById('login-screen');
+                const appShell = document.getElementById('app-shell');
+
+                if (appShell) {
+                    appShell.classList.remove('active');
+                    appShell.style.display = 'none';
+                    appShell.style.opacity = '0';
+                    appShell.style.pointerEvents = 'none';
+                }
+                if (loginScreen) {
+                    loginScreen.classList.remove('hidden');
+                    loginScreen.style.display = 'flex';
+                }
                 
-                document.getElementById('login-screen').classList.remove('hidden');
-                document.getElementById('login-screen').style.display = 'flex';
-                
-                Notifications.show("Terminal connection terminated cleanly.", "info");
+                Notifications.show("Terminal secure connection closed cleanly.", "info");
                 if (typeof onLogout === 'function') onLogout();
             });
         }
 
-        // Automatic Persistence Token Session Verification Loop
+        // Automatic Session Recovery Pipeline Loop Verification
         const activeToken = localStorage.getItem("prime_auth_session");
         if (activeToken === "authenticated_secure_token") {
-            if (document.getElementById('login-screen')) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('login-screen').classList.add('hidden');
+            const loginScreen = document.getElementById('login-screen');
+            const appShell = document.getElementById('app-shell');
+
+            if (loginScreen) {
+                loginScreen.style.display = 'none';
+                loginScreen.classList.add('hidden');
             }
-            if (document.getElementById('app-shell')) {
-                document.getElementById('app-shell').classList.add('active');
-                document.getElementById('app-shell').style.opacity = '1';
-                document.getElementById('app-shell').style.pointerEvents = 'all';
+            if (appShell) {
+                appShell.classList.add('active');
+                appShell.style.display = 'flex';
+                appShell.style.opacity = '1';
+                appShell.style.pointerEvents = 'all';
             }
             if (typeof onSuccess === 'function') {
-                setTimeout(() => { onSuccess(); }, 100); // Async frame safety initialization
+                setTimeout(() => { onSuccess(); }, 50); // Frame safety delay
             }
         }
     }
 };
+
 
     import { supabase } from './supabase.js';
 import { Utils } from './utils.js';

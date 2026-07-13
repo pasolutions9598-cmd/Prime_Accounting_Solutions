@@ -131,6 +131,1881 @@ input[type="file"] { display: none; }
         </div>
     </div>
 </div>
+    <!-- =======================================================
+     DASHBOARD PAGE
+======================================================== -->
+
+<section id="dashboardPage" class="page-section">
+
+    <!-- Page Header -->
+    <div class="section-header">
+
+        <div class="header-left">
+            <h1>Dashboard</h1>
+            <p>Welcome to Prime Accounting Solutions Admin Panel</p>
+        </div>
+
+        <div class="header-right">
+            <span id="dashboardDate">--</span>
+            <span id="dashboardTime">--</span>
+        </div>
+
+    </div>
+
+
+    <!-- Statistics Cards -->
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+            <h3>Total Visitors</h3>
+            <h2 id="totalVisitors">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Total Leads</h3>
+            <h2 id="totalLeads">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Published Posts</h3>
+            <h2 id="publishedPosts">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Testimonials</h3>
+            <h2 id="totalTestimonials">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Service Clicks</h3>
+            <h2 id="serviceClicks">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Top Service</h3>
+            <h2 id="topService">--</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>New Leads</h3>
+            <h2 id="newLeads">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Contacted Leads</h3>
+            <h2 id="contactedLeads">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Converted Leads</h3>
+            <h2 id="convertedLeads">0</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Closed Leads</h3>
+            <h2 id="closedLeads">0</h2>
+        </div>
+
+    </div>
+
+
+    <!-- Charts -->
+
+    <div class="dashboard-row">
+
+        <div class="dashboard-box">
+
+            <h2>Visitors Overview</h2>
+
+            <canvas id="visitorsChart"></canvas>
+
+        </div>
+
+
+        <div class="dashboard-box">
+
+            <h2>Leads Analytics</h2>
+
+            <canvas id="leadsChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Activity -->
+
+    <div class="dashboard-row">
+
+        <div class="dashboard-box">
+
+            <h2>Recent Activity</h2>
+
+            <div id="recentActivity">
+
+                <p>No Activity Found</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-box">
+
+            <h2>Recent Leads</h2>
+
+            <div id="recentLeads">
+
+                <p>No Leads Found</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Posts -->
+
+    <div class="dashboard-box">
+
+        <h2>Latest Posts</h2>
+
+        <div id="recentPosts">
+
+            <p>No Posts Found</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Testimonials -->
+
+    <div class="dashboard-box">
+
+        <h2>Latest Testimonials</h2>
+
+        <div id="recentTestimonials">
+
+            <p>No Testimonials Found</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Service Performance -->
+
+    <div class="dashboard-box">
+
+        <h2>Top Services Performance</h2>
+
+        <div id="servicePerformance">
+
+            <p>No Data Available</p>
+
+        </div>
+
+    </div>
+
+    </section>
+    <!-- ======================================================
+                    LEADS MANAGEMENT
+======================================================= -->
+
+<section id="leadsPage" class="page-section" style="display:none;">
+
+    <!-- Page Header -->
+    <div class="section-header">
+
+        <div class="header-left">
+            <h2>👥 Leads Management</h2>
+            <p>Manage all customer enquiries and follow-ups.</p>
+        </div>
+
+        <div class="header-right">
+            <button id="addLeadBtn" class="primary-btn">
+                ➕ Add New Lead
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="leadSearch"
+            placeholder="Search by Name, Email or Phone">
+
+        <select id="leadStatusFilter">
+            <option value="">All Status</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Converted">Converted</option>
+            <option value="Closed">Closed</option>
+        </select>
+
+        <button id="exportLeadBtn" class="secondary-btn">
+            📥 Export CSV
+        </button>
+
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h4>Total Leads</h4>
+            <h2 id="leadTotal">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>New</h4>
+            <h2 id="leadNew">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Contacted</h4>
+            <h2 id="leadContacted">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Converted</h4>
+            <h2 id="leadConverted">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Closed</h4>
+            <h2 id="leadClosed">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Leads Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Phone</th>
+
+                    <th>Email</th>
+
+                    <th>Service</th>
+
+                    <th>Status</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="leadsTableBody">
+
+                <tr>
+
+                    <td colspan="7">
+
+                        No Leads Found
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <div id="leadPagination"></div>
+
+</section>
+
+<!-- ======================================================
+                ADD / EDIT LEAD MODAL
+======================================================= -->
+
+<div id="leadModal" class="modal" style="display:none;">
+
+    <div class="modal-card">
+
+        <h2 id="leadModalTitle">
+
+            Add Lead
+
+        </h2>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="leadName"
+                placeholder="Full Name">
+
+            <input
+                type="text"
+                id="leadPhone"
+                placeholder="Phone Number">
+
+            <input
+                type="email"
+                id="leadEmail"
+                placeholder="Email Address">
+
+            <select id="leadService">
+
+                <option value="Accounting">Accounting</option>
+
+                <option value="Bookkeeping">Bookkeeping</option>
+
+                <option value="GST Registration">GST Registration</option>
+
+                <option value="GST Return Filing">GST Return Filing</option>
+
+                <option value="TDS">TDS</option>
+
+                <option value="Income Tax">Income Tax</option>
+
+                <option value="Payroll">Payroll</option>
+
+                <option value="MIS Reporting">MIS Reporting</option>
+
+                <option value="Business Support">Business Support</option>
+
+            </select>
+
+            <select id="leadStatus">
+
+                <option value="New">New</option>
+
+                <option value="Contacted">Contacted</option>
+
+                <option value="Converted">Converted</option>
+
+                <option value="Closed">Closed</option>
+
+            </select>
+
+        </div>
+
+        <textarea
+            id="leadNotes"
+            rows="5"
+            placeholder="Notes"></textarea>
+
+        <div class="button-group">
+
+            <button id="saveLeadBtn"
+                class="primary-btn">
+
+                💾 Save Lead
+
+            </button>
+
+            <button id="cancelLeadBtn"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================================================
+                    VIEW LEAD MODAL
+======================================================= -->
+
+<div id="viewLeadModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Lead Details
+
+        </h2>
+
+        <div id="leadViewContent">
+
+        </div>
+
+        <button id="closeLeadViewBtn"
+            class="secondary-btn">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+    <!-- =========================================================
+                        POSTS MANAGEMENT
+========================================================= -->
+
+<section id="postsPage" class="page-section" style="display:none;">
+
+    <!-- Page Header -->
+    <div class="section-header">
+
+        <div class="header-left">
+            <h2>📰 Posts Management</h2>
+            <p>Create, publish and manage company posts.</p>
+        </div>
+
+        <div class="header-right">
+            <button id="newPostBtn" class="primary-btn">
+                ➕ New Post
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Search & Filter -->
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="postSearch"
+            placeholder="Search Posts...">
+
+        <select id="postCategoryFilter">
+
+            <option value="">All Categories</option>
+            <option value="Accounting">Accounting</option>
+            <option value="GST">GST</option>
+            <option value="Income Tax">Income Tax</option>
+            <option value="TDS">TDS</option>
+            <option value="Payroll">Payroll</option>
+            <option value="Business">Business</option>
+            <option value="Other">Other</option>
+
+        </select>
+
+        <select id="postStatusFilter">
+
+            <option value="">All Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+
+        </select>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h4>Total Posts</h4>
+            <h2 id="totalPosts">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Published</h4>
+            <h2 id="publishedPostsCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Drafts</h4>
+            <h2 id="draftPostsCount">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Posts Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Image</th>
+
+                    <th>Title</th>
+
+                    <th>Category</th>
+
+                    <th>Type</th>
+
+                    <th>Status</th>
+
+                    <th>Created</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="postsTableBody">
+
+                <tr>
+
+                    <td colspan="7">
+
+                        No Posts Found
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <div id="postsPagination"></div>
+
+</section>
+
+<!-- =========================================================
+                     POST FORM MODAL
+========================================================= -->
+
+<div id="postModal" class="modal" style="display:none;">
+
+    <div class="modal-card">
+
+        <h2 id="postModalTitle">
+
+            Create New Post
+
+        </h2>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="postTitle"
+                placeholder="Post Title">
+
+            <select id="postCategory">
+
+                <option value="Accounting">Accounting</option>
+                <option value="GST">GST</option>
+                <option value="Income Tax">Income Tax</option>
+                <option value="TDS">TDS</option>
+                <option value="Payroll">Payroll</option>
+                <option value="Business">Business</option>
+                <option value="Other">Other</option>
+
+            </select>
+
+            <select id="postType">
+
+                <option value="news">News</option>
+                <option value="announcement">Announcement</option>
+
+            </select>
+
+        </div>
+
+        <textarea
+            id="postContent"
+            rows="10"
+            placeholder="Write post content..."></textarea>
+
+        <div class="input-group">
+
+            <label>Featured Image</label>
+
+            <input
+                type="file"
+                id="imageFile"
+                accept="image/*">
+
+        </div>
+
+        <div id="imagePreview"></div>
+
+        <div class="button-group">
+
+            <button
+                id="publishBtn"
+                class="primary-btn">
+
+                🚀 Publish
+
+            </button>
+
+            <button
+                id="draftBtn"
+                class="secondary-btn">
+
+                📁 Save Draft
+
+            </button>
+
+            <button
+                id="cancelPostBtn"
+                class="danger-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+                     VIEW POST MODAL
+========================================================= -->
+
+<div id="postViewModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Post Details
+
+        </h2>
+
+        <div id="postViewContent">
+
+        </div>
+
+        <button
+            id="closePostViewBtn"
+            class="secondary-btn">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+                  DELETE CONFIRM MODAL
+========================================================= -->
+
+<div id="deletePostModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Delete Post
+
+        </h2>
+
+        <p>
+
+            Are you sure you want to delete this post?
+
+        </p>
+
+        <div class="button-group">
+
+            <button
+                id="confirmDeletePostBtn"
+                class="danger-btn">
+
+                Delete
+
+            </button>
+
+            <button
+                id="cancelDeletePostBtn"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+                    </div>
+    <!-- =========================================================
+                    TESTIMONIALS MANAGEMENT
+========================================================= -->
+
+<section id="testimonialsPage" class="page-section" style="display:none;">
+
+    <!-- Page Header -->
+    <div class="section-header">
+
+        <div class="header-left">
+            <h2>⭐ Testimonials Management</h2>
+            <p>Manage customer reviews and testimonials.</p>
+        </div>
+
+        <div class="header-right">
+            <button id="addTestimonialBtn" class="primary-btn">
+                ➕ Add Testimonial
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Search & Filters -->
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="testimonialSearch"
+            placeholder="Search Testimonials...">
+
+        <select id="testimonialStatusFilter">
+            <option value="">All Status</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+        </select>
+
+        <select id="testimonialRatingFilter">
+            <option value="">All Ratings</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h4>Total Testimonials</h4>
+            <h2 id="totalTestimonialsCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Approved</h4>
+            <h2 id="approvedTestimonialsCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Pending</h4>
+            <h2 id="pendingTestimonialsCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Rejected</h4>
+            <h2 id="rejectedTestimonialsCount">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Photo</th>
+
+                    <th>Name</th>
+
+                    <th>Company</th>
+
+                    <th>Rating</th>
+
+                    <th>Status</th>
+
+                    <th>Date</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="testimonialsTableBody">
+
+                <tr>
+
+                    <td colspan="7">
+
+                        No Testimonials Found
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div id="testimonialPagination"></div>
+
+</section>
+
+<!-- =========================================================
+                ADD / EDIT TESTIMONIAL MODAL
+========================================================= -->
+
+<div id="testimonialModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2 id="testimonialModalTitle">
+
+            Add Testimonial
+
+        </h2>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="clientName"
+                placeholder="Client Name">
+
+            <input
+                type="text"
+                id="clientCompany"
+                placeholder="Company Name">
+
+            <input
+                type="text"
+                id="clientDesignation"
+                placeholder="Designation">
+
+            <select id="clientRating">
+
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+
+            </select>
+
+            <select id="testimonialStatus">
+
+                <option value="approved">Approved</option>
+                <option value="pending">Pending</option>
+                <option value="rejected">Rejected</option>
+
+            </select>
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="featuredTestimonial">
+
+                Featured Testimonial
+
+            </label>
+
+        </div>
+
+        <textarea
+            id="testimonialMessage"
+            rows="6"
+            placeholder="Client Review"></textarea>
+
+        <div class="input-group">
+
+            <label>Client Photo</label>
+
+            <input
+                type="file"
+                id="testimonialPhoto"
+                accept="image/*">
+
+        </div>
+
+        <div id="testimonialImagePreview"></div>
+
+        <div class="button-group">
+
+            <button
+                id="saveTestimonialBtn"
+                class="primary-btn">
+
+                💾 Save
+
+            </button>
+
+            <button
+                id="cancelTestimonialBtn"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+                VIEW TESTIMONIAL MODAL
+========================================================= -->
+
+<div id="viewTestimonialModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Testimonial Details
+
+        </h2>
+
+        <div id="testimonialViewContent">
+
+        </div>
+
+        <button
+            id="closeTestimonialViewBtn"
+            class="secondary-btn">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+                DELETE TESTIMONIAL MODAL
+========================================================= -->
+
+<div id="deleteTestimonialModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Delete Testimonial
+
+        </h2>
+
+        <p>
+
+            Are you sure you want to delete this testimonial?
+
+        </p>
+
+        <div class="button-group">
+
+            <button
+                id="confirmDeleteTestimonialBtn"
+                class="danger-btn">
+
+                Delete
+
+            </button>
+
+            <button
+                id="cancelDeleteTestimonialBtn"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- =========================================================
+                    ANALYTICS PAGE
+========================================================= -->
+
+<section id="analyticsPage" class="page-section" style="display:none;">
+
+    <!-- Page Header -->
+    <div class="section-header">
+
+        <div class="header-left">
+            <h2>📊 Analytics</h2>
+            <p>Website performance, visitors, leads and business insights.</p>
+        </div>
+
+        <div class="header-right">
+
+            <select id="analyticsRange">
+
+                <option value="today">Today</option>
+                <option value="7days">Last 7 Days</option>
+                <option value="30days" selected>Last 30 Days</option>
+                <option value="12months">Last 12 Months</option>
+                <option value="all">All Time</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    ANALYTICS CARDS
+    ==================================================== -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h4>Total Visitors</h4>
+            <h2 id="analyticsVisitors">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Total Leads</h4>
+            <h2 id="analyticsLeads">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Service Clicks</h4>
+            <h2 id="analyticsClicks">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Published Posts</h4>
+            <h2 id="analyticsPosts">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Testimonials</h4>
+            <h2 id="analyticsTestimonials">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Conversion Rate</h4>
+            <h2 id="conversionRate">0%</h2>
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                        CHARTS
+    ==================================================== -->
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+
+            <h3>Visitors Trend</h3>
+
+            <canvas id="visitorsAnalyticsChart"></canvas>
+
+        </div>
+
+        <div class="analytics-card">
+
+            <h3>Leads Trend</h3>
+
+            <canvas id="leadsAnalyticsChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+
+            <h3>Service Click Analytics</h3>
+
+            <canvas id="serviceChart"></canvas>
+
+        </div>
+
+        <div class="analytics-card">
+
+            <h3>Lead Status Distribution</h3>
+
+            <canvas id="leadStatusChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    TOP SERVICES
+    ==================================================== -->
+
+    <div class="table-card">
+
+        <h3>Top Services</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Service</th>
+
+                    <th>Total Clicks</th>
+
+                    <th>Conversion</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="topServicesTable">
+
+                <tr>
+
+                    <td colspan="3">
+
+                        No Data Available
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ===================================================
+                    MONTHLY REPORT
+    ==================================================== -->
+
+    <div class="table-card">
+
+        <h3>Monthly Performance Report</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Month</th>
+
+                    <th>Visitors</th>
+
+                    <th>Leads</th>
+
+                    <th>Posts</th>
+
+                    <th>Clicks</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="monthlyReportTable">
+
+                <tr>
+
+                    <td colspan="5">
+
+                        No Report Available
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ===================================================
+                    EXPORT REPORT
+    ==================================================== -->
+
+    <div class="button-group">
+
+        <button
+            id="exportAnalyticsCSV"
+            class="secondary-btn">
+
+            📥 Export CSV
+
+        </button>
+
+        <button
+            id="exportAnalyticsExcel"
+            class="secondary-btn">
+
+            📊 Export Excel
+
+        </button>
+
+        <button
+            id="printAnalytics"
+            class="primary-btn">
+
+            🖨 Print Report
+
+        </button>
+
+    </div>
+
+</section>
+    <!-- =========================================================
+                    SERVICES MANAGEMENT
+========================================================= -->
+
+<section id="servicesPage" class="page-section" style="display:none;">
+
+    <!-- Header -->
+    <div class="section-header">
+
+        <div class="header-left">
+            <h2>💼 Services Management</h2>
+            <p>Manage all company services displayed on the website.</p>
+        </div>
+
+        <div class="header-right">
+            <button id="addServiceBtn" class="primary-btn">
+                ➕ Add Service
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Search & Filter -->
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="serviceSearch"
+            placeholder="Search Services...">
+
+        <select id="serviceStatusFilter">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+
+        <button
+            id="refreshServicesBtn"
+            class="secondary-btn">
+
+            🔄 Refresh
+
+        </button>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h4>Total Services</h4>
+            <h2 id="totalServices">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Active Services</h4>
+            <h2 id="activeServices">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Inactive Services</h4>
+            <h2 id="inactiveServices">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Total Clicks</h4>
+            <h2 id="serviceTotalClicks">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Services Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Icon</th>
+
+                    <th>Service Name</th>
+
+                    <th>Category</th>
+
+                    <th>Price</th>
+
+                    <th>Status</th>
+
+                    <th>Display Order</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="servicesTableBody">
+
+                <tr>
+
+                    <td colspan="7">
+
+                        No Services Found
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div id="servicesPagination"></div>
+
+</section>
+
+<!-- =========================================================
+                ADD / EDIT SERVICE MODAL
+========================================================= -->
+
+<div id="serviceModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2 id="serviceModalTitle">
+
+            Add Service
+
+        </h2>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="serviceName"
+                placeholder="Service Name">
+
+            <input
+                type="text"
+                id="serviceCategory"
+                placeholder="Category">
+
+            <input
+                type="text"
+                id="servicePrice"
+                placeholder="Price">
+
+            <input
+                type="number"
+                id="serviceOrder"
+                placeholder="Display Order">
+
+            <select id="serviceStatus">
+
+                <option value="active">
+                    Active
+                </option>
+
+                <option value="inactive">
+                    Inactive
+                </option>
+
+            </select>
+
+        </div>
+
+        <textarea
+            id="serviceDescription"
+            rows="6"
+            placeholder="Service Description"></textarea>
+
+        <div class="input-group">
+
+            <label>Service Icon</label>
+
+            <input
+                type="file"
+                id="serviceIcon"
+                accept="image/*">
+
+        </div>
+
+        <div id="serviceIconPreview"></div>
+
+        <div class="button-group">
+
+            <button
+                id="saveServiceBtn"
+                class="primary-btn">
+
+                💾 Save Service
+
+            </button>
+
+            <button
+                id="cancelServiceBtn"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+                VIEW SERVICE MODAL
+========================================================= -->
+
+<div id="viewServiceModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Service Details
+
+        </h2>
+
+        <div id="serviceViewContent">
+
+        </div>
+
+        <button
+            id="closeServiceViewBtn"
+            class="secondary-btn">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+                DELETE SERVICE MODAL
+========================================================= -->
+
+<div id="deleteServiceModal"
+     class="modal"
+     style="display:none;">
+
+    <div class="modal-card">
+
+        <h2>
+
+            Delete Service
+
+        </h2>
+
+        <p>
+
+            Are you sure you want to delete this service?
+
+        </p>
+
+        <div class="button-group">
+
+            <button
+                id="confirmDeleteServiceBtn"
+                class="danger-btn">
+
+                Delete
+
+            </button>
+
+            <button
+                id="cancelDeleteServiceBtn"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- =========================================================
+                    SETTINGS PAGE
+========================================================= -->
+
+<section id="settingsPage" class="page-section" style="display:none;">
+
+    <!-- Header -->
+
+    <div class="section-header">
+
+        <div class="header-left">
+
+            <h2>⚙ Settings</h2>
+
+            <p>Manage company information and system settings.</p>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    COMPANY INFORMATION
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Company Information</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="companyName"
+                placeholder="Company Name">
+
+            <input
+                type="text"
+                id="companyTagline"
+                placeholder="Company Tagline">
+
+            <input
+                type="email"
+                id="companyEmail"
+                placeholder="Company Email">
+
+            <input
+                type="text"
+                id="companyPhone"
+                placeholder="Phone Number">
+
+            <input
+                type="text"
+                id="companyWebsite"
+                placeholder="Website URL">
+
+            <input
+                type="text"
+                id="companyAddress"
+                placeholder="Business Address">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    BUSINESS HOURS
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Business Hours</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="workingDays"
+                placeholder="Working Days">
+
+            <input
+                type="text"
+                id="workingHours"
+                placeholder="Working Hours">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    SOCIAL MEDIA
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Social Media</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="url"
+                id="facebookLink"
+                placeholder="Facebook">
+
+            <input
+                type="url"
+                id="instagramLink"
+                placeholder="Instagram">
+
+            <input
+                type="url"
+                id="linkedinLink"
+                placeholder="LinkedIn">
+
+            <input
+                type="url"
+                id="youtubeLink"
+                placeholder="YouTube">
+
+            <input
+                type="url"
+                id="whatsappLink"
+                placeholder="WhatsApp">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    COMPANY LOGO
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Logo & Branding</h3>
+
+        <div class="input-group">
+
+            <label>Company Logo</label>
+
+            <input
+                type="file"
+                id="companyLogo"
+                accept="image/*">
+
+        </div>
+
+        <div id="logoPreview"></div>
+
+        <div class="input-group">
+
+            <label>Favicon</label>
+
+            <input
+                type="file"
+                id="companyFavicon"
+                accept="image/*">
+
+        </div>
+
+        <div id="faviconPreview"></div>
+
+    </div>
+
+    <!-- ===================================================
+                    ADMIN PROFILE
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Admin Profile</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="adminName"
+                placeholder="Administrator Name">
+
+            <input
+                type="email"
+                id="adminEmail"
+                placeholder="Admin Email">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    CHANGE PASSWORD
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Change Password</h3>
+
+        <div class="form-grid">
+
+            <input
+                type="password"
+                id="currentPassword"
+                placeholder="Current Password">
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="New Password">
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password">
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    SYSTEM SETTINGS
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>System Settings</h3>
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="maintenanceMode">
+
+            Enable Maintenance Mode
+
+        </label>
+
+        <br><br>
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="enableNotifications">
+
+            Enable Notifications
+
+        </label>
+
+        <br><br>
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="enableAnalytics">
+
+            Enable Analytics
+
+        </label>
+
+    </div>
+
+    <!-- ===================================================
+                    BACKUP
+    ==================================================== -->
+
+    <div class="settings-card">
+
+        <h3>Backup & Restore</h3>
+
+        <div class="button-group">
+
+            <button
+                id="backupBtn"
+                class="secondary-btn">
+
+                📥 Backup Data
+
+            </button>
+
+            <button
+                id="restoreBtn"
+                class="secondary-btn">
+
+                📤 Restore Data
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================
+                    SAVE SETTINGS
+    ==================================================== -->
+
+    <div class="button-group">
+
+        <button
+            id="saveSettingsBtn"
+            class="primary-btn">
+
+            💾 Save Settings
+
+        </button>
+
+        <button
+            id="resetSettingsBtn"
+            class="danger-btn">
+
+            Reset
+
+        </button>
+
+    </div>
+
+</section>
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'

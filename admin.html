@@ -381,7 +381,91 @@ export const Storage = {
         }
     }
 };
-            
+            //app.js//
+        import { Utils } from './utils.js';
+import { Auth } from './auth.js';
+import { Dashboard } from './dashboard.js';
+import { Leads } from './leads.js';
+import { Posts } from './posts.js';
+import { GST } from './gst.js';
+import { Testimonials } from './testimonials.js';
+import { Analytics } from './analytics.js';
+import { Settings } from './settings.js';
+
+window.App = { Utils }; // Export utility functions to the global layout frame scope safely
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Start layout sub-component routines
+    Utils.initClock();
+
+    // Setup navigation actions
+    const menuItems = document.querySelectorAll('.sidebar-menu .menu-item:not(#action-logout)');
+    const viewContainers = document.querySelectorAll('.view-container');
+
+    const switchView = (targetViewId) => {
+        viewContainers.forEach(c => c.classList.remove('active'));
+        menuItems.forEach(i => i.classList.remove('active'));
+
+        const targetEl = document.getElementById(targetViewId);
+        if (targetEl) targetEl.classList.add('active');
+
+        const activeMenuItem = document.querySelector(`[data-target="${targetViewId}"]`);
+        if (activeMenuItem) activeMenuItem.classList.add('active');
+
+        // Route data sync layers properly depending on the active view
+        switch (targetViewId) {
+            case 'view-dashboard': Dashboard.load(); break;
+            case 'view-leads': Leads.load(); break;
+            case 'view-posts': Posts.load(); break;
+            case 'view-gst': GST.load(); break;
+            case 'view-testimonials': Testimonials.load(); break;
+            case 'view-analytics': Analytics.load(); break;
+            case 'view-settings': Settings.load(); break;
+        }
+    };
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = item.getAttribute('data-target');
+            switchView(target);
+        });
+    });
+
+    // Expand/Collapse navigation panel action handler
+    const sidebar = document.getElementById('app-sidebar');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        toggleBtn.innerText = sidebar.classList.contains('collapsed') ? '▸' : '◂';
+    });
+
+    // Wire up global input filter monitors and functional control triggers
+    document.getElementById('lead-search').addEventListener('input', () => Leads.load());
+    document.getElementById('lead-filter-status').addEventListener('change', () => Leads.load());
+    document.getElementById('post-search').addEventListener('input', () => Posts.load());
+    document.getElementById('post-filter-category').addEventListener('change', () => Posts.load());
+
+    document.getElementById('btn-create-post').addEventListener('click', () => Posts.openCreateForm());
+    document.getElementById('btn-create-lead').addEventListener('click', () => Leads.openCreateForm());
+    document.getElementById('btn-export-leads-csv').addEventListener('click', () => Leads.exportCSV());
+
+    // Initialize Settings submission hooks
+    Settings.init();
+
+    // Start secure authentication system engine routing pipeline loop
+    Auth.init(
+        () => {
+            // Success Pathway Callback handler logic execution chain loop
+            switchView('view-dashboard');
+        },
+        () => {
+            // Session Exit cleanup tracking state loop
+            console.log("Portal session ended cleanly.");
+        }
+    );
+});
+        
 // js/auth.js
 import { Notifications } from './notifications.js';
 import { Utils } from './utils.js';
@@ -1146,89 +1230,7 @@ export const Settings = {
         });
     }
 };
-            import { Utils } from './utils.js';
-import { Auth } from './auth.js';
-import { Dashboard } from './dashboard.js';
-import { Leads } from './leads.js';
-import { Posts } from './posts.js';
-import { GST } from './gst.js';
-import { Testimonials } from './testimonials.js';
-import { Analytics } from './analytics.js';
-import { Settings } from './settings.js';
-
-window.App = { Utils }; // Export utility functions to the global layout frame scope safely
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Start layout sub-component routines
-    Utils.initClock();
-
-    // Setup navigation actions
-    const menuItems = document.querySelectorAll('.sidebar-menu .menu-item:not(#action-logout)');
-    const viewContainers = document.querySelectorAll('.view-container');
-
-    const switchView = (targetViewId) => {
-        viewContainers.forEach(c => c.classList.remove('active'));
-        menuItems.forEach(i => i.classList.remove('active'));
-
-        const targetEl = document.getElementById(targetViewId);
-        if (targetEl) targetEl.classList.add('active');
-
-        const activeMenuItem = document.querySelector(`[data-target="${targetViewId}"]`);
-        if (activeMenuItem) activeMenuItem.classList.add('active');
-
-        // Route data sync layers properly depending on the active view
-        switch (targetViewId) {
-            case 'view-dashboard': Dashboard.load(); break;
-            case 'view-leads': Leads.load(); break;
-            case 'view-posts': Posts.load(); break;
-            case 'view-gst': GST.load(); break;
-            case 'view-testimonials': Testimonials.load(); break;
-            case 'view-analytics': Analytics.load(); break;
-            case 'view-settings': Settings.load(); break;
-        }
-    };
-
-    menuItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = item.getAttribute('data-target');
-            switchView(target);
-        });
-    });
-
-    // Expand/Collapse navigation panel action handler
-    const sidebar = document.getElementById('app-sidebar');
-    const toggleBtn = document.getElementById('sidebar-toggle');
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-        toggleBtn.innerText = sidebar.classList.contains('collapsed') ? '▸' : '◂';
-    });
-
-    // Wire up global input filter monitors and functional control triggers
-    document.getElementById('lead-search').addEventListener('input', () => Leads.load());
-    document.getElementById('lead-filter-status').addEventListener('change', () => Leads.load());
-    document.getElementById('post-search').addEventListener('input', () => Posts.load());
-    document.getElementById('post-filter-category').addEventListener('change', () => Posts.load());
-
-    document.getElementById('btn-create-post').addEventListener('click', () => Posts.openCreateForm());
-    document.getElementById('btn-create-lead').addEventListener('click', () => Leads.openCreateForm());
-    document.getElementById('btn-export-leads-csv').addEventListener('click', () => Leads.exportCSV());
-
-    // Initialize Settings submission hooks
-    Settings.init();
-
-    // Start secure authentication system engine routing pipeline loop
-    Auth.init(
-        () => {
-            // Success Pathway Callback handler logic execution chain loop
-            switchView('view-dashboard');
-        },
-        () => {
-            // Session Exit cleanup tracking state loop
-            console.log("Portal session ended cleanly.");
-        }
-    );
-});
+            
                                                           
                                              
         </script>

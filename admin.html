@@ -403,9 +403,8 @@ export const Auth = {
                 
                 Utils.showLoader();
                 
-                const emailInput = document.getElementById('p.a.solutions9598@gmail.com');
-                const passwordInput = document.getElementById('aqibsolutions@9598');
-
+                const emailInput = document.getElementById('login-email');
+const passwordInput = document.getElementById('login-password');
                 if (!emailInput || !passwordInput) {
                     Utils.hideLoader();
                     Notifications.show("Critical UI Error: Form input targets missing from DOM.", "error");

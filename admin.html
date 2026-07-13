@@ -381,7 +381,8 @@ export const Storage = {
         }
     }
 };
-            import { Notifications } from './notifications.js';
+            // js/auth.js
+import { Notifications } from './notifications.js';
 import { Utils } from './utils.js';
 
 export const Auth = {
@@ -389,44 +390,81 @@ export const Auth = {
         const form = document.getElementById('system-login-form');
         const logoutAction = document.getElementById('action-logout');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            Utils.showLoader();
-            
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value.trim();
+        if (form) {
+            // Form submission event routing handler hook
+            form.removeAttribute('onsubmit'); // Kisi bhi inline conflict block ko remove karne ke liye
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                Utils.showLoader();
+                
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value.trim();
 
-            // Hard-secured direct credential override mapping matching historical parameters exactly
-            if(email === "p.a.solutions9598@gmail.com" && password === "aqibsolutions@9598") {
-                localStorage.setItem("prime_auth_session", "authenticated_secure_token");
-                Notifications.show("Gateway Credentials Verified. Welcome back.", "success");
+                // Exact Master System Verification Credentials
+                const MASTER_EMAIL = "p.a.solutions9598@gmail.com";
+                const MASTER_PASSWORD = "aqibsolutions@9598";
+
+                if (email === MASTER_EMAIL && password === MASTER_PASSWORD) {
+                    // Force session status entry in client memory system
+                    localStorage.setItem("prime_auth_session", "authenticated_secure_token");
+                    
+                    // UI Management Interface rendering layers toggles execution
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('login-screen').classList.add('hidden');
+                    document.getElementById('app-shell').classList.add('active');
+                    document.getElementById('app-shell').style.opacity = '1';
+                    document.getElementById('app-shell').style.pointerEvents = 'all';
+
+                    Notifications.show("Administrative Access Granted. Initializing Terminals.", "success");
+                    Utils.hideLoader();
+                    
+                    if (typeof onSuccess === 'function') {
+                        onSuccess(); // Dashboard metrics data updates array dynamically load karega
+                    }
+                } else {
+                    Utils.hideLoader();
+                    Notifications.show("Access Denied: Operational authorization failure.", "error");
+                }
+            });
+        }
+
+        if (logoutAction) {
+            logoutAction.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem("prime_auth_session");
+                
+                // Portal display rollback components arrays logic
+                document.getElementById('app-shell').classList.remove('active');
+                document.getElementById('app-shell').style.opacity = '0';
+                document.getElementById('app-shell').style.pointerEvents = 'none';
+                
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('login-screen').style.display = 'flex';
+                
+                Notifications.show("Terminal connection terminated cleanly.", "info");
+                if (typeof onLogout === 'function') onLogout();
+            });
+        }
+
+        // Automatic Persistence Token Session Verification Loop
+        const activeToken = localStorage.getItem("prime_auth_session");
+        if (activeToken === "authenticated_secure_token") {
+            if (document.getElementById('login-screen')) {
+                document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('app-shell').classList.add('active');
-                Utils.hideLoader();
-                onSuccess();
-            } else {
-                Utils.hideLoader();
-                Notifications.show("Security Override Alert: Invalid credentials verification.", "error");
             }
-        });
-
-        logoutAction.addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem("prime_auth_session");
-            document.getElementById('app-shell').classList.remove('active');
-            document.getElementById('login-screen').classList.remove('hidden');
-            Notifications.show("Session terminated cleanly.", "info");
-            onLogout();
-        });
-
-        // Auto recovery state check
-        if(localStorage.getItem("prime_auth_session") === "authenticated_secure_token") {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('app-shell').classList.add('active');
-            onSuccess();
+            if (document.getElementById('app-shell')) {
+                document.getElementById('app-shell').classList.add('active');
+                document.getElementById('app-shell').style.opacity = '1';
+                document.getElementById('app-shell').style.pointerEvents = 'all';
+            }
+            if (typeof onSuccess === 'function') {
+                setTimeout(() => { onSuccess(); }, 100); // Async frame safety initialization
+            }
         }
     }
 };
+
     import { supabase } from './supabase.js';
 import { Utils } from './utils.js';
 

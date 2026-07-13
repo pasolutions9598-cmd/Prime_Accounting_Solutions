@@ -222,3 +222,220 @@ document.addEventListener("DOMContentLoaded", () => {
     initDashboard();
 
 });
+/* ==========================================================
+   dashboard.js
+   Part 2 - Recent Data
+========================================================== */
+
+/* ==========================================================
+   DOM REFERENCES
+========================================================== */
+
+const recentLeadsTable =
+    document.getElementById("recentLeadsTable");
+
+const recentPostsTable =
+    document.getElementById("recentPostsTable");
+
+const recentActivity =
+    document.getElementById("recentActivity");
+
+/* ==========================================================
+   LOAD RECENT LEADS
+========================================================== */
+
+async function loadRecentLeads() {
+
+    if (!recentLeadsTable) return;
+
+    try {
+
+        const { data, error } = await supabase
+            .from("leads")
+            .select("*")
+            .order("created_at", { ascending: false })
+            .limit(5);
+
+        if (error) throw error;
+
+        if (!data.length) {
+
+            recentLeadsTable.innerHTML =
+                "<tr><td colspan='4'>No Leads Found</td></tr>";
+
+            return;
+
+        }
+
+        recentLeadsTable.innerHTML = "";
+
+        data.forEach(lead => {
+
+            recentLeadsTable.innerHTML += `
+                <tr>
+                    <td>${lead.name ?? "-"}</td>
+                    <td>${lead.phone ?? "-"}</td>
+                    <td>${lead.service ?? "-"}</td>
+                    <td>${lead.status ?? "New"}</td>
+                </tr>
+            `;
+
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+/* ==========================================================
+   LOAD RECENT POSTS
+========================================================== */
+
+async function loadRecentPosts() {
+
+    if (!recentPostsTable) return;
+
+    try {
+
+        const { data, error } = await supabase
+            .from("posts")
+            .select("*")
+            .order("created_at", { ascending: false })
+            .limit(5);
+
+        if (error) throw error;
+
+        if (!data.length) {
+
+            recentPostsTable.innerHTML =
+                "<tr><td colspan='4'>No Posts Found</td></tr>";
+
+            return;
+
+        }
+
+        recentPostsTable.innerHTML = "";
+
+        data.forEach(post => {
+
+            recentPostsTable.innerHTML += `
+                <tr>
+                    <td>${post.title}</td>
+                    <td>${post.category}</td>
+                    <td>${post.status}</td>
+                    <td>${new Date(post.created_at).toLocaleDateString()}</td>
+                </tr>
+            `;
+
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+/* ==========================================================
+   LOAD RECENT ACTIVITY
+========================================================== */
+
+async function loadRecentActivity() {
+
+    if (!recentActivity) return;
+
+    recentActivity.innerHTML = "";
+
+    try {
+
+        const { data } = await supabase
+            .from("posts")
+            .select("title,created_at")
+            .order("created_at", {
+                ascending: false
+            })
+            .limit(5);
+
+        if (!data || !data.length) {
+
+            recentActivity.innerHTML =
+                "<p>No Activity Found</p>";
+
+            return;
+
+        }
+
+        data.forEach(item => {
+
+            recentActivity.innerHTML += `
+
+                <div class="activity-item">
+
+                    <strong>
+                        New Post Published
+                    </strong>
+
+                    <p>${item.title}</p>
+
+                    <small>
+
+                        ${new Date(item.created_at)
+                            .toLocaleString()}
+
+                    </small>
+
+                </div>
+
+            `;
+
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+/* ==========================================================
+   LOAD ALL DASHBOARD DATA
+========================================================== */
+
+export async function loadDashboardData() {
+
+    await Promise.all([
+
+        loadRecentLeads(),
+
+        loadRecentPosts(),
+
+        loadRecentActivity()
+
+    ]);
+
+}
+
+/* ==========================================================
+   UPDATE INIT
+========================================================== */
+
+const oldInitDashboard = initDashboard;
+
+initDashboard = async function () {
+
+    await oldInitDashboard();
+
+    await loadDashboardData();
+
+};
+const oldInitDashboard = initDashboard;
+
+initDashboard = async function () {
+    await oldInitDashboard();
+    await loadDashboardData();
+};

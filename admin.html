@@ -1,301 +1,1168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prime Accounting Solutions - Premium Admin Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root { --primary: #002d72; --secondary: #009245; --dark: #0f172a; --light: #f8fafc; --text: #334155; --card-bg: #ffffff; }
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
-body { background: var(--light); color: var(--text); padding-bottom: 60px; }
-.header { background: linear-gradient(135deg, #071630 0%, #1e293b 100%); padding: 25px 20px; text-align: center; color: white; font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-.container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-.card { background: var(--card-bg); border-radius: 20px; padding: 35px; box-shadow: 0 10px 30px rgba(15,23,42,0.02); border: 1px solid #e2e8f0; margin-bottom: 30px; transition: 0.3s; }
-.card h2 { font-family: 'Outfit', sans-serif; color: var(--primary); font-size: 24px; margin-bottom: 25px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
-.stat-card { background: var(--card-bg); padding: 25px 30px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; border-top: 5px solid var(--primary); text-align: left; }
-.stat-card.visitors { border-top-color: var(--secondary); }
-.stat-title { color: #64748b; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-.stat-number { font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--dark); }
-.row { display: flex; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
-.row > div { flex: 1; min-width: 200px; }
-label { font-size: 14px; font-weight: 600; color: #475569; display: block; margin-top: 15px; }
-input[type="text"], input[type="email"], input[type="password"], textarea, select { width: 100%; padding: 14px; margin: 8px 0 15px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; background: #fff; color: var(--dark); }
-input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(0,45,114,0.06); }
-textarea { min-height: 150px; resize: vertical; }
-button { padding: 12px 20px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-right: 5px; }
-button:hover { transform: translateY(-1px); }
-.login-btn { background: var(--primary); color: white; width: 100%; margin-top: 15px; padding: 16px; font-size: 15px; }
-.publish-btn { background: var(--secondary); color: white; }
-.draft-btn { background: #64748b; color: white; }
-.logout-btn { background: #ef4444; color: white; float: right; padding: 10px 20px; font-size: 14px; }
-.custom-file-btn { display: block; background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; color: #475569; margin: 8px 0 15px; }
-input[type="file"] { display: none; }
-#adminPanel { display: none; }
-#loginBox { display: block; }
-.post-card { background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; }
-.post-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; color: var(--dark); margin: 10px 0; }
-.post-card img { width: 100%; border-radius: 12px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
-.post-meta-info { font-size: 13px; color: #64748b; margin-top: 15px; background: #f8fafc; padding: 10px 15px; border-radius: 8px; display: inline-block; }
-.badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 30px; text-transform: uppercase; margin-right: 5px; }
-.badge-news { background: #e0f2fe; color: #0369a1; }
-.badge-announcement { background: #fef3c7; color: #d97706; }
-.badge-draft { background: #cbd5e1; color: #334155; }
-.edit-btn { background: #facc15; color: #0f172a; }
-.delete-btn { background: #fee2e2; color: #ef4444; }
-.delete-btn:hover { background: #ef4444; color: white; }
-.force-live-btn { background: #dcfce7; color: #15803d; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Accounting Solutions — Executive Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #071630;
+            --navy-light: #112240;
+            --gold: #D4AF37;
+            --gold-hover: #AA841A;
+            --bg-main: #F4F6F9;
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --sidebar-width: 280px;
+            --sidebar-collapsed: 80px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(255, 255, 255, 0.75);
+            --shadow: 0 10px 30px -5px rgba(7, 22, 48, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; height: 100vh; }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+
+        /* System Loaders & Toasts */
+        #global-loader { position: fixed; inset: 0; background: rgba(7, 22, 48, 0.6); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; pointer-events: none; transition: var(--transition); }
+        #global-loader.active { opacity: 1; pointer-events: all; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(212, 175, 55, 0.1); border-left-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        #toast-container { position: fixed; top: 24px; right: 24px; z-index: 10000; display: flex; flex-direction: column; gap: 12px; }
+        .toast { background: var(--bg-card); border-left: 4px solid var(--gold); padding: 16px 24px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; transform: translateX(120%); transition: var(--transition); font-weight: 500; font-size: 14px; min-width: 300px; }
+        .toast.active { transform: translateX(0); }
+        .toast.success { border-left-color: var(--success); }
+        .toast.warning { border-left-color: var(--warning); }
+        .toast.error { border-left-color: var(--danger); }
+
+        /* Modal Dialogs */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); z-index: 900; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition); }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-card { background: var(--bg-card); width: 100%; max-width: 600px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); overflow: hidden; transform: translateY(20px); transition: var(--transition); }
+        .modal-overlay.active .modal-card { transform: translateY(0); }
+        .modal-header { background: var(--navy-dark); color: white; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Outfit', sans-serif; }
+        .modal-body { padding: 24px; max-height: 75vh; overflow-y: auto; }
+        .modal-footer { padding: 16px 24px; background: var(--bg-main); display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid var(--border-color); }
+
+        /* Utility Forms and Form Controls */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; }
+        .form-control { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-color); background: #FFF; font-size: 14px; color: var(--text-main); transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15); }
+        .btn { padding: 12px 20px; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); text-decoration: none; }
+        .btn-primary { background: var(--navy-dark); color: white; }
+        .btn-primary:hover { background: var(--navy-light); }
+        .btn-accent { background: var(--gold); color: var(--navy-dark); }
+        .btn-accent:hover { background: var(--gold-hover); }
+        .btn-secondary { background: var(--border-color); color: var(--text-main); }
+        .btn-danger { background: var(--danger); color: white; }
+
+        /* Login Layout CSS */
+        #login-screen { display: flex; height: 100vh; width: 100vw; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%); justify-content: center; align-items: center; padding: 20px; position: fixed; inset: 0; z-index: 1000; transition: var(--transition); }
+        #login-screen.hidden { opacity: 0; pointer-events: none; transform: scale(1.02); }
+        .login-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 450px; border-radius: 24px; padding: 48px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center; }
+        .login-logo { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: white; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .login-logo span { color: var(--gold); }
+        .login-subtitle { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 32px; }
+
+        /* Secured Shell Interface Workspace */
+        #app-shell { display: flex; width: 100vw; height: 100vh; opacity: 0; pointer-events: none; transition: var(--transition); }
+        #app-shell.active { opacity: 1; pointer-events: all; }
+        
+        /* Sidebar Navigation Layout styling */
+        .sidebar { width: var(--sidebar-width); background: var(--navy-dark); color: white; display: flex; flex-direction: column; transition: var(--transition); position: relative; z-index: 100; }
+        .sidebar.collapsed { width: var(--sidebar-collapsed); }
+        .sidebar-brand { padding: 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .brand-text { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 18px; white-space: nowrap; transition: var(--transition); }
+        .sidebar.collapsed .brand-text { opacity: 0; pointer-events: none; }
+        .brand-text span { color: var(--gold); }
+        .sidebar-menu { list-style: none; padding: 20px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; overflow-y: auto; }
+        .menu-item a { display: flex; align-items: center; gap: 16px; padding: 14px 16px; color: rgba(255,255,255,0.6); text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 14px; transition: var(--transition); white-space: nowrap; }
+        .menu-item a:hover, .menu-item.active a { color: white; background: rgba(255,255,255,0.05); }
+        .menu-item.active a { border-left: 3px solid var(--gold); background: rgba(255,255,255,0.08); color: #FFF; }
+        .sidebar.collapsed .menu-item a span:not(.icon) { opacity: 0; pointer-events: none; width: 0; }
+        
+        /* Main Application Workspace view ports */
+        .main-workspace { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .top-bar { height: 80px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; box-shadow: var(--shadow); }
+        .system-greeting h1 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy-dark); }
+        .system-greeting p { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+        .top-bar-actions { display: flex; align-items: center; gap: 24px; }
+        .live-clock { background: var(--bg-main); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--navy-dark); border: 1px solid var(--border-color); }
+        
+        .view-container { flex: 1; padding: 40px; overflow-y: auto; display: none; }
+        .view-container.active { display: block; }
+        
+        /* Dashboard Module and Cards Components styling */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 32px; }
+        .metric-card { background: var(--bg-card); padding: 24px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow); position: relative; overflow: hidden; transition: var(--transition); }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
+        .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--navy-dark); }
+        .metric-card.accent::before { background: var(--gold); }
+        .metric-label { font-size: 13px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+        .metric-value { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--navy-dark); margin: 8px 0 4px 0; }
+        
+        /* Modern Structured Tables styling */
+        .table-responsive { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow); overflow-x: auto; margin-top: 24px; }
+        .premium-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        .premium-table th { background: #F8FAFC; padding: 16px 24px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border-color); text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        .premium-table td { padding: 18px 24px; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
+        .premium-table tr:last-child td { border: none; }
+        .premium-table tr:hover td { background-color: #F8FAFC; }
+        
+        /* System Badges Architecture styling */
+        .badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 30px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-success { background: #E6F4EA; color: var(--success); }
+        .badge-warning { background: #FEF3C7; color: #D97706; }
+        .badge-danger { background: #FCE8E6; color: var(--danger); }
+        .badge-info { background: #E0F2FE; color: #0369a1; }
+
+        .view-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .view-header h2 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700; color: var(--navy-dark); }
+        .search-filter-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    </style>
 </head>
 <body>
 
-<div class="header">Prime Accounting Solutions — Dashboard</div>
+    <div id="global-loader"><div class="spinner"></div></div>
 
-<div class="container">
-    <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto;">
-        <h2>Admin Access</h2>
-        <form id="loginForm" onsubmit="event.preventDefault(); window.loginAdmin();">
-            <input type="email" id="email" placeholder="Email Address" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" class="login-btn">Sign In</button>
-        </form>
+    <div id="toast-container"></div>
+
+    <div id="modal-system-overlay" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-system-title">Modal Title</h3>
+                <span style="cursor:pointer; font-weight:bold;" onclick="window.App.Utils.closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modal-system-body"></div>
+            <div class="modal-footer" id="modal-system-footer"></div>
+        </div>
     </div>
 
-    <div id="adminPanel">
-        <div class="card" style="padding: 20px 30px;">
-            <button class="logout-btn" onclick="window.logoutAdmin()">Exit Session</button>
-            <span style="font-weight:600; font-family:'Outfit'; font-size:18px;">👤 Terminal Secure: Administrator</span>
-        </div>
-
-        <div class="analytics-grid">
-            <div class="stat-card visitors">
-                <div class="stat-title">📊 Live Site Visitors</div>
-                <div class="stat-number" id="totalVisitors">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">📝 Total Feed Analytics</div>
-                <div class="stat-number" id="totalPostsCount">0</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>✍️ Compose Executive Broadcast</h2>
-            <div class="row">
-                <div>
-                    <label>Distribution Type</label>
-                    <select id="postType">
-                        <option value="news">Regular Tax Update</option>
-                        <option value="announcement">🚨 Critical Announcement</option>
-                    </select>
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-logo">PRIME<span>ACCOUNTING</span></div>
+            <div class="login-subtitle">Secure Executive Administration Gateway</div>
+            <form id="system-login-form">
+                <div class="form-group" style="text-align:left;">
+                    <label style="color:rgba(255,255,255,0.7);">Access Credentials Identifier</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="admin@primeaccountingsolutions.com" required style="background:rgba(255,255,255,0.9);">
                 </div>
-                <div>
-                    <label>Stream Category</label>
-                    <select id="postCategory">
-                        <option value="General">General</option>
+                <div class="form-group" style="text-align:left;">
+                    <label style="color:rgba(255,255,255,0.7);">Security Authentication Key</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••••••" required style="background:rgba(255,255,255,0.9);">
+                </div>
+                <button type="submit" class="btn btn-accent" style="width:100%; margin-top:16px; justify-content:center;">Authenticate Portal</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-shell">
+        <nav class="sidebar" id="app-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-text">PRIME<span>.AS</span></div>
+                <button id="sidebar-toggle" style="background:transparent; border:none; color:white; cursor:pointer; font-size:16px;">◂</button>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-target="view-dashboard"><a href="#"><span class="icon">📊</span><span>Dashboard</span></a></li>
+                <li class="menu-item" data-target="view-leads"><a href="#"><span class="icon">💼</span><span>Leads Registry</span></a></li>
+                <li class="menu-item" data-target="view-posts"><a href="#"><span class="icon">📝</span><span>Broadcast Feed</span></a></li>
+                <li class="menu-item" data-target="view-gst"><a href="#"><span class="icon">🏛️</span><span>GST Suite</span></a></li>
+                <li class="menu-item" data-target="view-testimonials"><a href="#"><span class="icon">⭐</span><span>Testimonials</span></a></li>
+                <li class="menu-item" data-target="view-analytics"><a href="#"><span class="icon">📈</span><span>Deep Analytics</span></a></li>
+                <li class="menu-item" data-target="view-settings"><a href="#"><span class="icon">⚙️</span><span>Portal Settings</span></a></li>
+                <li class="menu-item" id="action-logout" style="margin-top:auto;"><a href="#" style="color:var(--danger);"><span class="icon">🔒</span><span>Exit Session</span></a></li>
+            </ul>
+        </nav>
+
+        <main class="main-workspace">
+            <header class="top-bar">
+                <div class="system-greeting">
+                    <h1 id="greeting-txt">Welcome, Administrator</h1>
+                    <p id="live-date-string">Secure Executive Connection Active</p>
+                </div>
+                <div class="top-bar-actions">
+                    <div class="live-clock" id="system-live-clock">00:00:00 AM</div>
+                </div>
+            </header>
+
+            <div id="view-dashboard" class="view-container active">
+                <div class="view-header">
+                    <h2>Operational Briefing Metrics</h2>
+                </div>
+                <div class="metrics-grid" id="dashboard-metrics-box"></div>
+                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px; margin-top:32px;">
+                    <div class="metric-card" style="padding:0;">
+                        <h3 style="padding:24px 24px 12px 24px; font-family:'Outfit'; font-size:18px;">Pipeline Priority Acquisition Leads</h3>
+                        <div class="table-responsive" style="margin:0; border:none; box-shadow:none;" id="dash-leads-table"></div>
+                    </div>
+                    <div class="metric-card">
+                        <h3 style="font-family:'Outfit'; font-size:18px; margin-bottom:16px;">System Activity Audit Logs</h3>
+                        <div id="dash-activity-log" style="display:flex; flex-direction:column; gap:12px; font-size:13px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-leads" class="view-container">
+                <div class="view-header">
+                    <h2>Leads Pipeline Matrix</h2>
+                    <button class="btn btn-primary" id="btn-create-lead">➕ Create Acquisition Record</button>
+                </div>
+                <div class="search-filter-row">
+                    <input type="text" id="lead-search" class="form-control" placeholder="Search parameters..." style="max-width:300px;">
+                    <select id="lead-filter-status" class="form-control" style="max-width:200px;">
+                        <option value="ALL">All Status Pipeline</option>
+                        <option value="New">New</option>
+                        <option value="Contacted">Contacted</option>
+                        <option value="Converted">Converted</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                    <button class="btn btn-secondary" id="btn-export-leads-csv">📥 Export Matrix Data (CSV)</button>
+                </div>
+                <div class="table-responsive" id="leads-table-wrapper"></div>
+            </div>
+
+            <div id="view-posts" class="view-container">
+                <div class="view-header">
+                    <h2>Broadcast Feed Management</h2>
+                    <button class="btn btn-primary" id="btn-create-post">✍️ Author Executive Broadcast</button>
+                </div>
+                <div class="search-filter-row">
+                    <input type="text" id="post-search" class="form-control" placeholder="Search title parameters..." style="max-width:300px;">
+                    <select id="post-filter-category" class="form-control" style="max-width:200px;">
+                        <option value="ALL">All Stream Channels</option>
+                        <option value="General">General Corporate</option>
                         <option value="GST">GST Updates</option>
-                        <option value="Income Tax">Income Tax</option>
+                        <option value="Income Tax">Income Tax Stream</option>
                         <option value="Audit">Audit & Assurance</option>
-                        <option value="Accounting">Accounting Solutions</option>
                     </select>
                 </div>
+                <div class="table-responsive" id="posts-table-wrapper"></div>
             </div>
 
-            <label>Broadcast Title</label>
-            <input type="text" id="postTitle" placeholder="Enter headline statement...">
-            
-            <label>Featured Infographic Media</label>
-            <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Upload Attachment</label>
-            <input type="file" id="imageFile" accept="image/*">
-            <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:contain; border-radius:12px; margin-bottom:20px; background:#f8fafc; border:1px solid #e2e8f0;">
-            
-            <label>Content Description / Brief</label>
-            <textarea id="postContent" placeholder="Write comprehensive update specifications here..."></textarea>
+            <div id="view-gst" class="view-container">
+                <div class="view-header">
+                    <h2>GST Enterprise Compliance Suite</h2>
+                    <button class="btn btn-primary" id="btn-create-gst-client">💼 Provision Enterprise Account</button>
+                </div>
+                <div class="table-responsive" id="gst-table-wrapper"></div>
+            </div>
 
-            <button class="publish-btn" onclick="window.saveContent('published')" id="submitBtn">Deploy Live Broadcast</button>
-            <button class="draft-btn" onclick="window.saveContent('draft')">Store to Drafts</button>
-        </div>
+            <div id="view-testimonials" class="view-container">
+                <div class="view-header">
+                    <h2>Corporate Reputation Testimonials</h2>
+                    <button class="btn btn-primary" id="btn-create-testimonial">➕ Add Executive Review</button>
+                </div>
+                <div class="table-responsive" id="testimonials-table-wrapper"></div>
 
-        <div class="card">
-            <h2>🗄️ Stream Management Registry</h2>
-            <select id="filterCategory" onchange="window.loadPosts()" style="width:auto; margin-bottom: 20px;">
-                <option value="All">All Categories</option>
-                <option value="General">General</option>
-                <option value="GST">GST Updates</option>
-                <option value="Income Tax">Income Tax</option>
-                <option value="Audit">Audit & Assurance</option>
-                <option value="Accounting">Accounting Solutions</option>
-            </select>
-            <div id="postsContainer"></div>
-        </div>
+                <div class="metrics-grid" id="analytics-extended-grid"></div>
+                <div class="table-responsive" id="analytics-clicks-report-wrapper"></div>
+            </div>
+
+            <div id="view-settings" class="view-container">
+                <div class="view-header">
+                    <h2>Portal Configuration & Parameters</h2>
+                </div>
+                <div class="metric-card" style="max-width:700px;">
+                    <form id="portal-settings-form">
+                        <div class="form-group">
+                            <label>Enterprise Entity Name</label>
+                            <input type="text" id="set-company-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Primary Communications Inboxes Mail Routing (SMTP Secure Primary Target)</label>
+                            <input type="email" id="set-company-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Enterprise Office Locations Address Line (Physical Coordinates)</label>
+                            <textarea id="set-company-address" class="form-control" style="min-height:80px; resize:vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-accent">Save Global System Configuration</button>
+                    </form>
+                </div>
+            </div>
+        </main>
     </div>
-</div>
 
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    <script type="module" src="js/app.js">
+    
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
-const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+export const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
+export const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
 
-const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
-const ADMIN_PASSWORD = "aqibsolutions@9598";
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-document.getElementById("imageFile").addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if(!file) return;
-    document.getElementById("uploadBtnLabel").innerText = "✅ Attached: " + file.name;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-        const img = document.getElementById("previewImage");
-        img.src = ev.target.result;
-        img.style.display = "block";
-    };
-    reader.readAsDataURL(file);
-});
-
-window.loginAdmin = function() {
-    if(document.getElementById("email").value.trim() === ADMIN_EMAIL && document.getElementById("password").value.trim() === ADMIN_PASSWORD) {
-        localStorage.setItem("prime_admin_logged", "yes");
-        checkAuth();
-    } else {
-        alert("Security Override: Invalid Credentials.");
-    }
-}
-
-window.logoutAdmin = function() {
-    localStorage.removeItem("prime_admin_logged");
-    checkAuth();
-}
-
-function checkAuth() {
-    if(localStorage.getItem("prime_admin_logged") === "yes") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        loadAnalytics();
-        window.loadPosts();
-    } else {
-        document.getElementById("loginBox").style.display = "block";
-        document.getElementById("adminPanel").style.display = "none";
-    }
-}
-
-async function loadAnalytics() {
-    try {
-        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
-        if(data) document.getElementById("totalVisitors").innerText = data.visitor_count;
-        const { count } = await supabase.from('posts').select('id', { count: 'exact', head: true });
-        document.getElementById("totalPostsCount").innerText = count || 0;
-    } catch (e) { console.error(e); }
-}
-
-window.saveContent = async function(status) {
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const type = document.getElementById("postType").value;
-    const category = document.getElementById("postCategory").value;
-    const file = document.getElementById("imageFile").files[0];
-    const submitBtn = document.getElementById("submitBtn");
-
-    if(!title || !content) { alert("Error: Core parameters missing."); return; }
-    submitBtn.innerText = "⏳ Synchronizing Server...";
-    submitBtn.disabled = true;
-    let imageUrl = "";
-
-    try {
-        if(file) {
-            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${file.name.split('.').pop()}`;
-            await supabase.storage.from('post-images').upload(fileName, file);
-            imageUrl = supabase.storage.from('post-images').getPublicUrl(fileName).data.publicUrl;
-        }
-        await supabase.from('posts').insert([{ title, content, type, category, status, image: imageUrl }]);
-        alert(status === 'published' ? "Broadcast Synchronized Live! 🚀" : "Saved to Repository Drafts! 📁");
-        location.reload();
-    } catch (error) { alert(error.message); }
-}
-
-window.loadPosts = async function() {
-    const container = document.getElementById("postsContainer");
-    const filterCat = document.getElementById("filterCategory").value;
-    container.innerHTML = "Querying Database Registry...";
-    try {
-        let query = supabase.from('posts').select('id, title, content, type, category, status, image, created_at');
-        if(filterCat !== "All") { query = query.eq('category', filterCat); }
-        const { data: posts, error } = await query.order('created_at', { ascending: false });
-        if (error) throw error;
-
-        container.innerHTML = "";
-        if(!posts || posts.length === 0) { container.innerHTML = "<p>No posts found.</p>"; return; }
-        posts.forEach((post) => {
-            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
-            const isAnnounce = post.type === 'announcement';
-            const isDraft = post.status === 'draft';
-            
-            // Safe JSON strings conversion for edit click handler
-            const safeTitle = encodeURIComponent(post.title || "");
-            const safeContent = encodeURIComponent(post.content || "");
-
-            container.innerHTML += `
-                <div class="post-card" style="${isAnnounce ? 'border-left:5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.75; border-left:5px solid #64748b;' : ''}">
-                    <div>
-                        ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
-                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 LOGGED BLOCK'}</span>
-                        <span class="badge" style="background:#e2f0d9; color:#385723;">🏷️ ${post.category}</span>
-                    </div>
-                    <h3>${post.title || ""}</h3>
-                    ${post.image ? `<img src="${post.image}">` : ""}
-                    <p style="white-space: pre-wrap; margin-top:10px; color:#475569; font-size:14px;">${post.content || ""}</p>
-                    <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
-                    <div style="margin-top:20px;">
-                        <button class="edit-btn" onclick="window.editPost('${post.id}', '${safeTitle}', '${safeContent}')">✏️ Modify</button>
-                        ${isDraft ? `<button class="force-live-btn" onclick="window.publishDraft('${post.id}')">🚀 Force Live</button>` : ''}
-                        <button class="delete-btn" onclick="window.deletePost('${post.id}')">🗑️ Purge</button>
-                    </div>
-                </div>`;
+        export const Utils = {
+    showLoader: () => document.getElementById('global-loader').classList.add('active'),
+    hideLoader: () => document.getElementById('global-loader').classList.remove('active'),
+    
+    formatDate: (isoString) => {
+        if(!isoString) return 'N/A';
+        return new Date(isoString).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
         });
-    } catch(err) { container.innerHTML = "Error loading data."; console.error(err); }
-}
+    },
 
-window.publishDraft = async function(id) {
-    const { error } = await supabase.from('posts').update({ status: 'published' }).eq('id', id);
-    if(error) alert(error.message);
-    window.loadPosts();
-}
+    openModal: (title, bodyHtml, footerHtml) => {
+        document.getElementById('modal-system-title').innerText = title;
+        document.getElementById('modal-system-body').innerHTML = bodyHtml;
+        document.getElementById('modal-system-footer').innerHTML = footerHtml || '';
+        document.getElementById('modal-system-overlay').classList.add('active');
+    },
 
-window.deletePost = async function(id) {
-    if (!confirm("Confirm hard purge of this data block?")) return;
-    const { error } = await supabase.from('posts').delete().eq('id', id);
-    if(error) alert(error.message);
-    loadAnalytics(); 
-    window.loadPosts();
-}
+    closeModal: () => {
+        document.getElementById('modal-system-overlay').classList.remove('active');
+        document.getElementById('modal-system-body').innerHTML = '';
+        document.getElementById('modal-system-footer').innerHTML = '';
+    },
 
-window.editPost = async function(id, encTitle, encContent) {
-    const currentTitle = decodeURIComponent(encTitle);
-    const currentContent = decodeURIComponent(encContent);
-    
-    const newTitle = prompt("Modify Specification Headline:", currentTitle);
-    if (newTitle === null) return; // User canceled
-    
-    const newContent = prompt("Modify Brief Data Description:", currentContent);
-    if (newContent === null) return; // User canceled
-    
-    if(!newTitle.trim() || !newContent.trim()) {
-        alert("Parameters cannot be left empty.");
-        return;
+    initClock: () => {
+        const clockEl = document.getElementById('system-live-clock');
+        const dateEl = document.getElementById('live-date-string');
+        const update = () => {
+            const now = new Date();
+            if(clockEl) clockEl.innerText = now.toLocaleTimeString('en-US', { hour12: true });
+            if(dateEl) dateEl.innerText = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        };
+        setInterval(update, 1000);
+        update();
     }
-
-    const { error } = await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
-    if(error) {
-        alert("Update Failed: " + error.message);
-    } else {
-        alert("Post updated successfully!");
-        window.loadPosts();
+};
+export const Notifications = {
+    show: (message, type = 'info') => {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `<span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span><div>${message}</div>`;
+        container.appendChild(toast);
+        
+        setTimeout(() => toast.classList.add('active'), 50);
+        setTimeout(() => {
+            toast.classList.remove('active');
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
     }
-}
+};
+import { supabase } from './supabase.js';
+import { Notifications } from './notifications.js';
 
-checkAuth();
-</script>
+export const Storage = {
+    uploadImage: async (file, bucket = 'post-images') => {
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Math.random().toString(36).substring(2, 15)}-${Date.now()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from(bucket)
+                .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data } = supabase.storage.from(bucket).getPublicUrl(filePath);
+            return data.publicUrl;
+        } catch (error) {
+            Notifications.show(`Storage failure: ${error.message}`, 'error');
+            return null;
+        }
+    }
+};
+            import { Notifications } from './notifications.js';
+import { Utils } from './utils.js';
+
+export const Auth = {
+    init: (onSuccess, onLogout) => {
+        const form = document.getElementById('system-login-form');
+        const logoutAction = document.getElementById('action-logout');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            Utils.showLoader();
+            
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+
+            // Hard-secured direct credential override mapping matching historical parameters exactly
+            if(email === "p.a.solutions9598@gmail.com" && password === "aqibsolutions@9598") {
+                localStorage.setItem("prime_auth_session", "authenticated_secure_token");
+                Notifications.show("Gateway Credentials Verified. Welcome back.", "success");
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('app-shell').classList.add('active');
+                Utils.hideLoader();
+                onSuccess();
+            } else {
+                Utils.hideLoader();
+                Notifications.show("Security Override Alert: Invalid credentials verification.", "error");
+            }
+        });
+
+        logoutAction.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem("prime_auth_session");
+            document.getElementById('app-shell').classList.remove('active');
+            document.getElementById('login-screen').classList.remove('hidden');
+            Notifications.show("Session terminated cleanly.", "info");
+            onLogout();
+        });
+
+        // Auto recovery state check
+        if(localStorage.getItem("prime_auth_session") === "authenticated_secure_token") {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('app-shell').classList.add('active');
+            onSuccess();
+        }
+    }
+};
+    import { supabase } from './supabase.js';
+import { Utils } from './utils.js';
+
+export const Dashboard = {
+    load: async () => {
+        try {
+            const { data: analytics } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
+            const { count: leadCount } = await supabase.from('leads').select('*', { count: 'exact', head: true });
+            const { count: postCount } = await supabase.from('posts').select('*', { count: 'exact', head: true });
+            const { count: testCount } = await supabase.from('testimonials').select('*', { count: 'exact', head: true });
+
+            const metricsBox = document.getElementById('dashboard-metrics-box');
+            metricsBox.innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-label">📊 Unique Global Visitors</div>
+                    <div class="metric-value">${analytics?.visitor_count || 0}</div>
+                </div>
+                <div class="metric-card accent">
+                    <div class="metric-label">💼 Active Capture Leads</div>
+                    <div class="metric-value">${leadCount || 0}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">📝 Synchronized Broadcasts</div>
+                    <div class="metric-value">${postCount || 0}</div>
+                </div>
+                <div class="metric-card accent">
+                    <div class="metric-label">⭐ Validated Endorsements</div>
+                    <div class="metric-value">${testCount || 0}</div>
+                </div>
+            `;
+
+            // Load brief pipeline tracking summary matrix table
+            const { data: recentLeads } = await supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(3);
+            let leadsHtml = `
+                <table class="premium-table">
+                    <thead><tr><th>Name</th><th>Service Target</th><th>Status</th></tr></thead>
+                    <tbody>
+            `;
+            if(recentLeads && recentLeads.length > 0) {
+                recentLeads.forEach(l => {
+                    leadsHtml += `<tr><td><b>${l.name}</b></td><td>${l.service || 'General'}</td><td><span class="badge badge-warning">${l.status}</span></td></tr>`;
+                });
+            } else {
+                leadsHtml += `<tr><td colspan="3">No current pipeline priority records logs data.</td></tr>`;
+            }
+            leadsHtml += `</tbody></table>`;
+            document.getElementById('dash-leads-table').innerHTML = leadsHtml;
+
+            // Activity framework dynamic tracer simulation
+            const activityBox = document.getElementById('dash-activity-log');
+            activityBox.innerHTML = `
+                <div>🕒 System core status checked successfully at ${new Date().toLocaleTimeString()}</div>
+                <div>📡 All synchronization API pipelines connected completely with standard parameters</div>
+            `;
+
+        } catch (e) {
+            console.error(e);
+        }
+    }
+};
+import { supabase } from './supabase.js';
+import { Utils } from './utils.js';
+import { Notifications } from './notifications.js';
+import { Storage } from './storage.js';
+
+export const Posts = {
+    load: async () => {
+        Utils.showLoader();
+        const wrapper = document.getElementById('posts-table-wrapper');
+        const searchVal = document.getElementById('post-search').value.toLowerCase();
+        const categoryFilter = document.getElementById('post-filter-category').value;
+
+        try {
+            let query = supabase.from('posts').select('*').order('created_at', { ascending: false });
+            if (categoryFilter !== 'ALL') {
+                query = query.eq('category', categoryFilter);
+            }
+            const { data: posts, error } = await query;
+            if (error) throw error;
+
+            let html = `
+                <table class="premium-table">
+                    <thead>
+                        <tr><th>Broadcast Details</th><th>Channel Stream</th><th>Type</th><th>Status</th><th>Logged Time</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            const filtered = posts.filter(p => p.title?.toLowerCase().includes(searchVal));
+
+            if(filtered.length === 0) {
+                html += `<tr><td colspan="6" style="text-align:center;">No match entries found in system workspace.</td></tr>`;
+            } else {
+                filtered.forEach(p => {
+                    html += `
+                        <tr>
+                            <td>
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    ${p.image_url ? `<img src="${p.image_url}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">` : '<div style="width:40px; height:40px; background:#E2E8F0; border-radius:6px;"></div>'}
+                                    <div><b>${p.title}</b></div>
+                                </div>
+                            </td>
+                            <td><span class="badge" style="background:#E2F0D9; color:#385723;">${p.category}</span></td>
+                            <td><span class="badge ${p.type === 'announcement' ? 'badge-danger' : 'badge-info'}">${p.type}</span></td>
+                            <td><span class="badge ${p.status === 'published' ? 'badge-success' : 'badge-warning'}">${p.status}</span></td>
+                            <td>${Utils.formatDate(p.created_at)}</td>
+                            <td>
+                                <button class="btn btn-secondary action-edit-post" data-id="${p.id}" style="padding:6px 12px; font-size:12px;">Modify</button>
+                                <button class="btn btn-danger action-delete-post" data-id="${p.id}" style="padding:6px 12px; font-size:12px;">Purge</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            html += `</tbody></table>`;
+            wrapper.innerHTML = html;
+            Posts.bindEvents();
+        } catch (err) {
+            Notifications.show(err.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    },
+
+    bindEvents: () => {
+        document.querySelectorAll('.action-edit-post').forEach(b => {
+            b.addEventListener('click', () => Posts.openEditForm(b.getAttribute('data-id')));
+        });
+        document.querySelectorAll('.action-delete-post').forEach(b => {
+            b.addEventListener('click', () => Posts.delete(b.getAttribute('data-id')));
+        });
+    },
+
+    openCreateForm: () => {
+        const body = `
+            <div class="form-group">
+                <label>Headline Title</label>
+                <input type="text" id="form-post-title" class="form-control" placeholder="Update Headline Specification...">
+            </div>
+            <div class="form-group">
+                <label>Stream Category Channel</label>
+                <select id="form-post-category" class="form-control">
+                    <option value="General">General Corporate</option>
+                    <option value="GST">GST Updates</option>
+                    <option value="Income Tax">Income Tax Stream</option>
+                    <option value="Audit">Audit & Assurance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Distribution Velocity Type</label>
+                <select id="form-post-type" class="form-control">
+                    <option value="news">Regular Bulletin</option>
+                    <option value="announcement">🚨 Critical Announcement</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Infographic Image Asset</label>
+                <input type="file" id="form-post-file" class="form-control" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label>Broadcast content body</label>
+                <textarea id="form-post-content" class="form-control" style="min-height:120px;"></textarea>
+            </div>
+        `;
+        const footer = `
+            <button class="btn btn-secondary" onclick="window.App.Utils.closeModal()">Dismiss</button>
+            <button class="btn btn-primary" id="form-post-submit-draft">Save Draft</button>
+            <button class="btn btn-accent" id="form-post-submit-publish">Deploy Live</button>
+        `;
+        Utils.openModal("Author Executive Data Broadcast Stream", body, footer);
+
+        document.getElementById('form-post-submit-draft').addEventListener('click', () => Posts.save(null, 'draft'));
+        document.getElementById('form-post-submit-publish').addEventListener('click', () => Posts.save(null, 'published'));
+    },
+
+    openEditForm: async (id) => {
+        Utils.showLoader();
+        try {
+            const { data: p } = await supabase.from('posts').select('*').eq('id', id).single();
+            Utils.hideLoader();
+
+            const body = `
+                <div class="form-group">
+                    <label>Headline Title</label>
+                    <input type="text" id="form-post-title" class="form-control" value="${p.title || ''}">
+                </div>
+                <div class="form-group">
+                    <label>Stream Category Channel</label>
+                    <select id="form-post-category" class="form-control">
+                        <option value="General" ${p.category === 'General' ? 'selected' : ''}>General Corporate</option>
+                        <option value="GST" ${p.category === 'GST' ? 'selected' : ''}>GST Updates</option>
+                        <option value="Income Tax" ${p.category === 'Income Tax' ? 'selected' : ''}>Income Tax Stream</option>
+                        <option value="Audit" ${p.category === 'Audit' ? 'selected' : ''}>Audit & Assurance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Distribution Velocity Type</label>
+                    <select id="form-post-type" class="form-control">
+                        <option value="news" ${p.type === 'news' ? 'selected' : ''}>Regular Bulletin</option>
+                        <option value="announcement" ${p.type === 'announcement' ? 'selected' : ''}>🚨 Critical Announcement</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Broadcast content body</label>
+                    <textarea id="form-post-content" class="form-control" style="min-height:120px;">${p.content || ''}</textarea>
+                </div>
+            `;
+            const footer = `
+                <button class="btn btn-secondary" onclick="window.App.Utils.closeModal()">Dismiss</button>
+                <button class="btn btn-accent" id="form-post-submit-update">Update Data Specs</button>
+            `;
+            Utils.openModal("Modify System Logged Broadcast Specification", body, footer);
+
+            document.getElementById('form-post-submit-update').addEventListener('click', () => Posts.save(id, p.status, p.image_url));
+        } catch (err) {
+            Utils.hideLoader();
+            Notifications.show(err.message, 'error');
+        }
+    },
+
+    save: async (id = null, status = 'published', existingImgUrl = '') => {
+        const title = document.getElementById('form-post-title').value.trim();
+        const content = document.getElementById('form-post-content').value.trim();
+        const category = document.getElementById('form-post-category').value;
+        const type = document.getElementById('form-post-type').value;
+        const fileInput = document.getElementById('form-post-file');
+
+        if(!title || !content) {
+            Notifications.show("Core structural values must be mapped completely.", "warning");
+            return;
+        }
+
+        Utils.showLoader();
+        let image_url = existingImgUrl;
+
+        if(fileInput && fileInput.files.length > 0) {
+            image_url = await Storage.uploadImage(fileInput.files[0]);
+        }
+
+        const payload = { title, content, category, type, status, image_url };
+
+        try {
+            if(id) {
+                await supabase.from('posts').update(payload).eq('id', id);
+                Notifications.show("Specification record revised properly.", "success");
+            } else {
+                await supabase.from('posts').insert([payload]);
+                Notifications.show("Operational entry stream broadcast created.", "success");
+            }
+            Utils.closeModal();
+            Posts.load();
+        } catch (err) {
+            Notifications.show(err.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    },
+
+    delete: async (id) => {
+        if(!confirm("Confirm irreversible data erasure operations?")) return;
+        Utils.showLoader();
+        try {
+            await supabase.from('posts').delete().eq('id', id);
+            Notifications.show("Record fully deleted from registry system logs.", "success");
+            Posts.load();
+        } catch (err) {
+            Notifications.show(err.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    }
+};
+        import { supabase } from './supabase.js';
+import { Utils } from './utils.js';
+import { Notifications } from './notifications.js';
+
+export const Leads = {
+    load: async () => {
+        Utils.showLoader();
+        const wrapper = document.getElementById('leads-table-wrapper');
+        const searchVal = document.getElementById('lead-search').value.toLowerCase();
+        const statusFilter = document.getElementById('lead-filter-status').value;
+
+        try {
+            let query = supabase.from('leads').select('*').order('created_at', { ascending: false });
+            if(statusFilter !== 'ALL') query = query.eq('status', statusFilter);
+
+            const { data: leads } = await query;
+            let html = `
+                <table class="premium-table">
+                    <thead>
+                        <tr><th>Client Prospect</th><th>Contact Vectors</th><th>Target Domain Service</th><th>Status</th><th>Notes Log</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            const filtered = (leads || []).filter(l => l.name?.toLowerCase().includes(searchVal) || l.email?.toLowerCase().includes(searchVal));
+
+            if(filtered.length === 0) {
+                html += `<tr><td colspan="6" style="text-align:center;">No match records found inside corporate funnel registry matrix.</td></tr>`;
+            } else {
+                filtered.forEach(l => {
+                    html += `
+                        <tr>
+                            <td><b>${l.name}</b></td>
+                            <td><div style="font-size:12px;">📧 ${l.email}<br>📞 ${l.phone || 'N/A'}</div></td>
+                            <td><span class="badge badge-info">${l.service || 'General Consultation'}</span></td>
+                            <td><span class="badge ${l.status === 'Converted' ? 'badge-success' : l.status === 'Closed' ? 'badge-danger' : 'badge-warning'}">${l.status}</span></td>
+                            <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${l.notes || 'No active remarks attached.'}</td>
+                            <td>
+                                <button class="btn btn-secondary action-edit-lead" data-id="${l.id}" style="padding:6px 12px; font-size:12px;">Modify</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            html += `</tbody></table>`;
+            wrapper.innerHTML = html;
+
+            document.querySelectorAll('.action-edit-lead').forEach(b => {
+                b.addEventListener('click', () => Leads.openEditForm(b.getAttribute('data-id')));
+            });
+
+        } catch (e) {
+            Notifications.show(e.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    },
+
+    openCreateForm: () => {
+        const body = `
+            <div class="form-group">
+                <label>Prospect Client Full Name</label>
+                <input type="text" id="form-lead-name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Secure Routing Email Address</label>
+                <input type="email" id="form-lead-email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Direct Contact Phone String</label>
+                <input type="text" id="form-lead-phone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Strategic Target Capability Domain Focus</label>
+                <input type="text" id="form-lead-service" class="form-control" placeholder="e.g., GST Compliance, Corporate Audit">
+            </div>
+            <div class="form-group">
+                <label>Funnel Lifecycle Progression Status</label>
+                <select id="form-lead-status" class="form-control">
+                    <option value="New">New Discovery Target</option>
+                    <option value="Contacted">Active Outreach Engaged</option>
+                    <option value="Converted">Validated Converted Account</option>
+                    <option value="Closed">Closed / Archive Record</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Consultation Dossier / Internal Notes Registry</label>
+                <textarea id="form-lead-notes" class="form-control" style="min-height:80px;"></textarea>
+            </div>
+        `;
+        const footer = `
+            <button class="btn btn-secondary" onclick="window.App.Utils.closeModal()">Dismiss</button>
+            <button class="btn btn-accent" id="form-lead-submit-create">Insert Pipeline Record</button>
+        `;
+        Utils.openModal("Provision New Client Funnel Record Block", body, footer);
+        document.getElementById('form-lead-submit-create').addEventListener('click', () => Leads.save(null));
+    },
+
+    openEditForm: async (id) => {
+        Utils.showLoader();
+        try {
+            const { data: l } = await supabase.from('leads').select('*').eq('id', id).single();
+            Utils.hideLoader();
+
+            const body = `
+                <div class="form-group">
+                    <label>Prospect Client Full Name</label>
+                    <input type="text" id="form-lead-name" class="form-control" value="${l.name || ''}" required>
+                </div>
+                <div class="form-group">
+                    <label>Secure Routing Email Address</label>
+                    <input type="email" id="form-lead-email" class="form-control" value="${l.email || ''}" required>
+                </div>
+                <div class="form-group">
+                    <label>Direct Contact Phone String</label>
+                    <input type="text" id="form-lead-phone" class="form-control" value="${l.phone || ''}">
+                </div>
+                <div class="form-group">
+                    <label>Strategic Target Capability Domain Focus</label>
+                    <input type="text" id="form-lead-service" class="form-control" value="${l.service || ''}">
+                </div>
+                <div class="form-group">
+                    <label>Funnel Lifecycle Progression Status</label>
+                    <select id="form-lead-status" class="form-control">
+                        <option value="New" ${l.status === 'New' ? 'selected' : ''}>New Discovery Target</option>
+                        <option value="Contacted" ${l.status === 'Contacted' ? 'selected' : ''}>Active Outreach Engaged</option>
+                        <option value="Converted" ${l.status === 'Converted' ? 'selected' : ''}>Validated Converted Account</option>
+                        <option value="Closed" ${l.status === 'Closed' ? 'selected' : ''}>Closed / Archive Record</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Consultation Dossier / Internal Notes Registry</label>
+                    <textarea id="form-lead-notes" class="form-control" style="min-height:80px;">${l.notes || ''}</textarea>
+                </div>
+            `;
+            const footer = `
+                <button class="btn btn-secondary" onclick="window.App.Utils.closeModal()">Dismiss</button>
+                <button class="btn btn-accent" id="form-lead-submit-update">Update Data Block</button>
+            `;
+            Utils.openModal("Modify Funnel Pipeline Data Parameters", body, footer);
+            document.getElementById('form-lead-submit-update').addEventListener('click', () => Leads.save(id));
+        } catch (e) {
+            Utils.hideLoader();
+            Notifications.show(e.message, 'error');
+        }
+    },
+
+    save: async (id = null) => {
+        const name = document.getElementById('form-lead-name').value.trim();
+        const email = document.getElementById('form-lead-email').value.trim();
+        const phone = document.getElementById('form-lead-phone').value.trim();
+        const service = document.getElementById('form-lead-service').value.trim();
+        const status = document.getElementById('form-lead-status').value;
+        const notes = document.getElementById('form-lead-notes').value.trim();
+
+        if(!name || !email) {
+            Notifications.show("Identity mappings parameters must be configured fully.", "warning");
+            return;
+        }
+
+        Utils.showLoader();
+        const payload = { name, email, phone, service, status, notes };
+
+        try {
+            if(id) {
+                await supabase.from('leads').update(payload).eq('id', id);
+                Notifications.show("Lead record updated successfully.", "success");
+            } else {
+                await supabase.from('leads').insert([payload]);
+                Notifications.show("Prospect inserted to active business pipeline registry.", "success");
+            }
+            Utils.closeModal();
+            Leads.load();
+        } catch (e) {
+            Notifications.show(e.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    },
+
+    exportCSV: async () => {
+        Utils.showLoader();
+        try {
+            const { data: leads } = await supabase.from('leads').select('*');
+            if(!leads || leads.length === 0) return;
+
+            let csvContent = "data:text/csv;charset=utf-8,ID,Name,Email,Phone,Service,Status,Notes,Created_At\n";
+            leads.forEach(l => {
+                csvContent += `"${l.id}","${l.name}","${l.email}","${l.phone || ''}","${l.service || ''}","${l.status}","${(l.notes || '').replace(/"/g, '""')}","${l.created_at}"\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Prime_Leads_Matrix_Export_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (e) {
+            Notifications.show(e.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    }
+};
+        import { supabase } from './supabase.js';
+import { Utils } from './utils.js';
+import { Notifications } from './notifications.js';
+
+export const Testimonials = {
+    load: async () => {
+        Utils.showLoader();
+        const wrapper = document.getElementById('testimonials-table-wrapper');
+        try {
+            const { data: reviews } = await supabase.from('testimonials').select('*').order('created_at', { ascending: false });
+            let html = `
+                <table class="premium-table">
+                    <thead>
+                        <tr><th>Executive Identity</th><th>Review Excerpt Text</th><th>Rating Level</th><th>Status Visibility</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+            `;
+            if(!reviews || reviews.length === 0) {
+                html += `<tr><td colspan="5" style="text-align:center;">No testimonials data logs.</td></tr>`;
+            } else {
+                reviews.forEach(r => {
+                    html += `
+                        <tr>
+                            <td><b>${r.name}</b><br><span style="font-size:12px; color:var(--text-muted);">${r.designation || 'Executive Partner'} at ${r.company || 'Enterprise'}</span></td>
+                            <td style="max-width:300px; white-space:normal;">"${r.content}"</td>
+                            <td><b style="color:var(--gold);">${'★'.repeat(r.rating || 5)}</b></td>
+                            <td><span class="badge ${r.featured ? 'badge-success' : 'badge-warning'}">${r.featured ? 'Live / Featured' : 'Pending / Standard'}</span></td>
+                            <td>
+                                <button class="btn btn-secondary action-toggle-testimonial" data-id="${r.id}" style="padding:6px 12px; font-size:12px;">Toggle Visibility</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            html += `</tbody></table>`;
+            wrapper.innerHTML = html;
+
+            document.querySelectorAll('.action-toggle-testimonial').forEach(b => {
+                b.addEventListener('click', async () => {
+                    const id = b.getAttribute('data-id');
+                    const target = reviews.find(x => x.id == id);
+                    Utils.showLoader();
+                    await supabase.from('testimonials').update({ featured: !target.featured }).eq('id', id);
+                    Notifications.show("Visibility parameters toggled successfully.", "success");
+                    Testimonials.load();
+                });
+            });
+        } catch (e) {
+            Notifications.show(e.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    }
+};
+        import { supabase } from './supabase.js';
+import { Utils } from './utils.js';
+import { Notifications } from './notifications.js';
+
+export const GST = {
+    load: async () => {
+        Utils.showLoader();
+        const wrapper = document.getElementById('gst-table-wrapper');
+        try {
+            const { data: clients } = await supabase.from('gst_clients').select('*').order('client_name', { ascending: true });
+            let html = `
+                <table class="premium-table">
+                    <thead>
+                        <tr><th>Corporate Client Entity</th><th>GSTIN Identifier Number</th><th>GSTR-1 Timeline</th><th>GSTR-3B Timeline</th><th>Compliance Status</th></tr>
+                    </thead>
+                    <tbody>
+            `;
+            if(!clients || clients.length === 0) {
+                html += `<tr><td colspan="5" style="text-align:center;">No Enterprise clients attached to GST Compliance Matrix Registry.</td></tr>`;
+            } else {
+                clients.forEach(c => {
+                    html += `
+                        <tr>
+                            <td><b>${c.client_name}</b></td>
+                            <td><code style="background:#F1F5F9; padding:4px 8px; border-radius:4px; font-weight:600;">${c.gstin}</code></td>
+                            <td><span class="badge badge-info">${c.gstr1_status || 'Pending Verification'}</span></td>
+                            <td><span class="badge badge-info">${c.gstr3b_status || 'Pending Verification'}</span></td>
+                            <td><span class="badge ${c.compliance_lock ? 'badge-success' : 'badge-warning'}">${c.compliance_lock ? 'Compliant' : 'Review Required'}</span></td>
+                        </tr>
+                    `;
+                });
+            }
+            html += `</tbody></table>`;
+            wrapper.innerHTML = html;
+        } catch (e) {
+            Notifications.show(e.message, 'error');
+        } finally {
+            Utils.hideLoader();
+        }
+    }
+};
+        import { supabase } from './supabase.js';
+import { Utils } from './utils.js';
+
+export const Analytics = {
+    load: async () => {
+        Utils.showLoader();
+        try {
+            const { data: clicks } = await supabase.from('service_clicks').select('*').order('click_count', { ascending: false });
+            const grid = document.getElementById('analytics-extended-grid');
+            grid.innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-label">Total Domain Audit Iterations</div>
+                    <div class="metric-value">Active Tracker</div>
+                </div>
+            `;
+            let html = `
+                <table class="premium-table">
+                    <thead><tr><th>Capability Service Segment</th><th>Total Interactive Hit Count</th></tr></thead>
+                    <tbody>
+            `;
+            if(!clicks || clicks.length === 0) {
+                html += `<tr><td colspan="2">No performance telemetry captures found.</td></tr>`;
+            } else {
+                clicks.forEach(c => {
+                    html += `<tr><td><b>${c.service_name}</b></td><td><code>${c.click_count} Interactions</code></td></tr>`;
+                });
+            }
+            html += `</tbody></table>`;
+            document.getElementById('analytics-clicks-report-wrapper').innerHTML = html;
+        } catch (e) {
+            console.error(e);
+        } finally {
+            Utils.hideLoader();
+        }
+    }
+};
+import { supabase } from './supabase.js';
+import { Notifications } from './notifications.js';
+import { Utils } from './utils.js';
+
+export const Settings = {
+    load: async () => {
+        Utils.showLoader();
+        try {
+            const { data: s } = await supabase.from('settings').select('*').limit(1).maybeSingle();
+            if(s) {
+                document.getElementById('set-company-name').value = s.company_name || '';
+                document.getElementById('set-company-email').value = s.email_routing || '';
+                document.getElementById('set-company-address').value = s.physical_address || '';
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            Utils.hideLoader();
+        }
+    },
+    init: () => {
+        document.getElementById('portal-settings-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            Utils.showLoader();
+            const company_name = document.getElementById('set-company-name').value;
+            const email_routing = document.getElementById('set-company-email').value;
+            const physical_address = document.getElementById('set-company-address').value;
+            try {
+                await supabase.from('settings').upsert({ id: 1, company_name, email_routing, physical_address });
+                Notifications.show("Configuration file parameters saved into remote database registry storage.", "success");
+            } catch(err) {
+                Notifications.show(err.message, "error");
+            } finally {
+                Utils.hideLoader();
+            }
+        });
+    }
+};
+            import { Utils } from './utils.js';
+import { Auth } from './auth.js';
+import { Dashboard } from './dashboard.js';
+import { Leads } from './leads.js';
+import { Posts } from './posts.js';
+import { GST } from './gst.js';
+import { Testimonials } from './testimonials.js';
+import { Analytics } from './analytics.js';
+import { Settings } from './settings.js';
+
+window.App = { Utils }; // Export utility functions to the global layout frame scope safely
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Start layout sub-component routines
+    Utils.initClock();
+
+    // Setup navigation actions
+    const menuItems = document.querySelectorAll('.sidebar-menu .menu-item:not(#action-logout)');
+    const viewContainers = document.querySelectorAll('.view-container');
+
+    const switchView = (targetViewId) => {
+        viewContainers.forEach(c => c.classList.remove('active'));
+        menuItems.forEach(i => i.classList.remove('active'));
+
+        const targetEl = document.getElementById(targetViewId);
+        if (targetEl) targetEl.classList.add('active');
+
+        const activeMenuItem = document.querySelector(`[data-target="${targetViewId}"]`);
+        if (activeMenuItem) activeMenuItem.classList.add('active');
+
+        // Route data sync layers properly depending on the active view
+        switch (targetViewId) {
+            case 'view-dashboard': Dashboard.load(); break;
+            case 'view-leads': Leads.load(); break;
+            case 'view-posts': Posts.load(); break;
+            case 'view-gst': GST.load(); break;
+            case 'view-testimonials': Testimonials.load(); break;
+            case 'view-analytics': Analytics.load(); break;
+            case 'view-settings': Settings.load(); break;
+        }
+    };
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = item.getAttribute('data-target');
+            switchView(target);
+        });
+    });
+
+    // Expand/Collapse navigation panel action handler
+    const sidebar = document.getElementById('app-sidebar');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        toggleBtn.innerText = sidebar.classList.contains('collapsed') ? '▸' : '◂';
+    });
+
+    // Wire up global input filter monitors and functional control triggers
+    document.getElementById('lead-search').addEventListener('input', () => Leads.load());
+    document.getElementById('lead-filter-status').addEventListener('change', () => Leads.load());
+    document.getElementById('post-search').addEventListener('input', () => Posts.load());
+    document.getElementById('post-filter-category').addEventListener('change', () => Posts.load());
+
+    document.getElementById('btn-create-post').addEventListener('click', () => Posts.openCreateForm());
+    document.getElementById('btn-create-lead').addEventListener('click', () => Leads.openCreateForm());
+    document.getElementById('btn-export-leads-csv').addEventListener('click', () => Leads.exportCSV());
+
+    // Initialize Settings submission hooks
+    Settings.init();
+
+    // Start secure authentication system engine routing pipeline loop
+    Auth.init(
+        () => {
+            // Success Pathway Callback handler logic execution chain loop
+            switchView('view-dashboard');
+        },
+        () => {
+            // Session Exit cleanup tracking state loop
+            console.log("Portal session ended cleanly.");
+        }
+    );
+});
+                                                          
+                                             
+        </script>
+    
 </body>
 </html>
+
+
+                

@@ -381,48 +381,7 @@ export const Storage = {
         }
     }
 };
-            // js/auth.js
-import { Notifications } from './notifications.js';
-import { Utils } from './utils.js';
-
-export const Auth = {
-    init: (onSuccess, onLogout) => {
-        const form = document.getElementById('system-login-form');
-        const logoutAction = document.getElementById('action-logout');
-
-        if (form) {
-            // Form submission event routing handler hook
-            form.removeAttribute('onsubmit'); // Kisi bhi inline conflict block ko remove karne ke liye
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                Utils.showLoader();
-                
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value.trim();
-
-                // Exact Master System Verification Credentials
-                const MASTER_EMAIL = "p.a.solutions9598@gmail.com";
-                const MASTER_PASSWORD = "aqibsolutions@9598";
-
-                if (email === MASTER_EMAIL && password === MASTER_PASSWORD) {
-                    // Force session status entry in client memory system
-                    localStorage.setItem("prime_auth_session", "authenticated_secure_token");
-                    
-                    // UI Management Interface rendering layers toggles execution
-                    document.getElementById('login-screen').style.display = 'none';
-                    document.getElementById('login-screen').classList.add('hidden');
-                    document.getElementById('app-shell').classList.add('active');
-                    document.getElementById('app-shell').style.opacity = '1';
-                    document.getElementById('app-shell').style.pointerEvents = 'all';
-
-                    Notifications.show("Administrative Access Granted. Initializing Terminals.", "success");
-                    Utils.hideLoader();
-                    
-                    if (typeof onSuccess === 'function') {
-                        onSuccess(); // Dashboard metrics data updates array dynamically load karega
-                    }
-                } else {
-                    Utils.hideLoader();
+            
 // js/auth.js
 import { Notifications } from './notifications.js';
 import { Utils } from './utils.js';

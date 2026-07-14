@@ -778,7 +778,366 @@
 
     </div>
 
+<!-- ===================================================== -->
+<!-- SERVICES PAGE -->
+<!-- ===================================================== -->
 
+<section id="servicesPage" class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Services Management</h1>
+
+            <p>Manage all services displayed on the website.</p>
+
+        </div>
+
+        <button id="newServiceBtn">
+
+            ➕ Add Service
+
+        </button>
+
+    </div>
+
+    <!-- Toolbar -->
+
+    <div class="toolbar">
+
+        <input
+            type="search"
+            id="serviceSearch"
+            placeholder="Search services...">
+
+        <select id="serviceCategoryFilter">
+
+            <option value="">All Categories</option>
+
+            <option value="Accounting">Accounting</option>
+
+            <option value="GST">GST</option>
+
+            <option value="Income Tax">Income Tax</option>
+
+            <option value="TDS">TDS</option>
+
+            <option value="Business Registration">Business Registration</option>
+
+            <option value="Payroll">Payroll</option>
+
+        </select>
+
+        <select id="serviceStatusFilter">
+
+            <option value="">All Status</option>
+
+            <option value="active">Active</option>
+
+            <option value="inactive">Inactive</option>
+
+        </select>
+
+        <select id="servicePriceFilter">
+
+            <option value="">All Prices</option>
+
+            <option value="500">₹500</option>
+
+            <option value="1000">₹1,000</option>
+
+            <option value="1500">₹1,500</option>
+
+            <option value="2000">₹2,000</option>
+
+            <option value="5000">₹5,000</option>
+
+            <option value="8000">₹8,000</option>
+
+        </select>
+
+    </div>
+
+    <!-- Services Table -->
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Image</th>
+
+                    <th>Service</th>
+
+                    <th>Category</th>
+
+                    <th>Price</th>
+
+                    <th>Status</th>
+
+                    <th>Featured</th>
+
+                    <th>Date</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="serviceTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+    <!-- ===================================================== -->
+<!-- SETTINGS PAGE -->
+<!-- ===================================================== -->
+
+<section id="settingsPage" class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Settings</h1>
+
+            <p>Manage company information and website settings.</p>
+
+        </div>
+
+        <div class="page-actions">
+
+            <button id="refreshSettingsBtn">
+
+                🔄 Refresh
+
+            </button>
+
+            <button id="saveSettingsBtn">
+
+                💾 Save Settings
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="settings-grid">
+
+        <!-- Company Information -->
+
+        <div class="settings-card">
+
+            <h2>Company Information</h2>
+
+            <div class="form-group">
+
+                <label>Company Name</label>
+
+                <input
+                    type="text"
+                    id="companyName">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Tagline</label>
+
+                <input
+                    type="text"
+                    id="companyTagline">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Company Description</label>
+
+                <textarea
+                    id="companyDescription"
+                    rows="5"></textarea>
+
+            </div>
+
+        </div>
+
+        <!-- Contact Information -->
+
+        <div class="settings-card">
+
+            <h2>Contact Information</h2>
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="companyEmail">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Phone</label>
+
+                <input
+                    type="text"
+                    id="companyPhone">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Website</label>
+
+                <input
+                    type="url"
+                    id="companyWebsite">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Address</label>
+
+                <textarea
+                    id="companyAddress"
+                    rows="4"></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+                    </section>
+    <!-- ===================================================== -->
+<!-- LEAD VIEW MODAL -->
+<!-- ===================================================== -->
+
+<div id="leadModal" class="modal">
+
+    <div class="modal-content">
+
+        <button id="closeLeadModal" class="modal-close">
+
+            ✕
+
+        </button>
+
+        <div id="leadModalBody"></div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- POST VIEW MODAL -->
+<!-- ===================================================== -->
+
+<div id="postModal" class="modal">
+
+    <div class="modal-content">
+
+        <button id="closePostModal" class="modal-close">
+
+            ✕
+
+        </button>
+
+        <div id="postModalBody"></div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- SERVICE VIEW MODAL -->
+<!-- ===================================================== -->
+
+<div id="serviceModal" class="modal">
+
+    <div class="modal-content">
+
+        <button id="closeServiceModal" class="modal-close">
+
+            ✕
+
+        </button>
+
+        <div id="serviceModalBody"></div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- DELETE CONFIRM MODAL -->
+<!-- ===================================================== -->
+
+<div id="deleteModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>
+
+            Delete Confirmation
+
+        </h2>
+
+        <p>
+
+            Are you sure you want to delete this item?
+
+        </p>
+
+        <div class="modal-actions">
+
+            <button id="confirmDeleteBtn">
+
+                Delete
+
+            </button>
+
+            <button id="cancelDeleteBtn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- TOAST -->
+<!-- ===================================================== -->
+
+<div id="toastContainer"></div>
+
+<!-- ===================================================== -->
+<!-- GLOBAL LOADER -->
+<!-- ===================================================== -->
+
+<div id="globalLoader">
+
+    <div class="loader-spinner"></div>
+
+</div>
     <!-- ===================================================== -->
     <!-- GLOBAL LOADER -->
     <!-- ===================================================== -->

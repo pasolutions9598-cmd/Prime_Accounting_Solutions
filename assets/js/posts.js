@@ -146,3 +146,188 @@ data-id="${post.id}">
     });
 
 }
+
+/* ==========================================================
+   SEARCH & FILTER
+========================================================== */
+
+function applyFilters() {
+
+    let filtered = [...allPosts];
+
+    const keyword =
+        postSearch?.value
+            .trim()
+            .toLowerCase() || "";
+
+    const category =
+        categoryFilter?.value || "";
+
+    const status =
+        statusFilter?.value || "";
+
+    if (keyword) {
+
+        filtered = filtered.filter(post =>
+
+            (post.title || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (post.category || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (post.type || "")
+                .toLowerCase()
+                .includes(keyword)
+
+        );
+
+    }
+
+    if (category) {
+
+        filtered = filtered.filter(
+
+            post => post.category === category
+
+        );
+
+    }
+
+    if (status) {
+
+        filtered = filtered.filter(
+
+            post => post.status === status
+
+        );
+
+    }
+
+    renderPosts(filtered);
+
+}
+
+/* ==========================================================
+   DELETE POST
+========================================================== */
+
+async function deletePost(id) {
+
+    if (!confirm("Delete this post?"))
+        return;
+
+    try {
+
+        const { error } = await supabase
+
+            .from("posts")
+
+            .delete()
+
+            .eq("id", id);
+
+        if (error) throw error;
+
+        await loadPosts();
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Unable to delete post.");
+
+    }
+
+}
+
+/* ==========================================================
+   TABLE EVENTS
+========================================================== */
+
+document.addEventListener("click", e => {
+
+    const btn = e.target;
+
+    if (btn.classList.contains("deletePostBtn")) {
+
+        deletePost(btn.dataset.id);
+
+    }
+
+    if (btn.classList.contains("editPostBtn")) {
+
+        alert(
+            "Edit Post feature will be connected after the Post Editor modal is added."
+        );
+
+    }
+
+});
+
+/* ==========================================================
+   FILTER EVENTS
+========================================================== */
+
+postSearch?.addEventListener(
+    "input",
+    applyFilters
+);
+
+categoryFilter?.addEventListener(
+    "change",
+    applyFilters
+);
+
+statusFilter?.addEventListener(
+    "change",
+    applyFilters
+);
+
+/* ==========================================================
+   NEW POST BUTTON
+========================================================== */
+
+newPostBtn?.addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Post Editor modal will be added in the next step."
+        );
+
+    }
+);
+
+/* ==========================================================
+   INITIALIZE
+========================================================== */
+
+export async function initPosts() {
+
+    console.log(
+        "Posts Module Initialized"
+    );
+
+    await loadPosts();
+
+}
+
+/* ==========================================================
+   AUTO START
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initPosts();
+
+    }
+);

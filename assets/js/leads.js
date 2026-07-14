@@ -1,6 +1,7 @@
 /* ===========================================================
    Prime Accounting Solutions
    leads.js
+   Production Ready
    Part 1
 =========================================================== */
 
@@ -10,20 +11,14 @@ import { supabase } from "./supabase.js";
    DOM ELEMENTS
 =========================================================== */
 
-const leadsTableBody =
-    document.getElementById("leadsTableBody");
+const leadTableBody =
+    document.getElementById("leadTableBody");
 
-const totalLeadsCard =
-    document.getElementById("totalLeads");
+const leadSearch =
+    document.getElementById("leadSearch");
 
-const newLeadsCard =
-    document.getElementById("newLeads");
-
-const contactedLeadsCard =
-    document.getElementById("contactedLeads");
-
-const convertedLeadsCard =
-    document.getElementById("convertedLeads");
+const leadStatusFilter =
+    document.getElementById("leadStatusFilter");
 
 const refreshLeadsBtn =
     document.getElementById("refreshLeadsBtn");
@@ -32,27 +27,7 @@ const refreshLeadsBtn =
    GLOBAL STATE
 =========================================================== */
 
-let leadsData = [];
-
-/* ===========================================================
-   FORMAT DATE
-=========================================================== */
-
-function formatDate(date) {
-
-    if (!date) return "-";
-
-    return new Date(date).toLocaleDateString("en-IN", {
-
-        day: "2-digit",
-
-        month: "short",
-
-        year: "numeric"
-
-    });
-
-}
+let allLeads = [];
 
 /* ===========================================================
    LOAD LEADS
@@ -60,450 +35,7 @@ function formatDate(date) {
 
 export async function loadLeads() {
 
-    try {
-
-        const { data, error } = await supabase
-
-            .from("leads")
-
-            .select("*")
-
-            .order("created_at", {
-
-                ascending: false
-
-            });
-
-        if (error) throw error;
-
-        leadsData = data || [];
-
-        renderLeadsTable();
-
-        updateLeadStats();
-
-    }
-
-    catch (err) {
-
-        console.error("Load Leads Error :", err);
-
-    }
-
-}
-
-/* ===========================================================
-   RENDER TABLE
-=========================================================== */
-
-function renderLeadsTable() {
-
-    if (!leadsTableBody) return;
-
-    leadsTableBody.innerHTML = "";
-
-    if (!leadsData.length) {
-
-        leadsTableBody.innerHTML =
-
-        `<tr>
-
-            <td colspan="8">
-
-                No Leads Found
-
-            </td>
-
-        </tr>`;
-
-        return;
-
-    }
-
-    leadsData.forEach(lead => {
-
-        leadsTableBody.innerHTML += `
-
-        <tr>
-
-            <td>${lead.name || "-"}</td>
-
-            <td>${lead.phone || "-"}</td>
-
-            <td>${lead.email || "-"}</td>
-
-            <td>${lead.service || "-"}</td>
-
-            <td>${lead.status || "New"}</td>
-
-            <td>${formatDate(lead.created_at)}</td>
-
-            <td>
-
-                <button
-                    class="viewLeadBtn"
-                    data-id="${lead.id}">
-
-                    View
-
-                </button>
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-}
-
-/* ===========================================================
-   UPDATE STATS
-=========================================================== */
-
-function updateLeadStats() {
-
-    if (totalLeadsCard)
-
-        totalLeadsCard.textContent =
-
-            leadsData.length;
-
-    if (newLeadsCard)
-
-        newLeadsCard.textContent =
-
-            leadsData.filter(
-
-                x => x.status === "New"
-
-            ).length;
-
-    if (contactedLeadsCard)
-
-        contactedLeadsCard.textContent =
-
-            leadsData.filter(
-
-                x => x.status === "Contacted"
-
-            ).length;
-
-    if (convertedLeadsCard)
-
-        convertedLeadsCard.textContent =
-
-            leadsData.filter(
-
-                x => x.status === "Converted"
-
-            ).length;
-
-}
-
-/* ===========================================================
-   REFRESH
-=========================================================== */
-
-export async function refreshLeads() {
-
-    await loadLeads();
-
-}
-
-/* ===========================================================
-   EVENTS
-=========================================================== */
-
-if (refreshLeadsBtn) {
-
-    refreshLeadsBtn.addEventListener(
-
-        "click",
-
-        refreshLeads
-
-    );
-
-}
-
-/* ===========================================================
-   INIT
-=========================================================== */
-
-export async function initLeads() {
-
-    console.log(
-
-        "Leads Module Loaded"
-
-    );
-
-    await loadLeads();
-
-}
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    () => {
-
-        initLeads();
-
-    }
-
-);
-/* ===========================================================
-   LEADS.JS
-   PART 2A
-   Search & Status Filter
-=========================================================== */
-
-/* ===========================================================
-   DOM ELEMENTS
-=========================================================== */
-
-const leadSearchInput =
-    document.getElementById("leadSearch");
-
-const leadStatusFilter =
-    document.getElementById("leadStatusFilter");
-
-/* ===========================================================
-   FILTERED DATA
-=========================================================== */
-
-let filteredLeads = [];
-
-/* ===========================================================
-   APPLY FILTERS
-=========================================================== */
-
-function applyLeadFilters() {
-
-    const searchText =
-        (leadSearchInput?.value || "")
-        .trim()
-        .toLowerCase();
-
-    const status =
-        leadStatusFilter?.value || "";
-
-    filteredLeads = leadsData.filter(lead => {
-
-        const matchSearch =
-
-            !searchText ||
-
-            (lead.name || "")
-                .toLowerCase()
-                .includes(searchText) ||
-
-            (lead.email || "")
-                .toLowerCase()
-                .includes(searchText) ||
-
-            (lead.phone || "")
-                .toLowerCase()
-                .includes(searchText) ||
-
-            (lead.service || "")
-                .toLowerCase()
-                .includes(searchText);
-
-        const matchStatus =
-
-            !status ||
-
-            (lead.status || "")
-                .toLowerCase() ===
-            status.toLowerCase();
-
-        return matchSearch && matchStatus;
-
-    });
-
-    renderFilteredLeads();
-
-}
-
-/* ===========================================================
-   RENDER FILTERED TABLE
-=========================================================== */
-
-function renderFilteredLeads() {
-
-    if (!leadsTableBody) return;
-
-    leadsTableBody.innerHTML = "";
-
-    if (!filteredLeads.length) {
-
-        leadsTableBody.innerHTML = `
-
-        <tr>
-
-            <td colspan="8">
-
-                No Matching Leads Found
-
-            </td>
-
-        </tr>
-
-        `;
-
-        return;
-
-    }
-
-    filteredLeads.forEach(lead => {
-
-        leadsTableBody.innerHTML += `
-
-        <tr>
-
-            <td>${lead.name || "-"}</td>
-
-            <td>${lead.phone || "-"}</td>
-
-            <td>${lead.email || "-"}</td>
-
-            <td>${lead.service || "-"}</td>
-
-            <td>${lead.status || "New"}</td>
-
-            <td>${formatDate(lead.created_at)}</td>
-
-            <td>
-
-                <button
-                    class="viewLeadBtn"
-                    data-id="${lead.id}">
-
-                    View
-
-                </button>
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-}
-
-/* ===========================================================
-   SEARCH EVENT
-=========================================================== */
-
-if (leadSearchInput) {
-
-    leadSearchInput.addEventListener(
-
-        "input",
-
-        applyLeadFilters
-
-    );
-
-}
-
-/* ===========================================================
-   STATUS FILTER EVENT
-=========================================================== */
-
-if (leadStatusFilter) {
-
-    leadStatusFilter.addEventListener(
-
-        "change",
-
-        applyLeadFilters
-
-    );
-
-}
-
-/* ===========================================================
-   UPDATE LOAD FUNCTION
-=========================================================== */
-
-const oldLoadLeads = loadLeads;
-
-loadLeads = async function () {
-
-    await oldLoadLeads();
-
-    filteredLeads = [...leadsData];
-
-    renderFilteredLeads();
-
-};
-/* ===========================================================
-   LEADS.JS
-   PART 2B
-   View Lead Modal
-=========================================================== */
-
-/* ===========================================================
-   DOM ELEMENTS
-=========================================================== */
-
-const leadModal =
-    document.getElementById("leadModal");
-
-const leadModalBody =
-    document.getElementById("leadModalBody");
-
-const closeLeadModalBtn =
-    document.getElementById("closeLeadModal");
-
-/* ===========================================================
-   OPEN MODAL
-=========================================================== */
-
-function openLeadModal() {
-
-    if (!leadModal) return;
-
-    leadModal.style.display = "flex";
-
-}
-
-/* ===========================================================
-   CLOSE MODAL
-=========================================================== */
-
-function closeLeadModal() {
-
-    if (!leadModal) return;
-
-    leadModal.style.display = "none";
-
-}
-
-if (closeLeadModalBtn) {
-
-    closeLeadModalBtn.addEventListener(
-
-        "click",
-
-        closeLeadModal
-
-    );
-
-}
-
-/* ===========================================================
-   VIEW LEAD
-=========================================================== */
-
-export async function viewLead(id) {
+    if (!leadTableBody) return;
 
     try {
 
@@ -519,87 +51,207 @@ export async function viewLead(id) {
 
             .select("*")
 
-            .eq("id", id)
+            .order("created_at", {
 
-            .single();
+                ascending: false
+
+            });
 
         if (error) throw error;
 
-        if (!leadModalBody) return;
+        allLeads = data || [];
 
-        leadModalBody.innerHTML = `
+        renderLeads(allLeads);
 
-            <div class="lead-details">
+    } catch (err) {
 
-                <div class="detail-row">
-                    <strong>Name</strong>
-                    <span>${data.name || "-"}</span>
-                </div>
+        console.error(err);
 
-                <div class="detail-row">
-                    <strong>Phone</strong>
-                    <span>${data.phone || "-"}</span>
-                </div>
+        leadTableBody.innerHTML = `
 
-                <div class="detail-row">
-                    <strong>Email</strong>
-                    <span>${data.email || "-"}</span>
-                </div>
+<tr>
 
-                <div class="detail-row">
-                    <strong>Service</strong>
-                    <span>${data.service || "-"}</span>
-                </div>
+<td colspan="7">
 
-                <div class="detail-row">
-                    <strong>Status</strong>
-                    <span>${data.status || "New"}</span>
-                </div>
+Unable to load leads.
 
-                <div class="detail-row">
-                    <strong>Company</strong>
-                    <span>${data.company || "-"}</span>
-                </div>
+</td>
 
-                <div class="detail-row">
-                    <strong>Message</strong>
-                    <p>${data.message || "-"}</p>
-                </div>
+</tr>
 
-                <div class="detail-row">
-                    <strong>Created</strong>
-                    <span>
-
-                        ${new Date(
-                            data.created_at
-                        ).toLocaleString("en-IN")}
-
-                    </span>
-                </div>
-
-            </div>
-
-        `;
-
-        openLeadModal();
+`;
 
     }
 
-    catch (err) {
+}
 
-        console.error(
+/* ===========================================================
+   RENDER TABLE
+=========================================================== */
 
-            "View Lead Error :",
+function renderLeads(leads) {
 
-            err
+    if (!leadTableBody) return;
+
+    if (!leads.length) {
+
+        leadTableBody.innerHTML = `
+
+<tr>
+
+<td colspan="7">
+
+No Leads Found
+
+</td>
+
+</tr>
+
+`;
+
+        return;
+
+    }
+
+    leadTableBody.innerHTML = "";
+
+    leads.forEach(lead => {
+
+        leadTableBody.innerHTML += `
+
+<tr>
+
+<td>${lead.name ?? "-"}</td>
+
+<td>${lead.company ?? "-"}</td>
+
+<td>${lead.phone ?? "-"}</td>
+
+<td>${lead.email ?? "-"}</td>
+
+<td>${lead.status ?? "New"}</td>
+
+<td>
+
+${lead.created_at
+? new Date(
+lead.created_at
+).toLocaleDateString()
+: "-"}
+
+</td>
+
+<td>
+
+<button
+class="editLeadBtn"
+data-id="${lead.id}">
+Edit
+</button>
+
+<button
+class="deleteLeadBtn"
+data-id="${lead.id}">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+    });
+
+}
+/* ===========================================================
+   SEARCH
+=========================================================== */
+
+function applyFilters() {
+
+    let filtered = [...allLeads];
+
+    const keyword =
+        leadSearch?.value
+            .trim()
+            .toLowerCase() || "";
+
+    const status =
+        leadStatusFilter?.value || "";
+
+    if (keyword) {
+
+        filtered = filtered.filter(lead =>
+
+            (lead.name || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (lead.company || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (lead.phone || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (lead.email || "")
+                .toLowerCase()
+                .includes(keyword)
 
         );
 
-        alert(
+    }
 
-            "Unable to load lead."
+    if (status) {
+
+        filtered = filtered.filter(
+
+            lead => lead.status === status
 
         );
+
+    }
+
+    renderLeads(filtered);
+
+}
+
+/* ===========================================================
+   DELETE LEAD
+=========================================================== */
+
+async function deleteLead(id) {
+
+    if (!confirm("Delete this lead?"))
+        return;
+
+    try {
+
+        const { error } = await supabase
+
+            .from("leads")
+
+            .delete()
+
+            .eq("id", id);
+
+        if (error) throw error;
+
+        await loadLeads();
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Unable to delete lead.");
 
     }
 
@@ -609,222 +261,72 @@ export async function viewLead(id) {
    TABLE EVENTS
 =========================================================== */
 
-document.addEventListener(
+document.addEventListener("click", e => {
 
-    "click",
+    const btn = e.target;
 
-    (e) => {
+    if (btn.classList.contains("deleteLeadBtn")) {
 
-        const btn =
-            e.target.closest(".viewLeadBtn");
-
-        if (!btn) return;
-
-        viewLead(btn.dataset.id);
+        deleteLead(btn.dataset.id);
 
     }
 
-);
+    if (btn.classList.contains("editLeadBtn")) {
 
-/* ===========================================================
-   ESC KEY CLOSE
-=========================================================== */
-
-document.addEventListener(
-
-    "keydown",
-
-    (e) => {
-
-        if (
-
-            e.key === "Escape"
-
-        ) {
-
-            closeLeadModal();
-
-        }
-
-    }
-
-);
-
-/* ===========================================================
-   OUTSIDE CLICK
-=========================================================== */
-
-if (leadModal) {
-
-    leadModal.addEventListener(
-
-        "click",
-
-        (e) => {
-
-            if (
-
-                e.target === leadModal
-
-            ) {
-
-                closeLeadModal();
-
-            }
-
-        }
-
-    );
-
-                      }
-/* ===========================================================
-   LEADS.JS
-   PART 2C
-   WhatsApp • Call • Email Actions
-=========================================================== */
-
-/* ===========================================================
-   OPEN WHATSAPP
-=========================================================== */
-
-export function openWhatsApp(phone) {
-
-    if (!phone) {
-
-        alert("Phone number not available.");
-
-        return;
-
-    }
-
-    const cleanPhone = phone.replace(/\D/g, "");
-
-    const message = encodeURIComponent(
-
-        "Hello,\n\nThank you for contacting Prime Accounting Solutions.\nHow can we help you today?"
-
-    );
-
-    window.open(
-
-        `https://wa.me/${cleanPhone}?text=${message}`,
-
-        "_blank"
-
-    );
-
-}
-
-/* ===========================================================
-   CALL LEAD
-=========================================================== */
-
-export function callLead(phone) {
-
-    if (!phone) {
-
-        alert("Phone number not available.");
-
-        return;
-
-    }
-
-    window.location.href = `tel:${phone}`;
-
-}
-
-/* ===========================================================
-   EMAIL LEAD
-=========================================================== */
-
-export function emailLead(email) {
-
-    if (!email) {
-
-        alert("Email address not available.");
-
-        return;
-
-    }
-
-    const subject = encodeURIComponent(
-
-        "Prime Accounting Solutions"
-
-    );
-
-    const body = encodeURIComponent(
-
-`Hello,
-
-Thank you for contacting Prime Accounting Solutions.
-
-Please let us know how we can assist you.
-
-Regards,
-Prime Accounting Solutions
-https://pasolutions9598-cmd.github.io/Prime_Accounting_Solutions/`
-
-    );
-
-    window.location.href =
-
-        `mailto:${email}?subject=${subject}&body=${body}`;
-
-}
-
-/* ===========================================================
-   ACTION BUTTON EVENTS
-=========================================================== */
-
-document.addEventListener("click", (e) => {
-
-    /* WhatsApp */
-
-    const whatsappBtn = e.target.closest(".whatsappLeadBtn");
-
-    if (whatsappBtn) {
-
-        openWhatsApp(
-
-            whatsappBtn.dataset.phone
-
+        alert(
+            "Edit Lead modal will be connected in the next update."
         );
-
-        return;
-
-    }
-
-    /* Call */
-
-    const callBtn = e.target.closest(".callLeadBtn");
-
-    if (callBtn) {
-
-        callLead(
-
-            callBtn.dataset.phone
-
-        );
-
-        return;
-
-    }
-
-    /* Email */
-
-    const emailBtn = e.target.closest(".emailLeadBtn");
-
-    if (emailBtn) {
-
-        emailLead(
-
-            emailBtn.dataset.email
-
-        );
-
-        return;
 
     }
 
 });
+
+/* ===========================================================
+   FILTER EVENTS
+=========================================================== */
+
+leadSearch?.addEventListener(
+    "input",
+    applyFilters
+);
+
+leadStatusFilter?.addEventListener(
+    "change",
+    applyFilters
+);
+
+/* ===========================================================
+   REFRESH BUTTON
+=========================================================== */
+
+refreshLeadsBtn?.addEventListener(
+    "click",
+    loadLeads
+);
+
+/* ===========================================================
+   INITIALIZE
+=========================================================== */
+
+export async function initLeads() {
+
+    console.log(
+        "Leads Module Initialized"
+    );
+
+    await loadLeads();
+
+}
+
+/* ===========================================================
+   AUTO START
+=========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initLeads();
+
+    }
+);

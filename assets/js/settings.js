@@ -1,6 +1,7 @@
 /* ===========================================================
    Prime Accounting Solutions
    settings.js
+   Production Ready
    Part 1
 =========================================================== */
 
@@ -16,6 +17,9 @@ const companyName =
 const companyTagline =
     document.getElementById("companyTagline");
 
+const companyDescription =
+    document.getElementById("companyDescription");
+
 const companyEmail =
     document.getElementById("companyEmail");
 
@@ -28,20 +32,11 @@ const companyWebsite =
 const companyAddress =
     document.getElementById("companyAddress");
 
-const companyDescription =
-    document.getElementById("companyDescription");
-
-const saveSettingsBtn =
-    document.getElementById("saveSettingsBtn");
-
 const refreshSettingsBtn =
     document.getElementById("refreshSettingsBtn");
 
-/* ===========================================================
-   GLOBAL STATE
-=========================================================== */
-
-let settingsData = {};
+const saveSettingsBtn =
+    document.getElementById("saveSettingsBtn");
 
 /* ===========================================================
    LOAD SETTINGS
@@ -51,7 +46,13 @@ export async function loadSettings() {
 
     try {
 
-        const { data, error } = await supabase
+        const {
+
+            data,
+
+            error
+
+        } = await supabase
 
             .from("settings")
 
@@ -63,59 +64,37 @@ export async function loadSettings() {
 
         if (error) throw error;
 
-        settingsData = data || {};
+        if (!data) return;
 
-        renderSettings();
+        companyName.value =
+            data.company_name || "";
 
-    }
+        companyTagline.value =
+            data.tagline || "";
 
-    catch (err) {
+        companyDescription.value =
+            data.description || "";
+
+        companyEmail.value =
+            data.email || "";
+
+        companyPhone.value =
+            data.phone || "";
+
+        companyWebsite.value =
+            data.website || "";
+
+        companyAddress.value =
+            data.address || "";
+
+    } catch (err) {
 
         console.error(
-
-            "Settings Load Error:",
-
+            "Settings Load Error",
             err
-
         );
 
     }
-
-}
-
-/* ===========================================================
-   RENDER SETTINGS
-=========================================================== */
-
-function renderSettings() {
-
-    if (companyName)
-        companyName.value =
-            settingsData.company_name || "";
-
-    if (companyTagline)
-        companyTagline.value =
-            settingsData.tagline || "";
-
-    if (companyEmail)
-        companyEmail.value =
-            settingsData.email || "";
-
-    if (companyPhone)
-        companyPhone.value =
-            settingsData.phone || "";
-
-    if (companyWebsite)
-        companyWebsite.value =
-            settingsData.website || "";
-
-    if (companyAddress)
-        companyAddress.value =
-            settingsData.address || "";
-
-    if (companyDescription)
-        companyDescription.value =
-            settingsData.description || "";
 
 }
 
@@ -129,26 +108,28 @@ export async function saveSettings() {
 
         const payload = {
 
+            id: 1,
+
             company_name:
-                companyName?.value.trim(),
+                companyName.value,
 
             tagline:
-                companyTagline?.value.trim(),
-
-            email:
-                companyEmail?.value.trim(),
-
-            phone:
-                companyPhone?.value.trim(),
-
-            website:
-                companyWebsite?.value.trim(),
-
-            address:
-                companyAddress?.value.trim(),
+                companyTagline.value,
 
             description:
-                companyDescription?.value.trim()
+                companyDescription.value,
+
+            email:
+                companyEmail.value,
+
+            phone:
+                companyPhone.value,
+
+            website:
+                companyWebsite.value,
+
+            address:
+                companyAddress.value
 
         };
 
@@ -156,96 +137,90 @@ export async function saveSettings() {
 
             .from("settings")
 
-            .update(payload)
-
-            .eq("id", settingsData.id);
+            .upsert(payload);
 
         if (error) throw error;
 
         alert(
-
             "Settings Saved Successfully."
-
         );
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert(
+            "Unable to save settings."
+        );
+
+    }
+
+}
+/* ===========================================================
+   REFRESH SETTINGS
+=========================================================== */
+
+refreshSettingsBtn?.addEventListener(
+    "click",
+    async () => {
 
         await loadSettings();
 
     }
-
-    catch (err) {
-
-        console.error(
-
-            "Save Settings Error:",
-
-            err
-
-        );
-
-        alert(
-
-            "Unable to save settings."
-
-        );
-
-    }
-
-}
+);
 
 /* ===========================================================
-   REFRESH
-=========================================================== */
-
-export async function refreshSettings() {
-
-    await loadSettings();
-
-}
-
-/* ===========================================================
-   EVENTS
+   SAVE SETTINGS
 =========================================================== */
 
 saveSettingsBtn?.addEventListener(
-
     "click",
+    async () => {
 
-    saveSettings
+        await saveSettings();
 
-);
-
-refreshSettingsBtn?.addEventListener(
-
-    "click",
-
-    refreshSettings
-
+    }
 );
 
 /* ===========================================================
-   INIT
+   RESET FORM
+=========================================================== */
+
+export function resetSettingsForm() {
+
+    companyName.value = "";
+    companyTagline.value = "";
+    companyDescription.value = "";
+    companyEmail.value = "";
+    companyPhone.value = "";
+    companyWebsite.value = "";
+    companyAddress.value = "";
+
+}
+
+/* ===========================================================
+   INITIALIZE SETTINGS
 =========================================================== */
 
 export async function initSettings() {
 
     console.log(
-
-        "Settings Module Loaded"
-
+        "Settings Module Initialized"
     );
 
     await loadSettings();
 
 }
 
+/* ===========================================================
+   AUTO START
+=========================================================== */
+
 document.addEventListener(
-
     "DOMContentLoaded",
-
     () => {
 
         initSettings();
 
     }
-
 );

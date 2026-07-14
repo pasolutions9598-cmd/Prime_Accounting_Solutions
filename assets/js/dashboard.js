@@ -433,9 +433,3 @@ initDashboard = async function () {
     await loadDashboardData();
 
 };
-const oldInitDashboard = initDashboard;
-
-initDashboard = async function () {
-    await oldInitDashboard();
-    await loadDashboardData();
-};

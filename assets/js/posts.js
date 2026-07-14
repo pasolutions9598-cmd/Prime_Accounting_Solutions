@@ -532,3 +532,526 @@ export function refreshFilteredPosts() {
     applyPostFilters();
 
       }
+/* ===========================================================
+   POSTS.JS
+   PART 2A
+   Search + Filters (Production Ready)
+=========================================================== */
+
+/* ===========================================================
+   DOM ELEMENTS
+=========================================================== */
+
+const postSearchInput =
+    document.getElementById("postSearch");
+
+const categoryFilter =
+    document.getElementById("postCategoryFilter");
+
+const statusFilter =
+    document.getElementById("postStatusFilter");
+
+const typeFilter =
+    document.getElementById("postTypeFilter");
+
+/* ===========================================================
+   FILTERED POSTS
+=========================================================== */
+
+let filteredPosts = [];
+
+/* ===========================================================
+   APPLY FILTERS
+=========================================================== */
+
+export function applyPostFilters() {
+
+    const keyword =
+        (postSearchInput?.value || "")
+        .trim()
+        .toLowerCase();
+
+    const category =
+        categoryFilter?.value || "";
+
+    const status =
+        statusFilter?.value || "";
+
+    const type =
+        typeFilter?.value || "";
+
+    filteredPosts = postsData.filter(post => {
+
+        const matchKeyword =
+
+            !keyword ||
+
+            (post.title || "")
+                .toLowerCase()
+                .includes(keyword) ||
+
+            (post.category || "")
+                .toLowerCase()
+                .includes(keyword) ||
+
+            (post.content || "")
+                .toLowerCase()
+                .includes(keyword);
+
+        const matchCategory =
+
+            !category ||
+
+            post.category === category;
+
+        const matchStatus =
+
+            !status ||
+
+            post.status === status;
+
+        const matchType =
+
+            !type ||
+
+            post.type === type;
+
+        return (
+
+            matchKeyword &&
+            matchCategory &&
+            matchStatus &&
+            matchType
+
+        );
+
+    });
+
+    renderFilteredPosts();
+
+}
+
+/* ===========================================================
+   RENDER FILTERED POSTS
+=========================================================== */
+
+function renderFilteredPosts() {
+
+    if (!postsTableBody) return;
+
+    postsTableBody.innerHTML = "";
+
+    if (!filteredPosts.length) {
+
+        postsTableBody.innerHTML = `
+
+            <tr>
+
+                <td colspan="7">
+
+                    No Matching Posts Found
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+    filteredPosts.forEach(post => {
+
+        postsTableBody.innerHTML += `
+
+            <tr>
+
+                <td>
+
+                    <img
+                        src="${post.image_url || ""}"
+                        width="55"
+                        height="55"
+                        style="
+                            object-fit:cover;
+                            border-radius:8px;
+                        ">
+
+                </td>
+
+                <td>${post.title || "-"}</td>
+
+                <td>${post.category || "-"}</td>
+
+                <td>${post.type || "-"}</td>
+
+                <td>
+
+                    <span class="status-badge ${post.status}">
+
+                        ${post.status}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    ${formatDate(post.created_at)}
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="viewPostBtn"
+                        data-id="${post.id}">
+
+                        👁
+
+                    </button>
+
+                    <button
+                        class="editPostBtn"
+                        data-id="${post.id}">
+
+                        ✏
+
+                    </button>
+
+                    <button
+                        class="deletePostBtn"
+                        data-id="${post.id}">
+
+                        🗑
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+/* ===========================================================
+   RESET FILTERS
+=========================================================== */
+
+export function resetPostFilters() {
+
+    if (postSearchInput)
+        postSearchInput.value = "";
+
+    if (categoryFilter)
+        categoryFilter.value = "";
+
+    if (statusFilter)
+        statusFilter.value = "";
+
+    if (typeFilter)
+        typeFilter.value = "";
+
+    filteredPosts = [...postsData];
+
+    renderFilteredPosts();
+
+}
+
+/* ===========================================================
+   EVENTS
+=========================================================== */
+
+postSearchInput?.addEventListener(
+
+    "input",
+
+    applyPostFilters
+
+);
+
+categoryFilter?.addEventListener(
+
+    "change",
+
+    applyPostFilters
+
+);
+
+statusFilter?.addEventListener(
+
+    "change",
+
+    applyPostFilters
+
+);
+
+typeFilter?.addEventListener(
+
+    "change",
+
+    applyPostFilters
+
+);
+
+/* ===========================================================
+   REFRESH FILTERS
+=========================================================== */
+
+export function refreshPostFilters() {
+
+    filteredPosts = [...postsData];
+
+    applyPostFilters();
+
+}
+/* ===========================================================
+   POSTS.JS
+   PART 2B
+   View Post Modal
+=========================================================== */
+
+/* ===========================================================
+   MODAL ELEMENTS
+=========================================================== */
+
+const postModal =
+    document.getElementById("postModal");
+
+const postModalBody =
+    document.getElementById("postModalBody");
+
+const closePostModal =
+    document.getElementById("closePostModal");
+
+/* ===========================================================
+   OPEN MODAL
+=========================================================== */
+
+function openPostModal() {
+
+    if (!postModal) return;
+
+    postModal.style.display = "flex";
+
+}
+
+/* ===========================================================
+   CLOSE MODAL
+=========================================================== */
+
+function closePostViewer() {
+
+    if (!postModal) return;
+
+    postModal.style.display = "none";
+
+}
+
+/* ===========================================================
+   VIEW POST
+=========================================================== */
+
+export async function viewPost(postId) {
+
+    try {
+
+        const { data, error } = await supabase
+
+            .from("posts")
+
+            .select("*")
+
+            .eq("id", postId)
+
+            .single();
+
+        if (error) throw error;
+
+        if (!postModalBody) return;
+
+        postModalBody.innerHTML = `
+
+            <div class="post-view-container">
+
+                <img
+                    src="${data.image_url || ""}"
+                    class="post-view-image">
+
+                <h2>
+
+                    ${data.title || "-"}
+
+                </h2>
+
+                <div class="post-meta">
+
+                    <span>
+
+                        📂 ${data.category || "-"}
+
+                    </span>
+
+                    <span>
+
+                        📰 ${data.type || "-"}
+
+                    </span>
+
+                    <span>
+
+                        📌 ${data.status || "-"}
+
+                    </span>
+
+                </div>
+
+                <div class="post-date">
+
+                    Published :
+
+                    ${new Date(
+
+                        data.created_at
+
+                    ).toLocaleString("en-IN")}
+
+                </div>
+
+                <hr>
+
+                <div class="post-content">
+
+                    ${data.content || ""}
+
+                </div>
+
+            </div>
+
+        `;
+
+        openPostModal();
+
+    }
+
+    catch (err) {
+
+        console.error(
+
+            "View Post Error :",
+
+            err
+
+        );
+
+        alert(
+
+            "Unable to load post."
+
+        );
+
+    }
+
+}
+
+/* ===========================================================
+   BUTTON EVENTS
+=========================================================== */
+
+document.addEventListener(
+
+    "click",
+
+    (e) => {
+
+        const btn =
+
+            e.target.closest(
+
+                ".viewPostBtn"
+
+            );
+
+        if (!btn) return;
+
+        viewPost(
+
+            btn.dataset.id
+
+        );
+
+    }
+
+);
+
+/* ===========================================================
+   CLOSE BUTTON
+=========================================================== */
+
+if (closePostModal) {
+
+    closePostModal.addEventListener(
+
+        "click",
+
+        closePostViewer
+
+    );
+
+}
+
+/* ===========================================================
+   ESC CLOSE
+=========================================================== */
+
+document.addEventListener(
+
+    "keydown",
+
+    (e) => {
+
+        if (
+
+            e.key === "Escape"
+
+        ) {
+
+            closePostViewer();
+
+        }
+
+    }
+
+);
+
+/* ===========================================================
+   OUTSIDE CLICK
+=========================================================== */
+
+if (postModal) {
+
+    postModal.addEventListener(
+
+        "click",
+
+        (e) => {
+
+            if (
+
+                e.target === postModal
+
+            ) {
+
+                closePostViewer();
+
+            }
+
+        }
+
+    );
+
+}

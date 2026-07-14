@@ -1,84 +1,42 @@
 /* ===========================================================
    Prime Accounting Solutions
    app.js
+   Production Ready
    Part 1
 =========================================================== */
 
 import { checkAuth, logout } from "./auth.js";
 
 /* ===========================================================
-   DOM ELEMENTS
+   DOM
 =========================================================== */
 
-const pageSections = document.querySelectorAll(".page-section");
-
-const sidebarItems = document.querySelectorAll("[data-page]");
+const loginScreen = document.getElementById("loginScreen");
+const adminWrapper = document.getElementById("adminWrapper");
 
 const sidebar = document.getElementById("sidebar");
 
-const loader = document.getElementById("loader");
+const pageContainer = document.getElementById("pageContainer");
 
-const toast = document.getElementById("toast");
+const pages = document.querySelectorAll(".page");
+
+const menuItems = document.querySelectorAll(".menu-item");
+
+const menuToggle = document.getElementById("menuToggle");
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+const loader = document.getElementById("globalLoader");
+
+const currentDate = document.getElementById("currentDate");
+
+const themeToggle = document.getElementById("themeToggle");
 
 /* ===========================================================
    GLOBAL STATE
 =========================================================== */
 
-let currentPage = "dashboardPage";
-
-/* ===========================================================
-   SHOW PAGE
-=========================================================== */
-
-export function showPage(pageId) {
-
-    pageSections.forEach(section => {
-
-        section.style.display = "none";
-
-    });
-
-    const targetPage = document.getElementById(pageId);
-
-    if (targetPage) {
-
-        targetPage.style.display = "block";
-
-        currentPage = pageId;
-
-    }
-
-    sidebarItems.forEach(item => {
-
-        item.classList.remove("active");
-
-        if (item.dataset.page === pageId) {
-
-            item.classList.add("active");
-
-        }
-
-    });
-
-}
-
-/* ===========================================================
-   SIDEBAR EVENTS
-=========================================================== */
-
-sidebarItems.forEach(item => {
-
-    item.addEventListener("click", () => {
-
-        const page = item.dataset.page;
-
-        if (!page) return;
-
-        showPage(page);
-
-    });
-
-});
+let activePage = "dashboardPage";
 
 /* ===========================================================
    LOADER
@@ -105,46 +63,199 @@ export function hideLoader() {
 }
 
 /* ===========================================================
-   TOAST PLACEHOLDER
+   TOAST
 =========================================================== */
 
 export function showToast(message, type = "success") {
 
-    if (!toast) return;
+    const container =
+        document.getElementById("toastContainer");
 
-    toast.innerText = message;
+    if (!container) return;
 
-    toast.className = "";
+    const toast =
+        document.createElement("div");
 
-    toast.classList.add(type);
+    toast.className =
+        `toast ${type}`;
 
-    toast.style.display = "block";
+    toast.textContent =
+        message;
+
+    container.appendChild(toast);
 
     setTimeout(() => {
 
-        toast.style.display = "none";
+        toast.remove();
 
     }, 3000);
 
 }
 
 /* ===========================================================
-   APP INIT
+   SHOW PAGE
+=========================================================== */
+
+export function showPage(pageId) {
+
+    pages.forEach(page => {
+
+        page.classList.remove("active-page");
+
+    });
+
+    const target =
+        document.getElementById(pageId);
+
+    if (target) {
+
+        target.classList.add("active-page");
+
+        activePage = pageId;
+
+    }
+
+    menuItems.forEach(item => {
+
+        item.classList.remove("active");
+
+        if (
+            item.dataset.page + "Page"
+            === pageId
+        ) {
+
+            item.classList.add("active");
+
+        }
+
+    });
+
+}
+
+/* ===========================================================
+   SIDEBAR
+=========================================================== */
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", e => {
+
+        e.preventDefault();
+
+        const page =
+            item.dataset.page + "Page";
+
+        showPage(page);
+
+        if (
+            window.innerWidth < 992
+        ) {
+
+            sidebar.classList.remove("active");
+
+        }
+
+    });
+
+});
+/* ===========================================================
+   MOBILE MENU
+=========================================================== */
+
+if (menuToggle) {
+
+    menuToggle.addEventListener("click", () => {
+
+        sidebar.classList.toggle("active");
+
+    });
+
+}
+
+/* ===========================================================
+   CURRENT DATE
+=========================================================== */
+
+function updateDate() {
+
+    if (!currentDate) return;
+
+    currentDate.textContent =
+        new Date().toLocaleDateString(
+            "en-IN",
+            {
+                weekday: "long",
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+}
+
+/* ===========================================================
+   THEME TOGGLE (PREPARED)
+=========================================================== */
+
+if (themeToggle) {
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("light-theme");
+
+    });
+
+}
+
+/* ===========================================================
+   LOGIN / ADMIN PANEL
 =========================================================== */
 
 async function initializeApp() {
 
-    const loggedIn = await checkAuth();
+    showLoader();
 
-    if (!loggedIn) {
+    try {
 
-        window.location.href = "admin.html";
+        const loggedIn =
+            await checkAuth();
 
-        return;
+        if (loggedIn) {
+
+            if (loginScreen)
+                loginScreen.style.display = "none";
+
+            if (adminWrapper)
+                adminWrapper.style.display = "flex";
+
+            showPage("dashboardPage");
+
+        } else {
+
+            if (loginScreen)
+                loginScreen.style.display = "flex";
+
+            if (adminWrapper)
+                adminWrapper.style.display = "none";
+
+        }
+
+        updateDate();
+
+    } catch (err) {
+
+        console.error(err);
+
+        showToast(
+            "Application failed to load",
+            "error"
+        );
+
+    } finally {
+
+        hideLoader();
 
     }
-
-    showPage(currentPage);
 
 }
 
@@ -152,24 +263,72 @@ async function initializeApp() {
    LOGOUT
 =========================================================== */
 
-const logoutBtn = document.getElementById("logoutBtn");
-
 if (logoutBtn) {
 
-    logoutBtn.addEventListener("click", async () => {
+    logoutBtn.addEventListener(
+        "click",
+        async () => {
 
-        await logout();
+            showLoader();
 
-    });
+            try {
+
+                await logout();
+
+            } catch (err) {
+
+                console.error(err);
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
 
 }
+
+/* ===========================================================
+   WINDOW RESIZE
+=========================================================== */
+
+window.addEventListener("resize", () => {
+
+    if (window.innerWidth >= 992) {
+
+        sidebar?.classList.remove("active");
+
+    }
+
+});
 
 /* ===========================================================
    START APPLICATION
 =========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    initializeApp();
+        initializeApp();
 
-});
+    }
+);
+
+/* ===========================================================
+   EXPORTS
+=========================================================== */
+
+export default {
+
+    showPage,
+
+    showLoader,
+
+    hideLoader,
+
+    showToast
+
+};

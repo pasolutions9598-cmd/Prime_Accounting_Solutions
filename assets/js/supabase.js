@@ -11,10 +11,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 =========================================================== */
 
 const SUPABASE_URL =
-    "https://YOUR_PROJECT_ID.supabase.co";
+    "https://ariqthzhspzktpoylqci.supabase.co";
 
 const SUPABASE_ANON_KEY =
-    "YOUR_SUPABASE_PUBLISHABLE_KEY";
+    "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
 
 /* ===========================================================
    CREATE CLIENT

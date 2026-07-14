@@ -1,235 +1,30 @@
-/* ==========================================================
+/* ===========================================================
    Prime Accounting Solutions
    dashboard.js
-   Part 1 - Dashboard Initialization & Statistics
-========================================================== */
+   Production Ready
+   Part 1
+=========================================================== */
 
 import { supabase } from "./supabase.js";
 
-/* ==========================================================
+/* ===========================================================
    DOM ELEMENTS
-========================================================== */
+=========================================================== */
 
-const totalLeadsEl = document.getElementById("totalLeads");
-const totalPostsEl = document.getElementById("totalPosts");
-const totalTestimonialsEl = document.getElementById("totalTestimonials");
-const totalServicesEl = document.getElementById("totalServices");
-const totalVisitorsEl = document.getElementById("totalVisitors");
+const totalLeads =
+    document.getElementById("totalLeads");
 
-/* ==========================================================
-   UPDATE CARD
-========================================================== */
+const totalPosts =
+    document.getElementById("totalPosts");
 
-function updateCard(element, value) {
+const totalTestimonials =
+    document.getElementById("totalTestimonials");
 
-    if (!element) return;
+const totalServices =
+    document.getElementById("totalServices");
 
-    element.textContent = value;
-
-}
-
-/* ==========================================================
-   FETCH TOTAL LEADS
-========================================================== */
-
-async function loadTotalLeads() {
-
-    try {
-
-        const { count, error } = await supabase
-            .from("leads")
-            .select("*", {
-                count: "exact",
-                head: true
-            });
-
-        if (error) throw error;
-
-        updateCard(totalLeadsEl, count || 0);
-
-    } catch (err) {
-
-        console.error("Leads Error:", err);
-
-        updateCard(totalLeadsEl, "-");
-
-    }
-
-}
-
-/* ==========================================================
-   FETCH TOTAL POSTS
-========================================================== */
-
-async function loadTotalPosts() {
-
-    try {
-
-        const { count, error } = await supabase
-            .from("posts")
-            .select("*", {
-                count: "exact",
-                head: true
-            });
-
-        if (error) throw error;
-
-        updateCard(totalPostsEl, count || 0);
-
-    } catch (err) {
-
-        console.error("Posts Error:", err);
-
-        updateCard(totalPostsEl, "-");
-
-    }
-
-}
-
-/* ==========================================================
-   FETCH TOTAL TESTIMONIALS
-========================================================== */
-
-async function loadTotalTestimonials() {
-
-    try {
-
-        const { count, error } = await supabase
-            .from("testimonials")
-            .select("*", {
-                count: "exact",
-                head: true
-            });
-
-        if (error) throw error;
-
-        updateCard(totalTestimonialsEl, count || 0);
-
-    } catch (err) {
-
-        console.error("Testimonials Error:", err);
-
-        updateCard(totalTestimonialsEl, "-");
-
-    }
-
-}
-
-/* ==========================================================
-   FETCH TOTAL SERVICES
-========================================================== */
-
-async function loadTotalServices() {
-
-    try {
-
-        const { count, error } = await supabase
-            .from("services")
-            .select("*", {
-                count: "exact",
-                head: true
-            });
-
-        if (error) throw error;
-
-        updateCard(totalServicesEl, count || 0);
-
-    } catch (err) {
-
-        console.error("Services Error:", err);
-
-        updateCard(totalServicesEl, "-");
-
-    }
-
-}
-
-/* ==========================================================
-   FETCH VISITORS
-========================================================== */
-
-async function loadTotalVisitors() {
-
-    try {
-
-        const { count, error } = await supabase
-            .from("visitors")
-            .select("*", {
-                count: "exact",
-                head: true
-            });
-
-        if (error) throw error;
-
-        updateCard(totalVisitorsEl, count || 0);
-
-    } catch (err) {
-
-        console.error("Visitors Error:", err);
-
-        updateCard(totalVisitorsEl, "-");
-
-    }
-
-}
-
-/* ==========================================================
-   LOAD DASHBOARD STATS
-========================================================== */
-
-export async function loadDashboardStats() {
-
-    await Promise.all([
-
-        loadTotalLeads(),
-        loadTotalPosts(),
-        loadTotalTestimonials(),
-        loadTotalServices(),
-        loadTotalVisitors()
-
-    ]);
-
-}
-
-/* ==========================================================
-   REFRESH DASHBOARD
-========================================================== */
-
-export async function refreshDashboard() {
-
-    await loadDashboardStats();
-
-}
-
-/* ==========================================================
-   INITIALIZE DASHBOARD
-========================================================== */
-
-export async function initDashboard() {
-
-    console.log("Dashboard Initialized");
-
-    await loadDashboardStats();
-
-}
-
-/* ==========================================================
-   AUTO START
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    initDashboard();
-
-});
-/* ==========================================================
-   dashboard.js
-   Part 2 - Recent Data
-========================================================== */
-
-/* ==========================================================
-   DOM REFERENCES
-========================================================== */
+const totalVisitors =
+    document.getElementById("totalVisitors");
 
 const recentLeadsTable =
     document.getElementById("recentLeadsTable");
@@ -240,9 +35,134 @@ const recentPostsTable =
 const recentActivity =
     document.getElementById("recentActivity");
 
-/* ==========================================================
-   LOAD RECENT LEADS
-========================================================== */
+/* ===========================================================
+   HELPERS
+=========================================================== */
+
+function setValue(element, value) {
+
+    if (!element) return;
+
+    element.textContent = value;
+
+}
+
+function showEmptyTable(table, message) {
+
+    if (!table) return;
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="10">${message}</td>
+        </tr>
+    `;
+
+}
+
+/* ===========================================================
+   DASHBOARD COUNTERS
+=========================================================== */
+
+async function loadCounters() {
+
+    try {
+
+        const [
+
+            leads,
+
+            posts,
+
+            testimonials,
+
+            services,
+
+            visitors
+
+        ] = await Promise.all([
+
+            supabase
+                .from("leads")
+                .select("*", {
+                    count: "exact",
+                    head: true
+                }),
+
+            supabase
+                .from("posts")
+                .select("*", {
+                    count: "exact",
+                    head: true
+                }),
+
+            supabase
+                .from("testimonials")
+                .select("*", {
+                    count: "exact",
+                    head: true
+                }),
+
+            supabase
+                .from("services")
+                .select("*", {
+                    count: "exact",
+                    head: true
+                }),
+
+            supabase
+                .from("visitors")
+                .select("*", {
+                    count: "exact",
+                    head: true
+                })
+
+        ]);
+
+        setValue(
+            totalLeads,
+            leads.count ?? 0
+        );
+
+        setValue(
+            totalPosts,
+            posts.count ?? 0
+        );
+
+        setValue(
+            totalTestimonials,
+            testimonials.count ?? 0
+        );
+
+        setValue(
+            totalServices,
+            services.count ?? 0
+        );
+
+        setValue(
+            totalVisitors,
+            visitors.count ?? 0
+        );
+
+    } catch (err) {
+
+        console.error(
+            "Dashboard Counter Error",
+            err
+        );
+
+        setValue(totalLeads, "-");
+        setValue(totalPosts, "-");
+        setValue(totalTestimonials, "-");
+        setValue(totalServices, "-");
+        setValue(totalVisitors, "-");
+
+    }
+
+}
+
+/* ===========================================================
+   RECENT LEADS
+=========================================================== */
 
 async function loadRecentLeads() {
 
@@ -250,18 +170,35 @@ async function loadRecentLeads() {
 
     try {
 
-        const { data, error } = await supabase
+        const {
+
+            data,
+
+            error
+
+        } = await supabase
+
             .from("leads")
+
             .select("*")
-            .order("created_at", { ascending: false })
+
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            )
+
             .limit(5);
 
         if (error) throw error;
 
         if (!data.length) {
 
-            recentLeadsTable.innerHTML =
-                "<tr><td colspan='4'>No Leads Found</td></tr>";
+            showEmptyTable(
+                recentLeadsTable,
+                "No Leads Found"
+            );
 
             return;
 
@@ -269,16 +206,23 @@ async function loadRecentLeads() {
 
         recentLeadsTable.innerHTML = "";
 
-        data.forEach(lead => {
+        data.forEach(item => {
 
             recentLeadsTable.innerHTML += `
-                <tr>
-                    <td>${lead.name ?? "-"}</td>
-                    <td>${lead.phone ?? "-"}</td>
-                    <td>${lead.service ?? "-"}</td>
-                    <td>${lead.status ?? "New"}</td>
-                </tr>
-            `;
+
+<tr>
+
+<td>${item.name ?? "-"}</td>
+
+<td>${item.phone ?? "-"}</td>
+
+<td>${item.service ?? "-"}</td>
+
+<td>${item.status ?? "New"}</td>
+
+</tr>
+
+`;
 
         });
 
@@ -286,13 +230,17 @@ async function loadRecentLeads() {
 
         console.error(err);
 
+        showEmptyTable(
+            recentLeadsTable,
+            "Unable to Load Leads"
+        );
+
     }
 
-}
-
-/* ==========================================================
-   LOAD RECENT POSTS
-========================================================== */
+    }
+/* ===========================================================
+   RECENT POSTS
+=========================================================== */
 
 async function loadRecentPosts() {
 
@@ -300,18 +248,25 @@ async function loadRecentPosts() {
 
     try {
 
-        const { data, error } = await supabase
+        const {
+            data,
+            error
+        } = await supabase
             .from("posts")
             .select("*")
-            .order("created_at", { ascending: false })
+            .order("created_at", {
+                ascending: false
+            })
             .limit(5);
 
         if (error) throw error;
 
-        if (!data.length) {
+        if (!data || data.length === 0) {
 
-            recentPostsTable.innerHTML =
-                "<tr><td colspan='4'>No Posts Found</td></tr>";
+            showEmptyTable(
+                recentPostsTable,
+                "No Posts Found"
+            );
 
             return;
 
@@ -322,13 +277,22 @@ async function loadRecentPosts() {
         data.forEach(post => {
 
             recentPostsTable.innerHTML += `
-                <tr>
-                    <td>${post.title}</td>
-                    <td>${post.category}</td>
-                    <td>${post.status}</td>
-                    <td>${new Date(post.created_at).toLocaleDateString()}</td>
-                </tr>
-            `;
+
+<tr>
+
+<td>${post.title ?? "-"}</td>
+
+<td>${post.category ?? "-"}</td>
+
+<td>${post.status ?? "-"}</td>
+
+<td>${post.created_at
+    ? new Date(post.created_at).toLocaleDateString()
+    : "-"}</td>
+
+</tr>
+
+`;
 
         });
 
@@ -336,23 +300,29 @@ async function loadRecentPosts() {
 
         console.error(err);
 
+        showEmptyTable(
+            recentPostsTable,
+            "Unable to Load Posts"
+        );
+
     }
 
 }
 
-/* ==========================================================
-   LOAD RECENT ACTIVITY
-========================================================== */
+/* ===========================================================
+   RECENT ACTIVITY
+=========================================================== */
 
 async function loadRecentActivity() {
 
     if (!recentActivity) return;
 
-    recentActivity.innerHTML = "";
-
     try {
 
-        const { data } = await supabase
+        const {
+            data,
+            error
+        } = await supabase
             .from("posts")
             .select("title,created_at")
             .order("created_at", {
@@ -360,37 +330,40 @@ async function loadRecentActivity() {
             })
             .limit(5);
 
-        if (!data || !data.length) {
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
 
             recentActivity.innerHTML =
-                "<p>No Activity Found</p>";
+                "<p>No Recent Activity</p>";
 
             return;
 
         }
 
+        recentActivity.innerHTML = "";
+
         data.forEach(item => {
 
             recentActivity.innerHTML += `
 
-                <div class="activity-item">
+<div class="activity-item">
 
-                    <strong>
-                        New Post Published
-                    </strong>
+<h4>New Post Published</h4>
 
-                    <p>${item.title}</p>
+<p>${item.title ?? "-"}</p>
 
-                    <small>
+<small>
 
-                        ${new Date(item.created_at)
-                            .toLocaleString()}
+${item.created_at
+    ? new Date(item.created_at).toLocaleString()
+    : "-"}
 
-                    </small>
+</small>
 
-                </div>
+</div>
 
-            `;
+`;
 
         });
 
@@ -398,17 +371,22 @@ async function loadRecentActivity() {
 
         console.error(err);
 
+        recentActivity.innerHTML =
+            "<p>Unable to Load Activity</p>";
+
     }
 
 }
 
-/* ==========================================================
-   LOAD ALL DASHBOARD DATA
-========================================================== */
+/* ===========================================================
+   LOAD COMPLETE DASHBOARD
+=========================================================== */
 
-export async function loadDashboardData() {
+export async function loadDashboard() {
 
     await Promise.all([
+
+        loadCounters(),
 
         loadRecentLeads(),
 
@@ -420,16 +398,39 @@ export async function loadDashboardData() {
 
 }
 
-/* ==========================================================
-   UPDATE INIT
-========================================================== */
+/* ===========================================================
+   REFRESH DASHBOARD
+=========================================================== */
 
-const oldInitDashboard = initDashboard;
+export async function refreshDashboard() {
 
-initDashboard = async function () {
+    await loadDashboard();
 
-    await oldInitDashboard();
+}
 
-    await loadDashboardData();
+/* ===========================================================
+   INITIALIZE DASHBOARD
+=========================================================== */
 
-};
+export async function initDashboard() {
+
+    console.log(
+        "Dashboard Initialized"
+    );
+
+    await loadDashboard();
+
+}
+
+/* ===========================================================
+   AUTO START
+=========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initDashboard();
+
+    }
+);

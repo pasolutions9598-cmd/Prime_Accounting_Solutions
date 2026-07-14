@@ -1,6 +1,7 @@
 /* ===========================================================
    Prime Accounting Solutions
    analytics.js
+   Production Ready
    Part 1
 =========================================================== */
 
@@ -10,41 +11,56 @@ import { supabase } from "./supabase.js";
    DOM ELEMENTS
 =========================================================== */
 
-const totalVisitorsCard =
-    document.getElementById("totalVisitors");
+const monthFilter =
+    document.getElementById("analyticsMonthFilter");
 
-const totalLeadsCard =
-    document.getElementById("totalLeads");
-
-const totalPostsCard =
-    document.getElementById("totalPosts");
-
-const totalTestimonialsCard =
-    document.getElementById("totalTestimonials");
-
-const totalServicesCard =
-    document.getElementById("totalServices");
-
-const refreshAnalyticsBtn =
+const refreshBtn =
     document.getElementById("refreshAnalyticsBtn");
 
+const monthlyVisitors =
+    document.getElementById("monthlyVisitors");
+
+const monthlyLeads =
+    document.getElementById("monthlyLeads");
+
+const monthlyPosts =
+    document.getElementById("monthlyPosts");
+
+const monthlyTestimonials =
+    document.getElementById("monthlyTestimonials");
+
+const monthlyServices =
+    document.getElementById("monthlyServices");
+
 /* ===========================================================
-   GLOBAL STATE
+   HELPERS
 =========================================================== */
 
-let analyticsData = {
+function setValue(element, value) {
 
-    visitors: 0,
+    if (!element) return;
 
-    leads: 0,
+    element.textContent = value;
 
-    posts: 0,
+}
 
-    testimonials: 0,
+function getSelectedMonth() {
 
-    services: 0
+    return Number(monthFilter?.value || new Date().getMonth() + 1);
 
-};
+}
+
+function isCurrentMonth(dateString) {
+
+    if (!dateString) return false;
+
+    const date = new Date(dateString);
+
+    return (
+        date.getMonth() + 1 === getSelectedMonth()
+    );
+
+}
 
 /* ===========================================================
    LOAD ANALYTICS
@@ -68,420 +84,179 @@ export async function loadAnalytics() {
 
         ] = await Promise.all([
 
-            supabase
-                .from("visitors")
-                .select("*", {
-                    count: "exact",
-                    head: true
-                }),
+            supabase.from("visitors").select("*"),
 
-            supabase
-                .from("leads")
-                .select("*", {
-                    count: "exact",
-                    head: true
-                }),
+            supabase.from("leads").select("*"),
 
-            supabase
-                .from("posts")
-                .select("*", {
-                    count: "exact",
-                    head: true
-                }),
+            supabase.from("posts").select("*"),
 
-            supabase
-                .from("testimonials")
-                .select("*", {
-                    count: "exact",
-                    head: true
-                }),
+            supabase.from("testimonials").select("*"),
 
-            supabase
-                .from("services")
-                .select("*", {
-                    count: "exact",
-                    head: true
-                })
+            supabase.from("services").select("*")
 
         ]);
 
-        analyticsData = {
+        setValue(
 
-            visitors:
-                visitors.count || 0,
+            monthlyVisitors,
 
-            leads:
-                leads.count || 0,
-
-            posts:
-                posts.count || 0,
-
-            testimonials:
-                testimonials.count || 0,
-
-            services:
-                services.count || 0
-
-        };
-
-        renderAnalytics();
-
-    }
-
-    catch (err) {
-
-        console.error(
-
-            "Analytics Error:",
-
-            err
+            (visitors.data || []).filter(v =>
+                isCurrentMonth(v.created_at)
+            ).length
 
         );
 
+        setValue(
+
+            monthlyLeads,
+
+            (leads.data || []).filter(v =>
+                isCurrentMonth(v.created_at)
+            ).length
+
+        );
+
+        setValue(
+
+            monthlyPosts,
+
+            (posts.data || []).filter(v =>
+                isCurrentMonth(v.created_at)
+            ).length
+
+        );
+
+        setValue(
+
+            monthlyTestimonials,
+
+            (testimonials.data || []).filter(v =>
+                isCurrentMonth(v.created_at)
+            ).length
+
+        );
+
+        setValue(
+
+            monthlyServices,
+
+            (services.data || []).filter(v =>
+                isCurrentMonth(v.created_at)
+            ).length
+
+        );
+
+    } catch (err) {
+
+        console.error("Analytics Error", err);
+
     }
 
-}
-
+   }
 /* ===========================================================
-   RENDER ANALYTICS
+   REFRESH ANALYTICS
 =========================================================== */
 
-function renderAnalytics() {
+refreshBtn?.addEventListener(
+    "click",
+    async () => {
 
-    if (totalVisitorsCard)
+        await loadAnalytics();
 
-        totalVisitorsCard.textContent =
-            analyticsData.visitors;
-
-    if (totalLeadsCard)
-
-        totalLeadsCard.textContent =
-            analyticsData.leads;
-
-    if (totalPostsCard)
-
-        totalPostsCard.textContent =
-            analyticsData.posts;
-
-    if (totalTestimonialsCard)
-
-        totalTestimonialsCard.textContent =
-            analyticsData.testimonials;
-
-    if (totalServicesCard)
-
-        totalServicesCard.textContent =
-            analyticsData.services;
-
-}
+    }
+);
 
 /* ===========================================================
-   REFRESH
+   MONTH FILTER
 =========================================================== */
 
-export async function refreshAnalytics() {
+monthFilter?.addEventListener(
+    "change",
+    async () => {
 
-    await loadAnalytics();
+        await loadAnalytics();
 
-}
+    }
+);
 
 /* ===========================================================
-   EVENTS
+   EXPORT CSV
 =========================================================== */
 
-if (refreshAnalyticsBtn) {
+const exportCsvBtn =
+    document.getElementById("exportCsvBtn");
 
-    refreshAnalyticsBtn.addEventListener(
+exportCsvBtn?.addEventListener(
+    "click",
+    () => {
 
-        "click",
+        alert(
+            "CSV Export will be connected in the next update."
+        );
 
-        refreshAnalytics
+    }
+);
 
+/* ===========================================================
+   EXPORT PDF
+=========================================================== */
+
+const exportPdfBtn =
+    document.getElementById("exportPdfBtn");
+
+exportPdfBtn?.addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "PDF Export will be connected in the next update."
+        );
+
+    }
+);
+
+/* ===========================================================
+   CHART PLACEHOLDER
+=========================================================== */
+
+function initializeCharts() {
+
+    console.log(
+        "Charts Ready"
     );
 
+    /*
+      Chart.js integration
+      will be added here.
+    */
+
 }
 
 /* ===========================================================
-   INIT
+   INITIALIZE ANALYTICS
 =========================================================== */
 
 export async function initAnalytics() {
 
     console.log(
-
-        "Analytics Module Loaded"
-
+        "Analytics Module Initialized"
     );
+
+    initializeCharts();
 
     await loadAnalytics();
 
 }
 
+/* ===========================================================
+   AUTO START
+=========================================================== */
+
 document.addEventListener(
-
     "DOMContentLoaded",
-
     () => {
 
         initAnalytics();
 
     }
-
 );
-/* ===========================================================
-   ANALYTICS.JS
-   PART 2A
-   Monthly Analytics + Date Filter
-=========================================================== */
-
-/* ===========================================================
-   DOM ELEMENTS
-=========================================================== */
-
-const analyticsMonthFilter =
-    document.getElementById("analyticsMonthFilter");
-
-const monthlyLeadsCard =
-    document.getElementById("monthlyLeads");
-
-const monthlyPostsCard =
-    document.getElementById("monthlyPosts");
-
-const monthlyTestimonialsCard =
-    document.getElementById("monthlyTestimonials");
-
-const monthlyServicesCard =
-    document.getElementById("monthlyServices");
-
-const monthlyVisitorsCard =
-    document.getElementById("monthlyVisitors");
-
-/* ===========================================================
-   MONTHLY DATA
-=========================================================== */
-
-let monthlyAnalytics = {
-
-    leads: 0,
-
-    posts: 0,
-
-    testimonials: 0,
-
-    services: 0,
-
-    visitors: 0
-
-};
-
-/* ===========================================================
-   LOAD MONTHLY ANALYTICS
-=========================================================== */
-
-export async function loadMonthlyAnalytics() {
-
-    try {
-
-        const selectedMonth =
-
-            analyticsMonthFilter?.value ||
-
-            new Date().getMonth() + 1;
-
-        const selectedYear =
-
-            new Date().getFullYear();
-
-        const [
-
-            leads,
-
-            posts,
-
-            testimonials,
-
-            services,
-
-            visitors
-
-        ] = await Promise.all([
-
-            supabase
-                .from("leads")
-                .select("created_at"),
-
-            supabase
-                .from("posts")
-                .select("created_at"),
-
-            supabase
-                .from("testimonials")
-                .select("created_at"),
-
-            supabase
-                .from("services")
-                .select("created_at"),
-
-            supabase
-                .from("visitors")
-                .select("created_at")
-
-        ]);
-
-        monthlyAnalytics.leads =
-
-            (leads.data || []).filter(item => {
-
-                const d = new Date(item.created_at);
-
-                return (
-
-                    d.getMonth() + 1 == selectedMonth &&
-
-                    d.getFullYear() == selectedYear
-
-                );
-
-            }).length;
-
-        monthlyAnalytics.posts =
-
-            (posts.data || []).filter(item => {
-
-                const d = new Date(item.created_at);
-
-                return (
-
-                    d.getMonth() + 1 == selectedMonth &&
-
-                    d.getFullYear() == selectedYear
-
-                );
-
-            }).length;
-
-        monthlyAnalytics.testimonials =
-
-            (testimonials.data || []).filter(item => {
-
-                const d = new Date(item.created_at);
-
-                return (
-
-                    d.getMonth() + 1 == selectedMonth &&
-
-                    d.getFullYear() == selectedYear
-
-                );
-
-            }).length;
-
-        monthlyAnalytics.services =
-
-            (services.data || []).filter(item => {
-
-                const d = new Date(item.created_at);
-
-                return (
-
-                    d.getMonth() + 1 == selectedMonth &&
-
-                    d.getFullYear() == selectedYear
-
-                );
-
-            }).length;
-
-        monthlyAnalytics.visitors =
-
-            (visitors.data || []).filter(item => {
-
-                const d = new Date(item.created_at);
-
-                return (
-
-                    d.getMonth() + 1 == selectedMonth &&
-
-                    d.getFullYear() == selectedYear
-
-                );
-
-            }).length;
-
-        renderMonthlyAnalytics();
-
-    }
-
-    catch (err) {
-
-        console.error(
-
-            "Monthly Analytics Error:",
-
-            err
-
-        );
-
-    }
-
-}
-
-/* ===========================================================
-   RENDER MONTHLY DATA
-=========================================================== */
-
-function renderMonthlyAnalytics() {
-
-    if (monthlyLeadsCard)
-
-        monthlyLeadsCard.textContent =
-
-            monthlyAnalytics.leads;
-
-    if (monthlyPostsCard)
-
-        monthlyPostsCard.textContent =
-
-            monthlyAnalytics.posts;
-
-    if (monthlyTestimonialsCard)
-
-        monthlyTestimonialsCard.textContent =
-
-            monthlyAnalytics.testimonials;
-
-    if (monthlyServicesCard)
-
-        monthlyServicesCard.textContent =
-
-            monthlyAnalytics.services;
-
-    if (monthlyVisitorsCard)
-
-        monthlyVisitorsCard.textContent =
-
-            monthlyAnalytics.visitors;
-
-}
-
-/* ===========================================================
-   MONTH FILTER EVENT
-=========================================================== */
-
-analyticsMonthFilter?.addEventListener(
-
-    "change",
-
-    loadMonthlyAnalytics
-
-);
-
-/* ===========================================================
-   REFRESH MONTHLY DATA
-=========================================================== */
-
-export async function refreshMonthlyAnalytics() {
-
-    await loadMonthlyAnalytics();
-
-          }

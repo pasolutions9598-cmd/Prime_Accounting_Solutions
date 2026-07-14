@@ -1,2177 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prime Accounting Solutions - Premium Admin Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root { --primary: #002d72; --secondary: #009245; --dark: #0f172a; --light: #f8fafc; --text: #334155; --card-bg: #ffffff; }
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
-body { background: var(--light); color: var(--text); padding-bottom: 60px; }
-.header { background: linear-gradient(135deg, #071630 0%, #1e293b 100%); padding: 25px 20px; text-align: center; color: white; font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-.container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-.card { background: var(--card-bg); border-radius: 20px; padding: 35px; box-shadow: 0 10px 30px rgba(15,23,42,0.02); border: 1px solid #e2e8f0; margin-bottom: 30px; transition: 0.3s; }
-.card h2 { font-family: 'Outfit', sans-serif; color: var(--primary); font-size: 24px; margin-bottom: 25px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-.analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
-.stat-card { background: var(--card-bg); padding: 25px 30px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; border-top: 5px solid var(--primary); text-align: left; }
-.stat-card.visitors { border-top-color: var(--secondary); }
-.stat-title { color: #64748b; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-.stat-number { font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--dark); }
-.row { display: flex; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
-.row > div { flex: 1; min-width: 200px; }
-label { font-size: 14px; font-weight: 600; color: #475569; display: block; margin-top: 15px; }
-input[type="text"], input[type="email"], input[type="password"], textarea, select { width: 100%; padding: 14px; margin: 8px 0 15px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; background: #fff; color: var(--dark); }
-input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(0,45,114,0.06); }
-textarea { min-height: 150px; resize: vertical; }
-button { padding: 12px 20px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-right: 5px; }
-button:hover { transform: translateY(-1px); }
-.login-btn { background: var(--primary); color: white; width: 100%; margin-top: 15px; padding: 16px; font-size: 15px; }
-.publish-btn { background: var(--secondary); color: white; }
-.draft-btn { background: #64748b; color: white; }
-.logout-btn { background: #ef4444; color: white; float: right; padding: 10px 20px; font-size: 14px; }
-.custom-file-btn { display: block; background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; color: #475569; margin: 8px 0 15px; }
-input[type="file"] { display: none; }
-#adminPanel { display: none; }
-#loginBox { display: block; }
-.post-card { background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 20px; border: 1px solid #e2e8f0; }
-.post-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; color: var(--dark); margin: 10px 0; }
-.post-card img { width: 100%; border-radius: 12px; margin: 15px 0; max-height: 250px; object-fit: contain; background: #f8fafc; border: 1px solid #f1f5f9; }
-.post-meta-info { font-size: 13px; color: #64748b; margin-top: 15px; background: #f8fafc; padding: 10px 15px; border-radius: 8px; display: inline-block; }
-.badge { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 30px; text-transform: uppercase; margin-right: 5px; }
-.badge-news { background: #e0f2fe; color: #0369a1; }
-.badge-announcement { background: #fef3c7; color: #d97706; }
-.badge-draft { background: #cbd5e1; color: #334155; }
-.edit-btn { background: #facc15; color: #0f172a; }
-.delete-btn { background: #fee2e2; color: #ef4444; }
-.delete-btn:hover { background: #ef4444; color: white; }
-.force-live-btn { background: #dcfce7; color: #15803d; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Prime Accounting Solutions | Admin Panel</title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Admin CSS -->
+
+    <link rel="stylesheet"
+          href="assets/css/admin.css">
+
 </head>
+
 <body>
 
-<div class="header">Prime Accounting Solutions — Dashboard</div>
+    <!-- ===================================================== -->
+    <!-- LOGIN SCREEN -->
+    <!-- ===================================================== -->
 
-<div class="container">
-    <div class="card" id="loginBox" style="max-width: 420px; margin: 60px auto;">
-        <h2>Admin Access</h2>
-        <form id="loginForm" onsubmit="event.preventDefault(); window.loginAdmin();">
-            <input type="email" id="email" placeholder="Email Address" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" class="login-btn">Sign In</button>
+    <section id="loginScreen">
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+
+            <h1>PAS</h1>
+
+            <h2>Prime Accounting Solutions</h2>
+
+            <p>Enterprise Admin Panel</p>
+
+        </div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+                    <button
+                        type="button"
+                        id="togglePassword">
+
+                        👁
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="loginError"></div>
+
+            <button
+                type="submit"
+                id="loginBtn">
+
+                Login
+
+            </button>
+
         </form>
+
+        <div class="login-footer">
+
+            © 2026 Prime Accounting Solutions
+
+        </div>
+
     </div>
 
-    <div id="adminPanel">
-        <div class="card" style="padding: 20px 30px;">
-            <button class="logout-btn" onclick="window.logoutAdmin()">Exit Session</button>
-            <span style="font-weight:600; font-family:'Outfit'; font-size:18px;">👤 Terminal Secure: Administrator</span>
-        </div>
-
-        <div class="analytics-grid">
-            <div class="stat-card visitors">
-                <div class="stat-title">📊 Live Site Visitors</div>
-                <div class="stat-number" id="totalVisitors">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">📝 Total Feed Analytics</div>
-                <div class="stat-number" id="totalPostsCount">0</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>✍️ Compose Executive Broadcast</h2>
-            <div class="row">
-                <div>
-                    <label>Distribution Type</label>
-                    <select id="postType">
-                        <option value="news">Regular Tax Update</option>
-                        <option value="announcement">🚨 Critical Announcement</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Stream Category</label>
-                    <select id="postCategory">
-                        <option value="General">General</option>
-                        <option value="GST">GST Updates</option>
-                        <option value="Income Tax">Income Tax</option>
-                        <option value="Audit">Audit & Assurance</option>
-                        <option value="Accounting">Accounting Solutions</option>
-                    </select>
-                </div>
-            </div>
-
-            <label>Broadcast Title</label>
-            <input type="text" id="postTitle" placeholder="Enter headline statement...">
-            
-            <label>Featured Infographic Media</label>
-            <label for="imageFile" class="custom-file-btn" id="uploadBtnLabel">📁 Click to Upload Attachment</label>
-            <input type="file" id="imageFile" accept="image/*">
-            <img id="previewImage" style="display:none; width:100%; max-height:250px; object-fit:contain; border-radius:12px; margin-bottom:20px; background:#f8fafc; border:1px solid #e2e8f0;">
-            
-            <label>Content Description / Brief</label>
-            <textarea id="postContent" placeholder="Write comprehensive update specifications here..."></textarea>
-
-            <button class="publish-btn" onclick="window.saveContent('published')" id="submitBtn">Deploy Live Broadcast</button>
-            <button class="draft-btn" onclick="window.saveContent('draft')">Store to Drafts</button>
-        </div>
-
-        <div class="card">
-            <h2>🗄️ Stream Management Registry</h2>
-            <select id="filterCategory" onchange="window.loadPosts()" style="width:auto; margin-bottom: 20px;">
-                <option value="All">All Categories</option>
-                <option value="General">General</option>
-                <option value="GST">GST Updates</option>
-                <option value="Income Tax">Income Tax</option>
-                <option value="Audit">Audit & Assurance</option>
-                <option value="Accounting">Accounting Solutions</option>
-            </select>
-            <div id="postsContainer"></div>
-        </div>
-    </div>
 </div>
-    <!-- =======================================================
-     DASHBOARD PAGE
-======================================================== -->
+    </section>
 
-<section id="dashboardPage" class="page-section">
 
-    <!-- Page Header -->
-    <div class="section-header">
+    <!-- ===================================================== -->
+    <!-- ADMIN WRAPPER -->
+    <!-- ===================================================== -->
 
-        <div class="header-left">
-            <h1>Dashboard</h1>
-            <p>Welcome to Prime Accounting Solutions Admin Panel</p>
+    <div id="adminWrapper">
+
+        <!-- Sidebar -->
+
+        <aside id="sidebar">
+<div class="sidebar-header">
+
+    <div class="brand-logo">
+
+        <h2>PAS</h2>
+
+    </div>
+
+    <div class="brand-text">
+
+        <h3>Prime Accounting Solutions</h3>
+
+        <span>Enterprise Admin</span>
+
+    </div>
+
+</div>
+
+<nav class="sidebar-menu">
+
+    <a href="#"
+       class="menu-item active"
+       data-page="dashboard">
+
+        <span>📊</span>
+
+        Dashboard
+
+    </a>
+
+    <a href="#"
+       class="menu-item"
+       data-page="leads">
+
+        <span>👥</span>
+
+        Leads
+
+    </a>
+
+    <a href="#"
+       class="menu-item"
+       data-page="posts">
+
+        <span>📰</span>
+
+        Posts
+
+    </a>
+
+    <a href="#"
+       class="menu-item"
+       data-page="analytics">
+
+        <span>📈</span>
+
+        Analytics
+
+    </a>
+
+    <a href="#"
+       class="menu-item"
+       data-page="services">
+
+        <span>🛠</span>
+
+        Services
+
+    </a>
+
+    <a href="#"
+       class="menu-item"
+       data-page="settings">
+
+        <span>⚙️</span>
+
+        Settings
+
+    </a>
+
+</nav>
+
+<div class="sidebar-footer">
+
+    <button id="logoutBtn">
+
+        🚪 Logout
+
+    </button>
+
+        </div>
+        </aside>
+
+        <!-- Main -->
+
+        <main id="mainContent">
+
+            <!-- Top Navbar -->
+
+            <header id="topNavbar">
+<div class="topbar-left">
+
+    <button id="menuToggle">
+
+        ☰
+
+    </button>
+
+    <div class="search-box">
+
+        <input
+            type="search"
+            id="globalSearch"
+            placeholder="Search...">
+
+    </div>
+
+</div>
+
+<div class="topbar-right">
+
+    <div class="current-date">
+
+        <span id="currentDate">
+
+            Loading...
+
+        </span>
+
+    </div>
+
+    <button
+        id="themeToggle"
+        class="topbar-btn"
+        title="Theme">
+
+        🌙
+
+    </button>
+
+    <button
+        id="notificationBtn"
+        class="topbar-btn"
+        title="Notifications">
+
+        🔔
+
+    </button>
+
+    <div class="admin-profile">
+
+        <div class="admin-avatar">
+
+            A
+
         </div>
 
-        <div class="header-right">
-            <span id="dashboardDate">--</span>
-            <span id="dashboardTime">--</span>
+        <div class="admin-details">
+
+            <strong id="adminName">
+
+                Administrator
+
+            </strong>
+
+            <small>
+
+                Super Admin
+
+            </small>
+
         </div>
 
     </div>
 
+</div>
+            </header>
 
-    <!-- Statistics Cards -->
+            <!-- Dynamic Pages -->
+
+            <div id="pageContainer">
+<!-- ===================================================== -->
+<!-- DASHBOARD PAGE -->
+<!-- ===================================================== -->
+
+<section id="dashboardPage" class="page active-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Dashboard</h1>
+
+            <p>Welcome back to Prime Accounting Solutions Admin Panel.</p>
+
+        </div>
+
+    </div>
+
+    <!-- Dashboard Cards -->
 
     <div class="dashboard-grid">
 
         <div class="dashboard-card">
-            <h3>Total Visitors</h3>
-            <h2 id="totalVisitors">0</h2>
-        </div>
 
-        <div class="dashboard-card">
             <h3>Total Leads</h3>
+
             <h2 id="totalLeads">0</h2>
+
         </div>
 
         <div class="dashboard-card">
-            <h3>Published Posts</h3>
-            <h2 id="publishedPosts">0</h2>
+
+            <h3>Total Posts</h3>
+
+            <h2 id="totalPosts">0</h2>
+
         </div>
 
         <div class="dashboard-card">
-            <h3>Testimonials</h3>
+
+            <h3>Total Visitors</h3>
+
+            <h2 id="totalVisitors">0</h2>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>Total Services</h3>
+
+            <h2 id="totalServices">0</h2>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>Total Testimonials</h3>
+
             <h2 id="totalTestimonials">0</h2>
-        </div>
 
-        <div class="dashboard-card">
-            <h3>Service Clicks</h3>
-            <h2 id="serviceClicks">0</h2>
-        </div>
+            <a href="testimonial.html"
+               class="manage-btn">
 
-        <div class="dashboard-card">
-            <h3>Top Service</h3>
-            <h2 id="topService">--</h2>
-        </div>
+                Manage
 
-        <div class="dashboard-card">
-            <h3>New Leads</h3>
-            <h2 id="newLeads">0</h2>
-        </div>
-
-        <div class="dashboard-card">
-            <h3>Contacted Leads</h3>
-            <h2 id="contactedLeads">0</h2>
-        </div>
-
-        <div class="dashboard-card">
-            <h3>Converted Leads</h3>
-            <h2 id="convertedLeads">0</h2>
-        </div>
-
-        <div class="dashboard-card">
-            <h3>Closed Leads</h3>
-            <h2 id="closedLeads">0</h2>
-        </div>
-
-    </div>
-
-
-    <!-- Charts -->
-
-    <div class="dashboard-row">
-
-        <div class="dashboard-box">
-
-            <h2>Visitors Overview</h2>
-
-            <canvas id="visitorsChart"></canvas>
-
-        </div>
-
-
-        <div class="dashboard-box">
-
-            <h2>Leads Analytics</h2>
-
-            <canvas id="leadsChart"></canvas>
+            </a>
 
         </div>
 
     </div>
 
+    <!-- Quick Actions -->
+
+    <div class="dashboard-section">
+
+        <h2>Quick Actions</h2>
+
+        <div class="quick-actions">
+
+            <button id="addLeadBtn">
+
+                ➕ Add Lead
+
+            </button>
+
+            <button id="addPostBtn">
+
+                📰 New Post
+
+            </button>
+
+            <button id="addServiceBtn">
+
+                🛠 New Service
+
+            </button>
+
+            <a href="testimonial.html">
+
+                <button>
+
+                    ⭐ Testimonials
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
 
     <!-- Recent Activity -->
 
-    <div class="dashboard-row">
+    <div class="dashboard-section">
 
-        <div class="dashboard-box">
+        <h2>Recent Activity</h2>
 
-            <h2>Recent Activity</h2>
+        <div id="recentActivity">
 
-            <div id="recentActivity">
+            No recent activity available.
 
-                <p>No Activity Found</p>
+        </div>
 
+    </div>
+
+</section>
             </div>
 
-        </div>
-
-
-        <div class="dashboard-box">
-
-            <h2>Recent Leads</h2>
-
-            <div id="recentLeads">
-
-                <p>No Leads Found</p>
-
-            </div>
-
-        </div>
+        </main>
 
     </div>
 
 
-    <!-- Recent Posts -->
+    <!-- ===================================================== -->
+    <!-- GLOBAL LOADER -->
+    <!-- ===================================================== -->
 
-    <div class="dashboard-box">
-
-        <h2>Latest Posts</h2>
-
-        <div id="recentPosts">
-
-            <p>No Posts Found</p>
-
-        </div>
+    <div id="globalLoader">
 
     </div>
 
 
-    <!-- Recent Testimonials -->
+    <!-- ===================================================== -->
+    <!-- TOAST -->
+    <!-- ===================================================== -->
 
-    <div class="dashboard-box">
-
-        <h2>Latest Testimonials</h2>
-
-        <div id="recentTestimonials">
-
-            <p>No Testimonials Found</p>
-
-        </div>
+    <div id="toastContainer">
 
     </div>
 
 
-    <!-- Service Performance -->
+    <!-- ===================================================== -->
+    <!-- SCRIPT FILES -->
+    <!-- ===================================================== -->
 
-    <div class="dashboard-box">
+    <script type="module"
+            src="assets/js/supabase.js"></script>
 
-        <h2>Top Services Performance</h2>
+    <script type="module"
+            src="assets/js/auth.js"></script>
 
-        <div id="servicePerformance">
+    <script type="module"
+            src="assets/js/app.js"></script>
 
-            <p>No Data Available</p>
+    <script type="module"
+            src="assets/js/dashboard.js"></script>
 
-        </div>
+    <script type="module"
+            src="assets/js/leads.js"></script>
 
-    </div>
+    <script type="module"
+            src="assets/js/posts.js"></script>
 
-    </section>
-    <!-- ======================================================
-                    LEADS MANAGEMENT
-======================================================= -->
+    <script type="module"
+            src="assets/js/analytics.js"></script>
 
-<section id="leadsPage" class="page-section" style="display:none;">
+    <script type="module"
+            src="assets/js/services.js"></script>
 
-    <!-- Page Header -->
-    <div class="section-header">
+    <script type="module"
+            src="assets/js/settings.js"></script>
 
-        <div class="header-left">
-            <h2>👥 Leads Management</h2>
-            <p>Manage all customer enquiries and follow-ups.</p>
-        </div>
-
-        <div class="header-right">
-            <button id="addLeadBtn" class="primary-btn">
-                ➕ Add New Lead
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Search & Filters -->
-    <div class="toolbar">
-
-        <input
-            type="text"
-            id="leadSearch"
-            placeholder="Search by Name, Email or Phone">
-
-        <select id="leadStatusFilter">
-            <option value="">All Status</option>
-            <option value="New">New</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Converted">Converted</option>
-            <option value="Closed">Closed</option>
-        </select>
-
-        <button id="exportLeadBtn" class="secondary-btn">
-            📥 Export CSV
-        </button>
-
-    </div>
-
-    <!-- Statistics -->
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h4>Total Leads</h4>
-            <h2 id="leadTotal">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>New</h4>
-            <h2 id="leadNew">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Contacted</h4>
-            <h2 id="leadContacted">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Converted</h4>
-            <h2 id="leadConverted">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Closed</h4>
-            <h2 id="leadClosed">0</h2>
-        </div>
-
-    </div>
-
-    <!-- Leads Table -->
-
-    <div class="table-card">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Name</th>
-
-                    <th>Phone</th>
-
-                    <th>Email</th>
-
-                    <th>Service</th>
-
-                    <th>Status</th>
-
-                    <th>Date</th>
-
-                    <th>Action</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="leadsTableBody">
-
-                <tr>
-
-                    <td colspan="7">
-
-                        No Leads Found
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <!-- Pagination -->
-
-    <div id="leadPagination"></div>
-
-</section>
-
-<!-- ======================================================
-                ADD / EDIT LEAD MODAL
-======================================================= -->
-
-<div id="leadModal" class="modal" style="display:none;">
-
-    <div class="modal-card">
-
-        <h2 id="leadModalTitle">
-
-            Add Lead
-
-        </h2>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="leadName"
-                placeholder="Full Name">
-
-            <input
-                type="text"
-                id="leadPhone"
-                placeholder="Phone Number">
-
-            <input
-                type="email"
-                id="leadEmail"
-                placeholder="Email Address">
-
-            <select id="leadService">
-
-                <option value="Accounting">Accounting</option>
-
-                <option value="Bookkeeping">Bookkeeping</option>
-
-                <option value="GST Registration">GST Registration</option>
-
-                <option value="GST Return Filing">GST Return Filing</option>
-
-                <option value="TDS">TDS</option>
-
-                <option value="Income Tax">Income Tax</option>
-
-                <option value="Payroll">Payroll</option>
-
-                <option value="MIS Reporting">MIS Reporting</option>
-
-                <option value="Business Support">Business Support</option>
-
-            </select>
-
-            <select id="leadStatus">
-
-                <option value="New">New</option>
-
-                <option value="Contacted">Contacted</option>
-
-                <option value="Converted">Converted</option>
-
-                <option value="Closed">Closed</option>
-
-            </select>
-
-        </div>
-
-        <textarea
-            id="leadNotes"
-            rows="5"
-            placeholder="Notes"></textarea>
-
-        <div class="button-group">
-
-            <button id="saveLeadBtn"
-                class="primary-btn">
-
-                💾 Save Lead
-
-            </button>
-
-            <button id="cancelLeadBtn"
-                class="secondary-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ======================================================
-                    VIEW LEAD MODAL
-======================================================= -->
-
-<div id="viewLeadModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Lead Details
-
-        </h2>
-
-        <div id="leadViewContent">
-
-        </div>
-
-        <button id="closeLeadViewBtn"
-            class="secondary-btn">
-
-            Close
-
-        </button>
-
-    </div>
-
-</div>
-    <!-- =========================================================
-                        POSTS MANAGEMENT
-========================================================= -->
-
-<section id="postsPage" class="page-section" style="display:none;">
-
-    <!-- Page Header -->
-    <div class="section-header">
-
-        <div class="header-left">
-            <h2>📰 Posts Management</h2>
-            <p>Create, publish and manage company posts.</p>
-        </div>
-
-        <div class="header-right">
-            <button id="newPostBtn" class="primary-btn">
-                ➕ New Post
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Search & Filter -->
-
-    <div class="toolbar">
-
-        <input
-            type="text"
-            id="postSearch"
-            placeholder="Search Posts...">
-
-        <select id="postCategoryFilter">
-
-            <option value="">All Categories</option>
-            <option value="Accounting">Accounting</option>
-            <option value="GST">GST</option>
-            <option value="Income Tax">Income Tax</option>
-            <option value="TDS">TDS</option>
-            <option value="Payroll">Payroll</option>
-            <option value="Business">Business</option>
-            <option value="Other">Other</option>
-
-        </select>
-
-        <select id="postStatusFilter">
-
-            <option value="">All Status</option>
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
-
-        </select>
-
-    </div>
-
-    <!-- Statistics -->
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h4>Total Posts</h4>
-            <h2 id="totalPosts">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Published</h4>
-            <h2 id="publishedPostsCount">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Drafts</h4>
-            <h2 id="draftPostsCount">0</h2>
-        </div>
-
-    </div>
-
-    <!-- Posts Table -->
-
-    <div class="table-card">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Image</th>
-
-                    <th>Title</th>
-
-                    <th>Category</th>
-
-                    <th>Type</th>
-
-                    <th>Status</th>
-
-                    <th>Created</th>
-
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="postsTableBody">
-
-                <tr>
-
-                    <td colspan="7">
-
-                        No Posts Found
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <!-- Pagination -->
-
-    <div id="postsPagination"></div>
-
-</section>
-
-<!-- =========================================================
-                     POST FORM MODAL
-========================================================= -->
-
-<div id="postModal" class="modal" style="display:none;">
-
-    <div class="modal-card">
-
-        <h2 id="postModalTitle">
-
-            Create New Post
-
-        </h2>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="postTitle"
-                placeholder="Post Title">
-
-            <select id="postCategory">
-
-                <option value="Accounting">Accounting</option>
-                <option value="GST">GST</option>
-                <option value="Income Tax">Income Tax</option>
-                <option value="TDS">TDS</option>
-                <option value="Payroll">Payroll</option>
-                <option value="Business">Business</option>
-                <option value="Other">Other</option>
-
-            </select>
-
-            <select id="postType">
-
-                <option value="news">News</option>
-                <option value="announcement">Announcement</option>
-
-            </select>
-
-        </div>
-
-        <textarea
-            id="postContent"
-            rows="10"
-            placeholder="Write post content..."></textarea>
-
-        <div class="input-group">
-
-            <label>Featured Image</label>
-
-            <input
-                type="file"
-                id="imageFile"
-                accept="image/*">
-
-        </div>
-
-        <div id="imagePreview"></div>
-
-        <div class="button-group">
-
-            <button
-                id="publishBtn"
-                class="primary-btn">
-
-                🚀 Publish
-
-            </button>
-
-            <button
-                id="draftBtn"
-                class="secondary-btn">
-
-                📁 Save Draft
-
-            </button>
-
-            <button
-                id="cancelPostBtn"
-                class="danger-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-                     VIEW POST MODAL
-========================================================= -->
-
-<div id="postViewModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Post Details
-
-        </h2>
-
-        <div id="postViewContent">
-
-        </div>
-
-        <button
-            id="closePostViewBtn"
-            class="secondary-btn">
-
-            Close
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-                  DELETE CONFIRM MODAL
-========================================================= -->
-
-<div id="deletePostModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Delete Post
-
-        </h2>
-
-        <p>
-
-            Are you sure you want to delete this post?
-
-        </p>
-
-        <div class="button-group">
-
-            <button
-                id="confirmDeletePostBtn"
-                class="danger-btn">
-
-                Delete
-
-            </button>
-
-            <button
-                id="cancelDeletePostBtn"
-                class="secondary-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-                    </div>
-    <!-- =========================================================
-                    TESTIMONIALS MANAGEMENT
-========================================================= -->
-
-<section id="testimonialsPage" class="page-section" style="display:none;">
-
-    <!-- Page Header -->
-    <div class="section-header">
-
-        <div class="header-left">
-            <h2>⭐ Testimonials Management</h2>
-            <p>Manage customer reviews and testimonials.</p>
-        </div>
-
-        <div class="header-right">
-            <button id="addTestimonialBtn" class="primary-btn">
-                ➕ Add Testimonial
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Search & Filters -->
-
-    <div class="toolbar">
-
-        <input
-            type="text"
-            id="testimonialSearch"
-            placeholder="Search Testimonials...">
-
-        <select id="testimonialStatusFilter">
-            <option value="">All Status</option>
-            <option value="approved">Approved</option>
-            <option value="pending">Pending</option>
-            <option value="rejected">Rejected</option>
-        </select>
-
-        <select id="testimonialRatingFilter">
-            <option value="">All Ratings</option>
-            <option value="5">⭐⭐⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="1">⭐</option>
-        </select>
-
-    </div>
-
-    <!-- Statistics -->
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h4>Total Testimonials</h4>
-            <h2 id="totalTestimonialsCount">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Approved</h4>
-            <h2 id="approvedTestimonialsCount">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Pending</h4>
-            <h2 id="pendingTestimonialsCount">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Rejected</h4>
-            <h2 id="rejectedTestimonialsCount">0</h2>
-        </div>
-
-    </div>
-
-    <!-- Table -->
-
-    <div class="table-card">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Photo</th>
-
-                    <th>Name</th>
-
-                    <th>Company</th>
-
-                    <th>Rating</th>
-
-                    <th>Status</th>
-
-                    <th>Date</th>
-
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="testimonialsTableBody">
-
-                <tr>
-
-                    <td colspan="7">
-
-                        No Testimonials Found
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div id="testimonialPagination"></div>
-
-</section>
-
-<!-- =========================================================
-                ADD / EDIT TESTIMONIAL MODAL
-========================================================= -->
-
-<div id="testimonialModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2 id="testimonialModalTitle">
-
-            Add Testimonial
-
-        </h2>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="clientName"
-                placeholder="Client Name">
-
-            <input
-                type="text"
-                id="clientCompany"
-                placeholder="Company Name">
-
-            <input
-                type="text"
-                id="clientDesignation"
-                placeholder="Designation">
-
-            <select id="clientRating">
-
-                <option value="5">⭐⭐⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="1">⭐</option>
-
-            </select>
-
-            <select id="testimonialStatus">
-
-                <option value="approved">Approved</option>
-                <option value="pending">Pending</option>
-                <option value="rejected">Rejected</option>
-
-            </select>
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    id="featuredTestimonial">
-
-                Featured Testimonial
-
-            </label>
-
-        </div>
-
-        <textarea
-            id="testimonialMessage"
-            rows="6"
-            placeholder="Client Review"></textarea>
-
-        <div class="input-group">
-
-            <label>Client Photo</label>
-
-            <input
-                type="file"
-                id="testimonialPhoto"
-                accept="image/*">
-
-        </div>
-
-        <div id="testimonialImagePreview"></div>
-
-        <div class="button-group">
-
-            <button
-                id="saveTestimonialBtn"
-                class="primary-btn">
-
-                💾 Save
-
-            </button>
-
-            <button
-                id="cancelTestimonialBtn"
-                class="secondary-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-                VIEW TESTIMONIAL MODAL
-========================================================= -->
-
-<div id="viewTestimonialModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Testimonial Details
-
-        </h2>
-
-        <div id="testimonialViewContent">
-
-        </div>
-
-        <button
-            id="closeTestimonialViewBtn"
-            class="secondary-btn">
-
-            Close
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-                DELETE TESTIMONIAL MODAL
-========================================================= -->
-
-<div id="deleteTestimonialModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Delete Testimonial
-
-        </h2>
-
-        <p>
-
-            Are you sure you want to delete this testimonial?
-
-        </p>
-
-        <div class="button-group">
-
-            <button
-                id="confirmDeleteTestimonialBtn"
-                class="danger-btn">
-
-                Delete
-
-            </button>
-
-            <button
-                id="cancelDeleteTestimonialBtn"
-                class="secondary-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-    <!-- =========================================================
-                    ANALYTICS PAGE
-========================================================= -->
-
-<section id="analyticsPage" class="page-section" style="display:none;">
-
-    <!-- Page Header -->
-    <div class="section-header">
-
-        <div class="header-left">
-            <h2>📊 Analytics</h2>
-            <p>Website performance, visitors, leads and business insights.</p>
-        </div>
-
-        <div class="header-right">
-
-            <select id="analyticsRange">
-
-                <option value="today">Today</option>
-                <option value="7days">Last 7 Days</option>
-                <option value="30days" selected>Last 30 Days</option>
-                <option value="12months">Last 12 Months</option>
-                <option value="all">All Time</option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    ANALYTICS CARDS
-    ==================================================== -->
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h4>Total Visitors</h4>
-            <h2 id="analyticsVisitors">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Total Leads</h4>
-            <h2 id="analyticsLeads">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Service Clicks</h4>
-            <h2 id="analyticsClicks">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Published Posts</h4>
-            <h2 id="analyticsPosts">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Testimonials</h4>
-            <h2 id="analyticsTestimonials">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Conversion Rate</h4>
-            <h2 id="conversionRate">0%</h2>
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                        CHARTS
-    ==================================================== -->
-
-    <div class="analytics-grid">
-
-        <div class="analytics-card">
-
-            <h3>Visitors Trend</h3>
-
-            <canvas id="visitorsAnalyticsChart"></canvas>
-
-        </div>
-
-        <div class="analytics-card">
-
-            <h3>Leads Trend</h3>
-
-            <canvas id="leadsAnalyticsChart"></canvas>
-
-        </div>
-
-    </div>
-
-    <div class="analytics-grid">
-
-        <div class="analytics-card">
-
-            <h3>Service Click Analytics</h3>
-
-            <canvas id="serviceChart"></canvas>
-
-        </div>
-
-        <div class="analytics-card">
-
-            <h3>Lead Status Distribution</h3>
-
-            <canvas id="leadStatusChart"></canvas>
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    TOP SERVICES
-    ==================================================== -->
-
-    <div class="table-card">
-
-        <h3>Top Services</h3>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Service</th>
-
-                    <th>Total Clicks</th>
-
-                    <th>Conversion</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="topServicesTable">
-
-                <tr>
-
-                    <td colspan="3">
-
-                        No Data Available
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <!-- ===================================================
-                    MONTHLY REPORT
-    ==================================================== -->
-
-    <div class="table-card">
-
-        <h3>Monthly Performance Report</h3>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Month</th>
-
-                    <th>Visitors</th>
-
-                    <th>Leads</th>
-
-                    <th>Posts</th>
-
-                    <th>Clicks</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="monthlyReportTable">
-
-                <tr>
-
-                    <td colspan="5">
-
-                        No Report Available
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <!-- ===================================================
-                    EXPORT REPORT
-    ==================================================== -->
-
-    <div class="button-group">
-
-        <button
-            id="exportAnalyticsCSV"
-            class="secondary-btn">
-
-            📥 Export CSV
-
-        </button>
-
-        <button
-            id="exportAnalyticsExcel"
-            class="secondary-btn">
-
-            📊 Export Excel
-
-        </button>
-
-        <button
-            id="printAnalytics"
-            class="primary-btn">
-
-            🖨 Print Report
-
-        </button>
-
-    </div>
-
-</section>
-    <!-- =========================================================
-                    SERVICES MANAGEMENT
-========================================================= -->
-
-<section id="servicesPage" class="page-section" style="display:none;">
-
-    <!-- Header -->
-    <div class="section-header">
-
-        <div class="header-left">
-            <h2>💼 Services Management</h2>
-            <p>Manage all company services displayed on the website.</p>
-        </div>
-
-        <div class="header-right">
-            <button id="addServiceBtn" class="primary-btn">
-                ➕ Add Service
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Search & Filter -->
-
-    <div class="toolbar">
-
-        <input
-            type="text"
-            id="serviceSearch"
-            placeholder="Search Services...">
-
-        <select id="serviceStatusFilter">
-            <option value="">All Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-        </select>
-
-        <button
-            id="refreshServicesBtn"
-            class="secondary-btn">
-
-            🔄 Refresh
-
-        </button>
-
-    </div>
-
-    <!-- Statistics -->
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h4>Total Services</h4>
-            <h2 id="totalServices">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Active Services</h4>
-            <h2 id="activeServices">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Inactive Services</h4>
-            <h2 id="inactiveServices">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <h4>Total Clicks</h4>
-            <h2 id="serviceTotalClicks">0</h2>
-        </div>
-
-    </div>
-
-    <!-- Services Table -->
-
-    <div class="table-card">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Icon</th>
-
-                    <th>Service Name</th>
-
-                    <th>Category</th>
-
-                    <th>Price</th>
-
-                    <th>Status</th>
-
-                    <th>Display Order</th>
-
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="servicesTableBody">
-
-                <tr>
-
-                    <td colspan="7">
-
-                        No Services Found
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div id="servicesPagination"></div>
-
-</section>
-
-<!-- =========================================================
-                ADD / EDIT SERVICE MODAL
-========================================================= -->
-
-<div id="serviceModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2 id="serviceModalTitle">
-
-            Add Service
-
-        </h2>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="serviceName"
-                placeholder="Service Name">
-
-            <input
-                type="text"
-                id="serviceCategory"
-                placeholder="Category">
-
-            <input
-                type="text"
-                id="servicePrice"
-                placeholder="Price">
-
-            <input
-                type="number"
-                id="serviceOrder"
-                placeholder="Display Order">
-
-            <select id="serviceStatus">
-
-                <option value="active">
-                    Active
-                </option>
-
-                <option value="inactive">
-                    Inactive
-                </option>
-
-            </select>
-
-        </div>
-
-        <textarea
-            id="serviceDescription"
-            rows="6"
-            placeholder="Service Description"></textarea>
-
-        <div class="input-group">
-
-            <label>Service Icon</label>
-
-            <input
-                type="file"
-                id="serviceIcon"
-                accept="image/*">
-
-        </div>
-
-        <div id="serviceIconPreview"></div>
-
-        <div class="button-group">
-
-            <button
-                id="saveServiceBtn"
-                class="primary-btn">
-
-                💾 Save Service
-
-            </button>
-
-            <button
-                id="cancelServiceBtn"
-                class="secondary-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-                VIEW SERVICE MODAL
-========================================================= -->
-
-<div id="viewServiceModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Service Details
-
-        </h2>
-
-        <div id="serviceViewContent">
-
-        </div>
-
-        <button
-            id="closeServiceViewBtn"
-            class="secondary-btn">
-
-            Close
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-                DELETE SERVICE MODAL
-========================================================= -->
-
-<div id="deleteServiceModal"
-     class="modal"
-     style="display:none;">
-
-    <div class="modal-card">
-
-        <h2>
-
-            Delete Service
-
-        </h2>
-
-        <p>
-
-            Are you sure you want to delete this service?
-
-        </p>
-
-        <div class="button-group">
-
-            <button
-                id="confirmDeleteServiceBtn"
-                class="danger-btn">
-
-                Delete
-
-            </button>
-
-            <button
-                id="cancelDeleteServiceBtn"
-                class="secondary-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-    <!-- =========================================================
-                    SETTINGS PAGE
-========================================================= -->
-
-<section id="settingsPage" class="page-section" style="display:none;">
-
-    <!-- Header -->
-
-    <div class="section-header">
-
-        <div class="header-left">
-
-            <h2>⚙ Settings</h2>
-
-            <p>Manage company information and system settings.</p>
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    COMPANY INFORMATION
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Company Information</h3>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="companyName"
-                placeholder="Company Name">
-
-            <input
-                type="text"
-                id="companyTagline"
-                placeholder="Company Tagline">
-
-            <input
-                type="email"
-                id="companyEmail"
-                placeholder="Company Email">
-
-            <input
-                type="text"
-                id="companyPhone"
-                placeholder="Phone Number">
-
-            <input
-                type="text"
-                id="companyWebsite"
-                placeholder="Website URL">
-
-            <input
-                type="text"
-                id="companyAddress"
-                placeholder="Business Address">
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    BUSINESS HOURS
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Business Hours</h3>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="workingDays"
-                placeholder="Working Days">
-
-            <input
-                type="text"
-                id="workingHours"
-                placeholder="Working Hours">
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    SOCIAL MEDIA
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Social Media</h3>
-
-        <div class="form-grid">
-
-            <input
-                type="url"
-                id="facebookLink"
-                placeholder="Facebook">
-
-            <input
-                type="url"
-                id="instagramLink"
-                placeholder="Instagram">
-
-            <input
-                type="url"
-                id="linkedinLink"
-                placeholder="LinkedIn">
-
-            <input
-                type="url"
-                id="youtubeLink"
-                placeholder="YouTube">
-
-            <input
-                type="url"
-                id="whatsappLink"
-                placeholder="WhatsApp">
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    COMPANY LOGO
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Logo & Branding</h3>
-
-        <div class="input-group">
-
-            <label>Company Logo</label>
-
-            <input
-                type="file"
-                id="companyLogo"
-                accept="image/*">
-
-        </div>
-
-        <div id="logoPreview"></div>
-
-        <div class="input-group">
-
-            <label>Favicon</label>
-
-            <input
-                type="file"
-                id="companyFavicon"
-                accept="image/*">
-
-        </div>
-
-        <div id="faviconPreview"></div>
-
-    </div>
-
-    <!-- ===================================================
-                    ADMIN PROFILE
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Admin Profile</h3>
-
-        <div class="form-grid">
-
-            <input
-                type="text"
-                id="adminName"
-                placeholder="Administrator Name">
-
-            <input
-                type="email"
-                id="adminEmail"
-                placeholder="Admin Email">
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    CHANGE PASSWORD
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Change Password</h3>
-
-        <div class="form-grid">
-
-            <input
-                type="password"
-                id="currentPassword"
-                placeholder="Current Password">
-
-            <input
-                type="password"
-                id="newPassword"
-                placeholder="New Password">
-
-            <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Confirm Password">
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    SYSTEM SETTINGS
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>System Settings</h3>
-
-        <label>
-
-            <input
-                type="checkbox"
-                id="maintenanceMode">
-
-            Enable Maintenance Mode
-
-        </label>
-
-        <br><br>
-
-        <label>
-
-            <input
-                type="checkbox"
-                id="enableNotifications">
-
-            Enable Notifications
-
-        </label>
-
-        <br><br>
-
-        <label>
-
-            <input
-                type="checkbox"
-                id="enableAnalytics">
-
-            Enable Analytics
-
-        </label>
-
-    </div>
-
-    <!-- ===================================================
-                    BACKUP
-    ==================================================== -->
-
-    <div class="settings-card">
-
-        <h3>Backup & Restore</h3>
-
-        <div class="button-group">
-
-            <button
-                id="backupBtn"
-                class="secondary-btn">
-
-                📥 Backup Data
-
-            </button>
-
-            <button
-                id="restoreBtn"
-                class="secondary-btn">
-
-                📤 Restore Data
-
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- ===================================================
-                    SAVE SETTINGS
-    ==================================================== -->
-
-    <div class="button-group">
-
-        <button
-            id="saveSettingsBtn"
-            class="primary-btn">
-
-            💾 Save Settings
-
-        </button>
-
-        <button
-            id="resetSettingsBtn"
-            class="danger-btn">
-
-            Reset
-
-        </button>
-
-    </div>
-
-</section>
-
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-
-const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
-const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-const ADMIN_EMAIL = "p.a.solutions9598@gmail.com";
-const ADMIN_PASSWORD = "aqibsolutions@9598";
-
-document.getElementById("imageFile").addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if(!file) return;
-    document.getElementById("uploadBtnLabel").innerText = "✅ Attached: " + file.name;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-        const img = document.getElementById("previewImage");
-        img.src = ev.target.result;
-        img.style.display = "block";
-    };
-    reader.readAsDataURL(file);
-});
-
-window.loginAdmin = function() {
-    if(document.getElementById("email").value.trim() === ADMIN_EMAIL && document.getElementById("password").value.trim() === ADMIN_PASSWORD) {
-        localStorage.setItem("prime_admin_logged", "yes");
-        checkAuth();
-    } else {
-        alert("Security Override: Invalid Credentials.");
-    }
-}
-
-window.logoutAdmin = function() {
-    localStorage.removeItem("prime_admin_logged");
-    checkAuth();
-}
-
-function checkAuth() {
-    if(localStorage.getItem("prime_admin_logged") === "yes") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        loadAnalytics();
-        window.loadPosts();
-    } else {
-        document.getElementById("loginBox").style.display = "block";
-        document.getElementById("adminPanel").style.display = "none";
-    }
-}
-
-async function loadAnalytics() {
-    try {
-        const { data } = await supabase.from('site_analytics').select('visitor_count').eq('id', 'main_site').maybeSingle();
-        if(data) document.getElementById("totalVisitors").innerText = data.visitor_count;
-        const { count } = await supabase.from('posts').select('id', { count: 'exact', head: true });
-        document.getElementById("totalPostsCount").innerText = count || 0;
-    } catch (e) { console.error(e); }
-}
-
-window.saveContent = async function(status) {
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const type = document.getElementById("postType").value;
-    const category = document.getElementById("postCategory").value;
-    const file = document.getElementById("imageFile").files[0];
-    const submitBtn = document.getElementById("submitBtn");
-
-    if(!title || !content) { alert("Error: Core parameters missing."); return; }
-    submitBtn.innerText = "⏳ Synchronizing Server...";
-    submitBtn.disabled = true;
-    let imageUrl = "";
-
-    try {
-        if(file) {
-            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${file.name.split('.').pop()}`;
-            await supabase.storage.from('post-images').upload(fileName, file);
-            imageUrl = supabase.storage.from('post-images').getPublicUrl(fileName).data.publicUrl;
-        }
-        await supabase.from('posts').insert([{ title, content, type, category, status, image: imageUrl }]);
-        alert(status === 'published' ? "Broadcast Synchronized Live! 🚀" : "Saved to Repository Drafts! 📁");
-        location.reload();
-    } catch (error) { alert(error.message); }
-}
-
-window.loadPosts = async function() {
-    const container = document.getElementById("postsContainer");
-    const filterCat = document.getElementById("filterCategory").value;
-    container.innerHTML = "Querying Database Registry...";
-    try {
-        let query = supabase.from('posts').select('id, title, content, type, category, status, image, created_at');
-        if(filterCat !== "All") { query = query.eq('category', filterCat); }
-        const { data: posts, error } = await query.order('created_at', { ascending: false });
-        if (error) throw error;
-
-        container.innerHTML = "";
-        if(!posts || posts.length === 0) { container.innerHTML = "<p>No posts found.</p>"; return; }
-        posts.forEach((post) => {
-            const dateFormatted = post.created_at ? new Date(post.created_at).toLocaleString() : "Recently";
-            const isAnnounce = post.type === 'announcement';
-            const isDraft = post.status === 'draft';
-            
-            // Safe JSON strings conversion for edit click handler
-            const safeTitle = encodeURIComponent(post.title || "");
-            const safeContent = encodeURIComponent(post.content || "");
-
-            container.innerHTML += `
-                <div class="post-card" style="${isAnnounce ? 'border-left:5px solid #d97706;' : ''} ${isDraft ? 'opacity:0.75; border-left:5px solid #64748b;' : ''}">
-                    <div>
-                        ${isDraft ? '<span class="badge badge-draft">📁 DRAFT</span>' : ''}
-                        <span class="badge ${isAnnounce ? 'badge-announcement' : 'badge-news'}">${isAnnounce ? '🚨 ANNOUNCEMENT' : '📝 LOGGED BLOCK'}</span>
-                        <span class="badge" style="background:#e2f0d9; color:#385723;">🏷️ ${post.category}</span>
-                    </div>
-                    <h3>${post.title || ""}</h3>
-                    ${post.image ? `<img src="${post.image}">` : ""}
-                    <p style="white-space: pre-wrap; margin-top:10px; color:#475569; font-size:14px;">${post.content || ""}</p>
-                    <div><div class="post-meta-info">📅 Log Time: ${dateFormatted}</div></div>
-                    <div style="margin-top:20px;">
-                        <button class="edit-btn" onclick="window.editPost('${post.id}', '${safeTitle}', '${safeContent}')">✏️ Modify</button>
-                        ${isDraft ? `<button class="force-live-btn" onclick="window.publishDraft('${post.id}')">🚀 Force Live</button>` : ''}
-                        <button class="delete-btn" onclick="window.deletePost('${post.id}')">🗑️ Purge</button>
-                    </div>
-                </div>`;
-        });
-    } catch(err) { container.innerHTML = "Error loading data."; console.error(err); }
-}
-
-window.publishDraft = async function(id) {
-    const { error } = await supabase.from('posts').update({ status: 'published' }).eq('id', id);
-    if(error) alert(error.message);
-    window.loadPosts();
-}
-
-window.deletePost = async function(id) {
-    if (!confirm("Confirm hard purge of this data block?")) return;
-    const { error } = await supabase.from('posts').delete().eq('id', id);
-    if(error) alert(error.message);
-    loadAnalytics(); 
-    window.loadPosts();
-}
-
-window.editPost = async function(id, encTitle, encContent) {
-    const currentTitle = decodeURIComponent(encTitle);
-    const currentContent = decodeURIComponent(encContent);
-    
-    const newTitle = prompt("Modify Specification Headline:", currentTitle);
-    if (newTitle === null) return; // User canceled
-    
-    const newContent = prompt("Modify Brief Data Description:", currentContent);
-    if (newContent === null) return; // User canceled
-    
-    if(!newTitle.trim() || !newContent.trim()) {
-        alert("Parameters cannot be left empty.");
-        return;
-    }
-
-    const { error } = await supabase.from('posts').update({ title: newTitle, content: newContent }).eq('id', id);
-    if(error) {
-        alert("Update Failed: " + error.message);
-    } else {
-        alert("Post updated successfully!");
-        window.loadPosts();
-    }
-}
-
-checkAuth();
-</script>
-    <script type="module" src="assets/js/app.js"></script>
 </body>
+
 </html>

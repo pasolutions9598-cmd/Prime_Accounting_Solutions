@@ -214,9 +214,7 @@ export async function handleLogin(event) {
 
     if (result.success) {
 
-        window.location.href =
-            "dashboard.html";
-
+        window.location.href = "admin.html";
     } else {
 
         alert(result.message);

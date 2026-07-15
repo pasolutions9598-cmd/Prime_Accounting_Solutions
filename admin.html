@@ -38,6 +38,7 @@
                     </div>
 
                     <div id="loginError"></div>
+
                     <button type="submit" id="loginBtn">Login</button>
                 </form>
 
@@ -49,7 +50,7 @@
     </section>
 
 
-    <div id="adminWrapper" style="display: none;">
+    <div id="adminWrapper">
 
         <aside id="sidebar">
             <div class="sidebar-header">
@@ -63,22 +64,22 @@
             </div>
 
             <nav class="sidebar-menu">
-                <a href="#" class="menu-item active" data-page="dashboardPage">
+                <a href="#" class="menu-item active" data-page="dashboard">
                     <span>📊</span> Dashboard
                 </a>
-                <a href="#" class="menu-item" data-page="leadsPage">
+                <a href="#" class="menu-item" data-page="leads">
                     <span>👥</span> Leads
                 </a>
-                <a href="#" class="menu-item" data-page="postsPage">
+                <a href="#" class="menu-item" data-page="posts">
                     <span>📰</span> Posts
                 </a>
-                <a href="#" class="menu-item" data-page="analyticsPage">
+                <a href="#" class="menu-item" data-page="analytics">
                     <span>📈</span> Analytics
                 </a>
-                <a href="#" class="menu-item" data-page="servicesPage">
+                <a href="#" class="menu-item" data-page="services">
                     <span>🛠</span> Services
                 </a>
-                <a href="#" class="menu-item" data-page="settingsPage">
+                <a href="#" class="menu-item" data-page="settings">
                     <span>⚙️</span> Settings
                 </a>
             </nav>
@@ -89,6 +90,7 @@
         </aside>
 
         <main id="mainContent">
+
             <header id="topNavbar">
                 <div class="topbar-left">
                     <button id="menuToggle">☰</button>
@@ -115,7 +117,7 @@
 
             <div id="pageContainer">
                 
-                <section id="dashboardPage" class="page active">
+                <section id="dashboardPage" class="page active-page">
                     <div class="page-header">
                         <div>
                             <h1>Dashboard</h1>
@@ -165,7 +167,7 @@
                     </div>
                 </section>
 
-                <section id="leadsPage" class="page" style="display: none;">
+                <section id="leadsPage" class="page">
                     <div class="page-header">
                         <div>
                             <h1>Leads Management</h1>
@@ -203,7 +205,7 @@
                     </div>
                 </section>
 
-                <section id="postsPage" class="page" style="display: none;">
+                <section id="postsPage" class="page">
                     <div class="page-header">
                         <div>
                             <h1>Posts Management</h1>
@@ -222,7 +224,7 @@
                             <option value="Accounting">Accounting</option>
                             <option value="Business">Business</option>
                         </select>
-                        <select id="postsStatusFilter">
+                        <select id="postStatusFilter">
                             <option value="">All Status</option>
                             <option value="Published">Published</option>
                             <option value="Draft">Draft</option>
@@ -246,7 +248,7 @@
                     </div>
                 </section>
 
-                <section id="analyticsPage" class="page" style="display: none;">
+                <section id="analyticsPage" class="page">
                     <div class="page-header">
                         <div>
                             <h1>Analytics Dashboard</h1>
@@ -323,7 +325,7 @@
                     </div>
                 </section>
 
-                <section id="servicesPage" class="page" style="display: none;">
+                <section id="servicesPage" class="page">
                     <div class="page-header">
                         <div>
                             <h1>Services Management</h1>
@@ -378,7 +380,7 @@
                     </div>
                 </section>
 
-                <section id="settingsPage" class="page" style="display: none;">
+                <section id="settingsPage" class="page">
                     <div class="page-header">
                         <div>
                             <h1>Settings</h1>
@@ -439,4 +441,9 @@
 
     <div id="postModal" class="modal">
         <div class="modal-content">
-         
+            <button id="closePostModal" class="modal-close">✕</button>
+            <div id="postModalBody"></div>
+        </div>
+    </div>
+
+    <div id="serviceModa

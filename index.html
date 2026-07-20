@@ -684,6 +684,123 @@
             .section-title { font-size: 2rem; }
             .hero-metrics-panel { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
         }
+        /* ==========================================
+   REVIEW SUCCESS POPUP
+========================================== */
+
+.review-success-popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.75);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+    backdrop-filter:blur(6px);
+
+}
+
+.review-success-popup.active{
+
+    display:flex;
+
+}
+
+.review-success-box{
+
+    width:min(92%,420px);
+
+    background:#071224;
+
+    border:1px solid rgba(223,183,76,.35);
+
+    border-radius:18px;
+
+    padding:32px 24px;
+
+    text-align:center;
+
+    box-shadow:0 0 45px rgba(223,183,76,.18);
+
+    animation:popupScale .30s ease;
+
+}
+
+.success-icon{
+
+    width:78px;
+
+    height:78px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(135deg,#ffe38a,#d8a726);
+
+    color:#071224;
+
+    font-size:38px;
+
+}
+
+.review-success-box h3{
+
+    color:#fff;
+
+    margin-bottom:12px;
+
+}
+
+.review-success-box p{
+
+    color:#cfd7e6;
+
+    line-height:1.7;
+
+    margin-bottom:22px;
+
+}
+
+.review-success-box button{
+
+    width:100%;
+
+}
+
+@keyframes popupScale{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.85);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+        }
     </style>
 </head>
 <body>
@@ -1089,8 +1206,20 @@ Reliable Accounting Solutions Across Multiple Business Sectors
                                 </div>
                             </div>
                             <textarea id="revMessage" rows="3" placeholder="Write your review or feedback about our accounting desk here..." required></textarea>
-                            <button type="submit" class="cta-btn cta-btn-gold" style="width:100%; border-radius:8px;">Submit Review via WhatsApp</button>
+                            <button type="submit" id="submitReviewBtn" class="cta-btn cta-btn-gold" style="width:100%; border-radius:8px;"> Submit Your Review </button>
                         </form>
+                        <div id="reviewSuccessPopup" class="review-success-popup">
+    <div class="review-success-box">
+        <div class="success-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3>Review Submitted</h3>
+        <p> Your review is under approval.
+            It will appear on our website after verification.
+        </p>
+        <button id="closeReviewPopup" class="cta-btn cta-btn-gold"> OK </button>
+    </div>
+</div>
                     </div>
                 </div>
             </section>
@@ -1559,17 +1688,62 @@ ${msg}`;
         });
 
         const dirReviewForm = document.getElementById('directReviewForm');
-        if(dirReviewForm) {
-            dirReviewForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('revName').value;
-                const message = document.getElementById('revMessage').value;
-                let starString = "⭐".repeat(selectedRating);
 
-                const waMessage = `*New Client Review Logs*\n\n*Enterprise/Name:* ${name}\n*Rating Score:* ${starString}\n*Feedback Note:* ${message}`;
-                window.open(`https://wa.me/916394748563?text=${encodeURIComponent(waMessage)}`, '_blank');
-            });
+if (dirReviewForm) {
+
+    dirReviewForm.addEventListener('submit', async function(e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById('revName').value.trim();
+        const review = document.getElementById('revMessage').value.trim();
+
+        const { error } = await supabase
+            .from("testimonials")
+            .insert([{
+                name: name,
+                company: "",
+                designation: "",
+                review: review,
+                rating: selectedRating,
+                image_url: "",
+                status: "pending",
+                featured: false
+            }]);
+
+        if (error) {
+            alert(error.message);
+            return;
         }
+
+        dirReviewForm.reset();
+
+        selectedRating = 5;
+
+        stars.forEach(s => s.classList.add("active"));
+
+        document
+            .getElementById("reviewSuccessPopup")
+            .classList.add("active");
+
+    });
+
+}
+
+document
+.getElementById("closeReviewPopup")
+.addEventListener("click", function(){
+
+    document
+    .getElementById("reviewSuccessPopup")
+    .classList.remove("active");
+
+    formContainer.classList.remove("open");
+
+    toggleBtn.innerHTML =
+    `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
+
+});
     </script>
 </body>
 </html>

@@ -1156,28 +1156,42 @@ Reliable Accounting Solutions Across Multiple Business Sectors
             </section>
         </div>
 
-        <div class="section-fluid-container" id="testimonials-fluid">
-            <section class="section-wrapper" id="testimonials">
-                <div class="section-header">
-                    <div class="section-tag"><i class="fa-solid fa-star"></i> Reviews</div>
-                    <div class="section-title">Client Testimonials</div>
-                    <div class="section-subtitle">What enterprise owners say about our technical accuracy</div>
-                </div>
+        <div class="testimonial-grid cards-grid" id="liveTestimonialsContainer">
 
-                <div class="testimonial-grid cards-grid" id="liveTestimonialsContainer">
-                    <div class="premium-glass-card testimonial-card">
-                        <i class="fa-solid fa-quote-right" style="position: absolute; top: 25px; right: 25px; font-size: 24px; opacity: 0.08; color: var(--gold-primary);"></i>
-                        <div class="stars-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p style="margin-bottom: 15px;">"Prime Accounting team streamlined our entire wholesale item listing and pending bills reconciliation. Highly reliable outsourced service in Prayagraj."</p>
-                        <strong>Agrawal Traders</strong>
-                    </div>
-                    <div class="premium-glass-card testimonial-card">
-                        <i class="fa-solid fa-quote-right" style="position: absolute; top: 25px; right: 25px; font-size: 24px; opacity: 0.08; color: var(--gold-primary);"></i>
-                        <div class="stars-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p style="margin-bottom: 15px;">"Their monthly MIS analytics report clarified our actual overhead expenditure leakages. Best structural accounts option for small ventures."</p>
-                        <strong>Vedic Retail Solutions</strong>
-                    </div>
-                </div>
+    <!-- Default Testimonials -->
+    <div class="premium-glass-card testimonial-card">
+        <i class="fa-solid fa-quote-right" style="position:absolute;top:25px;right:25px;font-size:24px;opacity:.08;color:var(--gold-primary);"></i>
+
+        <div class="stars-rating">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+        </div>
+
+        <p>"Prime Accounting team streamlined our entire wholesale item listing and pending bills reconciliation. Highly reliable outsourced service in Prayagraj."</p>
+
+        <strong>Agrawal Traders</strong>
+    </div>
+
+    <div class="premium-glass-card testimonial-card">
+        <i class="fa-solid fa-quote-right" style="position:absolute;top:25px;right:25px;font-size:24px;opacity:.08;color:var(--gold-primary);"></i>
+
+        <div class="stars-rating">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+        </div>
+
+        <p>"Their monthly MIS analytics report clarified our actual overhead expenditure leakages. Best structural accounts option for small ventures."</p>
+
+        <strong>Vedic Retail Solutions</strong>
+    </div>
+
+</div>
 
                 <div class="review-widget">
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
@@ -1335,6 +1349,63 @@ Reliable Accounting Solutions Across Multiple Business Sectors
         const SUPABASE_URL = "https://ariqthzhspzktpoylqci.supabase.co";
         const SUPABASE_KEY = "sb_publishable_GYSUR2xyPzrHvD0fapWjuA_6gr6_RTp";
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        /* ==========================================
+   LOAD APPROVED TESTIMONIALS
+========================================== */
+
+async function loadTestimonials() {
+
+    const container = document.getElementById("liveTestimonialsContainer");
+
+    if (!container) return;
+
+    const { data, error } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("status", "approved")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
+
+    if (!data || data.length === 0) return;
+
+    data.forEach(item => {
+
+        let stars = "";
+
+        for (let i = 0; i < item.rating; i++) {
+
+            stars += '<i class="fa-solid fa-star"></i>';
+
+        }
+
+        container.insertAdjacentHTML("beforeend", `
+            <div class="premium-glass-card testimonial-card">
+
+                <i class="fa-solid fa-quote-right"
+                   style="position:absolute;top:25px;right:25px;font-size:24px;opacity:.08;color:var(--gold-primary);">
+                </i>
+
+                <div class="stars-rating">
+                    ${stars}
+                </div>
+
+                <p>"${item.review}"</p>
+
+                <strong>${item.name}</strong>
+
+            </div>
+        `);
+
+    });
+
+        }
 
 // Track Visitor
 async function trackVisitor() {
@@ -1744,6 +1815,7 @@ document
     `<i class="fa-solid fa-pen-to-square"></i> Write A Review Here`;
 
 });
+        loadTestimonials();
     </script>
 </body>
 </html>

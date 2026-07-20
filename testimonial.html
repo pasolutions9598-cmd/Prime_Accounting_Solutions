@@ -264,15 +264,15 @@ placeholder="Write client testimonial here..."></textarea>
 
 <button
 class="publish"
-onclick="saveTestimonial('published')">
+onclick="saveTestimonial('approved')
 
 🚀 Publish
 
-</button>
+    </button>
 
 <button
 class="draft"
-onclick="saveTestimonial('draft')">
+onclick="saveTestimonial('pending')
 
 📁 Save Draft
 
@@ -392,9 +392,11 @@ const {error}=await supabase
 
 .insert([{
 
-client_name,
+name: client_name,
 
-company_name,
+company: company_name,
+
+designation: "",
 
 rating,
 
@@ -460,12 +462,11 @@ container.innerHTML += `
 
 <div style="padding:20px;border:1px solid #ddd;border-radius:10px;margin-bottom:20px;">
 
-<h3>${item.client_name}</h3>
+<h3>${item.name}</h3>
 
 <p style="color:#777;">
-${item.company_name || ""}
+${item.company || ""}
 </p>
-
 <p style="font-size:20px;">
 ${stars}
 </p>
@@ -497,7 +498,7 @@ Delete
 </button>
 
 ${
-item.status=="draft"
+item.status=="pending"
 ?
 
 `<button
@@ -550,7 +551,7 @@ await supabase
 
 .update({
 
-status:"published"
+status:"approved"
 
 })
 
@@ -572,11 +573,11 @@ const {data}=await supabase
 
 .single();
 
-const name=prompt("Client Name",data.client_name);
+const name=prompt("Client Name",data.name);
 
 if(name==null) return;
 
-const company=prompt("Company Name",data.company_name);
+const company=prompt("Company Name",data.company);
 
 const review=prompt("Review",data.review);
 
@@ -588,9 +589,11 @@ await supabase
 
 .update({
 
-client_name:name,
+name:name,
 
-company_name:company,
+company:company,
+
+designation:"",
 
 review:review,
 

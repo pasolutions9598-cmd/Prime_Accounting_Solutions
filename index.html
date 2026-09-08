@@ -748,6 +748,24 @@ input::placeholder, textarea::placeholder {
 .footer-cta h3 {
     color: var(--accent-gold) !important;
 }
+/* Scroll Lag Fix: Heavy Rendering Optimization */
+* {
+    /* Animations & rendering performance improve karta hai */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Glassmorphism blur performance fix */
+header, .card, .premium-glass-card {
+    will-change: transform, opacity;
+    transform: translateZ(0); /* GPU acceleration enable karta hai */
+}
+
+/* Scroll smooth banane ke liye */
+html {
+    scroll-behavior: smooth;
+}
+    
     </style>
 </head>
 <body>

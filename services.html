@@ -282,6 +282,84 @@
         font-size: 1.75rem;
       }
     }
+    /* Need Professional Accounting Support Section */
+.support-section {
+  background-color: #0d1117; /* Dark background matching your theme */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 60px 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.support-section .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.support-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.support-section p {
+  font-size: 1.1rem;
+  color: #a0aec0;
+  margin-bottom: 28px;
+}
+
+/* Button Layout & Styling */
+.support-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.support-buttons .btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Individual Button Colors */
+.whatsapp-btn {
+  background-color: #25d366;
+  color: #ffffff !important;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1eb954;
+  transform: translateY(-2px);
+}
+
+.call-btn {
+  background-color: #d97706; /* Gold/Orange primary color */
+  color: #ffffff !important;
+}
+
+.call-btn:hover {
+  background-color: #b45309;
+  transform: translateY(-2px);
+}
+
+.email-btn {
+  background-color: transparent;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.email-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
   </style>
 </head>
 <body>
@@ -400,6 +478,17 @@
         </div>
       </div>
     </section>
+    <section class="support-section">
+  <div class="container">
+    <h2>Need Professional Accounting Support?</h2>
+    <p>Let's discuss your accounting requirements today.</p>
+    <div class="support-buttons">
+      <a href="https://wa.me/YOUR_NUMBER" class="btn whatsapp-btn">WhatsApp</a>
+      <a href="tel:YOUR_NUMBER" class="btn call-btn">Call Now</a>
+      <a href="mailto:YOUR_EMAIL" class="btn email-btn">Email Us</a>
+    </div>
+  </div>
+</section>
   </div>
 
   <!-- Footer -->

@@ -1,110 +1,416 @@
- <style>
-#services-fluid { background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
- .cta-btn-gold:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #FFFFFF, var(--accent-gold));
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | Prime Accounting Solutions</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* =====================================================
+       HIGH-PERFORMANCE MODERN ENTERPRISE THEME
+       ===================================================== */
+    :root {
+      --bg-primary: #020617;
+      --bg-secondary: #0B1329;
+      --bg-card: #0F172A;
+      --bg-card-hover: #1E293B;
+      --accent-gold-light: #FDE68A;
+      --accent-gold: #C5A059;
+      --accent-gold-dark: #8C6A27;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --border-light: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(197, 160, 89, 0.3);
+      --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      --shadow-gold: 0 10px 25px -5px rgba(197, 160, 89, 0.2);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        .cta-btn-outline {
-            background: transparent;
-            color: var(--accent-gold) !important;
-            border: 1px solid var(--border-gold) !important;
-        }
-     </style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    strong {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-gold); }
+
+    /* Navigation Header */
+    header {
+      background: rgba(2, 6, 23, 0.9);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      padding: 12px 0;
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    .logo img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 6px 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    /* Section Layout */
+    .section-fluid-container {
+      width: 100%;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      padding-top: 100px; /* Offset for fixed header */
+    }
+
+    .section-wrapper {
+      padding: 60px 5% 80px 5%;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      border-radius: 20px;
+      background: rgba(197, 160, 89, 0.1);
+      border: 1px solid var(--border-gold);
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Grid & Cards Styling */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .premium-glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 30px 26px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .premium-glass-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-gold);
+      background: var(--bg-card-hover);
+    }
+
+    .card i {
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    /* Buttons Styling */
+    .cta-btn-gold:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #FFFFFF, var(--accent-gold));
+    }
+
+    .cta-btn-outline {
+      background: transparent;
+      color: var(--accent-gold) !important;
+      border: 1px solid var(--border-gold) !important;
+    }
+
+    /* Footer Interface */
+    footer {
+      background-color: #02040A;
+      padding: 40px 5% 30px 5%;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 992px) {
+      nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 2%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .section-wrapper {
+        padding: 40px 4% 40px 4%;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="section-fluid-container" id="services-fluid">
-  <section class="section-wrapper" id="services">
-    <div class="section-header">
-      <div class="section-tag"><i class="fa-solid fa-cubes"></i> Capabilities</div>
-      <div class="section-title">Our Premium Financial Services</div>
-      <div class="section-subtitle">One time services charges based on data profiles</div>
+
+  <!-- Navigation Header -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="Logo.png" alt="Prime Accounting Solutions Logo" onerror="this.style.display='none';"> 
+        Prime Accounting Solutions
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#feed">Live Feed</a></li>
+        <li><a href="index.html#founder">Leadership</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="index.html#contact">Contact Desk</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="industries.html">Industries</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Services Main Section -->
+  <div class="section-fluid-container" id="services-fluid">
+    <section class="section-wrapper" id="services">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-cubes"></i> Capabilities</div>
+        <div class="section-title">Our Premium Financial Services</div>
+        <div class="section-subtitle">One time services charges based on data profiles</div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="premium-glass-card card service-card" data-service="End-to-End Bookkeeping" onclick="trackServiceClick('End-to-End Bookkeeping')">
+          <i class="fa-solid fa-book"></i>
+          <h3>End-to-End Bookkeeping</h3>
+          <p>Meticulous data archiving, system recording, ledgers logging, and general accounts maintenance.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="GST Data Preparation" onclick="trackServiceClick('GST Data Preparation')">
+          <i class="fa-solid fa-receipt"></i>
+          <h3>GST Data Preparation</h3>
+          <p>Preparation of accurate GST sales, purchase, and input tax data for timely submission to your tax consultant or CA.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Tally, Zoho / Excel Entry" onclick="trackServiceClick('Tally, Zoho & Excel Entry')">
+          <i class="fa-solid fa-calculator"></i>
+          <h3>Tally, Zoho / Excel Entry</h3>
+          <p>Accurate digital bookkeeping across major platforms. We handle systematic processing inside Tally, Zoho Books, or custom Excel spreadsheets.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Executive MIS Reporting" onclick="trackServiceClick('Executive MIS Reporting')">
+          <i class="fa-solid fa-chart-pie"></i>
+          <h3>Executive MIS Reporting</h3>
+          <p>Monthly analytics briefs detailing your operational expenditures, profit parameters, and core business metrics.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Bank Reconciliation (BRS)" onclick="trackServiceClick('Bank Reconciliation (BRS)')">
+          <i class="fa-solid fa-building-columns"></i>
+          <h3>Bank Reconciliation (BRS)</h3>
+          <p>Eliminating accounting mismatches by checking bank statements against cash books to track banking charges and uncleared cheques.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Inventory Setup / Control" onclick="trackServiceClick('Inventory Setup / Control')">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <h3>Inventory Setup / Control</h3>
+          <p>Configuring structured digital stock tracking dashboards, opening valuations, and item-wise categories for flawless stock monitoring.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Payable / Receivable Mgmt" onclick="trackServiceClick('Payable / Receivable Mgmt')">
+          <i class="fa-solid fa-money-bill-transfer"></i>
+          <h3>Payable / Receivable Mgmt</h3>
+          <p>Comprehensive tracking of your outstanding invoices. We monitor your upcoming pipelines to optimize your enterprise cash flow seamlessly.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Vendor / Client Matching" onclick="trackServiceClick('Vendor / Client Matching')">
+          <i class="fa-solid fa-handshake"></i>
+          <h3>Vendor / Client Matching</h3>
+          <p>Conducting systematic monthly ledger reconciliations with your active suppliers and customers to resolve balance disputes instantly.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Financial Statement Preparation" onclick="trackServiceClick('Financial Statement Preparation')">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <h3>Financial Statement Preparation</h3>
+          <p>Preparation of accurate Profit &amp; Loss Statements, Balance Sheets, and Cash Flow Statements for informed business decisions.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Virtual Accounting Support" onclick="trackServiceClick('Virtual Accounting Support')">
+          <i class="fa-solid fa-laptop-house"></i>
+          <h3>Virtual Accounting Support</h3>
+          <p>Reliable remote accounting assistance for bookkeeping, reconciliations, financial reporting, and day-to-day accounting operations.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Financial Data Cleanup" onclick="trackServiceClick('Financial Data Cleanup')">
+          <i class="fa-solid fa-database"></i>
+          <h3>Financial Data Cleanup</h3>
+          <p>Organizing, correcting, and cleaning financial records to ensure accurate, consistent, and reliable accounting data.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Accounts Finalization Support" onclick="trackServiceClick('Accounts Finalization Support')">
+          <i class="fa-solid fa-file-signature"></i>
+          <h3>Accounts Finalization Support</h3>
+          <p>Preparing books of accounts for year-end finalization and seamless handover to your CA or auditor.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="GST Return Filing" onclick="trackServiceClick('GST Return Filing')">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <h3>GST Return Filing</h3>
+          <p>Ensure timely and accurate GST return filing with complete compliance support. We prepare and file GST returns, reconcile GST data, and help businesses avoid penalties while maintaining full statutory compliance.</p>
+        </div>
+
+        <div class="premium-glass-card card service-card" data-service="Audit And Assurance" onclick="trackServiceClick('Audit And Assurance')">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Audit And Assurance</h3>
+          <p>Professional audit and assurance services including internal audits, financial reviews, compliance verification, and business reporting to improve transparency, accuracy, and financial confidence.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-bottom">
+        &copy; Prime Accounting Solutions. All Rights Reserved.
+      </div>
     </div>
+  </footer>
 
-    <div class="cards-grid">
-      <div class="premium-glass-card card service-card" data-service="End-to-End Bookkeeping" onclick="trackServiceClick('End-to-End Bookkeeping')">
-        <i class="fa-solid fa-book"></i>
-        <h3>End-to-End Bookkeeping</h3>
-        <p>Meticulous data archiving, system recording, ledgers logging, and general accounts maintenance.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="GST Data Preparation" onclick="trackServiceClick('GST Data Preparation')">
-        <i class="fa-solid fa-receipt"></i>
-        <h3>GST Data Preparation</h3>
-        <p>Preparation of accurate GST sales, purchase, and input tax data for timely submission to your tax consultant or CA.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Tally, Zoho / Excel Entry" onclick="trackServiceClick('Tally, Zoho & Excel Entry')">
-        <i class="fa-solid fa-calculator"></i>
-        <h3>Tally, Zoho / Excel Entry</h3>
-        <p>Accurate digital bookkeeping across major platforms. We handle systematic processing inside Tally, Zoho Books, or custom Excel spreadsheets.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Executive MIS Reporting" onclick="trackServiceClick('Executive MIS Reporting')">
-        <i class="fa-solid fa-chart-pie"></i>
-        <h3>Executive MIS Reporting</h3>
-        <p>Monthly analytics briefs detailing your operational expenditures, profit parameters, and core business metrics.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Bank Reconciliation (BRS)" onclick="trackServiceClick('Bank Reconciliation (BRS)')">
-        <i class="fa-solid fa-building-columns"></i>
-        <h3>Bank Reconciliation (BRS)</h3>
-        <p>Eliminating accounting mismatches by checking bank statements against cash books to track banking charges and uncleared cheques.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Inventory Setup / Control" onclick="trackServiceClick('Inventory Setup / Control')">
-        <i class="fa-solid fa-boxes-stacked"></i>
-        <h3>Inventory Setup / Control</h3>
-        <p>Configuring structured digital stock tracking dashboards, opening valuations, and item-wise categories for flawless stock monitoring.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Payable / Receivable Mgmt" onclick="trackServiceClick('Payable / Receivable Mgmt')">
-        <i class="fa-solid fa-money-bill-transfer"></i>
-        <h3>Payable / Receivable Mgmt</h3>
-        <p>Comprehensive tracking of your outstanding invoices. We monitor your upcoming pipelines to optimize your enterprise cash flow seamlessly.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Vendor / Client Matching" onclick="trackServiceClick('Vendor / Client Matching')">
-        <i class="fa-solid fa-handshake"></i>
-        <h3>Vendor / Client Matching</h3>
-        <p>Conducting systematic monthly ledger reconciliations with your active suppliers and customers to resolve balance disputes instantly.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Financial Statement Preparation" onclick="trackServiceClick('Financial Statement Preparation')">
-        <i class="fa-solid fa-file-invoice-dollar"></i>
-        <h3>Financial Statement Preparation</h3>
-        <p>Preparation of accurate Profit &amp; Loss Statements, Balance Sheets, and Cash Flow Statements for informed business decisions.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Virtual Accounting Support" onclick="trackServiceClick('Virtual Accounting Support')">
-        <i class="fa-solid fa-laptop-house"></i>
-        <h3>Virtual Accounting Support</h3>
-        <p>Reliable remote accounting assistance for bookkeeping, reconciliations, financial reporting, and day-to-day accounting operations.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Financial Data Cleanup" onclick="trackServiceClick('Financial Data Cleanup')">
-        <i class="fa-solid fa-database"></i>
-        <h3>Financial Data Cleanup</h3>
-        <p>Organizing, correcting, and cleaning financial records to ensure accurate, consistent, and reliable accounting data.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Accounts Finalization Support" onclick="trackServiceClick('Accounts Finalization Support')">
-        <i class="fa-solid fa-file-signature"></i>
-        <h3>Accounts Finalization Support</h3>
-        <p>Preparing books of accounts for year-end finalization and seamless handover to your CA or auditor.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="GST Return Filing" onclick="trackServiceClick('GST Return Filing')">
-        <i class="fa-solid fa-file-invoice-dollar"></i>
-        <h3>GST Return Filing</h3>
-        <p>Ensure timely and accurate GST return filing with complete compliance support. We prepare and file GST returns, reconcile GST data, and help businesses avoid penalties while maintaining full statutory compliance.</p>
-      </div>
-
-      <div class="premium-glass-card card service-card" data-service="Audit And Assurance" onclick="trackServiceClick('Audit And Assurance')">
-        <i class="fa-solid fa-chart-line"></i>
-        <h3>Audit And Assurance</h3>
-        <p>Professional audit and assurance services including internal audits, financial reviews, compliance verification, and business reporting to improve transparency, accuracy, and financial confidence.</p>
-      </div>
-    </div>
-  </section>
-</div>
+  <script>
+    function trackServiceClick(serviceName) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'select_content', {
+          content_type: 'service',
+          item_id: serviceName
+        });
+      }
+    }
+  </script>
+</body>
+</html>

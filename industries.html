@@ -1,98 +1,392 @@
- <style>
-#industries-fluid { background: var(--bg-secondary); }
- .cta-btn-gold:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #FFFFFF, var(--accent-gold));
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industries We Serve | Prime Accounting Solutions</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* =====================================================
+       HIGH-PERFORMANCE MODERN ENTERPRISE THEME
+       ===================================================== */
+    :root {
+      --bg-primary: #020617;
+      --bg-secondary: #0B1329;
+      --bg-card: #0F172A;
+      --bg-card-hover: #1E293B;
+      --accent-gold-light: #FDE68A;
+      --accent-gold: #C5A059;
+      --accent-gold-dark: #8C6A27;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --border-light: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(197, 160, 89, 0.3);
+      --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      --shadow-gold: 0 10px 25px -5px rgba(197, 160, 89, 0.2);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        .cta-btn-outline {
-            background: transparent;
-            color: var(--accent-gold) !important;
-            border: 1px solid var(--border-gold) !important;
-        }
- </style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    strong {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-gold); }
+
+    /* Navigation Header */
+    header {
+      background: rgba(2, 6, 23, 0.9);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      padding: 12px 0;
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    .logo img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 6px 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    /* Section Layout */
+    .section-fluid-container {
+      width: 100%;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-secondary);
+      padding-top: 100px; /* Offset for fixed header */
+    }
+
+    .section-wrapper {
+      padding: 60px 5% 80px 5%;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      border-radius: 20px;
+      background: rgba(197, 160, 89, 0.1);
+      border: 1px solid var(--border-gold);
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Grid & Cards Styling */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .premium-glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 30px 26px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .premium-glass-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-gold);
+      background: var(--bg-card-hover);
+    }
+
+    .card i {
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    /* Footer Interface */
+    footer {
+      background-color: #02040A;
+      padding: 40px 5% 30px 5%;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 992px) {
+      nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 2%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .section-wrapper {
+        padding: 40px 4% 40px 4%;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="section-fluid-container" id="industries-fluid">
-  <section class="section-wrapper" id="industries">
-    <div class="section-header">
-      <div class="section-tag"><i class="fa-solid fa-building"></i> INDUSTRIES</div>
-      <div class="section-title">Industries We Serve</div>
-      <div class="section-subtitle">Reliable Accounting Solutions Across Multiple Business Sectors</div>
+
+  <!-- Navigation Header -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="Logo.png" alt="Prime Accounting Solutions Logo" onerror="this.style.display='none';"> 
+        Prime Accounting Solutions
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#feed">Live Feed</a></li>
+        <li><a href="index.html#founder">Leadership</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="index.html#contact">Contact Desk</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="industries.html" class="active">Industries</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Industries Main Section -->
+  <div class="section-fluid-container" id="industries-fluid">
+    <section class="section-wrapper" id="industries">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-building"></i> Industries</div>
+        <div class="section-title">Industries We Serve</div>
+        <div class="section-subtitle">Reliable Accounting Solutions Across Multiple Business Sectors</div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="premium-glass-card card industry-card" data-industry="Retail & Supermarkets" onclick="trackIndustryClick('Retail & Supermarkets')">
+          <i class="fa-solid fa-store"></i>
+          <h3>Retail &amp; Supermarkets</h3>
+          <p>Daily sales, inventory, cash flow, and bookkeeping support.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Trading Businesses" onclick="trackIndustryClick('Trading Businesses')">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <h3>Trading Businesses</h3>
+          <p>Purchase, sales, stock management, and account reconciliations.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="E-Commerce" onclick="trackIndustryClick('E-Commerce')">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h3>E-Commerce</h3>
+          <p>Accounting support for online stores and digital businesses.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Manufacturing" onclick="trackIndustryClick('Manufacturing')">
+          <i class="fa-solid fa-industry"></i>
+          <h3>Manufacturing</h3>
+          <p>Inventory control, production records, and financial reporting.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Service Companies" onclick="trackIndustryClick('Service Companies')">
+          <i class="fa-solid fa-briefcase"></i>
+          <h3>Service Companies</h3>
+          <p>Professional accounting solutions for service-based businesses.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Restaurants & Cafés" onclick="trackIndustryClick('Restaurants & Cafés')">
+          <i class="fa-solid fa-utensils"></i>
+          <h3>Restaurants &amp; Cafés</h3>
+          <p>Sales tracking, inventory management, and expense monitoring.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Startups" onclick="trackIndustryClick('Startups')">
+          <i class="fa-solid fa-rocket"></i>
+          <h3>Startups</h3>
+          <p>Scalable accounting support for growing businesses.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Small Businesses" onclick="trackIndustryClick('Small Businesses')">
+          <i class="fa-solid fa-shop"></i>
+          <h3>Small Businesses</h3>
+          <p>Affordable and reliable accounting solutions for small enterprises.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Consultants & Professionals" onclick="trackIndustryClick('Consultants & Professionals')">
+          <i class="fa-solid fa-user-tie"></i>
+          <h3>Consultants &amp; Professionals</h3>
+          <p>Financial record management for consultants and professionals.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Wholesale & Distribution" onclick="trackIndustryClick('Wholesale & Distribution')">
+          <i class="fa-solid fa-truck"></i>
+          <h3>Wholesale &amp; Distribution</h3>
+          <p>Accounting and inventory support for wholesale operations.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Import & Export Businesses" onclick="trackIndustryClick('Import & Export Businesses')">
+          <i class="fa-solid fa-globe"></i>
+          <h3>Import &amp; Export Businesses</h3>
+          <p>Accounting support for domestic and international trade.</p>
+        </div>
+
+        <div class="premium-glass-card card industry-card" data-industry="Construction & Contractors" onclick="trackIndustryClick('Construction & Contractors')">
+          <i class="fa-solid fa-hard-hat"></i>
+          <h3>Construction &amp; Contractors</h3>
+          <p>Project-wise accounting, expense tracking, and reporting.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-bottom">
+        &copy; Prime Accounting Solutions. All Rights Reserved.
+      </div>
     </div>
+  </footer>
 
-    <div class="cards-grid">
-      <div class="premium-glass-card card industry-card" data-industry="Retail & Supermarkets" onclick="trackIndustryClick('Retail & Supermarkets')">
-        <i class="fa-solid fa-store"></i>
-        <h3>Retail &amp; Supermarkets</h3>
-        <p>Daily sales, inventory, cash flow, and bookkeeping support.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Trading Businesses" onclick="trackIndustryClick('Trading Businesses')">
-        <i class="fa-solid fa-boxes-stacked"></i>
-        <h3>Trading Businesses</h3>
-        <p>Purchase, sales, stock management, and account reconciliations.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="E-Commerce" onclick="trackIndustryClick('E-Commerce')">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <h3>E-Commerce</h3>
-        <p>Accounting support for online stores and digital businesses.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Manufacturing" onclick="trackIndustryClick('Manufacturing')">
-        <i class="fa-solid fa-industry"></i>
-        <h3>Manufacturing</h3>
-        <p>Inventory control, production records, and financial reporting.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Service Companies" onclick="trackIndustryClick('Service Companies')">
-        <i class="fa-solid fa-briefcase"></i>
-        <h3>Service Companies</h3>
-        <p>Professional accounting solutions for service-based businesses.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Restaurants & Cafés" onclick="trackIndustryClick('Restaurants & Cafés')">
-        <i class="fa-solid fa-utensils"></i>
-        <h3>Restaurants &amp; Cafés</h3>
-        <p>Sales tracking, inventory management, and expense monitoring.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Startups" onclick="trackIndustryClick('Startups')">
-        <i class="fa-solid fa-rocket"></i>
-        <h3>Startups</h3>
-        <p>Scalable accounting support for growing businesses.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Small Businesses" onclick="trackIndustryClick('Small Businesses')">
-        <i class="fa-solid fa-shop"></i>
-        <h3>Small Businesses</h3>
-        <p>Affordable and reliable accounting solutions for small enterprises.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Consultants & Professionals" onclick="trackIndustryClick('Consultants & Professionals')">
-        <i class="fa-solid fa-user-tie"></i>
-        <h3>Consultants &amp; Professionals</h3>
-        <p>Financial record management for consultants and professionals.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Wholesale & Distribution" onclick="trackIndustryClick('Wholesale & Distribution')">
-        <i class="fa-solid fa-truck"></i>
-        <h3>Wholesale &amp; Distribution</h3>
-        <p>Accounting and inventory support for wholesale operations.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Import & Export Businesses" onclick="trackIndustryClick('Import & Export Businesses')">
-        <i class="fa-solid fa-globe"></i>
-        <h3>Import &amp; Export Businesses</h3>
-        <p>Accounting support for domestic and international trade.</p>
-      </div>
-
-      <div class="premium-glass-card card industry-card" data-industry="Construction & Contractors" onclick="trackIndustryClick('Construction & Contractors')">
-        <i class="fa-solid fa-hard-hat"></i>
-        <h3>Construction &amp; Contractors</h3>
-        <p>Project-wise accounting, expense tracking, and reporting.</p>
-      </div>
-    </div>
-  </section>
-</div>
+  <script>
+    function trackIndustryClick(industryName) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'select_content', {
+          content_type: 'industry',
+          item_id: industryName
+        });
+      }
+    }
+  </script>
+</body>
+</html>

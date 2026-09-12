@@ -30,7 +30,16 @@
       --shadow-gold: 0 10px 25px -5px rgba(197, 160, 89, 0.2);
       --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
+ /* 60 FPS Hardware Acceleration & Rendering Optimizations */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+    
     * {
       margin: 0;
       padding: 0;
